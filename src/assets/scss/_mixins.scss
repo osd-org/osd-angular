@@ -1,0 +1,59 @@
+@import "variables";
+
+@mixin font($size, $weight: null, $family: null) {
+  font-size: $size / $font-size-default * 1rem;
+  @if $weight != null {font-weight: $weight}
+  @if $family != null {font-family: $family}
+}
+
+@mixin scrollbar() {
+  &::-webkit-scrollbar {
+    width: 4px;
+    background-color: $color-light;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    width: 4px;
+    background-color: $color-secondary;
+  }
+}
+
+@mixin hiddeScrollBar() {
+  overflow-y: scroll;
+  -ms-overflow-style: none;  // IE 10+
+  overflow: -moz-scrollbars-none;  // Firefox old
+  scrollbar-width: none; /* Firefox new */
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+@mixin retina {
+  @media
+  only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min--moz-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 2/1),
+  only screen and (min-device-pixel-ratio: 2),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+    @content;
+  }
+}
+
+@mixin media-between($lower, $upper) {
+  @media (min-width: $lower) and (max-width: ($upper - 1)) {
+    @content;
+  }
+}
+
+@mixin media-below($breakpoint) {
+  @media (max-width: ($breakpoint - 1)) {
+    @content;
+  }
+}
+
+@mixin media-above($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
