@@ -1,0 +1,78 @@
+@font-face {
+  font-family: "icons";
+  src: url('/assets/fonts/icons.eot');
+  src: url('/assets/fonts/icons.eot?#iefix') format('eot'),
+  url('/assets/fonts/icons.woff') format('woff'),
+  url('/assets/fonts/icons.ttf') format('truetype')
+}
+
+@mixin icon-styles {
+  font-family: "icons";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  // speak: none; // only necessary if not using the private unicode range (firstGlyph option)
+  text-decoration: none;
+  text-transform: none;
+}
+
+%icon {
+  @include icon-styles;
+}
+
+@function icon-char($filename) {
+  $char: "";
+
+  @if $filename == arrow {
+  $char: "\E001";
+}
+  @if $filename == facebook {
+  $char: "\E002";
+}
+  @if $filename == left {
+  $char: "\E003";
+}
+  @if $filename == location {
+  $char: "\E004";
+}
+  @if $filename == search {
+  $char: "\E005";
+}
+  @if $filename == twitter {
+  $char: "\E006";
+}
+
+@return $char;
+}
+
+@mixin icon($filename, $insert: before, $extend: true) {
+&:#{$insert} {
+  @if $extend {
+    @extend %icon;
+  } @else {
+    @include icon-styles;
+  }
+  content: icon-char($filename);
+}
+}
+
+.icon-arrow {
+  @include icon(arrow);
+}
+.icon-facebook {
+  @include icon(facebook);
+}
+.icon-left {
+  @include icon(left);
+}
+.icon-location {
+  @include icon(location);
+}
+.icon-search {
+  @include icon(search);
+}
+.icon-twitter {
+  @include icon(twitter);
+}

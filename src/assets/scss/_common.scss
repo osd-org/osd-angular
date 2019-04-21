@@ -1,0 +1,43 @@
+html {
+  overflow-x: hidden;
+  overflow-y: auto;
+  color: #fff;
+}
+
+body {
+  overflow: hidden;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.container {
+  box-sizing: border-box;
+  width: 1100px;
+  height: 100%;
+  margin: 0 auto;
+  overflow-y: auto;
+  overflow-x: visible;
+}
+
+.page-top {
+  height: 100px;
+  box-sizing: border-box;
+  padding-bottom: 25px;
+}
+
+.page-content {
+  position: relative;
+  margin-bottom: 220px;
+}
+
+.btn {
+  border: 0;
+  box-sizing: border-box;
+  background: transparent;
+  outline: none;
+  display: inline-block;
+  cursor: pointer;
+}

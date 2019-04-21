@@ -1,0 +1,48 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 36px;
+    margin-top: 46px;
+}
+
+.logo {
+    display: block;
+    height: 100%;
+
+    img {
+        height: 100%;
+    }
+}
+
+.nav {
+
+    &__item {
+        text-transform: uppercase;
+        position: relative;
+
+        &:not(:last-child) {
+            margin-right: 36px;
+        }
+
+        &:hover,
+        &.active {
+            &:after {
+                transform: scaleX(1);
+            }
+        }
+
+        &:after {
+            display: block;
+            position: absolute;
+            content: '';
+            width: 100%;
+            left: 0;
+            bottom: -8px;
+            border-bottom: 3px solid;
+            transition: 0.3s transform;
+            transform-origin: center;
+            transform: scaleX(0);
+        }
+    }
+}
