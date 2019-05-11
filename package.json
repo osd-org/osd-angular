@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.13.0",
-    "@angular/cli": "^7.0.0",
+    "@angular/cli": "^7.3.8",
     "@angular/compiler-cli": "^7.0.0",
     "@angular/platform-server": "^7.0.0",
     "@types/gsap": "^1.20.1",
