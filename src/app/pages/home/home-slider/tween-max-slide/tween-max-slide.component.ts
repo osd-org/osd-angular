@@ -21,6 +21,8 @@ export class TweenMaxSlideComponent implements OnInit, AfterViewInit {
   block: any[];
   flashAnimation: any;
   TweenLite = TweenLite;
+  public sliderList: any[] = [];
+
   constructor(
     private _platform: PlatformService,
     private _renderer: Renderer2,
@@ -29,15 +31,14 @@ export class TweenMaxSlideComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this._api.get('/slider/list').subscribe(e => {
-      console.log(e);
-
+      this.sliderList = e;
     })
   }
 
   ngAfterViewInit() {
-    this.block = this.AnimationObject.nativeElement.querySelectorAll('.block');
+    // this.block = this.AnimationObject.nativeElement.querySelectorAll('.block');
     // this.layerAnimation();
-    this.startFlashing()
+    // this.startFlashing()
 
   }
 

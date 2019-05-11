@@ -10,8 +10,8 @@ import { catchError, map } from 'rxjs/operators';
 export class ApiService {
 
   private _headers: HttpHeaders = new HttpHeaders({
-    'Accept': 'application/vnd.softswiss.v1+json',
-    'Content-Type': 'application/json'
+    // 'Accept': 'application/json',
+    // 'Content-Type': 'application/json'
   });
 
   private _options: any = {
@@ -19,7 +19,7 @@ export class ApiService {
     withCredentials: true
   };
 
-  private _apiUrl: string = 'https://api.osdirect.com.ua/ua/wp-json/wp/v2';
+  private _apiUrl: string = environment.api_url;
   private _apiCmsUrl: string = '/';
 
   constructor(
