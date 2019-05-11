@@ -1,17 +1,17 @@
-<div>
+<div *ngFor="let item of sliderList">
   <div class="slogan">
     <div class="slogan__block">
-      <span class="slogan__block-text">Впечетляем</span>
+      <span class="slogan__block-text">{{item?.data?.group?.first}}</span>
     </div>
     <div class="slogan__block red">
-      <span class="slogan__block-text">Вовлекаем</span>
+      <span class="slogan__block-text">{{item?.data?.group?.second}}</span>
     </div>
     <div class="slogan__block">
-      <span class="slogan__block-text">Продаем</span>
+      <span class="slogan__block-text">{{item?.data?.group?.third}}</span>
     </div>
 
     <a href="#" class="btn show-all">
-      Узнать больше 
+      Узнать больше
       <i class="icon icon-arrow"></i>
       <span class="line line-1"></span>
       <span class="line line-2"></span>
@@ -27,7 +27,7 @@
     <div class="block block-5"></div>
     <div class="block block-6"></div>
     <div class="block block-7"><a href="#">Смотреть кейс</a></div>
-    <img class="block-img" src="/assets/svg/slide-1.svg" alt="">
+    <img class="block-img" [src]="item?.data?.img?.url" alt="">
   </div>
 
 </div>

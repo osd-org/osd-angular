@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '@osd-services/api.service';
 
 @Component({
   selector: 'app-home-slider-slide-green',
@@ -7,7 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeSliderSlideGreenComponent implements OnInit {
 
-  constructor() { }
+  sliderList: any[] = [];
+
+  constructor(
+    private _api: ApiService
+  ) {
+    this._api.get('/slider/list').subscribe(e => {
+      this.sliderList = e;
+    })
+  }
 
   ngOnInit() {
   }
