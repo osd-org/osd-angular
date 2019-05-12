@@ -7,6 +7,7 @@ import { HomeSliderComponent } from './home-slider/home-slider.component';
 import { HomeSliderSlideGreenComponent } from './home-slider/home-slider-slide-green/home-slider-slide-green.component';
 import { HomeSliderSlideBlackComponent } from './home-slider/home-slider-slide-black/home-slider-slide-black.component';
 import { TweenMaxSlideComponent } from './home-slider/tween-max-slide/tween-max-slide.component';
+
 const routes: Routes = [
     {
       path: '',

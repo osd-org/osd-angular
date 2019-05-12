@@ -36,9 +36,20 @@
         visibility: visible;
     }
     100% {
-        transform: translateX(0);
+        transform: translateX(0px);
         visibility: visible;
     }
+}
+
+@keyframes end-part {
+  0% {
+      transform: translateX(0px);
+      visibility: visible;
+  }
+  100% {
+      transform: translateX(-2000px);
+      visibility: visible;
+  }
 }
 
 :host.start {
@@ -59,7 +70,7 @@
                 animation: start-slogan-block 1.5s forwards;
                 animation-delay: 0.75s;
             }
-            
+
         }
     }
 

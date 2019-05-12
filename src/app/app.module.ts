@@ -10,6 +10,7 @@ import { AppComponent }         from './app.component';
 import {ServicesModule} from '@osd-services/services.module';
 import { PLATFORM_ID, APP_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { isPlatformBrowser } from '@angular/common';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    ServicesModule
+    ServicesModule,
+    BrowserAnimationsModule
   ],
   declarations: [
     AppComponent,

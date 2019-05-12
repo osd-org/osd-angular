@@ -36,6 +36,7 @@
     "gsap": "^2.0.2",
     "jss": "^9.8.7",
     "jss-preset-default": "^10.0.0-alpha.7",
+    "ngx-cookie-service": "^2.1.0",
     "rxjs": "^6.3.0",
     "spider-detector": "^1.0.19",
     "zone.js": "~0.8.26"
