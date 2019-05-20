@@ -9,7 +9,7 @@ import * as express from 'express';
 import { join } from 'path';
 import * as detector from 'spider-detector';
 
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
+// process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 
 // Faster server renders w/ Prod mode (dev mode never needed)
 enableProdMode();
