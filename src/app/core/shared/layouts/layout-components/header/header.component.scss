@@ -1,48 +1,68 @@
+@import "mixins";
+
+:host {
+  height: 87px;
+  background-color: rgba(0, 0, 0, 0.27);
+  display: block;
+}
+
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 36px;
-    margin-top: 46px;
-}
-
-.logo {
-    display: block;
-    height: 100%;
-
-    img {
+  @include flex(row, space-between, center);
+  height: 100%;
+    &-container {
+      width: 100%;
+      height: 100%;
+    }
+    .logo {
+        display: block;
+        width: 40px;
+        height: 37px;
+        img {
+            height: 100%;
+        }
+    }
+    &__group {
+      &--rt {
+        width: 100%;
+        max-width: 300px;
         height: 100%;
-    }
-}
-
-.nav {
-
-    &__item {
-        text-transform: uppercase;
-        position: relative;
-
-        &:not(:last-child) {
-            margin-right: 36px;
-        }
-
-        &:hover,
-        &.active {
-            &:after {
-                transform: scaleX(1);
+        @include flex(row, flex-end, center);
+        .langs {
+          width: 137px;
+          height: 42px;
+          border-radius: 20px;
+          background-color: #313131;
+          margin-right: 20px;
+          &__list {
+            padding: 0;
+            margin: 0;
+            @include flex(row, space-between, center);
+          }
+          &__item {
+            list-style: none;
+            width: 37px;
+            height: 37px;
+            box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05), 0 2px 2px rgba(0, 0, 0, 0.1), 0 3px 1px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background-color: none;
+            padding: 0;
+            margin: 0;
+            border-radius: 50%;
+            @include flex(row, center, center);
+            cursor: pointer;
+            &.active {
+              background-color: #8001f9;
             }
+          }
         }
-
-        &:after {
-            display: block;
-            position: absolute;
-            content: '';
-            width: 100%;
-            left: 0;
-            bottom: -8px;
-            border-bottom: 3px solid;
-            transition: 0.3s transform;
-            transform-origin: center;
-            transform: scaleX(0);
+        .menu-btn {
+          width: 43px;
+          height: 35px;
+          background: none;
+          border: none;
+          padding: 0;
         }
+      }
     }
+
 }

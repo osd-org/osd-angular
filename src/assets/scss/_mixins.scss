@@ -57,3 +57,11 @@
     @content;
   }
 }
+
+@mixin flex($direction: row, $justify: flex-start, $align-items: flex-start) {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align-items;
+}
