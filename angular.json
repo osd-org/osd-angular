@@ -115,6 +115,18 @@
               "includePaths": [
                 "src/assets/scss/"
               ]
+            },
+            "sourceMap": false
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true
             }
           }
         }

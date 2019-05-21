@@ -1,5 +1,5 @@
 <ng-container *ngFor="let item of sliderList; let i = index;">
-  <div *ngIf="currentSlideIndex === i">
+  <div [hidden]="currentSlideIndex !== i">
     <div class="slogan">
       <div class="slogan__block">
         <span class="slogan__block-text">{{item?.data?.group?.first}}</span>

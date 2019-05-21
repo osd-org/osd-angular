@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '@osd-services/api.service';
+import { PlatformService } from '@osd-services/universal/platform.service';
 
 @Component({
   selector: 'app-home-slider-slide-green',
@@ -14,6 +15,7 @@ export class HomeSliderSlideGreenComponent implements OnInit {
 
   constructor(
     private _api: ApiService,
+    private _platform: PlatformService
   ) {
     this._loadSlider();
   }
@@ -24,7 +26,9 @@ export class HomeSliderSlideGreenComponent implements OnInit {
   private _loadSlider() {
     this._api.get('/slider/list').subscribe(e => {
       this.sliderList = e;
-      this._siledrTimer(e);
+      if (this._platform.isBrowser) {
+        this._siledrTimer(e);
+      }
     })
   }
 
