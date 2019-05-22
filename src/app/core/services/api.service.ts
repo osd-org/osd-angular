@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of, Subject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { TranslationService } from '../shared/translation/translation.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +20,11 @@ export class ApiService {
     withCredentials: true
   };
 
-  private _apiUrl: string = environment.api_url;
-  private _apiCmsUrl: string = '/';
+  private _apiUrl: string = '';
 
   constructor(
     private _http: HttpClient,
+    private _translate: TranslationService
   ) {
     this._headers = new HttpHeaders();
   }
@@ -34,10 +35,11 @@ export class ApiService {
    * @param  {boolean=false} cms
    * @returns Observable
    */
-  public get(url: string, params: any = null, cms: boolean = false): Observable<any> {
+  public get(url: string, params: any = null): Observable<any> {
+
     const options = Object.assign({}, this._options);
     options.params = params;
-    return this.request('GET', url, options, cms);
+    return this.request('GET', url, options);
   }
 
   /**
@@ -46,10 +48,10 @@ export class ApiService {
    * @param  {boolean=false} cms
    * @returns Observable
    */
-  public post(url: string, data: any = null, cms: boolean = false): Observable<any> {
+  public post(url: string, data: any = null): Observable<any> {
     const options = Object.assign({}, this._options);
     options.body = data;
-    return this.request('POST', url, options, cms);
+    return this.request('POST', url, options);
   }
 
   /**
@@ -59,10 +61,10 @@ export class ApiService {
    * @param cms
    * @returns Observable
    */
-  public put(url: string, data: any = null, cms: boolean = false): Observable<any> {
+  public put(url: string, data: any = null): Observable<any> {
     const options = Object.assign({}, this._options);
     options.body = data;
-    return this.request('PUT', url, options, cms);
+    return this.request('PUT', url, options);
   }
 
   /**
@@ -71,10 +73,10 @@ export class ApiService {
    * @param  {boolean=false} cms
    * @returns Observable
    */
-  public patch(url: string, data: any = null, cms: boolean = false): Observable<any> {
+  public patch(url: string, data: any = null): Observable<any> {
     const options = Object.assign({}, this._options);
     options.body = data;
-    return this.request('PATCH', url, options, cms);
+    return this.request('PATCH', url, options);
   }
 
   /**
@@ -83,10 +85,10 @@ export class ApiService {
    * @param  {boolean=false} cms
    * @returns Observable
    */
-  public delete(url: string, data: any = null, cms: boolean = false): Observable<any> {
+  public delete(url: string, data: any = null): Observable<any> {
     const options = Object.assign({}, this._options);
     options.body = data;
-    return this.request('DELETE', url, options, cms);
+    return this.request('DELETE', url, options);
   }
 
   /**
@@ -96,8 +98,8 @@ export class ApiService {
    * @param  {boolean=false} cms
    * @returns Observable
    */
-  public request(method: string, url: string, options: any = this._options, cms: boolean = false): Observable<any> {
-    const path = cms ? this._apiCmsUrl : this._apiUrl;
+  public request(method: string, url: string, options: any = this._options): Observable<any> {
+    const path = environment.api_host + '/' + this._translate.lang + environment.api_url;
     const subject = new Subject();
 
     this._http.request(method, path + encodeURI(url), options).subscribe(response => {

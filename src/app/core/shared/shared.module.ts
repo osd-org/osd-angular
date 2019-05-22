@@ -4,6 +4,7 @@ import {DirectivesModule} from '@osd-directives/directives.module';
 import {LayoutsModule} from './layouts/layouts.module';
 import {PipesModule} from '@osd-pipes/pipes.module';
 import {FormsModule} from '@angular/forms';
+import { TranslationModule } from './translation/translation.module';
 
 @NgModule({
   imports: [

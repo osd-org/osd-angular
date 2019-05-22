@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '@osd-services/api.service';
 import { PlatformService } from '@osd-services/universal/platform.service';
+import { TranslationService } from 'app/core/shared/translation/translation.service';
+
 
 @Component({
   selector: 'app-home-slider-slide-green',
@@ -15,12 +17,14 @@ export class HomeSliderSlideGreenComponent implements OnInit {
 
   constructor(
     private _api: ApiService,
-    private _platform: PlatformService
+    private _platform: PlatformService,
+    private _translate: TranslationService
   ) {
     this._loadSlider();
   }
 
   ngOnInit() {
+
   }
 
   private _loadSlider() {

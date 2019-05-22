@@ -9,9 +9,11 @@
 
               <div class="langs">
                 <ul class="langs__list">
-                  <li class="langs__item active">en</li>
-                  <li class="langs__item">ru</li>
-                  <li class="langs__item">ua</li>
+                  <li
+                  class="langs__item"
+                  [ngClass]="{'active': item === LANG}"
+                  (click)="changeLang(item)"
+                  *ngFor="let item of langList">{{ item }}</li>
                 </ul>
               </div>
 
