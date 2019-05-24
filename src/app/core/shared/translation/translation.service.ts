@@ -4,11 +4,9 @@ import { LANG_UA } from './LANG_UA';
 import { LANG_EN } from './LANG_EN';
 import { LANG_RU } from './LANG_RU';
 
-import { AsyncSubject, BehaviorSubject, combineLatest, ReplaySubject, Subject } from 'rxjs';
-// import { EnvironmentService } from '@osd-services/environment.service';
+import { ReplaySubject, BehaviorSubject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { map, mergeMap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 import { WindowService } from '@osd-services/universal/window.service';
 
 @Injectable({
@@ -17,14 +15,11 @@ import { WindowService } from '@osd-services/universal/window.service';
 export class TranslationService {
 
   private _defaultLang = 'ru';
-
   private _currentLang = this._cookie.check('qtrans_front_language') ? this._cookie.get('qtrans_front_language') : this._defaultLang;
-
   private _langChange$: EventEmitter<string> = new EventEmitter<string>();
-
   private _langResolved: boolean;
-
   private _resolveLang$: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
+  private _env$ = new BehaviorSubject<string>(this._defaultLang)
 
   /**
    * Available languages
@@ -35,14 +30,18 @@ export class TranslationService {
     'ua': LANG_UA
   };
 
+  private _langList: Array<any> = [
+    {code: 'en', title: 'English'},
+    {code: 'ru', title: 'Русский'},
+    {code: 'ua', title: 'Украинский'},
+  ];
 
   constructor(
-    // private _environment: EnvironmentService,
     private _window: WindowService,
     private _cookie: CookieService,
     private _router: Router
   ) {
-    // this._resolveCurrentLang();
+    this._resolveCurrentLang();
 
   }
 
@@ -61,6 +60,12 @@ export class TranslationService {
     return this._defaultLang;
   }
 
+  /**
+   * Returns available game
+   */
+  get langList(): Array<any> {
+    return this._langList;
+  }
 
   /**
    * Returns current language
@@ -146,7 +151,6 @@ export class TranslationService {
     } else {
       const host = this._window.nativeWindow.location.origin;
       const uri = this._window.nativeWindow.location.href.replace(host, '');
-
       this._router.navigateByUrl(uri);
     }
   }
@@ -156,23 +160,24 @@ export class TranslationService {
    *
    * @private
    */
-  // private _resolveCurrentLang() {
-  //   this._environment.env$.subscribe(env => {
-  //     const host = this._window.nativeWindow.location.origin;
-  //     const uri = this._window.nativeWindow.location.href.replace(host, '');
+  private _resolveCurrentLang() {
+    this._env$.subscribe(env => {
 
-  //     const langSegment = uri.split('/')[1];
+      const host = this._window.nativeWindow.location.origin;
+      const uri = this._window.nativeWindow.location.href.replace(host, '');
 
-  //     if (langSegment && this._dictionary.hasOwnProperty(langSegment)) { // check lang segment
-  //       this.changeLang(langSegment);
-  //     } else if (this._cookie.check('lang') && this._dictionary.hasOwnProperty(this._cookie.get('lang'))) { // check cookie
-  //       this.changeLang(this._cookie.get('lang'));
-  //     } else if (env.locale.short && this._dictionary.hasOwnProperty(env.locale.short)) { // check environment
-  //       this.changeLang(env.locale.short);
-  //     }
+      const langSegment = uri.split('/')[1];
 
-  //     this._langResolved = true;
-  //     this._resolveLang$.next(true);
-  //   });
-  // }
+      if (langSegment && this._dictionary.hasOwnProperty(langSegment)) { // check lang segment
+        this.changeLang(langSegment);
+      } else if (this._cookie.check('qtrans_front_language') && this._dictionary.hasOwnProperty(this._cookie.get('qtrans_front_language'))) { // check cookie
+        this.changeLang(this._cookie.get('qtrans_front_language'));
+      } else if (env && this._dictionary.hasOwnProperty(env)) { // check environment
+        this.changeLang(env);
+      }
+
+      this._langResolved = true;
+      this._resolveLang$.next(true);
+    });
+  }
 }

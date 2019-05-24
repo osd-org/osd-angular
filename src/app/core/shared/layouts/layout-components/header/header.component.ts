@@ -8,8 +8,6 @@ import { TranslationService } from 'app/core/shared/translation/translation.serv
 })
 export class HeaderComponent implements OnInit {
 
-  public langList: string[] = ['ru', 'en', 'ua'];
-
   constructor(
     private _translate: TranslationService
   ) { }
@@ -22,10 +20,15 @@ export class HeaderComponent implements OnInit {
     return this._translate.lang;
   }
 
+
+  public get langList(): any[] {
+    return this._translate.langList;
+  }
+
   /**
    * change current lang
    */
-  public changeLang(lang: string) {
+  public changeLanguage(lang: string) {
     this._translate.changeLang(lang);
   }
 }

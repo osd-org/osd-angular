@@ -2,13 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
 import {PageComponent} from './page.component';
+import { LangGuard } from '../core/shared/guards/lang.guard';
 
 const routes: Routes = [
     {
       path: '',
       component: PageComponent,
+      canActivate: [LangGuard],
+      canActivateChild: [LangGuard],
+      runGuardsAndResolvers: 'always',
       children: [
         { path: '', loadChildren: './home/home.module#HomeModule' },
+        { path: ':lang', loadChildren: './home/home.module#HomeModule' },
+        { path: '**', redirectTo: '/'},
       ]
     },
   ];
