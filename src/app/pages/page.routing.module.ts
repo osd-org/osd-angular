@@ -13,6 +13,7 @@ const routes: Routes = [
       runGuardsAndResolvers: 'always',
       children: [
         { path: '', loadChildren: './home/home.module#HomeModule' },
+        { path: ':lang/blog', loadChildren: './blog/blog.module#BlogModule'},
         { path: ':lang', loadChildren: './home/home.module#HomeModule' },
         { path: '**', redirectTo: '/'},
       ]
@@ -28,6 +29,6 @@ const routes: Routes = [
       RouterModule
     ],
     declarations: [],
-    providers: []
+    providers: [LangGuard]
   })
   export class PageRoutingModule { }
