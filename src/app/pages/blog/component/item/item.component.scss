@@ -1,0 +1,41 @@
+
+@import "variables";
+@import "mixins";
+
+
+.page-top {
+  background-color: #ee8028;
+  height: 180px;
+  .container {
+    @include flex(row, flex-start, center);
+  }
+  &__title {
+    width: 70%;
+    h1 {
+      color: #ffffff;
+      font-family: "Open Sans Semi Bold";
+      font-size: 28px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+  }
+  &__author {
+    width: 30%;
+    &-name {
+      color: #ffffff;
+      font-family: "DIN Alternate";
+      font-size: 15px;
+      font-weight: 700;
+    }
+    &-img {
+      width: 66px;
+      height: 66px;
+      border-radius: 50%;
+    }
+  }
+}
+
+.page-content {
+  background-color: #fff;
+  color: #000;
+}

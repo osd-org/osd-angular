@@ -1,10 +1,19 @@
 
 <app-main-layout>
-  <div class="page-top"></div>
-
   <div class="page-content">
-    <p>
-      blog works!
-    </p>
+    <div class="blog__list">
+      <div class="blog__item" *ngFor="let item of blogList">
+        <div class="blog__item-title">«Скидок не давать» и другие способы развития лояльного потребителя</div>
+        <div class="blog__item-text">Эксперт OSDirect Марк Тесля о том, какие еще полезные действия можно получить от лояльного клиента</div>
+        <div class="blog__item-readmore"><a [routerLink]="[item.id]">{{'читать' | translate}} <img src="/assets/svg/arrow.svg" alt=""></a></div>
+      </div>
+    </div>
+    <div class="blog__pagination">
+      <div class="blog__pagination-link">1</div>
+      <div class="blog__pagination-link">2</div>
+      <div class="blog__pagination-link">3</div>
+      <div class="blog__pagination-link">4</div>
+      <div class="blog__pagination-link">5</div>
+    </div>
   </div>
 </app-main-layout>

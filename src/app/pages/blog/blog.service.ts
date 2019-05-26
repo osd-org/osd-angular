@@ -8,18 +8,16 @@ import { of, Subject } from 'rxjs';
 })
 export class BlogService {
 
-  public blogList$: Subject<any[]> = new Subject<any[]>();
 
   constructor(
     private _api: ApiService
   ) { }
 
-  private _getBlogList() {
-    this._api.get('/admin/banner/type/list').pipe(
+  public getBlogList(param = null) {
+    return this._api.get('/posts', param).pipe(
       first(),
-      map(res => res['data']['list']),
       catchError(() =>  of([]))
-    ).subscribe();
+    )
   }
 
 }
