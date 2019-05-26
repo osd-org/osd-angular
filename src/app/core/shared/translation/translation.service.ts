@@ -1,3 +1,4 @@
+import { PlatformService } from '@osd-services/universal/platform.service';
 import { EventEmitter, Injectable } from '@angular/core';
 import { isNullOrUndefined } from 'util';
 import { LANG_UA } from './LANG_UA';
@@ -39,7 +40,8 @@ export class TranslationService {
   constructor(
     private _window: WindowService,
     private _cookie: CookieService,
-    private _router: Router
+    private _router: Router,
+    private _platform: PlatformService
   ) {
     this._resolveCurrentLang();
 
@@ -149,9 +151,11 @@ export class TranslationService {
     if (this.langResolved) {
       this._router.navigateByUrl(this._router.url);
     } else {
-      const host = this._window.nativeWindow.location.origin;
-      const uri = this._window.nativeWindow.location.href.replace(host, '');
-      this._router.navigateByUrl(uri);
+      if (this._platform.isBrowser) {
+        const host = this._window.nativeWindow.location.origin;
+        const uri = this._window.nativeWindow.location.href.replace(host, '');
+        this._router.navigateByUrl(uri);
+      }
     }
   }
 
@@ -162,20 +166,20 @@ export class TranslationService {
    */
   private _resolveCurrentLang() {
     this._env$.subscribe(env => {
+      if (this._platform.isBrowser) {
+        const host = this._window.nativeWindow.location.origin;
+        const uri = this._window.nativeWindow.location.href.replace(host, '');
 
-      const host = this._window.nativeWindow.location.origin;
-      const uri = this._window.nativeWindow.location.href.replace(host, '');
+        const langSegment = uri.split('/')[1];
 
-      const langSegment = uri.split('/')[1];
-
-      if (langSegment && this._dictionary.hasOwnProperty(langSegment)) { // check lang segment
-        this.changeLang(langSegment);
-      } else if (this._cookie.check('qtrans_front_language') && this._dictionary.hasOwnProperty(this._cookie.get('qtrans_front_language'))) { // check cookie
-        this.changeLang(this._cookie.get('qtrans_front_language'));
-      } else if (env && this._dictionary.hasOwnProperty(env)) { // check environment
-        this.changeLang(env);
+        if (langSegment && this._dictionary.hasOwnProperty(langSegment)) { // check lang segment
+          this.changeLang(langSegment);
+        } else if (this._cookie.check('qtrans_front_language') && this._dictionary.hasOwnProperty(this._cookie.get('qtrans_front_language'))) { // check cookie
+          this.changeLang(this._cookie.get('qtrans_front_language'));
+        } else if (env && this._dictionary.hasOwnProperty(env)) { // check environment
+          this.changeLang(env);
+        }
       }
-
       this._langResolved = true;
       this._resolveLang$.next(true);
     });
