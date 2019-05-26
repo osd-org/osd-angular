@@ -17,8 +17,6 @@ export class ListComponent implements OnInit {
   ngOnInit() {
     this._blog.getBlogList().subscribe( res => {
       this.blogList = res;
-      console.log(res);
-
     });
   }
 
