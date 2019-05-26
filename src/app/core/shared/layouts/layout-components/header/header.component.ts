@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslationService } from 'app/core/shared/translation/translation.service';
+import { SidebarService } from '../sidebar/sidebar.service';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,8 @@ import { TranslationService } from 'app/core/shared/translation/translation.serv
 export class HeaderComponent implements OnInit {
 
   constructor(
-    private _translate: TranslationService
+    private _translate: TranslationService,
+    public sidebar: SidebarService,
   ) { }
 
   ngOnInit() {

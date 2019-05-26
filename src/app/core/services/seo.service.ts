@@ -23,7 +23,7 @@ export class SeoService {
   }
 
   updateTags(tags: any) {
-    this.title.setTitle(tags.MetaTitle ? tags.MetaTitle : 'Turbico');
+    this.title.setTitle(tags.MetaTitle ? tags.MetaTitle : 'OSD');
     this.meta.updateTag({name: 'description', content: tags.MetaDesc ? tags.MetaDesc : ''});
   }
 }

@@ -15,9 +15,10 @@ export class ListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._blog.getBlogList().subscribe( res => {
+    this._blog.getBlogList().subscribe( (res: any[]) => {
       this.blogList = res;
     });
   }
+
 
 }

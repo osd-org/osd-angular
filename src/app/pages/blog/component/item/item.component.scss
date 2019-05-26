@@ -10,22 +10,25 @@
     @include flex(row, flex-start, center);
   }
   &__title {
-    width: 70%;
+    width: 76%;
     h1 {
       color: #ffffff;
       font-family: "Open Sans Semi Bold";
       font-size: 28px;
       font-weight: 600;
       text-transform: uppercase;
+      line-height: 2;
     }
   }
   &__author {
-    width: 30%;
+    width: 24%;
+    @include flex(row, space-around, center);
     &-name {
       color: #ffffff;
       font-family: "DIN Alternate";
       font-size: 15px;
       font-weight: 700;
+      text-align: right;
     }
     &-img {
       width: 66px;
@@ -38,4 +41,6 @@
 .page-content {
   background-color: #fff;
   color: #000;
+  height: calc(100vh - 327px);
+  margin-bottom: 0;
 }

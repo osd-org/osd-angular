@@ -3,14 +3,16 @@
   <div class="page-top">
     <div class="container">
       <div class="page-top__title">
-        <h1>Лояльные маркетинг-манипуляции
-
-            без материального стимулирования</h1>
+        <h1>{{blogPost?.acf?.title_detail}}</h1>
       </div>
       <div class="page-top__author">
-        <div class="page-top__author-name">ЛИДИЯ ГАВРИЩУК</div>
-        <div class="page-top__author-position">Маркетинг-директор</div>
-        <div class="page-top__author-img"></div>
+        <div class="page-top__author-name">
+          <div class="name">{{blogPost?.acf?.author_name}}</div>
+          <div class="position">{{blogPost?.acf?.author_position}}</div>
+        </div>
+        <div class="page-top__author-img">
+          <img [src]="blogPost?.acf?.author_photo?.url" alt="">
+        </div>
       </div>
     </div>
   </div>
@@ -18,8 +20,7 @@
 
 
   <div class="page-content">
-    <div class="container">
-      sdgsgsgsgseg
+    <div class="container" horisontalScroll [innerHTML]="blogPost?.acf?.desc_detail">
     </div>
   </div>
 </app-blog-layout>
