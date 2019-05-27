@@ -1,6 +1,9 @@
-<div class="sidebar"  ClickOutside (clickOutside)="sidebar.close()">
-    <div class="sidebar__header">
-2355252552
-    </div>
-
+<div class="sidebar" [ngClass]="{open: sidebar.isOpen}"  ClickOutside (clickOutside)="sidebar.close()">
+    <nav class="sidebar__menu">
+      <li
+      *ngFor="let item of menuList"
+      class="sidebar__menu-item" [ngStyle]="{'background-color': item?.color, 'height': linkHeight}">
+       <a [routerLink]="[ '/' + LANG, item?.link]" (click)="sidebar.close()" class="link">{{item?.name}}</a>
+      </li>
+    </nav>
   </div>

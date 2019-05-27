@@ -23,3 +23,8 @@ $bp-sm: 768px;
 $bp-md: 992px;
 $bp-ld: 1200px;
 $bp-xl: 1500px;
+
+
+$header-height: 87px;
+$footer-height: 60px;
+$content-height: calc(100vh - #{($header-height + $footer-height)});

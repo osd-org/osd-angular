@@ -10,6 +10,14 @@ import { SidebarService } from './sidebar.service';
 })
 export class SidebarComponent implements OnInit {
 
+  public menuList: any[] = [
+    { name: 'КЕЙСЫ', link: 'cases', color: '#000'},
+    { name: 'СЕРВИСЫ', link: 'services', color: '#8104f9'},
+    { name: 'ПРО НАС', link: 'about', color: '#1c0c57'},
+    { name: 'БЛОГ', link: 'blog', color: '#ec008c'},
+    { name: 'КЛИЕНТЫ', link: 'clients', color: '#16467f'},
+    { name: 'КОНТАКТЫ', link: 'contact', color: '#ee8028'},
+  ]
 
   constructor(
     public sidebar: SidebarService,
@@ -20,6 +28,18 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
   }
+
+
+  public get LANG(): string {
+    return this.translate.lang;
+  }
+
+
+  public get linkHeight() : string {
+    return 100 / this.menuList.length + '%';
+  }
+
+
 
 
 }
