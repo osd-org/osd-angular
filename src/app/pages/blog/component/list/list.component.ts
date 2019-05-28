@@ -10,7 +10,7 @@ export class ListComponent implements OnInit {
 
   public blogList: any[] = [];
   public paginationPages: any[] = [];
-  private _per_page: number = 1;
+  private _per_page: number = 9;
 
   constructor(
     private _blog: BlogService
@@ -20,7 +20,7 @@ export class ListComponent implements OnInit {
     this._blog.getBlogList({per_page: this._per_page}).subscribe( (res: any) => {
       this.blogList = res.body;
       this.paginationPages = res.headerParams.pages;
-      this.paginationPages = Array(2);
+      this.paginationPages = Array(this.paginationPages);
     });
   }
 
@@ -28,7 +28,7 @@ export class ListComponent implements OnInit {
     this._blog.getBlogList({per_page: this._per_page, page: pageNumber}).subscribe( (res: any) => {
       this.blogList = res.body;
       this.paginationPages = res.headerParams.pages;
-      this.paginationPages = Array(2);
+      this.paginationPages = Array(this.paginationPages);
     });
   }
 
