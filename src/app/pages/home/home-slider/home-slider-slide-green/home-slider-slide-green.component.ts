@@ -28,10 +28,10 @@ export class HomeSliderSlideGreenComponent implements OnInit {
   }
 
   private _loadSlider() {
-    this._api.get('/slider/list').subscribe(e => {
-      this.sliderList = e;
+    this._api.get('/slider/list').subscribe(res => {
+      this.sliderList = res.body;
       if (this._platform.isBrowser) {
-        this._siledrTimer(e);
+        this._siledrTimer(res.body);
       }
     })
   }

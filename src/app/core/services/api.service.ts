@@ -17,7 +17,8 @@ export class ApiService {
 
   private _options: any = {
     headers: this._headers,
-    withCredentials: true
+    withCredentials: true,
+    observe: "response"
   };
 
   private _apiUrl: string = '';
@@ -102,8 +103,10 @@ export class ApiService {
     const path = environment.api_host + '/' + this._translate.lang + environment.api_url;
     const subject = new Subject();
 
-    this._http.request(method, path + encodeURI(url), options).subscribe(response => {
-      subject.next(response);
+    this._http.request(method, path + encodeURI(url), options).subscribe((response: any )=> {
+      const body = response.body;
+      const headerParams = {total: response.headers.get('x-wp-total'), pages: response.headers.get('x-wp-totalpages')}
+      subject.next({body, headerParams});
     }, error => {
       this._handleError(error);
       subject.error(error);
