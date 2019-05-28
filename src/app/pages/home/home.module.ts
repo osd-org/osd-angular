@@ -3,10 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../../core/shared/shared.module';
-import { HomeSliderComponent } from './home-slider/home-slider.component';
-import { HomeSliderSlideGreenComponent } from './home-slider/home-slider-slide-green/home-slider-slide-green.component';
-import { HomeSliderSlideBlackComponent } from './home-slider/home-slider-slide-black/home-slider-slide-black.component';
-import { TweenMaxSlideComponent } from './home-slider/tween-max-slide/tween-max-slide.component';
+import { TileSliderModule } from './tile-slider/tile-slider.module';
 
 const routes: Routes = [
     {
@@ -19,14 +16,11 @@ const routes: Routes = [
     imports: [
       CommonModule,
       RouterModule.forChild(routes),
-      SharedModule
+      SharedModule,
+      TileSliderModule
     ],
     declarations: [
       HomeComponent,
-      HomeSliderComponent,
-      HomeSliderSlideGreenComponent,
-      HomeSliderSlideBlackComponent,
-      TweenMaxSlideComponent,
     ]
   })
   export class HomeModule {
