@@ -18,8 +18,11 @@ export class BlogService {
 
   public getBlogList(param = null) {
     return this._api.get('/posts', param).pipe(
-      map(res => this.blogList = res.body),
-      catchError(() =>  of([]))
+      map(res => {
+        this.blogList = res.body;
+        return res;
+      }),
+      catchError(() =>  of({}))
     )
   }
 
