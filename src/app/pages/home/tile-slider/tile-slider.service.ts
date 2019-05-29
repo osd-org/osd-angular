@@ -7,7 +7,9 @@ import { Injectable } from '@angular/core';
 })
 export class TileSliderService {
 
-  private _tileTransition = 500;
+  private _tileTransition = 400;
+  private _lineTransition = 400;
+  private _lineScaleTransition = 200;
 
   constructor(
     private _window: WindowService,
@@ -57,6 +59,40 @@ export class TileSliderService {
   }
 
   /**
+   * 
+   * @param lines 
+   * @param container 
+   */
+  public makeSlideLines(lines: Array<any>, container: HTMLElement) {
+    if (!this._platform.isBrowser) {
+      return;
+    }
+
+    const lineHeight = 50;
+
+    lines.forEach((line, index) => {
+      const lineEl = document.createElement('span');
+      lineEl.classList.add('line');
+      lineEl.innerHTML = line.text;
+      lineEl.style.color = 'rgba(255, 255, 255, 0)';
+      lineEl.style.backgroundColor = line.color;
+      lineEl.style.position = 'absolute';
+      lineEl.style.zIndex = '0';
+      lineEl.style.fontSize = '26px';
+      lineEl.style.lineHeight = lineHeight + 'px';
+      lineEl.style.transformOrigin = 'bottom left';
+      lineEl.style.transform = 'translateX(2000px) scaleY(0.1)';
+      lineEl.style.padding = '0 10px';
+      lineEl.style.boxSizing = 'border-box';
+      lineEl.style.height = lineHeight + 'px';
+      lineEl.style.top = 180 + lineHeight * index + 'px';
+      lineEl.style.left = window.innerWidth / 2 - 400 + 'px';
+
+      container.appendChild(lineEl);
+    });
+  }
+
+  /**
    * Устанавливает тайл в начальное положение
    * 
    * @param tile 
@@ -64,7 +100,6 @@ export class TileSliderService {
   public resetTile(tile: HTMLElement) {
     tile.style.transition = 0 + 'ms';
     tile.style.transform = 'translateX(2000px)';
-    tile.style.transition = this._tileTransition + 'ms';
   }
 
   /**
@@ -73,6 +108,7 @@ export class TileSliderService {
    * @param tile 
    */
   public showTile(tile: HTMLElement) {
+    tile.style.transition = this._tileTransition + 'ms';
     tile.style.transform = 'translateX(0)';
   }
 
@@ -83,5 +119,58 @@ export class TileSliderService {
    */
   public hideTile(tile: HTMLElement) {
     tile.style.transform = 'translateX(-2000px)';
+
+    setTimeout(() => {
+      this.resetTile(tile);
+    }, 2000);
+  }
+
+  /**
+   * 
+   * @param line 
+   */
+  public resetLine(line: HTMLElement) {
+    line.style.transition = 0 + 'ms';
+    line.style.transform = 'translateX(2000px) scaleY(0.1)';
+  }
+
+  /**
+   * 
+   * @param line 
+   */
+  public showLine(line: HTMLElement) {
+    line.style.transition = this._lineTransition + 'ms';
+    line.style.transform = 'translateX(0) scaleY(0.1)';
+
+    setTimeout(() => {
+      line.style.transition = this._lineScaleTransition + 'ms';
+      line.style.transform = 'translateX(0) scaleY(1)';
+
+      setTimeout(() => {
+        line.style.color = 'rgba(255, 255, 255, 1)';
+      }, this._lineTransition);
+    }, this._lineTransition + 50);
+  }
+
+  /**
+   * 
+   * @param line 
+   */
+  public hideLine(line: HTMLElement) {
+    line.style.transition = this._lineScaleTransition + 'ms';
+    line.style.color = 'rgba(255, 255, 255, 0)';
+
+    setTimeout(() => {
+      line.style.transform = 'translateX(0) scaleY(0.1)';
+
+      setTimeout(() => {
+        line.style.transition = this._lineTransition + 'ms ease-out';
+        line.style.transform = 'translateX(-2000px) scaleY(0.1)';
+
+        setTimeout(() => {
+          this.resetLine(line);
+        }, this._lineTransition);
+      }, this._lineScaleTransition + 50);
+    }, this._lineScaleTransition);
   }
 }

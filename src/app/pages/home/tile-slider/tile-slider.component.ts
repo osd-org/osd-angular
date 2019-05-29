@@ -1,14 +1,14 @@
-import { Component, OnInit, ContentChildren, AfterContentInit } from '@angular/core';
+import { Component, OnInit, ContentChildren, AfterContentInit, OnDestroy, EventEmitter } from '@angular/core';
 import { TileSlideComponent } from './tile-slide/tile-slide.component';
 import { fromEvent } from 'rxjs';
-import { throttleTime, pairwise } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tile-slider',
   templateUrl: './tile-slider.component.html',
   styleUrls: ['./tile-slider.component.scss']
 })
-export class TileSliderComponent implements OnInit, AfterContentInit {
+export class TileSliderComponent implements OnInit, OnDestroy, AfterContentInit {
 
   @ContentChildren(TileSlideComponent) slidesQueryList;
 
@@ -18,20 +18,22 @@ export class TileSliderComponent implements OnInit, AfterContentInit {
 
   private _allowSlideChanging: boolean;
 
+  private _alive$: EventEmitter<boolean> = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
-    
+    this._initEventListeners();
+  }
+
+  ngOnDestroy() {
+    this._alive$.complete();
   }
 
   ngAfterContentInit() {
     this._sliderList = this.slidesQueryList.toArray();
 
     this.showFirstSlide();
-
-    setInterval(() => {
-      this.nextSlide();
-    }, 7000);
   }
 
   /**
@@ -42,17 +44,13 @@ export class TileSliderComponent implements OnInit, AfterContentInit {
 
     setTimeout(() => {
       this._allowSlideChanging = true;
-    }, 5000);
+    }, 4000);
   }
 
   /**
    * 
    */
   nextSlide() {
-    if (!this._allowSlideChanging) {
-      return;
-    }
-
     this.hideCurrentSlide();
 
     if (this._currentSlide + 1 >= this._sliderList.length) {
@@ -61,7 +59,9 @@ export class TileSliderComponent implements OnInit, AfterContentInit {
       this._currentSlide ++;
     }
 
-    this._sliderList[this._currentSlide].show()
+    setTimeout(() => {
+      this._sliderList[this._currentSlide].show()
+    }, 2000);
 
     this.disableSlideChanging();
   }
@@ -70,10 +70,6 @@ export class TileSliderComponent implements OnInit, AfterContentInit {
    * 
    */
   prevSlide() {
-    if (!this._allowSlideChanging) {
-      return;
-    }
-
     this.hideCurrentSlide();
 
     if (this._currentSlide - 1 < 0) {
@@ -82,7 +78,9 @@ export class TileSliderComponent implements OnInit, AfterContentInit {
       this._currentSlide --;
     }
 
-    this._sliderList[this._currentSlide].show();
+    setTimeout(() => {
+      this._sliderList[this._currentSlide].show();
+    }, 2000);
 
     this.disableSlideChanging();
   }
@@ -107,7 +105,17 @@ export class TileSliderComponent implements OnInit, AfterContentInit {
    * 
    */
   private _initEventListeners() {
-    
+    fromEvent(window, 'wheel').pipe(
+      takeUntil(this._alive$)
+    ).subscribe((e: MouseWheelEvent) => {
+      if (this._allowSlideChanging) {
+        if (e.deltaY > 0) {
+          this.prevSlide();
+        } else {
+          this.nextSlide();
+        }
+      }
+    });
   }
 
 }
