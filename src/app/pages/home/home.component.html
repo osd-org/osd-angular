@@ -2,6 +2,8 @@
   <div class="page-top"></div>
 
   <div class="page-content">
-    <app-home-slider></app-home-slider>
+    <app-tile-slider>
+      <app-tile-slide *ngFor="let slide of slideList" [linesList]="slide.lines" [imageUrl]="slide.image" [linkData]="slide.link"></app-tile-slide>
+    </app-tile-slider>
   </div>
 </app-main-layout>
