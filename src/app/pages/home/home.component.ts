@@ -15,6 +15,40 @@ export class HomeComponent implements OnInit {
 
   @ViewChild('animeObject') AnimationObject: ElementRef;
 
+  /**
+   * Slides list for test
+   */
+  public slideList = [
+    {
+      lines: [
+        {text: 'СЕГМЕНТИРУЕМ', color: '#ff0000'},
+        {text: 'ИССЛЕДУЕМ', color: '#00ff00'},
+        {text: 'ПРОДАЕМ', color: '#ff00ff'},
+      ],
+      link: {
+        title: 'Huggies',
+        description: 'Метод кенгуру',
+        color: 'rgba(255, 0, 255, 0.4)',
+        url: '/'
+      },
+      image: 'https://iso.500px.com/wp-content/uploads/2016/02/stock-photo-133673159-1500x1000.jpg',
+    },
+    {
+      lines: [
+        {text: 'АНАЛИЗИРУЕМ', color: '#00ffff'},
+        {text: 'МАСШТАБИРУЕМ', color: '#ff00ff'},
+        {text: 'ТЕСТИРУЕМ', color: '#aacc00'},
+      ],
+      link: {
+        title: 'Huggies',
+        description: 'Метод кенгуру',
+        color: 'rgba(100, 100, 0, 0.4)',
+        url: '/'
+      },
+      image: 'https://cdn.serif.com/affinity/img/photo/home/0918/og-affinity-photo-120920181112.jpg',
+    },
+  ];
+
   public backgroundColor = BackgroundColor;
 
   constructor(

@@ -68,7 +68,7 @@ export class TileSliderService {
       return;
     }
 
-    const lineHeight = 50;
+    const lineHeight = 70;
 
     lines.forEach((line, index) => {
       const lineEl = document.createElement('span');
@@ -78,11 +78,11 @@ export class TileSliderService {
       lineEl.style.backgroundColor = line.color;
       lineEl.style.position = 'absolute';
       lineEl.style.zIndex = '0';
-      lineEl.style.fontSize = '26px';
+      lineEl.style.fontSize = '30px';
       lineEl.style.lineHeight = lineHeight + 'px';
       lineEl.style.transformOrigin = 'bottom left';
       lineEl.style.transform = 'translateX(2000px) scaleY(0.1)';
-      lineEl.style.padding = '0 10px';
+      lineEl.style.padding = '0 25px';
       lineEl.style.boxSizing = 'border-box';
       lineEl.style.height = lineHeight + 'px';
       lineEl.style.top = 180 + lineHeight * index + 'px';

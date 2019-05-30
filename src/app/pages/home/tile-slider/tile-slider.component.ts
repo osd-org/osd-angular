@@ -1,4 +1,4 @@
-import { Component, OnInit, ContentChildren, AfterContentInit, OnDestroy, EventEmitter } from '@angular/core';
+import { Component, OnInit, ContentChildren, AfterContentInit, OnDestroy, EventEmitter, Input } from '@angular/core';
 import { TileSlideComponent } from './tile-slide/tile-slide.component';
 import { fromEvent } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
