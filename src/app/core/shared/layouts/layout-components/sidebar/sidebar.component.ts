@@ -2,6 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { TranslationService } from 'app/core/shared/translation/translation.service';
 import { Router } from '@angular/router';
 import { SidebarService } from './sidebar.service';
+import { map } from 'rxjs/operators';
+import { ApiService } from '@osd-services/api.service';
+
+
+export interface Menu {
+	name: string;
+	url: string;
+	classes: string[];
+}
+
 
 @Component({
   selector: 'app-sidebar',
@@ -10,23 +20,18 @@ import { SidebarService } from './sidebar.service';
 })
 export class SidebarComponent implements OnInit {
 
-  public menuList: any[] = [
-    { name: 'КЕЙСЫ', link: 'cases', color: '#000'},
-    { name: 'СЕРВИСЫ', link: 'services', color: '#8104f9'},
-    { name: 'ПРО НАС', link: 'about', color: '#1c0c57'},
-    { name: 'БЛОГ', link: 'blog', color: '#ec008c'},
-    { name: 'КЛИЕНТЫ', link: 'clients', color: '#16467f'},
-    { name: 'КОНТАКТЫ', link: 'contact', color: '#ee8028'},
-  ]
+  public menuList: any[] = []
 
   constructor(
     public sidebar: SidebarService,
     public translate: TranslationService,
     private _router: Router,
+    private _api: ApiService
   ) {
   }
 
   ngOnInit() {
+    this._loadMenu();
   }
 
 
@@ -34,12 +39,23 @@ export class SidebarComponent implements OnInit {
     return this.translate.lang;
   }
 
+  private _loadMenu() {
+    this._api.get('/menu/list').pipe(
+      map(res => res.body),
+      map((menu: any[]) => {
+        menu = menu.map((e: Menu) => {
+          e.url = e.url.replace(/http:\/\//gi, '');
+          return e;
+        });
+        return menu;
+      })
+    ).subscribe((e: any[]) => {
+      this.menuList = e;
+    })
+  }
 
   public get linkHeight() : string {
     return 100 / this.menuList.length + '%';
   }
-
-
-
 
 }

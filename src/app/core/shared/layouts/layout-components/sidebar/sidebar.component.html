@@ -2,8 +2,8 @@
     <nav class="sidebar__menu">
       <li
       *ngFor="let item of menuList"
-      class="sidebar__menu-item" [ngStyle]="{'background-color': item?.color, 'height': linkHeight}">
-       <a [routerLink]="[ '/' + LANG, item?.link]" (click)="sidebar.close()" class="link">{{item?.name}}</a>
+      class="sidebar__menu-item" [ngStyle]="{'background-color': '#' + item?.classes[0], 'height': linkHeight}">
+       <a [routerLink]="[ '/' + LANG, item?.url]" (click)="sidebar.close()" class="link">{{item?.name}}</a>
       </li>
     </nav>
   </div>

@@ -31,11 +31,7 @@ export class TranslationService {
     'ua': LANG_UA
   };
 
-  private _langList: Array<any> = [
-    {code: 'en', title: 'English'},
-    {code: 'ru', title: 'Русский'},
-    {code: 'ua', title: 'Украинский'},
-  ];
+  private _langList: Array<any> = [];
 
   constructor(
     private _window: WindowService,
@@ -67,6 +63,10 @@ export class TranslationService {
    */
   get langList(): Array<any> {
     return this._langList;
+  }
+
+  set langList(v: Array<any>) {
+    this._langList = v;
   }
 
   /**
