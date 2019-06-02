@@ -14,6 +14,7 @@ const routes: Routes = [
       children: [
         { path: '', loadChildren: './home/home.module#HomeModule' },
         { path: ':lang/blog', loadChildren: './blog/blog.module#BlogModule'},
+        { path: ':lang/services', loadChildren: './services/services.module#ServicesModule'},
         { path: ':lang', loadChildren: './home/home.module#HomeModule' },
         { path: '**', redirectTo: '/'},
       ]
