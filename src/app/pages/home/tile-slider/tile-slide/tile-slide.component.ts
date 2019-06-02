@@ -52,7 +52,6 @@ export class TileSlideComponent implements OnInit {
       this._tileList = this._el.nativeElement.querySelectorAll('.tile');
       this._lineList = this._el.nativeElement.querySelectorAll('.line');
       this._link = this._el.nativeElement.querySelector('.link');
-
       this._link.style.backgroundColor = this.linkData.color;
     }
   }

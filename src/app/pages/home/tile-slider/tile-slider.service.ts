@@ -18,7 +18,7 @@ export class TileSliderService {
 
   /**
    * Создает набор клеток для слайда
-   * 
+   *
    * @param url ссылка на картинку
    * @param container елемент, в который добавляется слайд
    * @param width количество клеток по ширине
@@ -59,43 +59,42 @@ export class TileSliderService {
   }
 
   /**
-   * 
-   * @param lines 
-   * @param container 
+   *
+   * @param lines
+   * @param container
    */
   public makeSlideLines(lines: Array<any>, container: HTMLElement) {
-    if (!this._platform.isBrowser) {
-      return;
+    if (this._platform.isBrowser && lines) {
+      const lineHeight = 70;
+
+      Object.values(lines).forEach((line, index) => {
+        const lineEl = document.createElement('span');
+        lineEl.classList.add('line');
+        lineEl.innerHTML = line.text;
+        lineEl.style.color = 'rgba(255, 255, 255, 0)';
+        lineEl.style.backgroundColor = line.color;
+        lineEl.style.position = 'absolute';
+        lineEl.style.zIndex = '0';
+        lineEl.style.fontSize = '30px';
+        lineEl.style.lineHeight = lineHeight + 'px';
+        lineEl.style.transformOrigin = 'bottom left';
+        lineEl.style.transform = 'translateX(2000px) scaleY(0.1)';
+        lineEl.style.padding = '0 25px';
+        lineEl.style.boxSizing = 'border-box';
+        lineEl.style.height = lineHeight + 'px';
+        lineEl.style.top = 180 + lineHeight * index + 'px';
+        lineEl.style.left = window.innerWidth / 2 - 400 + 'px';
+
+        container.appendChild(lineEl);
+      });
     }
 
-    const lineHeight = 70;
-
-    lines.forEach((line, index) => {
-      const lineEl = document.createElement('span');
-      lineEl.classList.add('line');
-      lineEl.innerHTML = line.text;
-      lineEl.style.color = 'rgba(255, 255, 255, 0)';
-      lineEl.style.backgroundColor = line.color;
-      lineEl.style.position = 'absolute';
-      lineEl.style.zIndex = '0';
-      lineEl.style.fontSize = '30px';
-      lineEl.style.lineHeight = lineHeight + 'px';
-      lineEl.style.transformOrigin = 'bottom left';
-      lineEl.style.transform = 'translateX(2000px) scaleY(0.1)';
-      lineEl.style.padding = '0 25px';
-      lineEl.style.boxSizing = 'border-box';
-      lineEl.style.height = lineHeight + 'px';
-      lineEl.style.top = 180 + lineHeight * index + 'px';
-      lineEl.style.left = window.innerWidth / 2 - 400 + 'px';
-
-      container.appendChild(lineEl);
-    });
   }
 
   /**
    * Устанавливает тайл в начальное положение
-   * 
-   * @param tile 
+   *
+   * @param tile
    */
   public resetTile(tile: HTMLElement) {
     tile.style.transition = 0 + 'ms';
@@ -104,8 +103,8 @@ export class TileSliderService {
 
   /**
    * Анимация показа тайла
-   * 
-   * @param tile 
+   *
+   * @param tile
    */
   public showTile(tile: HTMLElement) {
     tile.style.transition = this._tileTransition + 'ms';
@@ -114,8 +113,8 @@ export class TileSliderService {
 
   /**
    * Анимация скрытия тайла
-   * 
-   * @param tile 
+   *
+   * @param tile
    */
   public hideTile(tile: HTMLElement) {
     tile.style.transform = 'translateX(-2000px)';
@@ -126,8 +125,8 @@ export class TileSliderService {
   }
 
   /**
-   * 
-   * @param line 
+   *
+   * @param line
    */
   public resetLine(line: HTMLElement) {
     line.style.transition = 0 + 'ms';
@@ -135,8 +134,8 @@ export class TileSliderService {
   }
 
   /**
-   * 
-   * @param line 
+   *
+   * @param line
    */
   public showLine(line: HTMLElement) {
     line.style.transition = this._lineTransition + 'ms';
@@ -153,8 +152,8 @@ export class TileSliderService {
   }
 
   /**
-   * 
-   * @param line 
+   *
+   * @param line
    */
   public hideLine(line: HTMLElement) {
     line.style.transition = this._lineScaleTransition + 'ms';

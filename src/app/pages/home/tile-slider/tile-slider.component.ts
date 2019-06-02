@@ -31,13 +31,14 @@ export class TileSliderComponent implements OnInit, OnDestroy, AfterContentInit 
   }
 
   ngAfterContentInit() {
+    setTimeout(() => {
     this._sliderList = this.slidesQueryList.toArray();
-
     this.showFirstSlide();
+    }, 1000);
   }
 
   /**
-   * 
+   *
    */
   disableSlideChanging() {
     this._allowSlideChanging = false;
@@ -48,7 +49,7 @@ export class TileSliderComponent implements OnInit, OnDestroy, AfterContentInit 
   }
 
   /**
-   * 
+   *
    */
   nextSlide() {
     this.hideCurrentSlide();
@@ -67,7 +68,7 @@ export class TileSliderComponent implements OnInit, OnDestroy, AfterContentInit 
   }
 
   /**
-   * 
+   *
    */
   prevSlide() {
     this.hideCurrentSlide();
@@ -86,23 +87,22 @@ export class TileSliderComponent implements OnInit, OnDestroy, AfterContentInit 
   }
 
   /**
-   * 
+   *
    */
   showFirstSlide() {
     this._sliderList[this._currentSlide].show();
-
     this.disableSlideChanging();
   }
 
   /**
-   * 
+   *
    */
   hideCurrentSlide() {
     this._sliderList[this._currentSlide].hide();
   }
 
   /**
-   * 
+   *
    */
   private _initEventListeners() {
     fromEvent(window, 'wheel').pipe(
