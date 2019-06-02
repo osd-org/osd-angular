@@ -6,6 +6,7 @@ import { PipesModule } from '@osd-pipes/pipes.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslationModule } from './translation/translation.module';
 import { RouterModule } from '@angular/router';
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { RouterModule } from '@angular/router';
     RouterModule,
     TranslationModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    ComponentsModule
   ],
   exports: [
     CommonModule,
@@ -26,7 +28,8 @@ import { RouterModule } from '@angular/router';
     RouterModule,
     TranslationModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    ComponentsModule
   ],
   declarations: []
 })
