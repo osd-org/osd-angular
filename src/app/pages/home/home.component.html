@@ -4,6 +4,7 @@
   <div class="page-content">
     <app-tile-slider>
       <app-tile-slide *ngFor="let slide of slideList" [linesList]="slide.lines" [imageUrl]="slide.image" [linkData]="slide.link"></app-tile-slide>
+      <app-links-slider [links]="linksList"></app-links-slider>
     </app-tile-slider>
   </div>
 </app-main-layout>
