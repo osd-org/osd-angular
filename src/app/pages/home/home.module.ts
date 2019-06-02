@@ -4,6 +4,7 @@ import { HomeComponent } from './home.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../../core/shared/shared.module';
 import { TileSliderModule } from './tile-slider/tile-slider.module';
+import { LinksSliderComponent } from './links-slider/links-slider.component';
 
 const routes: Routes = [
     {
@@ -21,6 +22,7 @@ const routes: Routes = [
     ],
     declarations: [
       HomeComponent,
+      LinksSliderComponent,
     ]
   })
   export class HomeModule {

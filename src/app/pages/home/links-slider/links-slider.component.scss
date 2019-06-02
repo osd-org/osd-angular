@@ -1,0 +1,37 @@
+
+@keyframes linkMove {
+    0% {
+        visibility: visible;
+        transform: translateX(105vw);
+    }
+    100% {
+        visibility: visible;
+        transform: translateX(-250px);
+    }
+}
+
+:host {
+    position: absolute;
+    bottom: 60px;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.link {
+    visibility: hidden;
+    opacity: 0.5;
+    color: #fff;
+    pointer-events: all;
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    animation-name: linkMove;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+
+    &:hover {
+        opacity: 0.8;
+        animation-play-state: paused;
+    }
+}

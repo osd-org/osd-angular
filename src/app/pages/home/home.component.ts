@@ -49,6 +49,40 @@ export class HomeComponent implements OnInit {
     },
   ];
 
+  /**
+   * Demo data for links slider
+   */
+  public linksList = [
+    {
+      url: '/',
+      fontSize: 18,
+      text: 'Дизайн',
+      bottomOffset: 30,
+      speed: 16
+    },
+    {
+      url: '/',
+      fontSize: 16,
+      text: 'Разработка',
+      bottomOffset: 70,
+      speed: 20
+    },
+    {
+      url: '/',
+      fontSize: 14,
+      text: 'Интеграция',
+      bottomOffset: 50,
+      speed: 18
+    },
+    {
+      url: '/',
+      fontSize: 15,
+      text: 'Визуализация',
+      bottomOffset: 40,
+      speed: 15
+    },
+  ];
+
   public backgroundColor = BackgroundColor;
 
   constructor(
