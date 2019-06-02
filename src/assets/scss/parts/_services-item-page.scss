@@ -1,0 +1,47 @@
+
+.service-container {
+    width: 100%;
+    height: calc(100vh - 87px);
+    background-color: #fff;
+    overflow: auto;
+    color: #000;
+}
+
+.service-content {
+    width: 900px;
+    margin: 0 auto;
+
+    h1 {
+        text-align: center;
+    }
+}
+
+.order-btn-container {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.order-btn {
+    display: inline-block;
+    color: #fff;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    margin-top: 40px;
+    transition: 0.4s;
+
+    &:hover {
+        opacity: 0.9;
+
+        i {
+            transform: translateX(5px);
+        }
+    }
+
+    i {
+        font-size: 10px;
+        transition: 0.3s;
+        display: inline-block;
+        margin-left: 10px;
+        font-size: 16px;
+    }
+}

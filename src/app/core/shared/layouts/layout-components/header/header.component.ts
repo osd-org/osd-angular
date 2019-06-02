@@ -1,3 +1,4 @@
+import { HeaderService } from './header.service';
 import { map } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { TranslationService } from 'app/core/shared/translation/translation.service';
@@ -14,7 +15,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private _translate: TranslationService,
     public sidebar: SidebarService,
-    private _api: ApiService
+    private _api: ApiService,
+    public header: HeaderService
   ) { }
 
   ngOnInit() {
