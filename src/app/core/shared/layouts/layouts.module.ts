@@ -5,13 +5,17 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { BlogLayoutComponent } from './blog-layout/blog-layout.component';
 import { ServicesLayoutComponent } from './services-layout/services-layout.component';
 import { TeamLayoutComponent } from './team-layout/team-layout.component';
+import { ContactsLayoutComponent } from './contacts-layout/contacts-layout.component';
+import { ClientsLayoutComponent } from './clients-layout/clients-layout.component';
 
 @NgModule({
   declarations: [
     BlogLayoutComponent,
     MainLayoutComponent,
     TeamLayoutComponent,
-    ServicesLayoutComponent
+    ServicesLayoutComponent,
+    ContactsLayoutComponent,
+    ClientsLayoutComponent
 ],
   imports: [
     CommonModule,
@@ -22,7 +26,8 @@ import { TeamLayoutComponent } from './team-layout/team-layout.component';
     MainLayoutComponent,
     BlogLayoutComponent,
     ServicesLayoutComponent,
-    TeamLayoutComponent
+    TeamLayoutComponent,
+    ClientsLayoutComponent
   ]
 })
 export class LayoutsModule { }

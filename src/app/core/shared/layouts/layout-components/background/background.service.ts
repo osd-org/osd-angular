@@ -5,7 +5,8 @@ export enum BackgroundColor {
   YELLOW = '#FF7500',
   PINK = '#EC008C',
   BLUE = '#0A51EB',
-  DARKBLUE = '#16467f'
+  DARKBLUE = '#16467f',
+  BLACK = '#000000'
 }
 
 @Injectable({
