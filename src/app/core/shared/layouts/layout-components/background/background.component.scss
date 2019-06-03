@@ -21,7 +21,7 @@
         z-index: -97;
         display: block;
         content: '';
-        background: url('/assets/svg/glitch.svg') repeat-x;
+        // background: url('/assets/svg/glitch.svg') repeat-x;
         background-size: cover;
         animation: bg-animation 10s linear infinite;
         will-change: background-position;
@@ -34,7 +34,7 @@
         display: block;
         content: '';
         background: url('/assets/svg/noise.svg') repeat-x;
-        background-size: cover;
+        background-size: 100vw auto;
         animation: bg-animation 30s linear infinite;
         will-change: background-position;
     }
