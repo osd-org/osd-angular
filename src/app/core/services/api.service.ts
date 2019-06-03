@@ -105,7 +105,7 @@ export class ApiService {
 
     this._http.request(method, path + encodeURI(url), options).subscribe((response: any )=> {
       const body = response.body;
-      const headerParams = {total: response.headers.get('x-wp-total'), pages: response.headers.get('x-wp-totalpages')}
+      const headerParams = {total: Number(response.headers.get('x-wp-total')), pages: Number(response.headers.get('x-wp-totalpages'))}
       subject.next({body, headerParams});
     }, error => {
       this._handleError(error);

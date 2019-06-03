@@ -4,11 +4,13 @@ import {LayoutComponentsModule} from './layout-components/layout-components.modu
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { BlogLayoutComponent } from './blog-layout/blog-layout.component';
 import { ServicesLayoutComponent } from './services-layout/services-layout.component';
+import { TeamLayoutComponent } from './team-layout/team-layout.component';
 
 @NgModule({
   declarations: [
     BlogLayoutComponent,
     MainLayoutComponent,
+    TeamLayoutComponent,
     ServicesLayoutComponent
 ],
   imports: [
@@ -19,7 +21,8 @@ import { ServicesLayoutComponent } from './services-layout/services-layout.compo
     LayoutComponentsModule,
     MainLayoutComponent,
     BlogLayoutComponent,
-    ServicesLayoutComponent
+    ServicesLayoutComponent,
+    TeamLayoutComponent
   ]
 })
 export class LayoutsModule { }

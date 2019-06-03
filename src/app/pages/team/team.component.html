@@ -1,0 +1,24 @@
+<app-team-layout>
+  <div class="page-content">
+    <div class="container">
+      <div class="page-title">НАША КОМАНДА</div>
+
+      <div class="team__list">
+        <div class="team__item" *ngFor="let item of teamList">
+          <img class="team__item-img" [src]="item?.data?.img?.url" alt="">
+          <div class="team__item-name">{{item?.data?.name}}</div>
+          <div class="team__item-position">{{item?.data?.position}}</div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="team__pagination">
+      <div
+        class="team__pagination-link"
+        (click)="loadPaginationPage(i + 1)"
+        *ngFor="let item of paginationPages; let i = index">{{i + 1}}</div>
+    </div>
+  </div>
+</app-team-layout>
