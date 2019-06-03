@@ -1,4 +1,5 @@
 import { Component, ElementRef, Renderer2, HostListener, ViewChild, Input, OnInit } from '@angular/core';
+import SweetScroll from 'sweet-scroll';
 
 @Component({
   selector: 'app-slider-text',
@@ -11,6 +12,7 @@ export class SliderTextComponent implements OnInit {
   private _section = null;
   private _card = null;
   private _lastSection = null;
+  private _scroller: SweetScroll;
 
   @ViewChild('scrollWrapper') scrollWrapper: ElementRef;
   @Input('html') html: any;
@@ -29,27 +31,35 @@ export class SliderTextComponent implements OnInit {
 
   private _horisontalScrolling(e) {
     if (e.deltaY > 0) {
-      this.scrollWrapper.nativeElement.scrollLeft += 100;
+      this._scroller.toLeft(this.scrollWrapper.nativeElement.scrollLeft + this.scrollWrapper.nativeElement.offsetWidth + 100 );
+      // this._scroller.to({ top: 0, left: this.scrollWrapper.nativeElement.scrollLeft + this.scrollWrapper.nativeElement.offsetWidth + 100 });
+      // this.scrollWrapper.nativeElement.scrollLeft += 100;
     } else {
-      this.scrollWrapper.nativeElement.scrollLeft -= 100;
+      this._scroller.toLeft(this.scrollWrapper.nativeElement.scrollLeft - this.scrollWrapper.nativeElement.offsetWidth - 100 );
+      // this._scroller.to({ top: 0, left: this.scrollWrapper.nativeElement.scrollLeft - this.scrollWrapper.nativeElement.offsetWidth - 100 });
+      // this.scrollWrapper.nativeElement.scrollLeft -= 100;
     }
   }
 
 
   public _init() {
     const rootElement = this.scrollWrapper.nativeElement;
-    const rootElementHeight = rootElement.offsetHeight;
     this._section = this._render.createElement('section');
     this._card = this.scrollWrapper.nativeElement.querySelectorAll('.card')[0];
     setTimeout(() => {
       this._render.setProperty(this._section, 'innerHTML', this.html);
       this._innerHTMLElements = this._section.querySelectorAll('*');
-      this._fillSections(rootElement, rootElementHeight);
-    }, 2000);
-
+      this._fillSections(rootElement);
+      this._scroller = new SweetScroll({
+        duration: 1000,                 // Specifies animation duration in integer
+        easing: 'easeOutQuint',         // Specifies the pattern of easing                // Enable the vertical scroll
+        horizontal: true,              // Enable the horizontal scroll
+      },
+      '.scrolling-wrapper-flexbox');
+    }, 1000);
   }
 
-  private _fillSections(rootElement, rootElementHeight) {
+  private _fillSections(rootElement) {
     this._innerHTMLElements.forEach(el => {
       if (!this.checkOverflow(this._card)) {
         this._render.appendChild(this._card, el)
