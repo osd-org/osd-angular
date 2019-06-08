@@ -1,9 +1,9 @@
 <div class="sidebar" [ngClass]="{open: sidebar.isOpen}"  ClickOutside (clickOutside)="sidebar.close()">
     <nav class="sidebar__menu">
-      <li
-      *ngFor="let item of menuList"
-      class="sidebar__menu-item" [ngStyle]="{'background-color': '#' + item?.classes[0], 'height': linkHeight}">
+      <div
+      *ngFor="let item of menuList; let i = index"
+      class="sidebar__menu-item" [ngStyle]="{'background-color': '#' + item?.classes[0], 'height': linkHeight, 'transitionDelay': i * 100 + 'ms'}">
        <a [routerLink]="[ '/' + LANG, item?.url]" (click)="sidebar.close()" class="link">{{item?.name}}</a>
-      </li>
+    </div>
     </nav>
   </div>

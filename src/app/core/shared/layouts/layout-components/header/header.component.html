@@ -1,4 +1,4 @@
-<div class="header-container">
+<div class="header-container" [ngClass]="{menu: sidebar.isOpen}">
     <div class="container">
         <header class="header">
             <a href="/" class="logo">
@@ -22,8 +22,12 @@
                 </ul>
               </div>
 
-              <button class="menu-btn" (click)="sidebar.open()">
-                <img src="/assets/svg/menu-btn_2.svg" alt="">
+              <button class="menu-btn" *ngIf="!sidebar.isOpen" (click)="sidebar.open()">
+                <i class="icon-menu"></i>
+              </button>
+
+              <button class="menu-btn" *ngIf="sidebar.isOpen" (click)="sidebar.close()">
+                <i class="icon-close"></i>
               </button>
             </div>
         </header>

@@ -1,26 +1,33 @@
 @import "mixins";
 @import "variables";
 
-:host {
-  height: $header-height;
-  background-color: rgba(0, 0, 0, 0.27);
-  display: block;
-  position: relative;
-  z-index: 90;
-}
-
 .header {
   @include flex(row, space-between, center);
   position: relative;
   height: 100%;
     &-container {
+      height: $header-height;
+      background-color: rgba(0, 0, 0, 0.27);
+      display: block;
+      z-index: 1000;
+      position: relative;
+      transition: 0.3s;
       width: 100%;
-      height: 100%;
+
+      &.menu {
+        background-color: rgba(0, 0, 0, 0);
+        pointer-events: none;
+
+        .page-title {
+          opacity: 0;
+        }
+      }
     }
     .logo {
         display: block;
         width: 40px;
         height: 37px;
+        pointer-events: all;
         img {
             height: 100%;
         }
@@ -37,6 +44,7 @@
           border-radius: 20px;
           background-color: #313131;
           margin-right: 20px;
+          pointer-events: all;
           &__list {
             padding: 0;
             margin: 0;
@@ -60,11 +68,17 @@
           }
         }
         .menu-btn {
-          width: 43px;
-          height: 35px;
+          @include font(28px);
           background: none;
           border: none;
           padding: 0;
+          pointer-events: all;
+          outline: none;
+          display: flex;
+
+          i {
+            display: inline-flex;
+          }
         }
       }
     }
@@ -79,4 +93,5 @@
   transform: translate(-50%, -50%);
   text-transform: uppercase;
   letter-spacing: 10px;
+  transition: 0.3s;
 }
