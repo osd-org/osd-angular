@@ -1,5 +1,24 @@
-// @font-face {
-//   font-family: 'Montserrat';
-//   font-weight: 400;
-//   src: url('/assets/fonts/Montserrat-Regular.ttf') format('truetype');
-// }
+@font-face {
+  font-family: 'Open Sans';
+  font-weight: 400;
+  src: url('/assets/fonts/OpenSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-weight: 600;
+    src: url('/assets/fonts/OpenSans-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-weight: 600;
+    font-style: italic;
+    src: url('/assets/fonts/OpenSans-SemiBoldItalic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Coco Gothic';
+    font-weight: 400;
+    src: url('/assets/fonts/Coco-Gothic-Regular-trial.ttf') format('truetype');
+}

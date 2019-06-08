@@ -28,20 +28,26 @@
   @if $filename == arrow {
   $char: "\E001";
 }
-  @if $filename == facebook {
+  @if $filename == close {
   $char: "\E002";
 }
-  @if $filename == left {
+  @if $filename == facebook {
   $char: "\E003";
 }
-  @if $filename == location {
+  @if $filename == left {
   $char: "\E004";
 }
-  @if $filename == search {
+  @if $filename == location {
   $char: "\E005";
 }
-  @if $filename == twitter {
+  @if $filename == menu {
   $char: "\E006";
+}
+  @if $filename == search {
+  $char: "\E007";
+}
+  @if $filename == twitter {
+  $char: "\E008";
 }
 
 @return $char;
@@ -61,6 +67,9 @@
 .icon-arrow {
   @include icon(arrow);
 }
+.icon-close {
+  @include icon(close);
+}
 .icon-facebook {
   @include icon(facebook);
 }
@@ -69,6 +78,9 @@
 }
 .icon-location {
   @include icon(location);
+}
+.icon-menu {
+  @include icon(menu);
 }
 .icon-search {
   @include icon(search);
