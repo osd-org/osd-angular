@@ -1,5 +1,7 @@
 import { Component, ElementRef, Renderer2, HostListener, ViewChild, Input, OnInit } from '@angular/core';
 import SweetScroll from 'sweet-scroll';
+import { fromEvent } from 'rxjs';
+import { throttleTime, debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-slider-text',
@@ -13,12 +15,12 @@ export class SliderTextComponent implements OnInit {
   private _card = null;
   private _lastSection = null;
   private _scroller: SweetScroll;
+  public maxRangeVal;
+  public currentRangeVal = 0;
 
   @ViewChild('scrollWrapper') scrollWrapper: ElementRef;
   @Input('html') html: any;
-  @HostListener('wheel', ['$event']) scroll($event){
-    this._horisontalScrolling($event);
-  }
+
   constructor(
     private _elementRef: ElementRef,
     private _render: Renderer2
@@ -27,15 +29,18 @@ export class SliderTextComponent implements OnInit {
 
   ngOnInit() {
     this._init();
+    this._scrollEvent$();
   }
 
   private _horisontalScrolling(e) {
     if (e.deltaY > 0) {
-      this._scroller.toLeft(this.scrollWrapper.nativeElement.scrollLeft + this.scrollWrapper.nativeElement.offsetWidth + 100 );
+      this.currentRangeVal = this.scrollWrapper.nativeElement.scrollLeft + this.scrollWrapper.nativeElement.offsetWidth + 100;
+      this._scroller.toLeft(this.currentRangeVal);
       // this._scroller.to({ top: 0, left: this.scrollWrapper.nativeElement.scrollLeft + this.scrollWrapper.nativeElement.offsetWidth + 100 });
       // this.scrollWrapper.nativeElement.scrollLeft += 100;
     } else {
-      this._scroller.toLeft(this.scrollWrapper.nativeElement.scrollLeft - this.scrollWrapper.nativeElement.offsetWidth - 100 );
+      this.currentRangeVal = this.scrollWrapper.nativeElement.scrollLeft - this.scrollWrapper.nativeElement.offsetWidth - 100;
+      this._scroller.toLeft(this.currentRangeVal);
       // this._scroller.to({ top: 0, left: this.scrollWrapper.nativeElement.scrollLeft - this.scrollWrapper.nativeElement.offsetWidth - 100 });
       // this.scrollWrapper.nativeElement.scrollLeft -= 100;
     }
@@ -49,35 +54,55 @@ export class SliderTextComponent implements OnInit {
     setTimeout(() => {
       this._render.setProperty(this._section, 'innerHTML', this.html);
       this._innerHTMLElements = this._section.querySelectorAll('*');
+      this.maxRangeVal = this._card.clientWidth + 100;
       this._fillSections(rootElement);
       this._scroller = new SweetScroll({
-        duration: 1000,                 // Specifies animation duration in integer
+        duration: 500,                 // Specifies animation duration in integer
         easing: 'easeOutQuint',         // Specifies the pattern of easing                // Enable the vertical scroll
         horizontal: true,              // Enable the horizontal scroll
       },
       '.scrolling-wrapper-flexbox');
     }, 1000);
+
+
   }
 
   private _fillSections(rootElement) {
     this._innerHTMLElements.forEach(el => {
-      if (!this.checkOverflow(this._card)) {
+      if (!this._checkOverflow(this._card)) {
         this._render.appendChild(this._card, el)
       } else {
+        this.maxRangeVal += this._card.clientWidth + 100;
         this._lastSection = this._card;
         this._card = this._render.createElement('div');
         this._render.addClass(this._card, 'card');
         this._render.insertBefore(rootElement, this._card, this._render.nextSibling(this._lastSection));
-      }});
+      }
+    });
   }
 
-  checkOverflow(el) {
-    const curOverflow = el.style.overflow;
-    if ( !curOverflow || curOverflow === "visible" )
-        el.style.overflow = "hidden";
-    const isOverflowing = el.clientWidth < el.scrollWidth
-        || el.clientHeight < el.scrollHeight;
-    el.style.overflow = curOverflow;
+  private _checkOverflow(card: HTMLElement) {
+    const curOverflow = card.style.overflow;
+    if ( !curOverflow || curOverflow === 'visible' ) {
+      card.style.overflow = 'hidden';
+    }
+    const isOverflowing = card.clientHeight < card.scrollHeight;
+    card.style.overflow = curOverflow;
     return isOverflowing;
+  }
+
+  private _scrollEvent$() {
+    fromEvent(this.scrollWrapper.nativeElement, 'wheel')
+    .pipe(
+      throttleTime(1000),
+      debounceTime(200),
+    )
+    .subscribe(e => {
+      this._horisontalScrolling(e)
+    });
+  }
+
+  public setRange(e) {
+    this._scroller.toLeft(parseFloat(e.target.value));
   }
 }

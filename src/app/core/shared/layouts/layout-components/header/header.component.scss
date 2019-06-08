@@ -39,7 +39,7 @@
         height: 100%;
         @include flex(row, flex-end, center);
         .langs {
-          width: 137px;
+          width: auto;
           height: 42px;
           border-radius: 20px;
           background-color: #313131;

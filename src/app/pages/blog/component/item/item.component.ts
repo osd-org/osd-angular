@@ -1,3 +1,4 @@
+import { BackgroundService, BackgroundColor } from './../../../../core/shared/layouts/layout-components/background/background.service';
 import { Component, OnInit } from '@angular/core';
 import { BlogService } from '../../blog.service';
 import { ActivatedRoute } from '@angular/router';
@@ -13,7 +14,8 @@ export class ItemComponent implements OnInit {
 
   constructor(
     private _blog: BlogService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _background: BackgroundService
   ) {
     this._route.params.pipe(
     ).subscribe(params => {
@@ -30,10 +32,7 @@ export class ItemComponent implements OnInit {
    }
 
   ngOnInit() {
-    setTimeout(() => {
-      console.log(this.blogPost);
-
-    }, 2000);
+    this._background.changeColor(BackgroundColor.BLACK);
   }
 
 }
