@@ -20,6 +20,7 @@ export interface Acf {
 	meta_title: string;
   meta_description: string;
   monetization_list?: any;
+  reviews?: any[];
 }
 
 export interface Title {

@@ -1,47 +1,28 @@
 <app-clients-layout>
   <div class="container">
-    <h1 class="title">Мы гордимся своими клиентами,<br>которые стали нашими партнерами</h1>
+    <h1 class="title" [innerHTML]="pageContent?.content?.rendered"></h1>
 
     <div class="testimonials-container">
       <div class="slider-nav prev" (click)="prev()"><i class="icon-arrow"></i></div>
       <div class="slider-nav next" (click)="next()"><i class="icon-arrow"></i></div>
       <div class="testimonials">
         <div class="testimonials-track js-track">
-          <div class="testimonial js-testimonial">
-            <p class="testimonial__text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Architecto eaque doloremque inventore laudantium ea ad iusto magnam cum, iste cupiditate, necessitatibus harum rem odio mollitia vitae est voluptatem excepturi consectetur.</p>
-            <strong class="testimonial__author">Оксана Алиева</strong>
-            <span class="testimonial__author-position">Директор по маркетингу ПАО «Альфа-Банк»</span>
+
+          <div class="testimonial js-testimonial" *ngFor="let item of pageContent?.acf?.reviews">
+            <p class="testimonial__text">{{item?.review}}</p>
+            <strong class="testimonial__author">{{item?.name}}</strong>
+            <span class="testimonial__author-position">{{item?.position}}</span>
           </div>
-          <div class="testimonial js-testimonial">
-            <p class="testimonial__text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Architecto eaque doloremque inventore laudantium ea ad iusto magnam cum, iste cupiditate, necessitatibus harum rem odio mollitia vitae est voluptatem excepturi consectetur.</p>
-            <strong class="testimonial__author">Оксана Алиева</strong>
-            <span class="testimonial__author-position">Директор по маркетингу ПАО «Альфа-Банк»</span>
-          </div>
-          <div class="testimonial js-testimonial">
-            <p class="testimonial__text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Architecto eaque doloremque inventore laudantium ea ad iusto magnam cum, iste cupiditate, necessitatibus harum rem odio mollitia vitae est voluptatem excepturi consectetur.</p>
-            <strong class="testimonial__author">Оксана Алиева</strong>
-            <span class="testimonial__author-position">Директор по маркетингу ПАО «Альфа-Банк»</span>
-          </div>
+
         </div>
       </div>
       <div class="pagination">
-        <span class="pagination__link" *ngFor="let slide of [0, 1, 2]" (click)="goTo(slide)" [ngClass]="{active: slide == activeSlide}">{{ slide + 1 }}</span>
+        <span class="pagination__link" *ngFor="let slide of pagination; let i = index;" (click)="goTo(i)" [ngClass]="{active: i == activeSlide}">{{ i + 1 }}</span>
       </div>
     </div>
 
     <div class="brands-container">
-      <img class="brand-item" src="https://credit-kiev.com/wp-content/uploads/2014/03/pumb_icon.png" alt="">
-      <img class="brand-item" src="https://cdn.27.ua/main/c67/hipp_logo.svg.png" alt="">
-      <img class="brand-item" src="https://credit-kiev.com/wp-content/uploads/2014/03/pumb_icon.png" alt="">
-      <img class="brand-item" src="http://www.tadviser.ru/images/thumb/a/ad/Nestle-Logo.png/300px-Nestle-Logo.png" alt="">
-      <img class="brand-item" src="https://credit-kiev.com/wp-content/uploads/2014/03/pumb_icon.png" alt="">
-      <img class="brand-item" src="https://credit-kiev.com/wp-content/uploads/2014/03/pumb_icon.png" alt="">
-      <img class="brand-item" src="https://cdn.27.ua/main/c67/hipp_logo.svg.png" alt="">
-      <img class="brand-item" src="https://credit-kiev.com/wp-content/uploads/2014/03/pumb_icon.png" alt="">
-      <img class="brand-item" src="http://www.tadviser.ru/images/thumb/a/ad/Nestle-Logo.png/300px-Nestle-Logo.png" alt="">
-      <img class="brand-item" src="https://credit-kiev.com/wp-content/uploads/2014/03/pumb_icon.png" alt="">
-      <img class="brand-item" src="https://cdn.27.ua/main/c67/hipp_logo.svg.png" alt="">
-      <img class="brand-item" src="https://credit-kiev.com/wp-content/uploads/2014/03/pumb_icon.png" alt="">
+      <img class="brand-item" [src]="item?.data?.img?.url" [alt]="item?.data?.img?.alt" *ngFor="let item of clientImgList">
     </div>
   </div>
 </app-clients-layout>
