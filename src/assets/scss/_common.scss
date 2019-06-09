@@ -43,3 +43,13 @@ a {
   display: inline-block;
   cursor: pointer;
 }
+
+
+.text {
+  .list--arrow {
+    li {
+      list-style: url('/assets/img/content/list-arrow.png');
+      padding-bottom: 15px;
+    }
+  }
+}

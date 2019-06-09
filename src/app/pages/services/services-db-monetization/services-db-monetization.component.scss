@@ -1,3 +1,32 @@
 @import "variables";
 @import "mixins";
 @import "parts/services-item-page";
+
+h1 {
+  @include font(42px, 600);
+  text-transform: uppercase;
+}
+.monetization {
+  &_list {
+    @include flex(row, space-between, center);
+    width: 100%;
+  }
+  &_item {
+    width: 170px;
+    height: 170px;
+    position: relative;
+    @include flex(row, center, center);
+    &-background {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
+    &-name {
+      text-align: center;
+      z-index: 1;
+      @include font(14px, 800);
+      line-height: 14px;
+      text-transform: uppercase;
+    }
+  }
+}

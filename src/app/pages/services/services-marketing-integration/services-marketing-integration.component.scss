@@ -1,3 +1,8 @@
 @import "variables";
 @import "mixins";
 @import "parts/services-item-page";
+
+h1 {
+  @include font(42px, 600);
+  text-transform: uppercase;
+}

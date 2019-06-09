@@ -14,16 +14,16 @@ export class SeoService {
   }
 
   generateTags(tags: any) {
-    this.title.setTitle(tags.MetaTitle);
+    this.title.setTitle(tags.meta_title);
     this.meta.addTags([
       {
-        name: 'description', content: tags.MetaDesc ? tags.MetaDesc : ''
+        name: 'description', content: tags.meta_description ? tags.meta_description : ''
       }
     ]);
   }
 
   updateTags(tags: any) {
-    this.title.setTitle(tags.MetaTitle ? tags.MetaTitle : 'OSD');
-    this.meta.updateTag({name: 'description', content: tags.MetaDesc ? tags.MetaDesc : ''});
+    this.title.setTitle(tags.meta_title ? tags.meta_title : 'OSD');
+    this.meta.updateTag({name: 'description', content: tags.meta_description ? tags.meta_description : ''});
   }
 }
