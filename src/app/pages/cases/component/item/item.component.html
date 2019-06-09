@@ -3,15 +3,15 @@
   <div class="page-top">
     <div class="container">
       <div class="page-top__title">
-        <h1>{{blogPost?.acf?.title_detail}}</h1>
+        <h1>{{casePost?.acf?.title_detail}}</h1>
       </div>
       <div class="page-top__author">
         <div class="page-top__author-name">
-          <div class="name">{{blogPost?.acf?.author_name}}</div>
-          <div class="position">{{blogPost?.acf?.author_position}}</div>
+          <div class="name">{{casePost?.acf?.author_name}}</div>
+          <div class="position">{{casePost?.acf?.author_position}}</div>
         </div>
         <div class="page-top__author-img">
-          <img [src]="blogPost?.acf?.author_photo?.url" alt="">
+          <img [src]="casePost?.acf?.author_photo?.url" alt="">
         </div>
       </div>
     </div>
@@ -21,7 +21,7 @@
 
   <div class="page-content">
     <div class="container">
-        <app-slider-text [html]="blogPost?.acf?.desc_detail"></app-slider-text>
+        <app-slider-text [html]="casePost?.acf?.desc_detail"></app-slider-text>
     </div>
   </div>
 
