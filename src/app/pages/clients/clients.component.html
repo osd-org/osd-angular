@@ -8,7 +8,9 @@
       <div class="testimonials">
         <div class="testimonials-track js-track">
 
-          <div class="testimonial js-testimonial" *ngFor="let item of pageContent?.acf?.reviews">
+          <div class="testimonial js-testimonial"
+          *ngFor="let item of pageContent?.acf?.reviews; let last = last;"
+          [attr.ready]="last ? false : initTestimonialsSlider()">
             <p class="testimonial__text">{{item?.review}}</p>
             <strong class="testimonial__author">{{item?.name}}</strong>
             <span class="testimonial__author-position">{{item?.position}}</span>
