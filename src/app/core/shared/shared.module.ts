@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslationModule } from './translation/translation.module';
 import { RouterModule } from '@angular/router';
 import { ComponentsModule } from './components/components.module';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   imports: [
@@ -18,7 +19,10 @@ import { ComponentsModule } from './components/components.module';
     TranslationModule,
     ReactiveFormsModule,
     FormsModule,
-    ComponentsModule
+    ComponentsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCCgsoz9cifBsT4D5gYGvYAWt8bgstA6nQ' // todo: Test Api Key
+    })
   ],
   exports: [
     CommonModule,
@@ -29,7 +33,8 @@ import { ComponentsModule } from './components/components.module';
     TranslationModule,
     ReactiveFormsModule,
     FormsModule,
-    ComponentsModule
+    ComponentsModule,
+    AgmCoreModule
   ],
   declarations: []
 })
