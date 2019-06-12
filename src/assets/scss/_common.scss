@@ -53,3 +53,75 @@ a {
     }
   }
 }
+
+.form-control {
+  display: block;
+
+  &:not(:last-child) {
+    margin-bottom: 30px;
+  }
+
+  &__label {
+    @include font(16px, 100);
+    display: block;
+    margin-bottom: 15px;
+  }
+
+  &__input {
+    @include hiddeScrollBar;
+    display: block;
+    width: 100%;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px solid #D8D8D8;
+    border-radius: 0;
+    resize: none;
+    box-sizing: border-box;
+    outline: none;
+  }
+
+  &__group {
+    display: flex;
+    justify-content: space-around;
+  }
+}
+
+.checkbox {
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+  padding-left: 35px;
+  cursor: pointer;
+
+  &__view {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 25px;
+    height: 25px;
+    border: 1px solid #fff;
+    transform: translateY(-50%);
+    box-sizing: border-box;
+    line-height: 21px;
+    text-align: center;
+
+    i {
+      font-size: 10px;
+      opacity: 0;
+    }
+  }
+
+  &__label {
+    text-transform: uppercase;
+  }
+
+  &__control {
+    display: none;
+
+    &:checked + .checkbox__view {
+      i {
+        opacity: 1;
+      }
+    }
+  }
+}

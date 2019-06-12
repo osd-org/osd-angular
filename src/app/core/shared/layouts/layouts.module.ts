@@ -30,6 +30,7 @@ import { ClientsLayoutComponent } from './clients-layout/clients-layout.componen
     BlogListLayoutComponent,
     ServicesLayoutComponent,
     TeamLayoutComponent,
+    ContactsLayoutComponent,
     ClientsLayoutComponent
   ]
 })
