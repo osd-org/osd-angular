@@ -1,7 +1,52 @@
 <app-contacts-layout>
   <agm-map class="map" [latitude]="50.45466" [longitude]="30.5238" [zoom]="15" [styles]="mapStyle" [disableDefaultUI]="true" [zoomControl]="false"></agm-map>
 
-  <div class="content-container">
-
+  <div class="container">
+    <div class="content-container">
+      <form class="contact-form">
+        <h1 class="title">Заинтересовались?<br>Давайте сотрудничать!</h1>
+        <div class="form-control">
+          <span class="form-control__label">Опишите что нужно сделать:</span>
+          <textarea class="form-control__input"></textarea>
+        </div>
+        <div class="form-control">
+          <span class="form-control__label">Выбирите направление:</span>
+          <div class="form-control__group checkbox-group">
+            <label class="checkbox">
+              <input type="checkbox" class="checkbox__control">
+              <div class="checkbox__view"><i class="icon-arrow"></i></div>
+              <span class="checkbox__label">Монетизация баз данных</span>
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" class="checkbox__control">
+                <div class="checkbox__view"><i class="icon-arrow"></i></div>
+                <span class="checkbox__label">Маркетинговые коммуникации 360°, PR и мероприятия.</span>
+              </label>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn send">Отправить <i class="icon-arrow"></i></button>
+        </div>
+      </form>
+      <div class="contact-info">
+        <div class="info-block">
+          <h3 class="subtitle">Позвоните нам!</h3>
+          <div class="numbers">
+            <div><a href="tel:+380444909088">+38 044 490 90 88</a></div>
+            <div><a href="tel:+380444909087">+38 044 490 90 87</a></div>
+          </div>
+          <h3 class="subtitle">Напишите нам письмо:</h3>
+          <div><a href="mailto:info@osdirect.com.ua"><i>info@osdirect.com.ua</i></a></div>
+        </div>
+        <div class="info-block">
+          <div class="map-control plus"></div>
+          <div class="map-control minus"></div>
+          <div class="address">
+            <img src="/assets/svg/logo.svg" class="logo" alt="">
+            <div>ул. Старонаводницкая 2-20, Киев, 01001, Украина</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </app-contacts-layout>

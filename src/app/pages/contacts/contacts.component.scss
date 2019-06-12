@@ -1,3 +1,5 @@
+@import 'variables';
+@import 'mixins';
 
 .map {
     width: 100vw;
@@ -6,4 +8,135 @@
     z-index: 0;
     left: 0;
     top: 0
+}
+
+.content-container {
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+    overflow: auto;
+    margin: 0 60px;
+}
+
+.contact-form {
+    margin-top: 30px;
+    background-color: rgba(#090909, 0.8);
+    box-sizing: border-box;
+    padding: 30px 15px;
+    pointer-events: all;
+
+    .title {
+        @include font(32px, 100);
+        margin: 0 0 30px 0;
+    }
+}
+
+.checkbox-group {
+    padding-left: 150px;
+
+    .checkbox {
+        margin: 0 20px;
+    }
+}
+
+.actions {
+    text-align: center;
+}
+
+.send {
+    display: inline-block;
+    color: #fff;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    transition: 0.4s;
+    background-color: #8001F9;
+
+    &:hover {
+        opacity: 0.9;
+
+        i {
+            transform: translateX(5px);
+        }
+    }
+
+    i {
+        position: relative;
+        top: 1px;
+        font-size: 10px;
+        transition: 0.3s;
+        display: inline-block;
+        margin-left: 10px;
+        font-size: 16px;
+    }
+}
+
+.contact-info {
+    display: flex;
+    margin-top: 30px;
+
+    .subtitle {
+        @include font(22px, 100);
+        margin: 0 0 15px 0;
+    }
+
+    .numbers {
+        margin-bottom: 15px;
+    }
+}
+
+.info-block {
+    width: 50%;
+    position: relative;
+    pointer-events: all;
+
+    a {
+        color: #fff;
+    }
+
+    .address {
+        position: absolute;
+        width: 230px;
+        bottom: 0;
+        right: 20px;
+
+        .logo {
+            width: 100%;
+        }
+    }
+
+    .map-control {
+        width: 30px;
+        height: 30px;
+        box-sizing: border-box;
+        position: absolute;
+        top: 0;
+        right: 0;
+        border: 1px solid #fff;
+        cursor: pointer;
+
+        &:before,
+        &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 15px;
+            height: 1px;
+            background-color: #fff;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        &:after {
+            transform: translate(-50%, -50%) rotateZ(90deg);
+        }
+
+        &.minus {
+            top: 40px;
+
+            &:after {
+                display: none;
+            }
+        }
+    }
 }
