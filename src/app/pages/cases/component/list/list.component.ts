@@ -20,7 +20,7 @@ export class ListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._header.setTitle('Блоги');
+    this._header.setTitle('КЕЙСЫ');
     this._case.getCaseList({per_page: this._per_page}).subscribe( (res: any) => {
       this.caseList = res.body;
       this.paginationPages = res.headerParams.pages;
