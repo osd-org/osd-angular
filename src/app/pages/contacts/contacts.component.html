@@ -3,47 +3,50 @@
 
   <div class="container">
     <div class="content-container">
-      <form class="contact-form">
-        <h1 class="title">Заинтересовались?<br>Давайте сотрудничать!</h1>
+      <form
+      [formGroup]="form"
+      (ngSubmit)="sendEmail()"
+      class="contact-form">
+        <h1 class="title">{{pageContent?.acf?.form_titles?.title1}}<br>{{pageContent?.acf?.form_titles?.title2}}</h1>
         <div class="form-control">
-          <span class="form-control__label">Опишите что нужно сделать:</span>
-          <textarea class="form-control__input"></textarea>
+          <span class="form-control__label">{{pageContent?.acf?.form_fields?.lable1}}</span>
+          <textarea class="form-control__input" formControlName="question"></textarea>
         </div>
         <div class="form-control">
-          <span class="form-control__label">Выбирите направление:</span>
+          <span class="form-control__label">{{pageContent?.acf?.form_fields?.lable2}}</span>
           <div class="form-control__group checkbox-group">
             <label class="checkbox">
-              <input type="checkbox" class="checkbox__control">
+              <input type="checkbox" formControlName="direction1" class="checkbox__control">
               <div class="checkbox__view"><i class="icon-arrow"></i></div>
-              <span class="checkbox__label">Монетизация баз данных</span>
+              <span class="checkbox__label">{{pageContent?.acf?.form_fields?.check_box_lable1}}</span>
             </label>
             <label class="checkbox">
-                <input type="checkbox" class="checkbox__control">
+                <input type="checkbox" formControlName="direction2" class="checkbox__control">
                 <div class="checkbox__view"><i class="icon-arrow"></i></div>
-                <span class="checkbox__label">Маркетинговые коммуникации 360°, PR и мероприятия.</span>
+                <span class="checkbox__label">{{pageContent?.acf?.form_fields?.check_box_lable2}}</span>
               </label>
           </div>
         </div>
         <div class="actions">
-          <button class="btn send">Отправить <i class="icon-arrow"></i></button>
+          <button class="btn send" type="submit">{{pageContent?.acf?.form_fields?.button_text}} <i class="icon-arrow"></i></button>
         </div>
       </form>
       <div class="contact-info">
         <div class="info-block">
-          <h3 class="subtitle">Позвоните нам!</h3>
+          <h3 class="subtitle">{{pageContent?.acf?.footer_contacts?.call_us}}</h3>
           <div class="numbers">
-            <div><a href="tel:+380444909088">+38 044 490 90 88</a></div>
-            <div><a href="tel:+380444909087">+38 044 490 90 87</a></div>
+            <div><a [href]="'tel:' + pageContent?.acf?.footer_contacts?.phone_num1">{{pageContent?.acf?.footer_contacts?.phone_num1}}</a></div>
+            <div><a [href]="'tel:' + pageContent?.acf?.footer_contacts?.phone_num2">{{pageContent?.acf?.footer_contacts?.phone_num2}}</a></div>
           </div>
-          <h3 class="subtitle">Напишите нам письмо:</h3>
-          <div><a href="mailto:info@osdirect.com.ua"><i>info@osdirect.com.ua</i></a></div>
+          <h3 class="subtitle">{{pageContent?.acf?.footer_contacts?.letter_us}}</h3>
+          <div><a [href]="'mailto:' + pageContent?.acf?.footer_contacts?.email"><i>{{pageContent?.acf?.footer_contacts?.email}}</i></a></div>
         </div>
         <div class="info-block">
           <div class="map-control plus"></div>
           <div class="map-control minus"></div>
           <div class="address">
             <img src="/assets/svg/logo.svg" class="logo" alt="">
-            <div>ул. Старонаводницкая 2-20, Киев, 01001, Украина</div>
+            <div>{{pageContent?.acf?.footer_contacts?.adress}}</div>
           </div>
         </div>
       </div>

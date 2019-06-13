@@ -34,12 +34,12 @@ export class SliderTextComponent implements OnInit {
 
   private _horisontalScrolling(e) {
     if (e.deltaY > 0) {
-      this.currentRangeVal = this.scrollWrapper.nativeElement.scrollLeft + this.scrollWrapper.nativeElement.offsetWidth + 100;
+      this.currentRangeVal = this.scrollWrapper.nativeElement.scrollLeft + 100;
       this._scroller.toLeft(this.currentRangeVal);
       // this._scroller.to({ top: 0, left: this.scrollWrapper.nativeElement.scrollLeft + this.scrollWrapper.nativeElement.offsetWidth + 100 });
       // this.scrollWrapper.nativeElement.scrollLeft += 100;
     } else {
-      this.currentRangeVal = this.scrollWrapper.nativeElement.scrollLeft - this.scrollWrapper.nativeElement.offsetWidth - 100;
+      this.currentRangeVal = this.scrollWrapper.nativeElement.scrollLeft - 100;
       this._scroller.toLeft(this.currentRangeVal);
       // this._scroller.to({ top: 0, left: this.scrollWrapper.nativeElement.scrollLeft - this.scrollWrapper.nativeElement.offsetWidth - 100 });
       // this.scrollWrapper.nativeElement.scrollLeft -= 100;
@@ -94,8 +94,8 @@ export class SliderTextComponent implements OnInit {
   private _scrollEvent$() {
     fromEvent(this.scrollWrapper.nativeElement, 'wheel')
     .pipe(
-      throttleTime(1000),
-      debounceTime(200),
+      // throttleTime(100),
+      // debounceTime(20),
     )
     .subscribe(e => {
       this._horisontalScrolling(e)
