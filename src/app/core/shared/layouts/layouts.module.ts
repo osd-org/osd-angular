@@ -4,20 +4,14 @@ import {LayoutComponentsModule} from './layout-components/layout-components.modu
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { BlogItemLayoutComponent } from './blog-layout/item/blog-item-layout.component';
 import { BlogListLayoutComponent } from './blog-layout/list/blog-list-layout.component';
-import { ServicesLayoutComponent } from './services-layout/services-layout.component';
-import { TeamLayoutComponent } from './team-layout/team-layout.component';
-import { ContactsLayoutComponent } from './contacts-layout/contacts-layout.component';
-import { ClientsLayoutComponent } from './clients-layout/clients-layout.component';
+import { PageLayoutComponent } from './page-layout/page-layout.component';
 
 @NgModule({
   declarations: [
     BlogItemLayoutComponent,
     BlogListLayoutComponent,
     MainLayoutComponent,
-    TeamLayoutComponent,
-    ServicesLayoutComponent,
-    ContactsLayoutComponent,
-    ClientsLayoutComponent
+    PageLayoutComponent
 ],
   imports: [
     CommonModule,
@@ -28,10 +22,7 @@ import { ClientsLayoutComponent } from './clients-layout/clients-layout.componen
     MainLayoutComponent,
     BlogItemLayoutComponent,
     BlogListLayoutComponent,
-    ServicesLayoutComponent,
-    TeamLayoutComponent,
-    ContactsLayoutComponent,
-    ClientsLayoutComponent
+    PageLayoutComponent
   ]
 })
 export class LayoutsModule { }
