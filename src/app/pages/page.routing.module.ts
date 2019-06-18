@@ -17,6 +17,7 @@ const routes: Routes = [
         { path: ':lang/services', loadChildren: './services/services.module#ServicesModule'},
         { path: ':lang/cases', loadChildren: './cases/case.module#CaseModule'},
         { path: ':lang/team', loadChildren: './team/team.module#TeamModule'},
+        { path: ':lang/about', loadChildren: './about/about.module#AboutModule'},
         { path: ':lang/contact', loadChildren: './contacts/contacts.module#ContactsModule'},
         { path: ':lang/clients', loadChildren: './clients/clients.module#ClientsModule'},
         { path: ':lang', loadChildren: './home/home.module#HomeModule' },
