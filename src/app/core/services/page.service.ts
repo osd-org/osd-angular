@@ -25,6 +25,8 @@ export interface Acf {
   reviews?: any[];
   img?: any;
   counts?: any[];
+  left_block?: any;
+  right_block?: any;
 }
 
 export interface Title {
