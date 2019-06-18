@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PageService, PageType } from '@osd-services/page.service';
 import { SeoService } from '@osd-services/seo.service';
 import { TranslationService } from 'app/core/shared/translation/translation.service';
+import { untilDestroyed } from '@osd-rxjs/operators';
 
 @Component({
   selector: 'app-services-db-monetization',
@@ -22,9 +23,14 @@ export class ServicesDbMonetizationComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this._page.loadPageBySlug('db-monetization').subscribe((e: PageType) => {
-      this._seo.updateTags(e.acf);
-      this.pageContent = e;
+    this._page.contentUpdate$.pipe(
+      untilDestroyed(this)
+    ).subscribe(() => {
+      this.pageContent = null;
+      this._page.loadPageBySlug('db-monetization').subscribe((e: PageType) => {
+        this._seo.updateTags(e.acf);
+        this.pageContent = e;
+      })
     })
     this._background.changeColor(BackgroundColor.BLUE);
   }

@@ -6,6 +6,7 @@ import { PageService, PageType } from '@osd-services/page.service';
 import { SeoService } from '@osd-services/seo.service';
 import { TranslationService } from 'app/core/shared/translation/translation.service';
 import { ApiService } from '@osd-services/api.service';
+import { untilDestroyed } from '@osd-rxjs/operators';
 
 @Component({
   selector: 'app-clients',
@@ -37,11 +38,16 @@ export class ClientsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this._header.setTitle('Клиенты');
     this._background.changeColor(BackgroundColor.BLACK);
-    this._page.loadPageBySlug('clients').subscribe((e: PageType) => {
-      this._seo.updateTags(e.acf);
-      this.pageContent = e;
-      this.pagination = Array(this.pageContent.acf.reviews.length);
-    })
+    this._page.contentUpdate$.pipe(
+      untilDestroyed(this)
+    ).subscribe(() => {
+      this.pageContent = null;
+      this._page.loadPageBySlug('clients').subscribe((e: PageType) => {
+        this._seo.updateTags(e.acf);
+        this.pageContent = e;
+        this.pagination = Array(this.pageContent.acf.reviews.length);
+      })
+    });
     this._loadClientList();
   }
 

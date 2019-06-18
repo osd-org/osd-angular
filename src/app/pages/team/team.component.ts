@@ -5,6 +5,8 @@ import { ApiService } from '@osd-services/api.service';
 import { HeaderService } from './../../core/shared/layouts/layout-components/header/header.service';
 import { map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { PageService } from '@osd-services/page.service';
+import { untilDestroyed } from '@osd-rxjs/operators';
 
 @Component({
   selector: 'app-team',
@@ -23,7 +25,8 @@ export class TeamComponent implements OnInit, OnDestroy {
     private _api: ApiService,
     private _platform: PlatformService,
     private _background: BackgroundService,
-    private _header: HeaderService
+    private _header: HeaderService,
+    private _page: PageService
   ){
 
 
@@ -32,7 +35,11 @@ export class TeamComponent implements OnInit, OnDestroy {
   ngOnInit(){
     this._header.setTitle('Про нас');
     this._background.changeColor(BackgroundColor.DARKBLUE);
-    this._getTeamList({per_page: this._per_page}).subscribe();
+    this._page.contentUpdate$.pipe(
+      untilDestroyed(this)
+    ).subscribe(() => {
+      this._getTeamList({per_page: this._per_page}).subscribe();
+    })
   }
 
   private _getTeamList(param = null) {

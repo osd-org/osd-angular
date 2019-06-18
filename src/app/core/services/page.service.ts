@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { map } from 'rxjs/operators';
+import { map, distinctUntilChanged, debounceTime } from 'rxjs/operators';
+import { TranslationService } from '../shared/translation/translation.service';
+import { BehaviorSubject } from 'rxjs';
 
 
 export interface PageType {
@@ -21,6 +23,8 @@ export interface Acf {
   meta_description: string;
   monetization_list?: any;
   reviews?: any[];
+  img?: any;
+  counts?: any[];
 }
 
 export interface Title {
@@ -34,9 +38,23 @@ export interface Title {
 })
 export class PageService {
 
+  /**
+   * Emitter that emits when need to update content
+   */
+  private _contentUpdate$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+
   constructor(
     private _api: ApiService,
+    private _translate: TranslationService
   ) {
+    this._langChangeListener();
+  }
+
+  /**
+   * Returns emitter that emits when need update content
+   */
+  get contentUpdate$(): BehaviorSubject<boolean> {
+    return this._contentUpdate$;
   }
 
   /**
@@ -53,6 +71,23 @@ export class PageService {
       })
     );
   }
+
+
+  /**
+   * Lang change event listener
+   *
+   * @private
+   */
+  private _langChangeListener() {
+    this._translate.onLangChange$.pipe(
+      distinctUntilChanged(),
+      debounceTime(100)
+    ).subscribe(lang => {
+      this._contentUpdate$.next(true);
+    });
+  }
+
+
 }
 
 

@@ -15,6 +15,13 @@ const doUnsubscribeIfArray = subscriptionsArray => {
   subscriptionsArray.forEach(doUnsubscribe);
 };
 
+
+
+/**
+ * @AutoUnsubscribe - decorator
+ *
+ * @param param0
+ */
 export function AutoUnsubscribe({
   blackList = [],
   arrayName = '',
@@ -49,34 +56,6 @@ export function AutoUnsubscribe({
     };
   };
 }
-
-
-
-export const untilDestroyed = (
-  componentInstance,
-  destroyMethodName = 'ngOnDestroy'
-) => <T>(source: Observable<T>) => {
-  console.log(componentInstance);
-
-  const originalDestroy = componentInstance[destroyMethodName];
-  if (isFunction(originalDestroy) === false) {
-    throw new Error(
-      `${
-        componentInstance.constructor.name
-      } is using untilDestroyed but doesn't implement ${destroyMethodName}`
-    );
-  }
-  if (!componentInstance['__takeUntilDestroy']) {
-    componentInstance['__takeUntilDestroy'] = new Subject();
-
-    componentInstance[destroyMethodName] = function() {
-      isFunction(originalDestroy) && originalDestroy.apply(this, arguments);
-      componentInstance['__takeUntilDestroy'].next(true);
-      componentInstance['__takeUntilDestroy'].complete();
-    };
-  }
-  return source.pipe(takeUntil<T>(componentInstance['__takeUntilDestroy']));
-};
 
 
 export function TakeUntilDestroy( constructor : any ) {

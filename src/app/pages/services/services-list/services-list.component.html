@@ -1,16 +1,14 @@
 <div class="services-container">
-  <div class="service-item left">
+  <div class="service-item left" [ngStyle]="{'background-color': pageContent?.acf?.left_block?.color}">
     <div class="service-block">
-      <div class="service-description">
-        Монетизация <br>баз <br>данных
+      <div class="service-description" [innerHTML]="pageContent?.acf?.left_block?.name">
       </div>
       <a routerLink="db-monetization" class="more-btn">Узнать больше <i class="icon-arrow"></i></a>
     </div>
   </div>
   <div class="service-item right">
     <div class="service-block">
-      <div class="service-description">
-        Интегрированные <br>маркетинговые <br>коммуникации 360°, <br>PR и мероприятия.
+      <div class="service-description" [innerHTML]="pageContent?.acf?.right_block?.name">
       </div>
       <a routerLink="marketing-integration" class="more-btn">Узнать больше <i class="icon-arrow"></i></a>
     </div>

@@ -5,6 +5,7 @@ import { PageService, PageType } from '@osd-services/page.service';
 import { SeoService } from '@osd-services/seo.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ApiService } from '@osd-services/api.service';
+import { untilDestroyed } from '@osd-rxjs/operators';
 
 @Component({
   selector: 'app-contacts',
@@ -26,12 +27,16 @@ export class ContactsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._header.setTitle('Контакты');
-    this._page.loadPageBySlug('contacts').subscribe((e: PageType) => {
-      this._seo.updateTags(e.acf);
-      this.pageContent = e;
+    this._page.contentUpdate$.pipe(
+      untilDestroyed(this)
+    ).subscribe(() => {
+      this.pageContent = null;
+      this._page.loadPageBySlug('contacts').subscribe((e: PageType) => {
+        this._seo.updateTags(e.acf);
+        this.pageContent = e;
+      })
     })
     this._initForm();
-
   }
 
   private _initForm() {

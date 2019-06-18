@@ -1,6 +1,6 @@
+import { PageService } from '@osd-services/page.service';
 import { Component, OnInit } from '@angular/core';
 import { TranslationService } from 'app/core/shared/translation/translation.service';
-import { Router } from '@angular/router';
 import { SidebarService } from './sidebar.service';
 import { map } from 'rxjs/operators';
 import { ApiService } from '@osd-services/api.service';
@@ -25,13 +25,15 @@ export class SidebarComponent implements OnInit {
   constructor(
     public sidebar: SidebarService,
     public translate: TranslationService,
-    private _router: Router,
+    private _page: PageService,
     private _api: ApiService
   ) {
   }
 
   ngOnInit() {
-    this._loadMenu();
+    this._page.contentUpdate$.subscribe(() => {
+      this._loadMenu();
+    })
   }
 
 

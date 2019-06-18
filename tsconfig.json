@@ -20,7 +20,8 @@
     "paths": {
       "@osd-services/*": ["app/core/services/*"],
       "@osd-pipes/*": ["app/core/shared/pipes/*"],
-      "@osd-directives/*": ["app/core/shared/directives/*"]
+      "@osd-directives/*": ["app/core/shared/directives/*"],
+      "@osd-rxjs/*": ["app/core/shared/rxjs/*"],
     }
   }
 }
