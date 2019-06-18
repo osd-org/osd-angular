@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { horisontalScrollDirective } from './horizontal-scroll.directive';
+import { CountUpDirective } from './countUp/count-up.directive';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   declarations: [
-    horisontalScrollDirective
+    horisontalScrollDirective,
+    CountUpDirective
   ],
   exports: [
-    horisontalScrollDirective
+    horisontalScrollDirective,
+    CountUpDirective
   ]
 })
 export class DirectivesModule { }

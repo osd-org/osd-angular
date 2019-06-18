@@ -68,9 +68,16 @@ export class SliderTextComponent implements OnInit {
   }
 
   private _fillSections(rootElement) {
-    this._innerHTMLElements.forEach(el => {
+    this._innerHTMLElements.forEach((el: HTMLElement )=> {
       if (!this._checkOverflow(this._card)) {
-        this._render.appendChild(this._card, el)
+        if (el.hasAttribute('angular')) {
+          let ngEl = this._render.createElement(el.tagName);
+          console.log(el.attributes);
+
+
+        } else {
+          this._render.appendChild(this._card, el)
+        }
       } else {
         this.maxRangeVal += this._card.clientWidth + 100;
         this._lastSection = this._card;
