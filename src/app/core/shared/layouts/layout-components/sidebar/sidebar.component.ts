@@ -42,7 +42,7 @@ export class SidebarComponent implements OnInit {
   }
 
   private _loadMenu() {
-    this._api.get('/menu/list').pipe(
+    this._api.getWithCache('/menu/list').pipe(
       map(res => res.body),
       map((menu: any[]) => {
         menu = menu.map((e: Menu) => {

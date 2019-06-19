@@ -63,7 +63,7 @@ export class PageService {
    * loadPageBySlug
    */
   public loadPageBySlug(slug: string) {
-    return this._api.get('/pages', {slug: slug}).pipe(
+    return this._api.getWithCache('/pages', {slug: slug}).pipe(
       map((e: any) => {
         if (e.body.length > 0) {
           return e.body[0];

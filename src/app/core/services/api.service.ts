@@ -2,8 +2,9 @@ import { environment } from '../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of, Subject } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { TranslationService } from '../shared/translation/translation.service';
+import { CacheService } from './cache/cache.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,8 @@ export class ApiService {
 
   constructor(
     private _http: HttpClient,
-    private _translate: TranslationService
+    private _translate: TranslationService,
+    private _cache: CacheService
   ) {
     this._headers = new HttpHeaders();
   }
@@ -37,10 +39,28 @@ export class ApiService {
    * @returns Observable
    */
   public get(url: string, params: any = null): Observable<any> {
-
     const options = Object.assign({}, this._options);
     options.params = params;
     return this.request('GET', url, options);
+  }
+
+  /**
+   * @param  {string} url
+   * @param  {any=null} params
+   * @param  {boolean=false} cms
+   * @returns Observable from cache
+   */
+  public getWithCache(url: string, params: any = null): Observable<any> {
+    const cacheKey = url + this._translate.lang + JSON.stringify(params);
+    const options = Object.assign({}, this._options);
+    options.params = params;
+    if (this._cache.has(cacheKey)) {
+      return this._cache.get(cacheKey);
+    } else {
+      return this.request('GET', url, options).pipe(
+        tap(res => this._cache.set(cacheKey, res))
+      );
+    }
   }
 
   /**
