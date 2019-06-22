@@ -33,6 +33,7 @@ export class ListComponent implements OnInit, OnDestroy {
         this.paginationPages = Array(this.paginationPages);
       });
     });
+    this._searchHendler();
   }
 
   public loadPaginationPage(pageNumber: number) {
@@ -41,6 +42,16 @@ export class ListComponent implements OnInit, OnDestroy {
       this.paginationPages = res.headerParams.pages;
       this.paginationPages = Array(this.paginationPages);
     });
+  }
+
+  private _searchHendler() {
+    this._header.searchInputEvent$.subscribe(e => {
+      this._blog.getBlogList({per_page: this._per_page, search: e}).subscribe( (res: any) => {
+        this.blogList = res.body;
+        this.paginationPages = res.headerParams.pages;
+        this.paginationPages = Array(this.paginationPages);
+      });
+    })
   }
 
   ngOnDestroy() {

@@ -1,0 +1,117 @@
+@import "mixins";
+@import "variables";
+
+.header {
+  @include flex(row, space-between, center);
+  position: relative;
+  height: 100%;
+    &-container {
+      height: $header-height;
+      background-color: rgba(0, 0, 0, 0.27);
+      display: block;
+      z-index: 1000;
+      position: relative;
+      transition: 0.3s;
+      width: 100%;
+
+      &.menu {
+        background-color: rgba(0, 0, 0, 0);
+        pointer-events: none;
+
+        .page-title {
+          opacity: 0;
+        }
+      }
+    }
+    .logo {
+        display: block;
+        width: 40px;
+        height: 37px;
+        pointer-events: all;
+        img {
+            height: 100%;
+        }
+    }
+    &__group {
+      &--rt {
+        width: 100%;
+        max-width: 480px;
+        height: 100%;
+        @include flex(row, flex-end, center);
+        .search {
+          width: 250px;
+          margin-right: 20px;
+          position: relative;
+          input {
+            height: 38px;
+            border-radius: 20px;
+            border: 1px solid #ffffff;
+            width: 100%;
+            background-color: transparent;
+            padding-left: 10px;
+          }
+          .icon {
+            position: absolute;
+            right: 0;
+            top: 6px;
+            font-size: 24px;
+            cursor: pointer;
+          }
+        }
+        .langs {
+          width: auto;
+          height: 42px;
+          border-radius: 20px;
+          background-color: #313131;
+          margin-right: 20px;
+          pointer-events: all;
+          &__list {
+            padding: 0;
+            margin: 0;
+            @include flex(row, space-between, center);
+          }
+          &__item {
+            list-style: none;
+            width: 37px;
+            height: 37px;
+            box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05), 0 2px 2px rgba(0, 0, 0, 0.1), 0 3px 1px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background-color: none;
+            padding: 0;
+            margin: 0;
+            border-radius: 50%;
+            @include flex(row, center, center);
+            cursor: pointer;
+            &.active {
+              background-color: #8001f9;
+            }
+          }
+        }
+        .menu-btn {
+          @include font(28px);
+          background: none;
+          border: none;
+          padding: 0;
+          pointer-events: all;
+          outline: none;
+          display: flex;
+
+          i {
+            display: inline-flex;
+          }
+        }
+      }
+    }
+
+}
+
+.page-title {
+  @include font(18px);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-transform: uppercase;
+  letter-spacing: 10px;
+  transition: 0.3s;
+}

@@ -1,0 +1,40 @@
+<div class="header-container" [ngClass]="{menu: sidebar.isOpen}">
+  <div class="container">
+      <header class="header">
+          <a href="/" class="logo">
+              <img src="/assets/svg/fill_1.svg" alt="Logo">
+          </a>
+
+          <div class="page-title">
+            {{ header.title }}
+          </div>
+
+          <div class="header__group--rt">
+
+            <div class="search">
+              <i class="icon icon-search"></i>
+              <input type="text" placeholder="Поиск по блогам" #searchInput>
+            </div>
+
+            <div class="langs">
+              <ul class="langs__list">
+                <li
+                class="langs__item"
+                [ngClass]="{'active': item === LANG}"
+                *ngFor="let item of langList"
+                (click)="changeLanguage(item)"
+                >{{ item }}</li>
+              </ul>
+            </div>
+
+            <button class="menu-btn" *ngIf="!sidebar.isOpen" (click)="sidebar.open()">
+              <i class="icon-menu"></i>
+            </button>
+
+            <button class="menu-btn" *ngIf="sidebar.isOpen" (click)="sidebar.close()">
+              <i class="icon-close"></i>
+            </button>
+          </div>
+      </header>
+  </div>
+</div>

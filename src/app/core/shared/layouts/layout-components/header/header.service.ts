@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HeaderService {
+  public searchInputEvent$ = new Subject();
 
   private _headerTitle: string;
 
