@@ -10,46 +10,33 @@
 h2 {
   color: aliceblue;
 }
-.scrolling-wrapper {
-  overflow-x: scroll;
-  overflow-y: hidden;
-  white-space: nowrap;
 
-  .card {
-    display: inline-block;
-  }
-}
 
 .scrolling-wrapper-flexbox {
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
+  overflow-y: hidden;
 
   .card {
     flex: 0 0 auto;
-    padding: 0px 50px;
     margin-bottom: 15px;
-  }
-}
-
-.card {
-  width: 100%;
-  height: auto;
-  overflow: hidden;
-  color: #000;
-  br {
-    display: none;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    color: #000;
   }
 }
 
 .scrolling-wrapper, .scrolling-wrapper-flexbox {
   width: 100%;
-  height: 100%;
+  height: 90%;
   -webkit-overflow-scrolling: touch;
   &::-webkit-scrollbar {
     display: none;
   }
 }
+
 
 
 .range-control {

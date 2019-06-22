@@ -1,3 +1,4 @@
+import { PlatformService } from '@osd-services/universal/platform.service';
 import { Component, ElementRef, Renderer2, ViewChild, Input, OnInit, OnDestroy } from '@angular/core';
 import SweetScroll from 'sweet-scroll';
 import { fromEvent } from 'rxjs';
@@ -13,22 +14,27 @@ import { untilDestroyed } from '@osd-rxjs/operators';
 export class SliderTextComponent implements OnInit, OnDestroy {
 
   private _innerHTMLElements: any = [];
-  private _section = null;
   private _card = null;
+  private _cardWidth: any;
+  private _cardList;
+  private _section = null;
   private _lastSection = null;
-  private _scroller: SweetScroll;
-  public maxRangeVal;
-  public currentRangeVal = 0;
-  public _time = 1000;
-  private _stepPx = 0;
+  public activeSlide = 0;
+  private _time = 1000;
+  private _scroll: SweetScroll;
+
+  public maxRangeVal: any;
+  public currentRangeVal: any;
+
+
 
   @ViewChild('scrollWrapper') scrollWrapper: ElementRef;
   @Input('html') html: any;
 
   constructor(
-    private _elementRef: ElementRef,
     private _render: Renderer2,
-    private _page: PageService
+    private _page: PageService,
+    private _platform: PlatformService
   ) {
   }
 
@@ -43,43 +49,49 @@ export class SliderTextComponent implements OnInit, OnDestroy {
 
   private _horisontalScrolling(e) {
     if (e.deltaY > 0) {
-      console.log(this._next());
-
-      this.currentRangeVal = this._next();
-      this._scroller.toLeft(this.currentRangeVal);
+      this.next();
     } else {
-      console.log(this._prev());
-
-      this.currentRangeVal = this._prev();
-      this._scroller.toLeft(this.currentRangeVal);
+      this.prev();
     }
   }
 
-  private _next() {
-    this._stepPx++;
-    return (this.scrollWrapper.nativeElement.offsetWidth + 100) * this._stepPx;
+  goTo(testimonialPosition: number) {
+    this.currentRangeVal = testimonialPosition * this._cardWidth;
+    this._scroll.toLeft(this.currentRangeVal);
+    this.activeSlide = testimonialPosition;
   }
-  private _prev() {
-    const prevStep = ((this.scrollWrapper.nativeElement.offsetWidth - 100) * this._stepPx) - ((this.scrollWrapper.nativeElement.offsetWidth - 100) * this._stepPx - 1);
-    this._stepPx--;
-    return prevStep;
+
+  next() {
+    if (this.activeSlide + 1 < this._cardList.length) {
+      this.goTo(this.activeSlide + 1);
+    }
+  }
+
+  prev() {
+    if (this.activeSlide - 1 >= 0) {
+      this.goTo(this.activeSlide - 1);
+    }
   }
 
   public _init() {
-    const rootElement = this.scrollWrapper.nativeElement;
+    this.currentRangeVal = 0;
+    this.activeSlide = 0;
+    this.scrollWrapper.nativeElement.style.height = 90 + '%';
     this._render.setProperty(this.scrollWrapper.nativeElement, 'innerHTML', '');
     const firstCard = this._render.createElement('div');
     this._render.addClass(firstCard, 'card');
     this._render.appendChild(this.scrollWrapper.nativeElement, firstCard);
-
-    this._section = this._render.createElement('section');
     this._card = this.scrollWrapper.nativeElement.querySelectorAll('.card')[0];
+    if (this._platform.isBrowser) {
+      this._cardWidth = this._card.scrollWidth;
+    }
     setTimeout(() => {
+      this._section = this._render.createElement('section');
       this._render.setProperty(this._section, 'innerHTML', this.html);
       this._innerHTMLElements = this._section.querySelectorAll('*');
-      this.maxRangeVal = this._card.clientWidth + 100;
+      const rootElement = this.scrollWrapper.nativeElement;
       this._fillSections(rootElement);
-      this._scroller = new SweetScroll({
+      this._scroll = new SweetScroll({
         duration: 500,                 // Specifies animation duration in integer
         easing: 'easeOutQuint',         // Specifies the pattern of easing                // Enable the vertical scroll
         horizontal: true,              // Enable the horizontal scroll
@@ -90,26 +102,21 @@ export class SliderTextComponent implements OnInit, OnDestroy {
 
   private _fillSections(rootElement) {
     this._innerHTMLElements.forEach((el: HTMLElement )=> {
-      if (!this._checkOverflow(this._card)) {
-        if (el.hasAttribute('angular')) {
-          let ngEl = this._render.createElement(el.tagName);
-          console.log(el.attributes);
-
-
-        } else {
-          this._render.appendChild(this._card, el)
-        }
+      if (!this._checkOverflow(this._card, el)) {
+        this._render.appendChild(this._card, el);
       } else {
-        this.maxRangeVal += this._card.clientWidth + 100;
         this._lastSection = this._card;
         this._card = this._render.createElement('div');
         this._render.addClass(this._card, 'card');
         this._render.insertBefore(rootElement, this._card, this._render.nextSibling(this._lastSection));
       }
     });
+    this._cardList = this.scrollWrapper.nativeElement.querySelectorAll('.card');
+    this.scrollWrapper.nativeElement.style.height = 100 + '%';
+    this.maxRangeVal = this._cardWidth * this._cardList.length;
   }
 
-  private _checkOverflow(card: HTMLElement) {
+  private _checkOverflow(card: HTMLElement, el: HTMLElement) {
     const curOverflow = card.style.overflow;
     if ( !curOverflow || curOverflow === 'visible' ) {
       card.style.overflow = 'hidden';
@@ -122,8 +129,8 @@ export class SliderTextComponent implements OnInit, OnDestroy {
   private _scrollEvent$() {
     fromEvent(this.scrollWrapper.nativeElement, 'wheel')
     .pipe(
-      throttleTime(100),
-      debounceTime(20),
+      // throttleTime(100),
+      debounceTime(300),
     )
     .subscribe(e => {
       this._horisontalScrolling(e)
@@ -131,7 +138,7 @@ export class SliderTextComponent implements OnInit, OnDestroy {
   }
 
   public setRange(e) {
-    this._scroller.toLeft(parseFloat(e.target.value));
+    this._scroll.toLeft(parseFloat(e.target.value));
   }
 
   ngOnDestroy() {
