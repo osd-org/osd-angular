@@ -70,6 +70,15 @@
     }
 }
 
+.ok {
+  display: inline-block;
+  color: #fff;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  transition: 0.4s;
+  background-color: #13c73a;
+}
+
 .contact-info {
     display: flex;
     margin-top: 30px;

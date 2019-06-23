@@ -16,6 +16,7 @@ export class ContactsComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   public mapStyle = mapStyle;
   public pageContent: any;
+  public emailSuccess: boolean = null;
 
   constructor(
     private _header: HeaderService,
@@ -74,12 +75,12 @@ export class ContactsComponent implements OnInit, OnDestroy {
     }
 
     this._api.post('/contact/send', data).subscribe(res => {
-      console.log(res);
-
-      // this._toastMessage.success('Message was send');
+      this.emailSuccess = true;
+      setTimeout(() => {
+        this.emailSuccess = false;
+      }, 2000);
       this.form.reset();
       }, error => {
-        // this._form.backendErrors(error.error.errors, this.form);
         console.log(error.errors, this.form);
       }
     );
