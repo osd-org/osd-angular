@@ -2,7 +2,7 @@ import { PlatformService } from '@osd-services/universal/platform.service';
 import { Component, ElementRef, Renderer2, ViewChild, Input, OnInit, OnDestroy } from '@angular/core';
 import SweetScroll from 'sweet-scroll';
 import { fromEvent } from 'rxjs';
-import { throttleTime, debounceTime } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
 import { PageService } from '@osd-services/page.service';
 import { untilDestroyed } from '@osd-rxjs/operators';
 
@@ -113,7 +113,7 @@ export class SliderTextComponent implements OnInit, OnDestroy {
     });
     this._cardList = this.scrollWrapper.nativeElement.querySelectorAll('.card');
     this.scrollWrapper.nativeElement.style.height = 100 + '%';
-    this.maxRangeVal = this._cardWidth * this._cardList.length;
+    this.maxRangeVal = this._cardWidth * (this._cardList.length - 1);
   }
 
   private _checkOverflow(card: HTMLElement, el: HTMLElement) {

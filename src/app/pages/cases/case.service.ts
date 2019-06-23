@@ -17,7 +17,7 @@ export class CaseService {
   ) { }
 
   public getCaseList(param = null) {
-    return this._api.get('/case/list', param).pipe(
+    return this._api.getWithCache('/case/list', param).pipe(
       map(res => {
         this._caseList = res.body;
         return res;
@@ -27,7 +27,7 @@ export class CaseService {
   }
 
   public getCasePostBySlug(slug: string) {
-    return this._api.get('/posts', {slug: slug}).pipe(
+    return this._api.getWithCache('/case', {slug: slug}).pipe(
       map(res => res.body),
       catchError(() =>  of({}))
     )
