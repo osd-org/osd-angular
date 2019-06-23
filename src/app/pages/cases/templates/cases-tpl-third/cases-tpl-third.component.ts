@@ -1,3 +1,5 @@
+import { RushSliderConfig } from './../../../../core/shared/components/rush-slider/rush-slider-config';
+import { RushSliderService } from './../../../../core/shared/components/rush-slider/rush-slider.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CasesTplThirdComponent implements OnInit {
 
-  constructor() { }
+  public slider: RushSliderService;
+
+  public sliderConfig: Map<number, RushSliderConfig>;
+
+  constructor() {
+    this._initConfig();
+  }
 
   ngOnInit() {
+  }
+
+  sliderInit(e) {
+    this.slider = e;
+  }
+
+  private _initConfig() {
+    this.sliderConfig = new Map();
+    this.sliderConfig.set(1400, {
+      speed: 1000
+    })
   }
 
 }
