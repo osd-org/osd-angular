@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SliderTextComponent } from './slider-text/slider-text.component';
+import { RushSliderModule } from './rush-slider/rush-slider.module';
 
 
 @NgModule({
@@ -8,11 +9,12 @@ import { SliderTextComponent } from './slider-text/slider-text.component';
     SliderTextComponent,
 ],
   imports: [
-    CommonModule
+    CommonModule,
+    RushSliderModule
   ],
   exports: [
     SliderTextComponent,
-
+    RushSliderModule
   ]
 })
 export class ComponentsModule { }

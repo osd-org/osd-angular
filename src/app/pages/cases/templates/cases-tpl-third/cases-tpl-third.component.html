@@ -1,0 +1,45 @@
+<app-rush-slider class="slider" [config]="sliderConfig" (init)="sliderInit($event)">
+  <app-rush-slide>
+    <div class="page-block-container">
+      <img class="page-block-bg" src="https://media1.s-nbcnews.com/j/newscms/2018_25/2471721/180620-jurassic-world-mn-1330_c1af24deda9ecff61f0d63705113b930.fit-760w.jpg" alt="">
+      <div class="page-block left">
+          <div class="text-block">
+            <div class="text-block__title">Брендинг</div>
+            <p>Описание<br>технических/технологических решений или маркетинговых  инструментов, которые были использованы для решения задач</p>
+            <p>Описание<br>технических/технологических решений или маркетинговых  инструментов, которые были использованы для решения задач</p>
+          </div>
+      </div>
+      <div class="page-block right">
+        <div class="block-img-container">
+          <img src="/assets/img/phone.svg" class="block-img" alt="">
+        </div>
+      </div>
+    </div>
+  </app-rush-slide>
+  <app-rush-slide>
+    <div class="page-block-container">
+      <img class="page-block-bg" src="https://media1.s-nbcnews.com/j/newscms/2018_25/2471721/180620-jurassic-world-mn-1330_c1af24deda9ecff61f0d63705113b930.fit-760w.jpg" alt="">
+      <div class="page-block left">
+          <div class="text-block">
+            <div class="text-block__title">Нейминг</div>
+            <p>Описание<br>технических/технологических решений или маркетинговых  инструментов, которые были использованы для решения задач</p>
+            <p>Описание<br>технических/технологических решений или маркетинговых  инструментов, которые были использованы для решения задач</p>
+          </div>
+      </div>
+      <div class="page-block right">
+        <div class="block-img-container">
+          <img src="/assets/img/phone.svg" class="block-img" alt="">
+        </div>
+      </div>
+    </div>
+  </app-rush-slide>
+</app-rush-slider>
+
+<div class="slider-controls">
+  <div class="slider-controls__btn prev" (click)="slider.prevSlide()"><i class="icon-arrow"></i></div>
+  <div class="slider-controls__btn next" (click)="slider.nextSlide()"><i class="icon-arrow"></i></div>
+</div>
+
+<div class="pagination" *ngIf="slider">
+  <span class="pagination__link" *ngFor="let slide of slider.slideList; let i = index;" (click)="slider.goToSlide(i)" [ngClass]="{active: i == slider.currentSlide}">{{ i + 1 }}</span>
+</div>
