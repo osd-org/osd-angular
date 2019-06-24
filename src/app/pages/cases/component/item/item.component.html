@@ -2,5 +2,6 @@
 <app-page-layout>
   <ng-container [ngSwitch]="currentTemplate">
       <app-case-tpl-second  *ngSwitchCase="'case2'"></app-case-tpl-second>
+      <app-cases-tpl-third  *ngSwitchCase="'case3'" [data]="casePost"></app-cases-tpl-third>
   </ng-container>
 </app-page-layout>

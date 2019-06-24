@@ -4,6 +4,11 @@ import { map, catchError, first } from 'rxjs/operators';
 import { of, Subject } from 'rxjs';
 import { SeoService } from '@osd-services/seo.service';
 
+export enum CaseSlideContentType {
+  TEXT = 'текст',
+  IMAGE = 'изображение',
+}
+
 @Injectable({
   providedIn: 'root'
 })
