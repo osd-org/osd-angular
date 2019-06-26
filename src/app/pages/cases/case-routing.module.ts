@@ -1,5 +1,5 @@
+import { CaseTplGaleryComponent } from './templates/case-tpl-galery/case-tpl-galery.component';
 import { CasesTplThirdComponent } from './templates/cases-tpl-third/cases-tpl-third.component';
-import { CaseTplSecondComponent } from './templates/case-tpl-second/case-tpl-second.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {ListComponent} from './component/list/list.component';
@@ -11,8 +11,8 @@ const routes: Routes = [
     component: ListComponent,
   },
   {
-    path: 'tpl-2',
-    component: CaseTplSecondComponent
+    path: 'galery',
+    component: CaseTplGaleryComponent
   },
   {
     path: 'tpl-3',

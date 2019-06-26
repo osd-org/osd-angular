@@ -1,0 +1,43 @@
+<ng-container>
+  <div class="container">
+    <div class="content-container">
+      <div class="heading">
+        <h1 class="heading__title">Фотоотчет</h1>
+        <div class="heading__description">
+          <p>Описание технических/технологических решений или маркетинговых  инструментов, которые были использованы для решения задач</p>
+        </div>
+      </div>
+      
+      <app-rush-slider class="slider" [config]="sliderConfig" (init)="sliderInit($event)">
+        <app-rush-slide>
+          <div class="grid">
+            <div class="grid__item">
+              <img src="https://www.sophiegee.com/wp-content/uploads/african-american-men-hairstyles-afro-71796.jpg" alt="">
+            </div>
+            <div class="grid__item">
+              <img src="https://www.sophiegee.com/wp-content/uploads/african-american-men-hairstyles-afro-71796.jpg" alt="">
+            </div>
+            <div class="grid__item">
+              <img src="https://www.sophiegee.com/wp-content/uploads/african-american-men-hairstyles-afro-71796.jpg" alt="">
+            </div>
+            <div class="grid__item">
+              <img src="https://www.sophiegee.com/wp-content/uploads/african-american-men-hairstyles-afro-71796.jpg" alt="">
+            </div>
+            <div class="grid__item">
+              <img src="https://www.sophiegee.com/wp-content/uploads/african-american-men-hairstyles-afro-71796.jpg" alt="">
+            </div>
+          </div>
+        </app-rush-slide>
+      </app-rush-slider>
+    
+      <div class="slider-controls">
+        <div class="slider-controls__btn prev"><i class="icon-arrow"></i></div>
+        <div class="slider-controls__btn next"><i class="icon-arrow"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="pagination" *ngIf="slider">
+    <span class="pagination__link" *ngFor="let slide of slider.slideList; let i = index;" (click)="slider.goToSlide(i)" [ngClass]="{active: i == slider.currentSlide}">{{ i + 1 }}</span>
+  </div> -->
+</ng-container>  

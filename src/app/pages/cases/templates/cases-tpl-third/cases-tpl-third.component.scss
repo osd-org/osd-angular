@@ -1,5 +1,6 @@
 @import "variables";
 @import "mixins";
+@import "../cases-parts";
 
 .slider {
     width: 100%;
@@ -95,59 +96,5 @@
         bottom: 0;
         max-height: 90%;
         max-width: 100%;
-    }
-}
-
-.slider-controls {
-    position: fixed;
-    width: 1100px;
-    display: flex;
-    justify-content: space-between;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-
-    &__btn {
-        @include font(18px);
-        pointer-events: all;
-        width: 70px;
-        height: 70px;
-        text-align: center;
-        color: rgba(#fff, 0.5);
-        line-height: 70px;
-        background-color: rgba(#000, 0.2);
-        border-radius: 50%;
-        cursor: pointer;
-        transition: 0.1s background-color;
-
-        &.prev {
-            transform: rotateZ(180deg)
-        }
-
-        &:hover {
-            background-color: rgba(#000, 0.3);
-        }
-    }
-}
-
-.pagination {
-    text-align: center;
-    width: 100%;
-    position: fixed;
-    bottom: 60px;
-    color: #9B9B9B;
-
-    &__link {
-        margin: 0 10px;
-
-        &:not(.active) {
-            cursor: pointer;
-        }
-
-        &.active {
-            cursor: default;
-            color: #eeeeee;
-        }
     }
 }
