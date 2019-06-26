@@ -40,4 +40,11 @@ export class CasesTplThirdComponent implements OnInit {
     })
   }
 
+  public returnBlockStyle(slide) {
+    return {
+      'background-color': slide.background_color,
+      'opacity': slide.background_opacity / 100
+    }
+  }
+
 }

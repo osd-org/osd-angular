@@ -21,7 +21,7 @@ import { AgmCoreModule } from '@agm/core';
     FormsModule,
     ComponentsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCCgsoz9cifBsT4D5gYGvYAWt8bgstA6nQ' // todo: Test Api Key
+      apiKey: 'AIzaSyAkGvTCXRIlnH-acZFRCBdHVITsDho5CVw' // todo: Test Api Key | old AIzaSyCCgsoz9cifBsT4D5gYGvYAWt8bgstA6nQ
     })
   ],
   exports: [

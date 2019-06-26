@@ -1,7 +1,7 @@
 <ng-container *ngIf="slideList.length">
   <app-rush-slider class="slider" [config]="sliderConfig" (init)="sliderInit($event)">
     <app-rush-slide *ngFor="let slide of slideList">
-      
+
       <!-- 1 PART -->
       <ng-container *ngIf="slide?.slide_content?.length === 1">
         <div class="page-block-container">
@@ -23,7 +23,7 @@
       <ng-container *ngIf="slide?.slide_content?.length === 2">
         <div class="page-block-container">
           <img class="page-block-bg" [src]="slide?.slide_background?.url" alt="">
-          <div class="page-block left">
+          <div class="page-block left" [ngStyle]="returnBlockStyle(slide?.slide_content[0])">
             <ng-container *ngFor="let content of [slide?.slide_content[0]]">
               <ng-container *ngIf="content.type_content === contentType.TEXT">
                 <ng-container *ngTemplateOutlet="text, context: {content: content}"></ng-container>
@@ -33,7 +33,7 @@
               </ng-container>
             </ng-container>
           </div>
-          <div class="page-block right">
+          <div class="page-block right" [ngStyle]="returnBlockStyle(slide?.slide_content[1])">
             <ng-container *ngFor="let content of [slide?.slide_content[1]]">
               <ng-container *ngIf="content.type_content === contentType.TEXT">
                 <ng-container *ngTemplateOutlet="text, context: {content: content}"></ng-container>
@@ -47,12 +47,12 @@
       </ng-container>
     </app-rush-slide>
   </app-rush-slider>
-  
+
   <div class="slider-controls">
     <div class="slider-controls__btn prev" (click)="slider.prevSlide()"><i class="icon-arrow"></i></div>
     <div class="slider-controls__btn next" (click)="slider.nextSlide()"><i class="icon-arrow"></i></div>
   </div>
-  
+
   <div class="pagination" *ngIf="slider">
     <span class="pagination__link" *ngFor="let slide of slider.slideList; let i = index;" (click)="slider.goToSlide(i)" [ngClass]="{active: i == slider.currentSlide}">{{ i + 1 }}</span>
   </div>
