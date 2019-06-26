@@ -18,6 +18,8 @@ export class ContactsComponent implements OnInit, OnDestroy {
   public pageContent: any;
   public emailSuccess: boolean = null;
 
+  public zoom = 15;
+
   constructor(
     private _header: HeaderService,
     private _page: PageService,
@@ -84,6 +86,18 @@ export class ContactsComponent implements OnInit, OnDestroy {
         console.log(error.errors, this.form);
       }
     );
+  }
+
+  zoomIn() {
+    if (this.zoom < 20) {
+      this.zoom ++;
+    }
+  }
+
+  zoomOut() {
+    if (this.zoom > 1) {
+      this.zoom --;
+    }
   }
 
   ngOnDestroy(): void {
