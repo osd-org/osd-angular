@@ -46,9 +46,25 @@
         justify-content: flex-end;
         color: #000;
 
+        .block-img-container {
+          .block-img {
+              right: 30px;
+              left: unset;
+          }
+      }
+
         .text-block {
             padding-right: 70px;
         }
+    }
+
+    &.full {
+      width: 100%;
+      .text-block {
+        width: 100%;
+        max-width: 600px;
+        left: calc(50% - 300px);
+      }
     }
 }
 

@@ -11,7 +11,19 @@ import { hexToRgba } from '../../../../core/helpers/colorHexToRgba';
 })
 export class CasesTplThirdComponent implements OnInit {
 
-  @Input('data') data: any;
+  private _data: any
+
+  @Input('data')
+  set _setData(v : any) {
+    this._data = v;
+    this.slideList = this.data.acf[this.data.slug].slide;
+  }
+
+  public get data(): any {
+    return this._data;
+  }
+
+
 
   public contentType = CaseSlideContentType;
 
@@ -26,7 +38,6 @@ export class CasesTplThirdComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.slideList = this.data.acf[this.data.slug].slide;
     console.log(this.slideList);
   }
 
