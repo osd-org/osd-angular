@@ -1,5 +1,5 @@
 <app-page-layout>
-  <agm-map class="map" [latitude]="50.45466" [longitude]="30.5238" [zoom]="15" [styles]="mapStyle" [disableDefaultUI]="true" [zoomControl]="false"></agm-map>
+  <agm-map class="map" [latitude]="50.45466" [longitude]="30.5238" [zoom]="zoom" [styles]="mapStyle" [disableDefaultUI]="true" [zoomControl]="false"></agm-map>
 
   <div class="container">
     <div class="content-container">
@@ -43,8 +43,8 @@
           <div><a [href]="'mailto:' + pageContent?.acf?.footer_contacts?.email"><i>{{pageContent?.acf?.footer_contacts?.email}}</i></a></div>
         </div>
         <div class="info-block">
-          <div class="map-control plus"></div>
-          <div class="map-control minus"></div>
+          <div class="map-control plus" (click)="zoomIn()"></div>
+          <div class="map-control minus" (click)="zoomOut()"></div>
           <div class="address">
             <img src="/assets/svg/logo.svg" class="logo" alt="">
             <div>{{pageContent?.acf?.footer_contacts?.adress}}</div>
