@@ -6,7 +6,7 @@
       <ng-container *ngIf="slide?.slide_content?.length === 1">
         <div class="page-block-container">
           <img class="page-block-bg" [src]="slide?.slide_background?.url" alt="">
-          <div class="page-block full">
+          <div class="page-block full" [ngStyle]="returnBlockStyle(slide?.slide_content[0])">
             <ng-container *ngFor="let content of [slide?.slide_content[0]]">
               <ng-container *ngIf="content.type_content === contentType.TEXT">
                 <ng-container *ngTemplateOutlet="text, context: {content: content}"></ng-container>

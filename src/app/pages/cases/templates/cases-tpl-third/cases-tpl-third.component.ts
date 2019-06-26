@@ -2,6 +2,7 @@ import { CaseSlideContentType } from './../../case.service';
 import { RushSliderConfig } from './../../../../core/shared/components/rush-slider/rush-slider-config';
 import { RushSliderService } from './../../../../core/shared/components/rush-slider/rush-slider.service';
 import { Component, OnInit, Input } from '@angular/core';
+import { hexToRgba } from '../../../../core/helpers/colorHexToRgba';
 
 @Component({
   selector: 'app-cases-tpl-third',
@@ -42,8 +43,7 @@ export class CasesTplThirdComponent implements OnInit {
 
   public returnBlockStyle(slide) {
     return {
-      'background-color': slide.background_color,
-      'opacity': slide.background_opacity / 100
+      'background-color': hexToRgba(slide.background_color, slide.background_opacity / 100)
     }
   }
 
