@@ -30,8 +30,6 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "./node_modules/gsap/umd/TweenMax.js",
-              "./node_modules/gsap/umd/ScrollToPlugin.js"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
