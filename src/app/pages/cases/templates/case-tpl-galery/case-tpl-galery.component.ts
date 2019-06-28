@@ -19,6 +19,8 @@ export class CaseTplGaleryComponent implements OnInit {
 
   @Input('data')
   set _setData(v : any) {
+    console.log(v);
+
     this._reloadSlider();
     this._data = v;
     this.slideList = this._mapSliderData(this.data.acf[this.data.slug]['gallery']);
