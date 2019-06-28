@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { RushSliderService } from 'app/core/shared/components/rush-slider/rush-slider.service';
 import { RushSliderConfig } from 'app/core/shared/components/rush-slider/rush-slider-config';
 
@@ -9,10 +9,25 @@ import { RushSliderConfig } from 'app/core/shared/components/rush-slider/rush-sl
 })
 export class CaseTplGaleryComponent implements OnInit {
 
+  public sliderLoad = false;
   public slider: RushSliderService;
-
   public sliderConfig: Map<number, RushSliderConfig>;
-  
+  public slideList: any[];
+  private _slidesPerPage = 6;
+
+  private _data: any
+
+  @Input('data')
+  set _setData(v : any) {
+    this._reloadSlider();
+    this._data = v;
+    this.slideList = this._mapSliderData(this.data.acf[this.data.slug]['gallery']);
+  }
+
+  public get data(): any {
+    return this._data;
+  }
+
   constructor() {
     this._initConfig();
   }
@@ -32,4 +47,20 @@ export class CaseTplGaleryComponent implements OnInit {
     })
   }
 
+  private _mapSliderData(gallery: any[]) {
+    const galleryList = [];
+    if (gallery.length && gallery.length > this._slidesPerPage) {
+      Array.from(Array(Math.ceil(gallery.length / this._slidesPerPage))).forEach((e, i) => {
+        galleryList.push({slide: gallery.slice(i * this._slidesPerPage, this._slidesPerPage + (this._slidesPerPage * i))})
+      });
+    }
+    return galleryList;
+  }
+
+  private _reloadSlider() {
+    this.sliderLoad = false;
+    setTimeout(() => {
+      this.sliderLoad = true;
+    });
+  }
 }
