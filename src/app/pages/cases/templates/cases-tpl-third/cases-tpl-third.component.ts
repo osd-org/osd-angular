@@ -11,12 +11,14 @@ import { hexToRgba } from '../../../../core/helpers/colorHexToRgba';
 })
 export class CasesTplThirdComponent implements OnInit {
 
+  public sliderLoad = false;
   private _data: any
 
   @Input('data')
   set _setData(v : any) {
     this._data = v;
     this.slideList = this.data.acf[this.data.slug].slide;
+    this._reloadSlider();
   }
 
   public get data(): any {
@@ -56,6 +58,13 @@ export class CasesTplThirdComponent implements OnInit {
     return {
       'background-color': hexToRgba(slide.background_color, slide.background_opacity / 100)
     }
+  }
+
+  private _reloadSlider() {
+    this.sliderLoad = false;
+    setTimeout(() => {
+      this.sliderLoad = true;
+    });
   }
 
 }
