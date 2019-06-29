@@ -44,8 +44,8 @@ export class CaseTplGaleryComponent implements OnInit {
     this.slider = e;
   }
 
-  openPhoto(url: string) {
-    this._modals.open('photo', url);
+  openPhoto(img: any) {
+    this._modals.open('photo', img);
   }
 
   private _initConfig() {

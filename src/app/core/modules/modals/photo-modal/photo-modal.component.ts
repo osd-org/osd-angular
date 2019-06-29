@@ -13,12 +13,16 @@ export class PhotoModalComponent extends BaseModalComponent implements OnInit {
 
   constructor(
     public modals: ModalsService
-  ) { 
+  ) {
     super(modals);
   }
 
   get url(): string {
-    return this.modals.currentModalData;
+    return this.modals.currentModalData['sizes']['large'];
+  }
+
+  get desc(): string {
+    return this.modals.currentModalData['description'];
   }
 
   ngOnInit() {

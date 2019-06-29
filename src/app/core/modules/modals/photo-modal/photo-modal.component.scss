@@ -5,4 +5,9 @@
 .image {
     max-height: 90vh;
     max-width: 90vw;
+    &-desc {
+      background-color: rgba(254, 241, 3, 0.58);
+      padding: 3px;
+      margin-top: -5px;
+    }
 }

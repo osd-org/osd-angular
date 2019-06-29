@@ -2,8 +2,8 @@
   <div class="modal__content">
     <div class="window">
       <i class="window__close icon-close" (click)="close()"></i>
-
       <img class="image" [src]="url" alt="">
+      <div class="image-desc" *ngIf="desc">{{desc}}</div>
     </div>
   </div>
 </div>
