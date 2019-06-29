@@ -44,7 +44,7 @@ export class CaseTplGaleryComponent implements OnInit {
   private _initConfig() {
     this.sliderConfig = new Map();
     this.sliderConfig.set(1400, {
-      speed: 1000,
+      speed: 400,
       spaceAround: 5
     })
   }

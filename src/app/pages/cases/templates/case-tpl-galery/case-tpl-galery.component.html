@@ -11,19 +11,20 @@
         </div>
       </div>
 
-      <app-rush-slider class="slider" [config]="sliderConfig" (init)="sliderInit($event)" *ngIf="sliderLoad">
-        <app-rush-slide  *ngFor="let item of slideList">
-          <div class="grid">
-            <div class="grid__item" *ngFor="let slide of item?.slide">
-              <img [src]="slide?.img?.url" [alt]="slide?.img?.alt">
+      <div class="slider-container">
+        <app-rush-slider class="slider" [config]="sliderConfig" (init)="sliderInit($event)" *ngIf="sliderLoad">
+          <app-rush-slide  *ngFor="let item of slideList">
+            <div class="grid">
+              <div class="grid__item" *ngFor="let slide of item?.slide">
+                <img [src]="slide?.img?.url" [alt]="slide?.img?.alt">
+              </div>
             </div>
-          </div>
-        </app-rush-slide>
-      </app-rush-slider>
-
-      <div class="slider-controls">
-        <div class="slider-controls__btn prev" (click)="slider.prevSlide()"><i class="icon-arrow"></i></div>
-        <div class="slider-controls__btn next" (click)="slider.nextSlide()"><i class="icon-arrow"></i></div>
+          </app-rush-slide>
+        </app-rush-slider>
+        <div class="slider-controls">
+          <div class="slider-controls__btn prev" (click)="slider.prevSlide()"><i class="icon-arrow"></i></div>
+          <div class="slider-controls__btn next" (click)="slider.nextSlide()"><i class="icon-arrow"></i></div>
+        </div>
       </div>
     </div>
   </div>
