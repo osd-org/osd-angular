@@ -1,0 +1,5 @@
+<div [@fadeInOut]="" class="overlay" *ngIf="modal" (click)="onOverlayClick();"></div>
+
+<ng-container [ngSwitch]="modal">
+	<app-photo-modal *ngSwitchCase="'photo'"></app-photo-modal>
+</ng-container>
