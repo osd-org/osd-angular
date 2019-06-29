@@ -1,0 +1,86 @@
+@import 'variables';
+@import 'mixins';
+
+.features {
+  margin-top: 70px;
+  display: flex;
+  justify-content: space-between;
+
+  .feature {
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+
+      &:nth-child(1) {
+          background: #EC008C;
+      }
+
+      &:nth-child(2) {
+          background: #16467F;
+      }
+
+      &:nth-child(3) {
+          background: #8001F9;
+      }
+
+      &__title {
+          @include font(100px, 100);
+          font-style: italic;
+          line-height: 1.1;
+      }
+
+      &__label {
+          text-transform: uppercase;
+      }
+  }
+}
+
+.description {
+  @include font(28px, 100);
+  margin-top: 70px;
+  padding-bottom: 30px;
+  box-sizing: border-box;
+}
+
+
+.bottom {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  &--left, &--right {
+    width: 50%;
+  }
+  &__title {
+    color: #000000;
+    @include font(24px, 600);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  &__party {
+    &-name {
+      color: #000000;
+      @include font(18px, 600);
+      text-transform: uppercase;
+    }
+    &-position {
+      color: #000000;
+      @include font(18px, 400);
+      text-transform: uppercase;
+    }
+  }
+  &__link {
+    width: 275px;
+    height: 256px;
+    border: 2px solid #000000;
+    margin: 0 auto;
+    color: #000000;
+    @include font(18px, 400);
+  }
+}
