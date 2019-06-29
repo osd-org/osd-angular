@@ -8,6 +8,7 @@ import { CaseTplSecondComponent } from './templates/case-tpl-second/case-tpl-sec
 import { CasesTplThirdComponent } from './templates/cases-tpl-third/cases-tpl-third.component';
 import { CaseTplGaleryComponent } from './templates/case-tpl-galery/case-tpl-galery.component';
 import { CaseTplFifthComponent } from './templates/case-tpl-fifth/case-tpl-fifth.component';
+import { CaseTplFourthComponent } from './templates/case-tpl-fourth/case-tpl-fourth.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { CaseTplFifthComponent } from './templates/case-tpl-fifth/case-tpl-fifth
     CaseTplSecondComponent,
     CasesTplThirdComponent,
     CaseTplGaleryComponent,
-    CaseTplFifthComponent
+    CaseTplFifthComponent,
+    CaseTplFourthComponent
   ],
   imports: [
     CommonModule,
