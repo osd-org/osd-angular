@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RushSliderService } from 'app/core/shared/components/rush-slider/rush-slider.service';
 import { RushSliderConfig } from 'app/core/shared/components/rush-slider/rush-slider-config';
+import { ModalsService } from 'app/core/modules/modals/modals.service';
 
 @Component({
   selector: 'app-case-tpl-galery',
@@ -30,7 +31,9 @@ export class CaseTplGaleryComponent implements OnInit {
     return this._data;
   }
 
-  constructor() {
+  constructor(
+    private _modals: ModalsService
+  ) {
     this._initConfig();
   }
 
@@ -41,10 +44,14 @@ export class CaseTplGaleryComponent implements OnInit {
     this.slider = e;
   }
 
+  openPhoto(url: string) {
+    this._modals.open('photo', url);
+  }
+
   private _initConfig() {
     this.sliderConfig = new Map();
     this.sliderConfig.set(1400, {
-      speed: 1000,
+      speed: 400,
       spaceAround: 5
     })
   }

@@ -1,3 +1,4 @@
+import { ModalsModule } from './../core/modules/modals/modals.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PageComponent } from './page.component';
@@ -8,7 +9,8 @@ import { SharedModule } from '../core/shared/shared.module';
     imports: [
       CommonModule,
       PageRoutingModule,
-      SharedModule
+      SharedModule,
+      ModalsModule
     ],
     declarations: [
         PageComponent

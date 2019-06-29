@@ -1,0 +1,52 @@
+.modal {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    pointer-events: none;
+
+    &__content {
+        @include scrollbar;
+        position: relative;
+        overflow: auto;
+        max-height: 100%;
+        max-width: 100%;
+        pointer-events: all;
+        color: #fff;
+
+        @include media-below($bp-sm) {
+            border-radius: 0;
+        }
+    }
+}
+
+.window {
+    position: relative;
+    padding: 0;
+    max-width: 100%;
+    overflow: auto;
+    box-sizing: border-box;
+
+    @include media-below($bp-sm) {
+        min-height: 100vh;
+        width: 100vw;
+    }
+
+    &__close {
+        @include font(18px);
+        position: absolute;
+        top: 10px;
+        right: 8px;
+        cursor: pointer;
+        z-index: 2;
+
+        @include media-below($bp-sm) {
+        font-size: 18px;
+        }
+    }
+}

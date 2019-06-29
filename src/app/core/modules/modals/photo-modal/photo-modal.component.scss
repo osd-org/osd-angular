@@ -1,0 +1,8 @@
+@import "_variables";
+@import "_mixins";
+@import "parts/modal-window";
+
+.image {
+    max-height: 90vh;
+    max-width: 90vw;
+}
