@@ -1,3 +1,4 @@
+import { TranslationService } from './../../../../core/shared/translation/translation.service';
 import { BackgroundService, BackgroundColor } from './../../../../core/shared/layouts/layout-components/background/background.service';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 
@@ -27,7 +28,8 @@ export class CaseTplSeventhComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private _background: BackgroundService
+    private _background: BackgroundService,
+    private _translate: TranslationService
   ) {
 
   }
@@ -36,6 +38,9 @@ export class CaseTplSeventhComponent implements OnInit, OnDestroy {
     this._background.changeColor(BackgroundColor.ORANGE);
   }
 
+  public get LANG(): string {
+    return this._translate.lang;
+  }
 
   ngOnDestroy() {
     this._background.changeColor(BackgroundColor.BLACK);

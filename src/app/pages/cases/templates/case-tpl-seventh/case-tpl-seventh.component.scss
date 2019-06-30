@@ -29,8 +29,7 @@
       }
 
       &__title {
-          @include font(100px, 100);
-          font-style: italic;
+          @include font(100px, 700);
           line-height: 1.1;
       }
 
@@ -82,5 +81,21 @@
     margin: 0 auto;
     color: #000000;
     @include font(18px, 400);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+      cursor: pointer;
+    }
+    &-more {
+      text-align: center;
+      position: absolute;
+      bottom: 37px;
+      width: 100%;
+    }
+    .icon {
+      @include font(42px, 400);
+    }
   }
 }
