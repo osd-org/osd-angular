@@ -5,6 +5,13 @@
   @include flex(row, space-between, center);
   position: relative;
   height: 100%;
+
+  @include media-below($bp-ld) {
+    padding: 20px 20px 10px 20px;
+    box-sizing: border-box;
+    height: auto;
+  }
+
     &-container {
       height: $header-height;
       background-color: rgba(0, 0, 0, 0.27);
@@ -13,6 +20,11 @@
       position: relative;
       transition: 0.3s;
       width: 100%;
+
+      @include media-below($bp-ld) {
+        height: $header-height-mobile;
+        background-color: #000;
+      }
 
       &.menu {
         background-color: rgba(0, 0, 0, 0);
@@ -31,6 +43,10 @@
         img {
             height: 100%;
         }
+
+        @include media-below($bp-ld) {
+          height: 26px;
+        }
     }
     &__group {
       &--rt {
@@ -38,6 +54,11 @@
         max-width: 300px;
         height: 100%;
         @include flex(row, flex-end, center);
+
+        @include media-below($bp-ld) {
+          width: unset;
+        }
+
         .langs {
           width: auto;
           height: 42px;
@@ -45,6 +66,11 @@
           background-color: #313131;
           margin-right: 20px;
           pointer-events: all;
+
+          @include media-below($bp-ld) {
+            display: none;
+          }
+
           &__list {
             padding: 0;
             margin: 0;
@@ -76,6 +102,10 @@
           outline: none;
           display: flex;
 
+          @include media-below($bp-ld) {
+            @include font(20px);
+          }
+
           i {
             display: inline-flex;
           }
@@ -94,4 +124,13 @@
   text-transform: uppercase;
   letter-spacing: 10px;
   transition: 0.3s;
+
+  @include media-below($bp-ld) {
+    @include font(28px);
+    top: calc(50% + 45px);
+    text-transform: none;
+    width: 100%;
+    text-align: center;
+    letter-spacing: 5px;
+  }
 }
