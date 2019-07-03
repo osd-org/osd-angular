@@ -1,3 +1,6 @@
+@import 'variables';
+@import 'mixins';
+
 @keyframes bg-animation {
     from { background-position: 0 0; }
     to { background-position: -100vw 0; }
@@ -18,24 +21,28 @@
 
     &:before {
         @extend .positioning;
-        z-index: -97;
-        display: block;
-        content: '';
-        // background: url('/assets/svg/glitch.svg') repeat-x;
-        background-size: cover;
-        animation: bg-animation 10s linear infinite;
-        will-change: background-position;
-        opacity: 0.3;
+        @include media-above($bp-ld) {
+            z-index: -97;
+            display: block;
+            content: '';
+            // background: url('/assets/svg/glitch.svg') repeat-x;
+            background-size: cover;
+            animation: bg-animation 10s linear infinite;
+            will-change: background-position;
+            opacity: 0.3;
+        }
     }
 
     &:after {
         @extend .positioning;
-        z-index: -98;
-        display: block;
-        content: '';
-        background: url('/assets/svg/noise.svg') repeat-x;
-        background-size: 100vw auto;
-        animation: bg-animation 30s linear infinite;
-        will-change: background-position;
+        @include media-above($bp-ld) {
+            z-index: -98;
+            display: block;
+            content: '';
+            background: url('/assets/svg/noise.svg') repeat-x;
+            background-size: 100vw auto;
+            animation: bg-animation 30s linear infinite;
+            will-change: background-position;
+        }
     }
 }
