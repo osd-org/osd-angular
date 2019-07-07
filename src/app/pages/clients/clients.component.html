@@ -11,6 +11,7 @@
           <div class="testimonial js-testimonial"
           *ngFor="let item of pageContent?.acf?.reviews; let last = last;"
           [attr.ready]="last ? false : initTestimonialsSlider()">
+            <img class="testimonial__quote" src="/assets/svg/quote.svg" alt="">
             <p class="testimonial__text">{{item?.review}}</p>
             <strong class="testimonial__author">{{item?.name}}</strong>
             <span class="testimonial__author-position">{{item?.position}}</span>
