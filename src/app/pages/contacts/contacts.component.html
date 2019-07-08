@@ -1,5 +1,4 @@
 <app-page-layout>
-  <agm-map class="map" [latitude]="50.45466" [longitude]="30.5238" [zoom]="zoom" [styles]="mapStyle" [disableDefaultUI]="true" [zoomControl]="false"></agm-map>
 
   <div class="container">
     <div class="content-container">
@@ -32,7 +31,8 @@
           <button class="btn ok" *ngIf="emailSuccess" type="button">{{'Сообщение отправлено' | translate}}</button>
         </div>
       </form>
-      <div class="contact-info">
+
+      <div class="contact-info mob-hidden">
         <div class="info-block">
           <h3 class="subtitle">{{pageContent?.acf?.footer_contacts?.call_us}}</h3>
           <div class="numbers">
@@ -51,6 +51,23 @@
           </div>
         </div>
       </div>
+
+      <div class="contact-info desktop-hidden">
+        <h3 class="subtitle mob">Как нас найти</h3>
+        <div class="info-block">
+          <div>{{pageContent?.acf?.footer_contacts?.adress}}</div>
+          <div><a [href]="'tel:' + pageContent?.acf?.footer_contacts?.phone_num1">{{pageContent?.acf?.footer_contacts?.phone_num1}}</a></div>
+          <div><a [href]="'tel:' + pageContent?.acf?.footer_contacts?.phone_num2">{{pageContent?.acf?.footer_contacts?.phone_num2}}</a></div>
+          <div><a [href]="'mailto:' + pageContent?.acf?.footer_contacts?.email"><i>{{pageContent?.acf?.footer_contacts?.email}}</i></a></div>
+          <div class="map-control plus" (click)="zoomIn()"></div>
+        </div>
+        <div class="info-block">
+          <div class="map-control minus" (click)="zoomOut()"></div>
+          <img src="/assets/svg/logo.svg" class="logo" alt="">
+        </div>
+      </div>
     </div>
   </div>
+
+  <agm-map class="map" [latitude]="50.45466" [longitude]="30.5238" [zoom]="zoom" [styles]="mapStyle" [disableDefaultUI]="true" [zoomControl]="false"></agm-map>
 </app-page-layout>

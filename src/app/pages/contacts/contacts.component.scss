@@ -7,7 +7,12 @@
     position: fixed;
     z-index: 0;
     left: 0;
-    top: 0
+    top: 0;
+
+    @include media-below($bp-ld) {
+        position: static;
+        height: 320px;
+    }
 }
 
 .content-container {
@@ -16,6 +21,11 @@
     pointer-events: none;
     overflow: auto;
     margin: 0 60px;
+
+    @include media-below($bp-ld) {
+        margin: 0;
+        position: static;
+    }
 }
 
 .contact-form {
@@ -25,17 +35,35 @@
     padding: 30px 15px;
     pointer-events: all;
 
+    @include media-below($bp-ld) {
+        margin-top: 0;
+        background-color: #000;
+    }
+
     .title {
         @include font(32px, 100);
         margin: 0 0 30px 0;
+
+        @include media-below($bp-ld) {
+            display: none;
+        }
     }
 }
 
 .checkbox-group {
     padding-left: 150px;
 
+    @include media-below($bp-ld) {
+        padding: 0;
+        display: block;
+    }
+
     .checkbox {
         margin: 0 20px;
+
+        @include media-below($bp-ld) {
+            margin: 30px 0;
+        }
     }
 }
 
@@ -50,6 +78,12 @@
     text-transform: uppercase;
     transition: 0.4s;
     background-color: #8001F9;
+
+    @include media-below($bp-ld) {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 15px 0;
+    }
 
     &:hover {
         opacity: 0.9;
@@ -67,6 +101,10 @@
         display: inline-block;
         margin-left: 10px;
         font-size: 16px;
+
+        @include media-below($bp-ld) {
+            display: none;
+        }
     }
 }
 
@@ -81,11 +119,27 @@
 
 .contact-info {
     display: flex;
-    margin-top: 30px;
+    margin: 30px 0;
+
+    @include media-below($bp-ld) {
+        position: absolute;
+        box-sizing: border-box;
+        padding: 50px 10px 0 10px;
+        width: 100%;
+        z-index: 99;
+    }
 
     .subtitle {
         @include font(22px, 100);
         margin: 0 0 15px 0;
+
+        &.mob {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            top: -10px;
+            left: 0;
+        }
     }
 
     .numbers {
@@ -96,7 +150,12 @@
 .info-block {
     width: 50%;
     position: relative;
+    z-index: 99;
     pointer-events: all;
+
+    @include media-below($bp-ld) {
+        font-size: 12px;
+    }
 
     a {
         color: #fff;
@@ -107,9 +166,16 @@
         width: 230px;
         bottom: 0;
         right: 20px;
+    }
 
-        .logo {
-            width: 100%;
+    .logo {
+        width: 100%;
+
+        @include media-below($bp-ld) {
+            padding-left: 10px;
+            box-sizing: border-box;
+            position: absolute;
+            bottom: 0;
         }
     }
 
@@ -123,6 +189,13 @@
         border: 1px solid #fff;
         cursor: pointer;
 
+        @include media-below($bp-ld) {
+            top: 100%;
+            margin-top: 60px;
+            width: 42px;
+            height: 42px;
+        }
+
         &:before,
         &:after {
             content: '';
@@ -134,18 +207,47 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+
+            @include media-below($bp-ld) {
+                width: 25px;
+                height: 2px;
+            }
         }
 
         &:after {
             transform: translate(-50%, -50%) rotateZ(90deg);
         }
 
+        &.plus {
+            @include media-below($bp-ld) {
+                right: 10px;
+            }
+        }
+
         &.minus {
             top: 40px;
+
+            @include media-below($bp-ld) {
+                right: unset;
+                left: 10px;
+                top: 100%;
+            }
 
             &:after {
                 display: none;
             }
         }
+    }
+}
+
+.desktop-hidden {
+    @include media-above($bp-ld) {
+        display: none;
+    }
+}
+
+.mob-hidden {
+    @include media-below($bp-ld) {
+        display: none;
     }
 }
