@@ -16,5 +16,10 @@
     <div class="description" [innerHTML]="pageContent?.content?.rendered">
       Рекламное агентство из Киева. Команда мечтателей, которые собрались вместе, чтобы изменить к лучшему мир  и будущее бизнеса наших единомышленников
     </div>
+
+    <a class="more" [routerLink]="['/' + LANG + '/cases']">
+      {{'ЕЩЕ КЕЙСЫ' | translate}}
+      <i class="icon-arrow"></i>
+    </a>
   </div>
 </app-page-layout>
