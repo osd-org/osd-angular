@@ -1,3 +1,4 @@
+import { DeviceDetectorService } from 'ngx-device-detector';
 import { BackgroundColor, BackgroundService } from './../../core/shared/layouts/layout-components/background/background.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PlatformService } from '@osd-services/universal/platform.service';
@@ -26,15 +27,21 @@ export class TeamComponent implements OnInit, OnDestroy {
     private _platform: PlatformService,
     private _background: BackgroundService,
     private _header: HeaderService,
-    private _page: PageService
+    private _page: PageService,
+    private _device: DeviceDetectorService
   ){
 
 
   }
 
   ngOnInit(){
-    this._header.setTitle('Про нас');
-    this._background.changeColor(BackgroundColor.DARKBLUE);
+    this._header.setTitle('Команда');
+    if (this._device.isMobile()) {
+      this._background.changeColor(BackgroundColor.BLACK);
+    } else {
+      this._background.changeColor(BackgroundColor.DARKBLUE);
+    }
+
     this._page.contentUpdate$.pipe(
       untilDestroyed(this)
     ).subscribe(() => {
