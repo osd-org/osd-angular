@@ -6,9 +6,9 @@
         <a [routerLink]="[item?.slug]"
         [ngStyle]="{'background-image': 'url('+ item?.data?.small_img +')'}"
         class="case__item" *ngFor="let item of caseList">
-          <div class="case__item-title"
-                [ngStyle]="{'background': item?.data?.small_title_color}"
-          >{{item?.data?.small_title}}</div>
+          <div class="case__item-title">
+            <span [ngStyle]="{'background': item?.data?.small_title_color}">{{item?.data?.small_title}}</span>
+          </div>
         </a>
       </div>
       <div class="case__pagination" *ngIf="paginationPages.length > 1">

@@ -4,6 +4,7 @@ import { CaseService } from '../../case.service';
 import { HeaderService } from 'app/core/shared/layouts/layout-components/header/header.service';
 import { untilDestroyed } from '@osd-rxjs/operators'
 import { PageService } from '@osd-services/page.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-list',
@@ -19,11 +20,18 @@ export class ListComponent implements OnInit, OnDestroy {
   constructor(
     private _case: CaseService,
     private _header: HeaderService,
-    private _page: PageService
+    private _page: PageService,
+    private _background: BackgroundService,
+    private _device: DeviceDetectorService,
   ) { }
 
   ngOnInit() {
     this._header.setTitle('КЕЙСЫ');
+    if (this._device.isMobile()) {
+      this._background.changeColor(BackgroundColor.BLACK);
+    } else {
+      this._background.changeColor(BackgroundColor.DARKBLUE);
+    }
     this._page.contentUpdate$.pipe(
       untilDestroyed(this)
     ).subscribe(() => {
