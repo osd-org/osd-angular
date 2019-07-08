@@ -4,6 +4,12 @@
 .title {
     @include font(24px, 400);
     margin: 30px 0 20px 0;
+
+    @include media-below($bp-ld) {
+        padding: 0 20px;
+        box-sizing: border-box;
+        color: #EC008C;
+    }
 }
 
 .testimonials-container {
@@ -13,6 +19,10 @@
     margin-bottom: 20px;
     color: #000;
     position: relative;
+
+    @include media-below($bp-ld) {
+        padding: 20px 20px 35px 20px;
+    }
 }
 
 .testimonials {
@@ -31,12 +41,33 @@
         padding: 0 50px;
         flex-shrink: 0;
 
+        @include media-below($bp-ld) {
+            padding: 0;
+        }
+
+        &__quote {
+            display: none;
+
+            @include media-below($bp-ld) {
+                display: inline;
+            }
+        }
+
         &__author {
             display: block;
+
+            @include media-below($bp-ld) {
+                color: #9B9B9B;
+                font-weight: normal;
+            }
 
             &-position {
                 display: block;
                 margin-top: 10px;
+
+                @include media-below($bp-ld) {
+                    color: #9B9B9B;
+                }
             }
         }
     }
@@ -55,6 +86,10 @@
     margin-top: 20px;
     text-align: center;
     color: #9B9B9B;
+
+    @include media-below($bp-ld) {
+        margin-top: 40px;
+    }
 
     &__link {
         margin: 0 10px;
@@ -82,9 +117,19 @@
     z-index: 9;
     cursor: pointer;
 
+    @include media-below($bp-ld) {
+        top: unset;
+        transform: unset;
+        bottom: 20px;
+    }
+
     &.prev {
         left: 20px;
         transform: translateY(-50%) rotateZ(180deg);
+
+        @include media-below($bp-ld) {
+            transform: rotateZ(180deg);
+        }
     }
 
     &.next {
