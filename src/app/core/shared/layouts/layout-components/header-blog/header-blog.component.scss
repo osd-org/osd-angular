@@ -139,7 +139,9 @@
   text-transform: uppercase;
   letter-spacing: 10px;
   transition: 0.3s;
-
+  .search {
+    display: none;
+  }
   @include media-below($bp-ld) {
     @include font(28px);
     top: calc(50% + 30px);
@@ -148,6 +150,7 @@
     text-align: center;
     letter-spacing: 5px;
     .search {
+      display: block;
       width: 240px;
       position: relative;
       margin: 0 auto;
