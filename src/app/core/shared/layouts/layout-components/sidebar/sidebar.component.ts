@@ -4,6 +4,7 @@ import { TranslationService } from 'app/core/shared/translation/translation.serv
 import { SidebarService } from './sidebar.service';
 import { map } from 'rxjs/operators';
 import { ApiService } from '@osd-services/api.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 
 export interface Menu {
@@ -24,9 +25,10 @@ export class SidebarComponent implements OnInit {
 
   constructor(
     public sidebar: SidebarService,
-    public translate: TranslationService,
+    private _translate: TranslationService,
     private _page: PageService,
-    private _api: ApiService
+    private _api: ApiService,
+    private _device: DeviceDetectorService
   ) {
   }
 
@@ -36,9 +38,19 @@ export class SidebarComponent implements OnInit {
     })
   }
 
-
   public get LANG(): string {
-    return this.translate.lang;
+    return this._translate.lang;
+  }
+
+  public get langList(): any[] {
+    return this._translate.langList;
+  }
+
+  /**
+   * change current lang
+   */
+  public changeLanguage(lang: string) {
+    this._translate.changeLang(lang);
   }
 
   private _loadMenu() {
@@ -57,7 +69,11 @@ export class SidebarComponent implements OnInit {
   }
 
   public get linkHeight() : string {
-    return 100 / this.menuList.length + '%';
+    if (this._device.isMobile()) {
+      return 'calc(' + 100 / this.menuList.length + '% - ' + 84 / this.menuList.length + 'px)';
+    } else {
+      return 100 / this.menuList.length + '%';
+    }
   }
 
 }

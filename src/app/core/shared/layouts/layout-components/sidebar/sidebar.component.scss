@@ -21,12 +21,14 @@
           transform: translateX(0);
         }
       }
+      &__langlist {
+        transform: translateX(0);
+      }
     }
   }
 
   &__menu {
     height: 100%;
-
     &-item {
       list-style: none;
       text-align: center;
@@ -36,8 +38,6 @@
       transform: translateX(200%);
       transition: 0.3s transform;
       pointer-events: all;
-
-
       .link {
         color: #ffffff;
         font-family: "Open Sans";
@@ -46,10 +46,34 @@
     }
   }
 
+
   @include media-below($bp-sm) {
-    width: 100%;
-    padding-left: 30px;
-    padding-right: 30px;
+    &__langlist {
+      height: 84px;
+      @include flex(row, space-between, center);
+      background-color: #000;
+      transform: translateX(200%);
+      transition: 0.3s transform;
+      pointer-events: all;
+      &-item {
+        &.active {
+          opacity: 1;
+          .icon {
+            transform: rotateZ(270deg);
+            @include font(14px, 100);
+          }
+        }
+        position: relative;
+        @include font(18px, 700);
+        opacity: 0.4;
+        color: #fff;
+        text-transform: uppercase;
+        width: 33%;
+        height: 70%;
+        @include flex(column, flex-start, center);
+      }
+
+    }
   }
 
 

@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
   }
 
   private _loadLanguages() {
-    this._api.get('/lang/list').pipe(
+    this._api.getWithCache('/lang/list').pipe(
       map(res => res.body)
     ).subscribe((e: any[]) => {
       this._translate.langList = e;
