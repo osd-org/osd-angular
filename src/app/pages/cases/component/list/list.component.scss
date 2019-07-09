@@ -70,6 +70,7 @@
     &__item {
       width: 246px;
       height: 216px;
+      margin-right: 0;
       &-title {
         @include font(18px, 700);
       }
