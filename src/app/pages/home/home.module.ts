@@ -1,3 +1,4 @@
+import { HomeSliderMobileModule } from './home-slider-mobile/home-slider-mobile.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
@@ -18,7 +19,8 @@ const routes: Routes = [
       CommonModule,
       RouterModule.forChild(routes),
       SharedModule,
-      TileSliderModule
+      TileSliderModule,
+      HomeSliderMobileModule
     ],
     declarations: [
       HomeComponent,

@@ -24,6 +24,10 @@
       @include media-below($bp-ld) {
         height: $header-height-mobile;
         background-color: #000;
+
+        &.no-title {
+          height: 65px;
+        }
       }
 
       &.menu {

@@ -1,0 +1,7 @@
+<div class="slide" [ngStyle]="{'background-image': 'url(' + imageUrl + ')'}">
+  <div class="lines">
+    <div class="line" [ngStyle]="{'background-color': linesList?.first.color}">{{ linesList?.first.text }}</div>
+    <div class="line" [ngStyle]="{'background-color': linesList?.second.color}">{{ linesList?.second.text }}</div>
+    <div class="line" [ngStyle]="{'background-color': linesList?.third.color}">{{ linesList?.third.text }}</div>
+  </div>
+</div>

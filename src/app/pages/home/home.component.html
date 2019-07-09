@@ -2,9 +2,13 @@
   <div class="page-top"></div>
 
   <div class="page-content" *ngIf="slideList.length">
-    <app-tile-slider>
+    <app-tile-slider *ngIf="!mobile">
       <app-tile-slide *ngFor="let slide of slideList" [linesList]="slide?.data?.group" [imageUrl]="slide?.data?.img?.url" [linkData]="slide?.data?.link_block"></app-tile-slide>
       <app-links-slider [links]="linksList"></app-links-slider>
     </app-tile-slider>
+
+    <app-home-slider-mobile *ngIf="mobile">
+      <app-home-slider-mobile-slide *ngFor="let slide of slideList" [linesList]="slide?.data?.group" [imageUrl]="slide?.data?.img?.url" [linkData]="slide?.data?.link_block"></app-home-slider-mobile-slide>
+    </app-home-slider-mobile>
   </div>
 </app-main-layout>
