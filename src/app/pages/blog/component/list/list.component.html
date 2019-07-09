@@ -17,6 +17,7 @@
           (click)="loadPaginationPage(i + 1)"
           *ngFor="let item of paginationPages; let i = index">{{i + 1}}</div>
       </div>
+      <button *ngIf="loadmore" class="blog__loadmore-btn" type="button" (click)="loadMore()">{{'load more' | translate}}</button>
     </div>
   </div>
 </app-blog-list-layout>
