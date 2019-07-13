@@ -8,6 +8,15 @@
     width: 100%;
     height: 100%;
     z-index: -1;
+    transition: 0.7s all linear;
+    overflow: hidden;
+
+    &.hide {
+        .lines {
+            transform: translateX(100%);
+        }
+    }
+
 }
 
 .slide {
@@ -28,6 +37,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    transition: 1s transform linear;
 
     .line {
         padding: 5px 15px;
