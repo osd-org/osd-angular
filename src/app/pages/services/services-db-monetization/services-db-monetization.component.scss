@@ -30,3 +30,31 @@ h1 {
     }
   }
 }
+
+@include media-below($bp-ld) {
+  .service {
+    &-container {
+      height: auto;
+      .order-btn-container {
+        margin: 20px;
+        a {
+          margin: 0;
+        }
+      }
+    }
+    &-content {
+      width: 100%;
+      h1 {
+        font-size: 16px;
+      }
+      .text {
+        padding: 20px 20px 10px 20px;
+      }
+      .monetization {
+        &_list {
+          @include flex(column, center, center);
+        }
+      }
+    }
+  }
+}

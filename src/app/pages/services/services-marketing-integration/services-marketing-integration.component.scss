@@ -6,3 +6,26 @@ h1 {
   @include font(42px, 600);
   text-transform: uppercase;
 }
+
+@include media-below($bp-ld) {
+  .service {
+    &-container {
+      height: auto;
+      .order-btn-container {
+        margin: 20px;
+        a {
+          margin: 0;
+        }
+      }
+    }
+    &-content {
+      width: 100%;
+      h1 {
+        font-size: 16px;
+      }
+      .text {
+        padding: 20px 20px 10px 20px;
+      }
+    }
+  }
+}
