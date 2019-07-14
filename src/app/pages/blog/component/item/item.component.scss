@@ -12,10 +12,9 @@
   &__title {
     width: 76%;
     h1 {
+      @include font(28px, 600);
       color: #ffffff;
       font-family: "Open Sans Semi Bold";
-      font-size: 28px;
-      font-weight: 600;
       text-transform: uppercase;
       line-height: 2;
     }
@@ -26,14 +25,16 @@
     &-name {
       color: #ffffff;
       font-family: "DIN Alternate";
-      font-size: 15px;
-      font-weight: 700;
+      @include font(15px, 700);
       text-align: right;
     }
     &-img {
       width: 66px;
       height: 66px;
       border-radius: 50%;
+    }
+    &--mobile {
+      display: none;
     }
   }
 }
@@ -54,5 +55,46 @@
       display: inline-block;
     }
   }
+}
 
+@include media-below($bp-ld) {
+  .page-top {
+    height: auto;
+    padding: 20px 20px 10px 20px;
+    box-sizing: border-box;
+    .container {
+      @include flex(column, flex-start, center);
+    }
+    &__title {
+      width: 100%;
+      h1 {
+        font-size: 18px;
+        margin: 0;
+        line-height: 25px;
+      }
+    }
+    &__author {
+      display: none;
+      &--mobile {
+        @include flex(row, flex-start, center);
+        background-color: #fff;
+        height: auto;
+        padding: 20px 20px 10px 20px;
+        box-sizing: border-box;
+      }
+      &-name {
+        color: #000;
+        @include font(14px, 300);
+        padding: 15px;
+      }
+    }
+  }
+  .page-content {
+    height: auto;
+    margin-bottom: 0;
+    .container {
+      height: auto;
+      padding: 20px 20px 10px 20px;
+    }
+  }
 }

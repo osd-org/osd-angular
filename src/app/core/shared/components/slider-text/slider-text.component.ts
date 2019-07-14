@@ -1,3 +1,4 @@
+import { DeviceDetectorService } from 'ngx-device-detector';
 import { PlatformService } from '@osd-services/universal/platform.service';
 import { Component, ElementRef, Renderer2, ViewChild, Input, OnInit, OnDestroy } from '@angular/core';
 import SweetScroll from 'sweet-scroll';
@@ -34,7 +35,8 @@ export class SliderTextComponent implements OnInit, OnDestroy {
   constructor(
     private _render: Renderer2,
     private _page: PageService,
-    private _platform: PlatformService
+    private _platform: PlatformService,
+    private _device: DeviceDetectorService
   ) {
   }
 
@@ -74,30 +76,34 @@ export class SliderTextComponent implements OnInit, OnDestroy {
   }
 
   public _init() {
-    this.currentRangeVal = 0;
-    this.activeSlide = 0;
-    this.scrollWrapper.nativeElement.style.height = 90 + '%';
-    this._render.setProperty(this.scrollWrapper.nativeElement, 'innerHTML', '');
-    const firstCard = this._render.createElement('div');
-    this._render.addClass(firstCard, 'card');
-    this._render.appendChild(this.scrollWrapper.nativeElement, firstCard);
-    this._card = this.scrollWrapper.nativeElement.querySelectorAll('.card')[0];
-    if (this._platform.isBrowser) {
-      this._cardWidth = this._card.scrollWidth;
+    if (this._device.isMobile()) {
+
+    } else {
+      this.currentRangeVal = 0;
+      this.activeSlide = 0;
+      this.scrollWrapper.nativeElement.style.height = 90 + '%';
+      this._render.setProperty(this.scrollWrapper.nativeElement, 'innerHTML', '');
+      const firstCard = this._render.createElement('div');
+      this._render.addClass(firstCard, 'card');
+      this._render.appendChild(this.scrollWrapper.nativeElement, firstCard);
+      this._card = this.scrollWrapper.nativeElement.querySelectorAll('.card')[0];
+      if (this._platform.isBrowser) {
+        this._cardWidth = this._card.scrollWidth;
+      }
+      setTimeout(() => {
+        this._section = this._render.createElement('section');
+        this._render.setProperty(this._section, 'innerHTML', this.html);
+        this._innerHTMLElements = this._section.querySelectorAll('*');
+        const rootElement = this.scrollWrapper.nativeElement;
+        this._fillSections(rootElement);
+        this._scroll = new SweetScroll({
+          duration: 500,                 // Specifies animation duration in integer
+          easing: 'easeOutQuint',         // Specifies the pattern of easing                // Enable the vertical scroll
+          horizontal: true,              // Enable the horizontal scroll
+        },
+        '.scrolling-wrapper-flexbox');
+      }, this._time);
     }
-    setTimeout(() => {
-      this._section = this._render.createElement('section');
-      this._render.setProperty(this._section, 'innerHTML', this.html);
-      this._innerHTMLElements = this._section.querySelectorAll('*');
-      const rootElement = this.scrollWrapper.nativeElement;
-      this._fillSections(rootElement);
-      this._scroll = new SweetScroll({
-        duration: 500,                 // Specifies animation duration in integer
-        easing: 'easeOutQuint',         // Specifies the pattern of easing                // Enable the vertical scroll
-        horizontal: true,              // Enable the horizontal scroll
-      },
-      '.scrolling-wrapper-flexbox');
-    }, this._time);
   }
 
   private _fillSections(rootElement) {

@@ -1,4 +1,6 @@
 
+@import "variables";
+@import "mixins";
 
 :host {
   width: 100%;
@@ -37,7 +39,9 @@ h2 {
   }
 }
 
-
+.mobile-text {
+  display: none;
+}
 
 .range-control {
   position: relative;
@@ -77,4 +81,15 @@ input[type=range]::-webkit-slider-thumb {
 input[type=range]:active + output {
   display: block;
   transform: translateX(-50%);
+}
+
+
+
+@include media-below($bp-ld) {
+  .scrolling-wrapper-flexbox, .range-control {
+    display: none;
+  }
+  .mobile-text {
+    display: block;
+  }
 }

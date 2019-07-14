@@ -71,14 +71,14 @@
         }
       }
 
-        @include media-below($bp-ld) {
-          height: 26px;
-          &__part {
-            &--left, &--right  {
-              display: none;
-            }
+      @include media-below($bp-ld) {
+        height: 26px;
+        &__part {
+          &--left, &--right  {
+            display: none;
           }
         }
+      }
     }
     &__group {
       &--rt {

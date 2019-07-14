@@ -35,17 +35,45 @@
       }
     }
     .logo {
-        display: block;
-        width: 40px;
-        height: 37px;
-        pointer-events: all;
+      display: flex;
+      flex-direction: row;
+      height: 37px;
+      pointer-events: all;
+      max-width: 235px;
+      &__part {
+        &--left {
+          width: 74px;
+        }
+        &--right {
+          width: 134px;
+        }
+        &--left, &--right  {
+          img {
+            width: 0;
+          }
+        }
+
+      }
+
+      img {
+        height: 100%;
+        transition: 0.5s
+      }
+      &:hover {
         img {
-            height: 100%;
+          width: 100%;
+          transition: 0.5s
         }
-        @include media-below($bp-ld) {
-          height: 26px;
-          z-index: 1;
+      }
+
+      @include media-below($bp-ld) {
+        height: 26px;
+        &__part {
+          &--left, &--right  {
+            display: none;
+          }
         }
+      }
     }
     &__group {
       &--rt {

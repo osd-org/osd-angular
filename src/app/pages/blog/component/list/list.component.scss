@@ -17,7 +17,7 @@ $group-size: 6;
 
 .blog {
   &__list {
-    @include flex(row, flex-start, center);
+    @include flex(row, center, center);
     width: 100%;
   }
   &__item {
