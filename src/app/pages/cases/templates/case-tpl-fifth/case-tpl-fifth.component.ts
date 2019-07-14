@@ -20,7 +20,7 @@ export class CaseTplFifthComponent implements OnInit {
   set _setData(v : any) {
     this._reloadSlider();
     this._data = v;
-    this.slideList = this.data.acf[this.data.slug]['slide'];
+    this.slideList = this.data['slide'];
   }
 
   public get data(): any {

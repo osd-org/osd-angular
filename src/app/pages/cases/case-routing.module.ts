@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {ListComponent} from './component/list/list.component';
 import {ItemComponent} from './component/item/item.component';
-
+import { ItemNewComponent } from './component/item-new/item-new.component';
 const routes: Routes = [
   {
     path: '',
@@ -19,9 +19,13 @@ const routes: Routes = [
     component: CasesTplThirdComponent
   },
   {
-    path: ':slug',
-    component: ItemComponent,
+    path: 'new',
+    component: ItemNewComponent
   },
+  {
+    path: ':slug',
+    component: ItemNewComponent,
+  }
 ];
 
 @NgModule({

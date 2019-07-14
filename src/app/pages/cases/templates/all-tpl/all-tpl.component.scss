@@ -1,0 +1,116 @@
+@import "variables";
+@import "mixins";
+@import "../cases-parts";
+
+.slider {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.page-block-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
+}
+
+.page-block {
+    width: 50%;
+    height: 100%;
+
+    &-bg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        z-index: -1;
+    }
+
+    &.right {
+        background-color: #fff;
+        display: flex;
+        justify-content: flex-start;
+        color: #000;
+
+        .text-block {
+            padding-left: 70px;
+        }
+    }
+
+    &.left {
+        background-color: rgba(#F4B515, 0.9);
+        display: flex;
+        justify-content: flex-end;
+        color: #000;
+
+        .block-img-container {
+          .block-img {
+              right: 30px;
+              left: unset;
+          }
+      }
+
+        .text-block {
+            padding-right: 70px;
+        }
+    }
+
+    &.full {
+      width: 100%;
+      .text-block {
+        width: 100%;
+        max-width: 600px;
+        left: calc(50% - 300px);
+      }
+    }
+}
+
+.text-block {
+    position: absolute;
+    top: 50%;
+    width: 360px;
+    transform: translateY(-50%);
+
+    &__title {
+        @include font(42px);
+        text-transform: uppercase;
+    }
+
+    &__list {
+        margin-top: 40px;
+        width: 300px;
+
+        &-item {
+            @include font(20px);
+            margin-bottom: 20px;
+            padding-left: 50px;
+            box-sizing: border-box;
+            position: relative;
+
+            i {
+                @include font(16px);
+                margin-right: 30px;
+                position: absolute;
+                left: 0;
+                top: 3px;
+            }
+        }
+    }
+}
+
+.block-img-container {
+    position: relative;
+    width: 100%;
+
+    .block-img {
+        position: absolute;
+        left: 30px;
+        bottom: 0;
+        max-height: 90%;
+        max-width: 100%;
+    }
+}
