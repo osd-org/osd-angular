@@ -31,28 +31,12 @@ export class HomeComponent implements OnInit {
     //   bottomOffset: 30,
     //   speed: 16
     // },
-    // {
-    //   url: '/',
-    //   fontSize: 16,
-    //   text: 'Разработка',
-    //   bottomOffset: 70,
-    //   speed: 20
-    // },
-    // {
-    //   url: '/',
-    //   fontSize: 14,
-    //   text: 'Интеграция',
-    //   bottomOffset: 50,
-    //   speed: 18
-    // },
-    // {
-    //   url: '/',
-    //   fontSize: 15,
-    //   text: 'Визуализация',
-    //   bottomOffset: 40,
-    //   speed: 15
-    // },
   ];
+
+  /**
+   * True if mobile version
+   */
+  public mobile: boolean;
 
   public backgroundColor = BackgroundColor;
 
@@ -63,8 +47,9 @@ export class HomeComponent implements OnInit {
     private _page: PageService,
     private _seo: SeoService
   ){
-
-
+    if (_platform.isBrowser) {
+      this.mobile = window.innerWidth <= 1080;
+    }
   }
 
    ngOnInit(){

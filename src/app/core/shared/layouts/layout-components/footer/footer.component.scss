@@ -1,6 +1,12 @@
 @import "variables";
 @import "mixins";
 
+:host {
+    @include media-below($bp-ld) {
+        display: none;
+    }
+}
+
 .footer-container {
     position: fixed;
     z-index: 99;
