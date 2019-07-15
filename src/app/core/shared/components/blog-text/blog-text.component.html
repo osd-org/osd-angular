@@ -1,0 +1,17 @@
+<div #scrollWrapper class="carousel">
+  <div class="carousel-cell" [innerHTML]="html"></div>
+  <div class="carousel-cell" [innerHTML]="html"></div>
+  <div class="carousel-cell" [innerHTML]="html"></div>
+  <div class="carousel-cell" [innerHTML]="html"></div>
+</div>
+
+<div class="range-control">
+  <div #bar class="bar" [ngStyle]="{width: currentRangeVal + '%'}"></div>
+  <input id="inputRange"
+  type="range"
+  min="0"
+  max="100"
+  step="1"
+  (change)="setRange($event)"
+  [value]="currentRangeVal">
+</div>

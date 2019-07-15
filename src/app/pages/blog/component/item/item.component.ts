@@ -6,6 +6,7 @@ import { untilDestroyed } from '@osd-rxjs/operators';
 import { PageService } from '@osd-services/page.service';
 import { switchMap } from 'rxjs/operators';
 
+
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
