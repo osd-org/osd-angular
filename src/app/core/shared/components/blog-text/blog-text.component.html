@@ -1,10 +1,12 @@
 <div #scrollWrapper class="carousel">
-  <div class="carousel-cell" *ngFor="let item of html" [innerHTML]="item?.text"></div>
+  <div class="carousel-cell"></div>
 </div>
 
 <div class="range-control">
   <div #bar class="bar" [ngStyle]="{width: currentRangeVal + '%'}"></div>
-  <div class="dots" *ngFor="let item of dots; let i = index" [ngStyle]="{left: (100 / _listLength ) * (i) + '%'}">22</div>
+  <div class="dots-bar">
+    <div class="dots" *ngFor="let item of dots; let i = index"></div>
+  </div>
   <input id="inputRange"
   type="range"
   min="0"
@@ -13,3 +15,6 @@
   (change)="setRange($event)"
   [value]="currentRangeVal">
 </div>
+
+
+<div #renderText class="mobile-text" [innerHTML]="html | sanitizeHtml"></div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import * as Flickity  from 'flickity';
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -12,12 +12,11 @@ export class BlogTextComponent implements OnInit {
   private _flickity;
   public maxRangeVal: any;
   private _currentRangeVal: any;
-  public _listLength;
-  private _html: any[] = [];
+  public listLength = 0;
+  private _html: any = null;
 
   @Input('html')
-  public set html(v : any[]) {
-    this._listLength = v.length;
+  set initHTML(v : any[]) {
     this._html = v;
   }
 
@@ -25,17 +24,47 @@ export class BlogTextComponent implements OnInit {
     return this._html;
   }
 
-
   @ViewChild('scrollWrapper') scrollWrapper: ElementRef;
+  @ViewChild('renderText') renderText: ElementRef;
   @ViewChild('bar') bar: ElementRef;
 
   constructor(
+    private _render: Renderer2,
   ) {
 
   }
 
   ngOnInit() {
     setTimeout(() => {
+      this._fillingText(() => {
+        this._initSlider();
+      });
+    }, 1000);
+  }
+
+  private _fillingText(callback) {
+    const content = this.renderText.nativeElement.querySelectorAll('*');
+    let slideList = this.scrollWrapper.nativeElement.querySelectorAll('.carousel-cell');
+    let currentSlide = slideList[slideList.length - 1];
+    let contentHeight = 0;
+    content.forEach((e: HTMLElement) => {
+      if (currentSlide.offsetHeight > contentHeight + e.offsetHeight + 50) {
+        contentHeight = contentHeight + e.offsetHeight;
+        this._render.appendChild(currentSlide, e);
+      } else {
+        this._append();
+        slideList = this.scrollWrapper.nativeElement.querySelectorAll('.carousel-cell');
+        currentSlide = slideList[slideList.length - 1];
+        contentHeight = 0;
+        contentHeight = contentHeight + e.offsetHeight;
+        this._render.appendChild(currentSlide, e);
+      }
+    });
+    callback('finish');
+    this.listLength = slideList.length;
+  }
+
+  private _initSlider() {
       this._flickity = new Flickity( '.carousel', {
         cellAlign: 'left',
         contain: true,
@@ -50,8 +79,6 @@ export class BlogTextComponent implements OnInit {
         this.bar.nativeElement.width = 100 + '%';
       });
       this._currentRangeVal = 0;
-      this._append();
-    }, 1000);
   }
 
   public get currentRangeVal(): number {
@@ -78,8 +105,8 @@ export class BlogTextComponent implements OnInit {
 
   public setRange(e) {
     this._currentRangeVal = e.target.value;
-    this._flickity.select(this.nearest(e.target.value, this._listLength))
-    this._currentRangeVal = this.nearest(e.target.value, this._listLength);
+    this._flickity.select(this.nearest(e.target.value, this.listLength))
+    this._currentRangeVal = this.nearest(e.target.value, this.listLength);
   }
 
   private nearest(value, steps, min = 0, max = 100){
@@ -103,21 +130,15 @@ export class BlogTextComponent implements OnInit {
   }
 
   private _append() {
-    function makeCell() {
-      var cell = (<any>document).createElement('div');
-      cell.className = 'carousel-cell';
-      cell.textContent = '3333';
-      cell.style.width = 100 + '%';
-      cell.style.height = 100 + '%';
-      return cell;
-    }
-    var cellElems = [ makeCell() ];
-    this._flickity.append(cellElems);
-    this._listLength++;
+    const cell = this._render.createElement('div');
+    this._render.addClass(cell, 'carousel-cell');
+    this._render.setStyle(cell, 'width', '100%');
+    this._render.setStyle(cell, 'height', '100%');
+    this._render.appendChild(this.scrollWrapper.nativeElement, cell)
   }
 
   public get dots(): any[] {
-    return Array(this._listLength)
+    return Array(this.listLength);
   }
 
 }
