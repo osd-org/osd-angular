@@ -12,9 +12,20 @@ export class BlogTextComponent implements OnInit {
   private _flickity;
   public maxRangeVal: any;
   private _currentRangeVal: any;
+  public _listLength;
+  private _html: any[] = [];
 
-  public list = [1, 2, 3, 4];
-  @Input('html') html: any;
+  @Input('html')
+  public set html(v : any[]) {
+    this._listLength = v.length;
+    this._html = v;
+  }
+
+  public get html() : any[] {
+    return this._html;
+  }
+
+
   @ViewChild('scrollWrapper') scrollWrapper: ElementRef;
   @ViewChild('bar') bar: ElementRef;
 
@@ -24,22 +35,24 @@ export class BlogTextComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._flickity = new Flickity( '.carousel', {
-      cellAlign: 'left',
-      contain: true,
-      adaptiveHeight: true,
-      prevNextButtons: false,
-      pageDots: false,
-      // freeScroll: true,
-    });
-    this._currentRangeVal = 0;
-    this._scrollEvent$();
-    this._scrollHendler((e) => {
-      this._currentRangeVal = e;
-      this.bar.nativeElement.width = 100 + '%';
-    });
+    setTimeout(() => {
+      this._flickity = new Flickity( '.carousel', {
+        cellAlign: 'left',
+        contain: true,
+        adaptiveHeight: true,
+        prevNextButtons: false,
+        pageDots: false,
+        freeScroll: true
+      });
+      this._scrollEvent$();
+      this._scrollHendler((e) => {
+        this._currentRangeVal = e;
+        this.bar.nativeElement.width = 100 + '%';
+      });
+      this._currentRangeVal = 0;
+      this._append();
+    }, 1000);
   }
-
 
   public get currentRangeVal(): number {
     return this._currentRangeVal;
@@ -65,8 +78,8 @@ export class BlogTextComponent implements OnInit {
 
   public setRange(e) {
     this._currentRangeVal = e.target.value;
-    this._flickity.select(this.nearest(e.target.value, this.list.length))
-    this._currentRangeVal = this.nearest(e.target.value, this.list.length);
+    this._flickity.select(this.nearest(e.target.value, this._listLength))
+    this._currentRangeVal = this.nearest(e.target.value, this._listLength);
   }
 
   private nearest(value, steps, min = 0, max = 100){
@@ -88,4 +101,23 @@ export class BlogTextComponent implements OnInit {
       callback(progress);
     });
   }
+
+  private _append() {
+    function makeCell() {
+      var cell = (<any>document).createElement('div');
+      cell.className = 'carousel-cell';
+      cell.textContent = '3333';
+      cell.style.width = 100 + '%';
+      cell.style.height = 100 + '%';
+      return cell;
+    }
+    var cellElems = [ makeCell() ];
+    this._flickity.append(cellElems);
+    this._listLength++;
+  }
+
+  public get dots(): any[] {
+    return Array(this._listLength)
+  }
+
 }
