@@ -1,5 +1,7 @@
 
 @import url('https://unpkg.com/flickity@2/dist/flickity.min.css');
+@import 'variables';
+@import 'mixins';
 
 .carousel {
   height: 90%;
@@ -11,7 +13,6 @@
     border-radius: 5px;
   }
 }
-
 
 .range-control {
   position: relative;
@@ -82,4 +83,14 @@ input[type=range]:active + output {
 
 .mobile-text {
   visibility: hidden;
+}
+
+
+@include media-below($bp-ld) {
+  .mobile-text {
+    visibility: visible;
+  }
+  .carousel, .range-control {
+    display: none;
+  }
 }

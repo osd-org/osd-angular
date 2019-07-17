@@ -1,7 +1,9 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, NgZone } from '@angular/core';
 import * as Flickity  from 'flickity';
 import { fromEvent } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, skip } from 'rxjs/operators';
+import { BodyService } from '@osd-services/body.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-blog-text',
@@ -14,9 +16,14 @@ export class BlogTextComponent implements OnInit {
   private _currentRangeVal: any;
   public listLength = 0;
   private _html: any = null;
+  private _scrollEventMouse$;
+  private _resizeHendler$;
 
   @Input('html')
   set initHTML(v : any[]) {
+    if (this._html) {
+      this._resetSlider();
+    }
     this._html = v;
   }
 
@@ -30,38 +37,46 @@ export class BlogTextComponent implements OnInit {
 
   constructor(
     private _render: Renderer2,
+    private _ngZone: NgZone,
+    private _body: BodyService,
+    public device: DeviceDetectorService
   ) {
 
   }
 
   ngOnInit() {
-    setTimeout(() => {
-      this._fillingText(() => {
-        this._initSlider();
-      });
-    }, 1000);
+    if (!this.device.isMobile()) {
+      setTimeout(() => {
+        this._fillingText(() => {
+          this._initSlider();
+        });
+      }, 1000);
+    }
   }
 
   private _fillingText(callback) {
-    const content = this.renderText.nativeElement.querySelectorAll('*');
-    let slideList = this.scrollWrapper.nativeElement.querySelectorAll('.carousel-cell');
-    let currentSlide = slideList[slideList.length - 1];
-    let contentHeight = 0;
-    content.forEach((e: HTMLElement) => {
-      if (currentSlide.offsetHeight > contentHeight + e.offsetHeight + 50) {
-        contentHeight = contentHeight + e.offsetHeight;
-        this._render.appendChild(currentSlide, e);
-      } else {
-        this._append();
-        slideList = this.scrollWrapper.nativeElement.querySelectorAll('.carousel-cell');
-        currentSlide = slideList[slideList.length - 1];
-        contentHeight = 0;
-        contentHeight = contentHeight + e.offsetHeight;
-        this._render.appendChild(currentSlide, e);
-      }
+    this._ngZone.run(() => {
+      const content = this.renderText.nativeElement.querySelectorAll('*');
+      let slideList = this.scrollWrapper.nativeElement.querySelectorAll('.carousel-cell');
+      let currentSlide = slideList[slideList.length - 1];
+      let contentHeight = 0;
+      content.forEach((e: HTMLElement) => {
+        if (currentSlide.offsetHeight > contentHeight + e.offsetHeight + 50) {
+          contentHeight = contentHeight + e.offsetHeight;
+          this._render.appendChild(currentSlide, e);
+        } else {
+          this._append();
+          slideList = this.scrollWrapper.nativeElement.querySelectorAll('.carousel-cell');
+          currentSlide = slideList[slideList.length - 1];
+          contentHeight = 0;
+          contentHeight = contentHeight + e.offsetHeight;
+          this._render.appendChild(currentSlide, e);
+        }
+      });
+      callback('finish');
+      this.listLength = slideList.length;
+      this._render.setProperty(this.renderText.nativeElement, 'innerHTML', this._html);
     });
-    callback('finish');
-    this.listLength = slideList.length;
   }
 
   private _initSlider() {
@@ -74,6 +89,7 @@ export class BlogTextComponent implements OnInit {
         freeScroll: true
       });
       this._scrollEvent$();
+      this._resizeHendler();
       this._scrollHendler((e) => {
         this._currentRangeVal = e;
         this.bar.nativeElement.width = 100 + '%';
@@ -86,7 +102,7 @@ export class BlogTextComponent implements OnInit {
   }
 
   private _scrollEvent$() {
-    fromEvent(this.scrollWrapper.nativeElement, 'wheel')
+    this._scrollEventMouse$ = fromEvent(this.scrollWrapper.nativeElement, 'wheel')
     .pipe(
       debounceTime(300),
     )
@@ -141,4 +157,30 @@ export class BlogTextComponent implements OnInit {
     return Array(this.listLength);
   }
 
+  private _resetSlider() {
+    if (!this.device.isMobile()) {
+      this._flickity.destroy();
+      this._render.setProperty(this.scrollWrapper.nativeElement, 'innerHTML', '');
+      this._append();
+      this._scrollEventMouse$.unsubscribe();
+      this._resizeHendler$.unsubscribe();
+      this.listLength = 0;
+      this._currentRangeVal = 0;
+      setTimeout(() => {
+        this._fillingText(() => {
+          this._initSlider();
+          this._flickity.reloadCells();
+        });
+      }, 1000);
+    }
+  }
+
+  private _resizeHendler() {
+    this._resizeHendler$ = this._body.height$.pipe(
+      skip(1),
+      debounceTime(300)
+    ).subscribe(e => {
+      this._resetSlider();
+    });
+  }
 }

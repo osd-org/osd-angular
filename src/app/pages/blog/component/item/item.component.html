@@ -29,7 +29,7 @@
 
   <div class="page-content">
     <div class="container">
-        <app-blog-text [html]="blogPost?.acf?.desc_detail"></app-blog-text>
+        <app-blog-text *ngIf="blogPost" [html]="blogPost?.acf?.desc_detail"></app-blog-text>
     </div>
   </div>
 

@@ -2,6 +2,8 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { PlatformService } from '@osd-services/universal/platform.service';
 import { WindowService } from '@osd-services/universal/window.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { Observable, BehaviorSubject, fromEvent } from 'rxjs';
+import { pluck, distinctUntilChanged, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +22,9 @@ export class BodyService {
   private _onSwipeRight: EventEmitter<any> = new EventEmitter<any>();
   private _onSwipeLeft: EventEmitter<any> = new EventEmitter<any>();
 
+  public height$: Observable<number>;
+  public width$: Observable<number>;
+
   constructor(
     private _window: WindowService,
     private _platform: PlatformService,
@@ -30,6 +35,7 @@ export class BodyService {
     if (this._platform.isBrowser) {
       this._documentEl = document.documentElement;
       this._bodyEl = document.body;
+      this._onResize();
     }
 
     // this._initHammer();
@@ -187,4 +193,33 @@ export class BodyService {
   //     }
   //   });
   // }
+
+
+  private _onResize() {
+    let windowSize$ = new BehaviorSubject(getWindowSize());
+
+    this.height$ = windowSize$.pipe(
+      pluck('height'),
+      distinctUntilChanged()
+    );
+    this.width$ = windowSize$.pipe(
+      pluck('width'),
+      distinctUntilChanged()
+    );
+
+    fromEvent((<any>window), 'resize').pipe(
+      map(getWindowSize)
+    ).subscribe(windowSize$);
+
+    function getWindowSize() {
+      return {
+          height: (<any>window).innerHeight,
+          width: (<any>window).innerWidth
+          //you can sense other parameters here
+      };
+    };
+  }
+
+
+
 }

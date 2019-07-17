@@ -31,6 +31,7 @@ export class ItemComponent implements OnInit, OnDestroy {
       switchMap(params => this._blog.getBlogPostBySlug(params.slug)),
       untilDestroyed(this)
     ).subscribe((res) => {
+      this.blogPost = null;
       this._blog.resolveCurrentBlogPost(res[0]);
       this.blogPost = res[0];
     })
