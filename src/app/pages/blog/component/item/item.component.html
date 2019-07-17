@@ -28,7 +28,7 @@
   </div>
 
   <div class="page-content">
-    <div class="container">
+    <div class="container" *ngIf="platform.isBrowser">
         <app-blog-text *ngIf="blogPost" [html]="blogPost?.acf?.desc_detail"></app-blog-text>
     </div>
   </div>

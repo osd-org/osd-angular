@@ -20,10 +20,24 @@ const app = express();
 app.use(
   cors(),
   detector.middleware()
-  );
+);
 
 const PORT = process.env.PORT || 4000;
 const DIST_FOLDER = join(process.cwd(), 'dist');
+global['window'] = {
+  document: {
+    createElementNS: () => {return {}}
+  },
+  Element: {
+    prototype: {}
+  },
+};
+global['navigator'] = {};
+global['btoa'] = () => {};
+global['ElemProto'] = {};
+global['document'] = {
+  addEventListener: () => {return {}}
+};
 
 // * NOTE :: leave this as require() since this file is built Dynamically from webpack
 const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require('./dist/server/main');

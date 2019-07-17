@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { untilDestroyed } from '@osd-rxjs/operators';
 import { PageService } from '@osd-services/page.service';
 import { switchMap } from 'rxjs/operators';
+import { PlatformService } from '@osd-services/universal/platform.service';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class ItemComponent implements OnInit, OnDestroy {
     private _blog: BlogService,
     private _route: ActivatedRoute,
     private _background: BackgroundService,
-    private _page: PageService
+    private _page: PageService,
+    public platform: PlatformService
   ) {
    }
 
