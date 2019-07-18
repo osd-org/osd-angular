@@ -1,9 +1,12 @@
 import { SeoService } from './../../core/services/seo.service';
 import { PageService } from '@osd-services/page.service';
 import { BackgroundColor, BackgroundService } from './../../core/shared/layouts/layout-components/background/background.service';
-import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PlatformService } from '@osd-services/universal/platform.service';
 import { ApiService } from '@osd-services/api.service';
+import { untilDestroyed } from '@osd-rxjs/operators';
+import { fromEvent } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 
 @Component({
@@ -12,7 +15,7 @@ import { ApiService } from '@osd-services/api.service';
   styleUrls: ['./home.component.scss']
 })
 
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
 
   /**
@@ -38,6 +41,11 @@ export class HomeComponent implements OnInit {
    */
   public mobile: boolean;
 
+  /**
+   * Uses for reloading slider after window resizing
+   */
+  public resize: boolean;
+
   public backgroundColor = BackgroundColor;
 
   constructor(
@@ -49,6 +57,7 @@ export class HomeComponent implements OnInit {
   ){
     if (_platform.isBrowser) {
       this.mobile = window.innerWidth <= 1080;
+      this._resizeHandler();
     }
   }
 
@@ -56,6 +65,10 @@ export class HomeComponent implements OnInit {
     this._background.changeColor(BackgroundColor.BLACK);
     this._getSliderList();
     this._getWordList();
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
   }
 
 
@@ -73,5 +86,21 @@ export class HomeComponent implements OnInit {
     // this._api.getWithCache('/slider/list').subscribe(e => {
     //   this.slideList = e.body;
     // })
+  }
+
+  /**
+   * Handle window resize for slider re-initialization
+   */
+  private _resizeHandler() {
+    fromEvent(window, 'resize').pipe(
+      untilDestroyed(this),
+      debounceTime(500)
+    ).subscribe(() => {
+      this.resize = true;
+
+      setTimeout(() => {
+        this.resize = false;
+      }, 10);
+    });
   }
 }
