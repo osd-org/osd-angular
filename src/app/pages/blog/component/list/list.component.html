@@ -4,10 +4,10 @@
     <div class="container">
       <div class="blog__list">
         <div class="blog__item" *ngFor="let item of blogList">
-          <div class="blog__item-title" [routerLink]="[item?.slug]">{{item?.acf?.title_prev}}
+          <div class="blog__item-title" [line-truncation]="2"  [options]='{ellipsis: "..."}' [routerLink]="[item?.slug]">{{item?.acf?.title_prev}}
             <img src="/assets/svg/arrow.svg" alt="">
           </div>
-          <div class="blog__item-text">{{item?.acf?.desc_prev}}</div>
+          <div class="blog__item-text" [line-truncation]="2"  [options]='{ellipsis: "..."}' >{{item?.acf?.desc_prev}}</div>
           <div class="blog__item-readmore"><a [routerLink]="[item?.slug]">{{'читать' | translate}} <img src="/assets/svg/arrow.svg" alt=""></a></div>
         </div>
       </div>

@@ -53,8 +53,9 @@ export class HomeComponent implements OnInit {
   }
 
    ngOnInit(){
-     this._getSliderList();
-     this._getWordList();
+    this._background.changeColor(BackgroundColor.BLACK);
+    this._getSliderList();
+    this._getWordList();
   }
 
 

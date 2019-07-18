@@ -22,11 +22,13 @@ export class ListComponent implements OnInit, OnDestroy {
   constructor(
     private _blog: BlogService,
     private _header: HeaderService,
-    private _page: PageService
+    private _page: PageService,
+    private _background: BackgroundService,
   ) { }
 
   ngOnInit() {
     this._header.setTitle('Блоги');
+    this._background.changeColor(BackgroundColor.BLACK);
     this._page.contentUpdate$.pipe(
       untilDestroyed(this)
     ).subscribe(() => {
