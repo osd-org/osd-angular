@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private _seo: SeoService
   ){
     if (_platform.isBrowser) {
-      this.mobile = window.innerWidth <= 1080;
+      this.mobile = window.innerWidth <= 1080 || window.navigator.userAgent.indexOf('Trident/') >= 0;
       this._resizeHandler();
     }
   }
