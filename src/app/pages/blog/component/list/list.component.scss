@@ -68,6 +68,9 @@ $group-size: 6;
       text-transform: uppercase;
       margin: 20px;
     }
+    &-link-icon {
+      display: none;
+    }
   }
   &__pagination {
     width: 100%;
@@ -92,12 +95,14 @@ $group-size: 6;
   @include media-below($bp-sm) {
     &__list {
       @include flex(column, flex-start, flex-start);
+      height: auto;
     }
     &__item {
       position: relative;
       width: 100%;
       height: 77px;
       max-width: unset;
+      min-height: unset;
       margin: 0;
       @include colors();
       img {
@@ -113,10 +118,6 @@ $group-size: 6;
         max-width: 285px;
         @include font(14px, 600);
         line-height: 21px;
-        text-overflow: ellipsis;
-        // white-space: nowrap;
-        overflow: hidden;
-        height: 100%;
         width: 100%;
         box-sizing: border-box;
         padding: 7px 25px;
@@ -126,6 +127,9 @@ $group-size: 6;
       }
       &-readmore {
         display: none;
+      }
+      &-link-icon {
+        display: block;
       }
     }
     &__pagination {

@@ -4,11 +4,13 @@
     <div class="container">
       <div class="blog__list">
         <div class="blog__item" *ngFor="let item of blogList">
-          <div class="blog__item-title" [line-truncation]="2"  [options]='{ellipsis: "..."}' [routerLink]="[item?.slug]">{{item?.acf?.title_prev}}
-            <img src="/assets/svg/arrow.svg" alt="">
+          <div class="blog__item-title"
+            [line-truncation]="2"
+            [options]='{ellipsis: "..."}' [routerLink]="[item?.slug]">{{item?.acf?.title_prev}}
           </div>
           <div class="blog__item-text" [line-truncation]="2"  [options]='{ellipsis: "..."}' >{{item?.acf?.desc_prev}}</div>
           <div class="blog__item-readmore"><a [routerLink]="[item?.slug]">{{'читать' | translate}} <img src="/assets/svg/arrow.svg" alt=""></a></div>
+          <a class="blog__item-link-icon"  [routerLink]="[item?.slug]"><img src="/assets/svg/arrow.svg" alt=""></a>
         </div>
       </div>
       <div class="blog__pagination" *ngIf="paginationPages.length > 1">
