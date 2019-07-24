@@ -4,6 +4,7 @@
 
     <div class="monetization_list">
       <div
+      (click)="openTab(item.name)"
       class="monetization_item"
       *ngFor="let item of pageContent?.acf?.monetization_list?.monetization_block"
       >
@@ -12,7 +13,9 @@
     </div>
     </div>
 
-    <div class="text" [innerHTML]="pageContent?.content?.rendered | sanitizeHtml"></div>
+    <ng-container>
+      <div class="text" [innerHTML]="currentTabContent | sanitizeHtml"></div>
+    </ng-container>
 
   </div>
   <div class="order-btn-container">
