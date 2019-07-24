@@ -1,5 +1,5 @@
 import { Directive, TemplateRef, ViewContainerRef, OnInit } from '@angular/core';
-import { PlatformService } from '@maneki-services/universal/platform.service';
+import { PlatformService } from '@osd-services/universal/platform.service';
 
 @Directive({
   selector: '[appShellNoSSR]'
