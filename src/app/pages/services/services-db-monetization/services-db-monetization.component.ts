@@ -15,6 +15,10 @@ export class ServicesDbMonetizationComponent implements OnInit, OnDestroy {
   public orderBtnColor = BackgroundColor.BLUE;
   public pageContent: PageType;
 
+  public monetizationBlocks: Array<any>;
+
+  private _currentTabContent: string = '';
+
   constructor(
     private _background: BackgroundService,
     private _page: PageService,
@@ -30,6 +34,8 @@ export class ServicesDbMonetizationComponent implements OnInit, OnDestroy {
       this._page.loadPageBySlug('db-monetization').subscribe((e: PageType) => {
         this._seo.updateTags(e.acf);
         this.pageContent = e;
+        this.monetizationBlocks = e.acf.monetization_list.monetization_block;
+        this.openTab(this.monetizationBlocks[0].name);
       })
     })
     this._background.changeColor(BackgroundColor.BLUE);
@@ -40,6 +46,14 @@ export class ServicesDbMonetizationComponent implements OnInit, OnDestroy {
     return this._translate.lang;
   }
 
+  public get currentTabContent(): string {
+    return this._currentTabContent;
+  }
+
+  openTab(name: string) {
+    const monetizationBlock = this.monetizationBlocks.find(block => block.name === name);
+    this._currentTabContent = monetizationBlock.name; // todo: insert content instead name
+  }
 
   ngOnDestroy(): void {
     this._background.changeColor(BackgroundColor.PURPLE);

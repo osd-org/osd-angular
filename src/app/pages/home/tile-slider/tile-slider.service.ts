@@ -50,7 +50,7 @@ export class TileSliderService {
         tile.style.backgroundImage = `url(${url})`;
         tile.style.backgroundPositionX = - (x * tileWidth) + 'px';
         tile.style.backgroundPositionY = - (y * tileHeight) + 'px';
-        tile.style.transform = 'translateX(2000px)';
+        tile.style.transform = 'translateX(3000px)';
         tile.style.transition = this._tileTransition + 'ms';
 
         container.appendChild(tile);
@@ -79,7 +79,7 @@ export class TileSliderService {
         lineEl.style.fontWeight = '700';
         lineEl.style.lineHeight = lineHeight + 'px';
         lineEl.style.transformOrigin = 'bottom left';
-        lineEl.style.transform = 'translateX(2000px) scaleY(0.1)';
+        lineEl.style.transform = 'translateX(3000px) scaleY(0.1)';
         lineEl.style.padding = '0 20px';
         lineEl.style.boxSizing = 'border-box';
         lineEl.style.height = lineHeight + 'px';
@@ -99,7 +99,7 @@ export class TileSliderService {
    */
   public resetTile(tile: HTMLElement) {
     tile.style.transition = 0 + 'ms';
-    tile.style.transform = 'translateX(2000px)';
+    tile.style.transform = 'translateX(3000px)';
   }
 
   /**
@@ -118,7 +118,7 @@ export class TileSliderService {
    * @param tile
    */
   public hideTile(tile: HTMLElement) {
-    tile.style.transform = 'translateX(-2000px)';
+    tile.style.transform = 'translateX(-3000px)';
 
     setTimeout(() => {
       this.resetTile(tile);
@@ -131,7 +131,7 @@ export class TileSliderService {
    */
   public resetLine(line: HTMLElement) {
     line.style.transition = 0 + 'ms';
-    line.style.transform = 'translateX(2000px) scaleY(0.1)';
+    line.style.transform = 'translateX(3000px) scaleY(0.1)';
   }
 
   /**
@@ -165,7 +165,7 @@ export class TileSliderService {
 
       setTimeout(() => {
         line.style.transition = this._lineTransition + 'ms ease-out';
-        line.style.transform = 'translateX(-2000px) scaleY(0.1)';
+        line.style.transform = 'translateX(-3000px) scaleY(0.1)';
 
         setTimeout(() => {
           this.resetLine(line);
