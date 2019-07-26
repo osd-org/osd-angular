@@ -19,6 +19,19 @@ export class ListComponent implements OnInit, OnDestroy {
   private _currentPage: number = 1;
   private _maxPage: number = null;
 
+  private _pagination: any = {
+    prevPage: null,
+    nextPage: null,
+    totalPages: null,
+    from: null,
+    to: null,
+    total: null
+  }
+  private _postsData: any = {
+    per_page: 9,
+    page: 1
+  }
+
   constructor(
     private _blog: BlogService,
     private _header: HeaderService,
@@ -32,20 +45,21 @@ export class ListComponent implements OnInit, OnDestroy {
     this._page.contentUpdate$.pipe(
       untilDestroyed(this)
     ).subscribe(() => {
-      this._blog.getBlogList({per_page: this._perPage}).subscribe( (res: any) => {
-        this._currentPage = 1;
-        this.blogList = res.body;
-        this._compareData(res);
-      });
+      this._getPost();
     });
     this._searchHendler();
   }
 
-  public loadPaginationPage(pageNumber: number) {
-    this._blog.getBlogList({per_page: this._perPage, page: pageNumber}).subscribe( (res: any) => {
+  private _getPost() {
+    this._blog.getBlogList(this._postsData).subscribe( (res: any) => {
       this.blogList = res.body;
-      this._compareData(res);
+      this._configPagination(res.headerParams);
     });
+  }
+
+  public loadPaginationPage(pageNumber: number) {
+    this._postsData.page = pageNumber;
+    this._getPost();
   }
 
   private _searchHendler() {
@@ -62,11 +76,8 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   public loadMore() {
-    this._currentPage++;
-    this._blog.getBlogList({per_page: this._perPage, page: this._currentPage}).subscribe( (res: any) => {
-      this.blogList = this.blogList.concat(res.body)
-      this._compareData(res);
-    });
+    this._postsData.page++;
+    this._getPost();
   }
 
   private _compareData(res) {
@@ -83,6 +94,14 @@ export class ListComponent implements OnInit, OnDestroy {
     });
   }
 
+  private _configPagination(headers) {
+    this._pagination.total = +headers['total'];
+    this._pagination.totalPages = +headers['pages'];
+    this._pagination.from = this._pagination.total ? ((this._postsData.page - 1) * this._postsData.per_page) + 1 : ' ';
+    this._pagination.to = (this._postsData.page * this._postsData.per_page) > this._pagination.total ? this._pagination.total : this._postsData.page * this._postsData.per_page;
+    this._pagination.prevPage = this._postsData.page > 1 ? this._postsData.page : '';
+    this._pagination.nextPage = this._postsData.page < this._pagination.totalPages ? this._postsData.page + 1 : '';
+}
 
   ngOnDestroy() {
 
