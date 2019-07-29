@@ -17,6 +17,7 @@ export class ContactsComponent implements OnInit, OnDestroy {
   public mapStyle = mapStyle;
   public pageContent: any;
   public emailSuccess: boolean = null;
+  public sending: boolean = null;
 
   public zoom = 15;
 
@@ -76,10 +77,12 @@ export class ContactsComponent implements OnInit, OnDestroy {
       data['contact']['direction2'] = 'МАРКЕТИНГОВЫЕ КОММУНИКАЦИИ 360°, PR И МЕРОПРИЯТИЯ.';
     }
 
+    this.sending = true;
     this._api.post('/contact/send', data).subscribe(res => {
       this.emailSuccess = true;
       setTimeout(() => {
         this.emailSuccess = false;
+        this.sending = false;
       }, 2000);
       this.form.reset();
       }, error => {

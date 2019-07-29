@@ -113,6 +113,7 @@
             padding: 0;
             margin: 0;
             @include flex(row, space-between, center);
+            position: relative;
           }
           &__item {
             list-style: none;
@@ -125,9 +126,13 @@
             margin: 0;
             border-radius: 50%;
             @include flex(row, center, center);
+            z-index: 2;
             cursor: pointer;
             &.active {
               background-color: #8001f9;
+              position: absolute;
+              z-index: 1;
+              transition: 0.5s;
             }
           }
         }

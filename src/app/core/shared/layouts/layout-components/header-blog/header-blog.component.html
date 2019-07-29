@@ -30,13 +30,13 @@
             </div>
 
             <div class="langs">
-              <ul class="langs__list">
+              <ul class="langs__list" *ngIf="langList?.length">
                 <li
                 class="langs__item"
-                [ngClass]="{'active': item === LANG}"
                 *ngFor="let item of langList"
                 (click)="changeLanguage(item)"
                 >{{ item }}</li>
+                <li class="langs__item active" [ngStyle]="{'left': langAnimation()}"></li>
               </ul>
             </div>
 

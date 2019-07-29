@@ -27,7 +27,8 @@
           </div>
         </div>
         <div class="actions">
-          <button class="btn send" *ngIf="!emailSuccess" type="submit">{{pageContent?.acf?.form_fields?.button_text}} <i class="icon-arrow"></i></button>
+          <button class="btn send" *ngIf="!emailSuccess && !sending" type="submit">{{pageContent?.acf?.form_fields?.button_text}} <i class="icon-arrow"></i></button>
+          <button class="btn sending" *ngIf="sending && !emailSuccess" disabled type="button"><img src="/assets/img/content/button_loader.gif" alt=""></button>
           <button class="btn ok" *ngIf="emailSuccess" type="button">{{'Сообщение отправлено' | translate}}</button>
         </div>
       </form>

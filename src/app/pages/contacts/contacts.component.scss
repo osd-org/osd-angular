@@ -117,6 +117,18 @@
   background-color: #13c73a;
 }
 
+.sending {
+  display: inline-block;
+  color: #fff;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  transition: 0.4s;
+  cursor: default;
+  img {
+    height: 30px;
+  }
+}
+
 .contact-info {
     display: flex;
     margin: 30px 0;

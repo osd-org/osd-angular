@@ -48,4 +48,25 @@ export class HeaderComponent implements OnInit {
   public changeLanguage(lang: string) {
     this._translate.changeLang(lang);
   }
+
+  public langAnimation() {
+    let position;
+    switch (this.LANG) {
+      case 'ru':
+        position = 0 + '%';
+        break;
+
+      case 'ua':
+        position = 'calc(100% - 39px)';
+        break;
+
+      case 'en':
+        position = 'calc(50% - 19px)';
+        break;
+
+      default:
+        break;
+    }
+    return position;
+  }
 }
