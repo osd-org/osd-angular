@@ -12,6 +12,8 @@ import { ApiService } from '@osd-services/api.service';
 })
 export class HeaderComponent implements OnInit {
 
+  public logoImg = '/assets/img/content/osd_logo_no-animation.png';
+
   constructor(
     private _translate: TranslationService,
     public sidebar: SidebarService,

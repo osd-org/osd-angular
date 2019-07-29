@@ -13,6 +13,7 @@ import { fromEvent } from 'rxjs';
 })
 export class HeaderBlogComponent implements OnInit {
 
+  public logoImg = '/assets/img/content/osd_logo_no-animation.png';
   @ViewChild('searchInput') searchInput;
   @ViewChild('searchInputMob') searchInputMob;
   constructor(

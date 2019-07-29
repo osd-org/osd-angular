@@ -72,6 +72,7 @@ export class ListComponent implements OnInit, OnDestroy {
         this._getPost();
       } else {
         this._resetSearch();
+        this._getPost();
       }
     })
   }
@@ -85,7 +86,6 @@ export class ListComponent implements OnInit, OnDestroy {
     delete this._postsData['search'];
     this._postsData.per_page = 9;
     this._postsData.page = 1;
-    this._getPost();
   }
 
   private _configPagination(headers) {

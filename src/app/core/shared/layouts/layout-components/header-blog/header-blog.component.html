@@ -1,17 +1,18 @@
 <div class="header-container" [ngClass]="{menu: sidebar.isOpen}">
   <div class="container">
       <header class="header">
-          <a href="/" class="logo">
-            <div class="logo__part--no-animation">
-              <img src="/assets/img/content/osd_logo_no-animation.png" alt="Logo">
-            </div>
-            <div class="logo__part--animation">
-                <img src="/assets/img/content/osd_logo_animation.gif" alt="Logo">
-            </div>
-            <div class="logo__part--mobile">
-                <img src="/assets/svg/fill_1.svg" alt="Logo">
-            </div>
-          </a>
+        <a href="/" class="logo">
+          <div
+          class="logo__part--no-animation"
+          (mouseover)="logoImg = '/assets/img/content/osd_logo_animation.gif'"
+          (mouseout)="logoImg = '/assets/img/content/osd_logo_no-animation.png'"
+          >
+              <img [src]="logoImg" alt="Logo">
+          </div>
+          <div class="logo__part--mobile">
+              <img src="/assets/svg/fill_1.svg" alt="Logo">
+          </div>
+        </a>
 
           <div class="page-title">
             {{ header.title }}

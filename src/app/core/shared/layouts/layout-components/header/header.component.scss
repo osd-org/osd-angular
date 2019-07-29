@@ -49,7 +49,7 @@
         &--no-animation {
           display: block;
         }
-        &--animation, &--mobile {
+        &--mobile {
           display: none;
         }
       }
@@ -58,24 +58,13 @@
         height: 100%;
       }
 
-      &:hover {
-        .logo__part {
-          &--no-animation {
-            display: none;
-          }
-          &--animation {
-            display: block;
-          }
-        }
-      }
-
       @include media-below($bp-ld) {
         height: 26px;
         &__part {
           &--mobile {
             display: block;
           }
-          &--no-animation, &--animation {
+          &--no-animation {
             display: none;
           }
         }
