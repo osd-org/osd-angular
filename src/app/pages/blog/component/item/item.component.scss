@@ -45,6 +45,9 @@
   color: #000;
   height: $content-height--no-footer--sub-header;
   margin-bottom: 0;
+  @include media-below($bp-sm) {
+    height: $content-height--no-footer--sub-header-mob;
+  }
   .container {
     height: $content-height--no-footer--sub-header;
     width: 100%;
