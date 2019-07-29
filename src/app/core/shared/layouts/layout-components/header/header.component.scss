@@ -46,35 +46,36 @@
       pointer-events: all;
       max-width: 235px;
       &__part {
-        &--left {
-          width: 74px;
+        &--no-animation {
+          display: block;
         }
-        &--right {
-          width: 134px;
+        &--animation, &--mobile {
+          display: none;
         }
-        &--left, &--right  {
-          img {
-            width: 0;
-          }
-        }
-
       }
 
       img {
         height: 100%;
-        transition: 0.5s
       }
+
       &:hover {
-        img {
-          width: 100%;
-          transition: 0.5s
+        .logo__part {
+          &--no-animation {
+            display: none;
+          }
+          &--animation {
+            display: block;
+          }
         }
       }
 
       @include media-below($bp-ld) {
         height: 26px;
         &__part {
-          &--left, &--right  {
+          &--mobile {
+            display: block;
+          }
+          &--no-animation, &--animation {
             display: none;
           }
         }
