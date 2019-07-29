@@ -57,7 +57,7 @@ export class ServicesDbMonetizationComponent implements OnInit, OnDestroy {
   openTab(name: string) {
     const monetizationBlock = this.monetizationBlocks.find(block => block.name === name);
     this.currentTab = name;
-    this._currentTabContent = monetizationBlock.name; // todo: insert content instead name
+    this._currentTabContent = monetizationBlock.desk; // todo: insert content instead name
   }
 
   ngOnDestroy(): void {
