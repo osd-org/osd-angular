@@ -4,6 +4,7 @@
 
 
 .page-top {
+  padding-bottom: 0;
   background-color: #ee8028;
   height: $sub-header-height;
   .container {
@@ -90,7 +91,7 @@
     }
   }
   .page-content {
-    height: auto;
+    overflow-y: scroll;
     margin-bottom: 0;
     .container {
       height: auto;

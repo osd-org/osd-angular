@@ -1,22 +1,7 @@
-<ng-container *ngIf="!device.isMobile()">
-  <div #scrollWrapper class="carousel">
-    <div class="carousel-cell"></div>
-  </div>
 
-  <div class="range-control">
-    <div #bar class="bar" [ngStyle]="{width: currentRangeVal + '%'}"></div>
-    <div class="dots-bar">
-      <div class="dots" *ngFor="let item of dots; let i = index"></div>
-    </div>
-    <input id="inputRange"
-    type="range"
-    min="0"
-    max="100"
-    step="1"
-    (change)="setRange($event)"
-    [value]="currentRangeVal">
-  </div>
-</ng-container>
+<div #renderText class="desktop-text" [innerHTML]="html | sanitizeHtml"></div>
+<div class="range-control">
+  <div class="bar" [ngStyle]="{width: progress + '%'}"></div>
+</div>
 
-
-<div #renderText class="mobile-text" [innerHTML]="html | sanitizeHtml"></div>
+<div class="mobile-text" [innerHTML]="html | sanitizeHtml"></div>

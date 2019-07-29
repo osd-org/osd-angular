@@ -1,59 +1,41 @@
-
-@import url('https://unpkg.com/flickity@2/dist/flickity.min.css');
 @import 'variables';
 @import 'mixins';
 
-.carousel {
+.desktop-text {
   height: 90%;
-  &-cell {
-    width: 100%;
-    height: 100%;
-    margin-right: 10px;
-    background: #fff;
-    border-radius: 5px;
-  }
+  overflow-y: scroll;
+  @include hiddeScrollBar();
+	background:
+		/* Shadow covers */
+		linear-gradient(white 30%, rgba(255,255,255,0)),
+		linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
+
+		/* Shadows */
+		radial-gradient(50% 0, ellipse, rgba(0,0,0,.2), rgba(0,0,0,0)),
+		radial-gradient(50% 100%, ellipse, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+	background:
+		/* Shadow covers */
+		linear-gradient(white 30%, rgba(255,255,255,0)),
+		linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
+
+		/* Shadows */
+		radial-gradient(ellipse at 50% 0, rgba(0,0,0,.2), rgba(0,0,0,0)),
+		radial-gradient(ellipse at 50% 100%, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+    background-repeat: no-repeat;
+    /* background-color: white; */
+    background-size: 100% 40px, 100% 40px, 100% 14px, 100% 30px;
+  background-attachment: local, local, scroll, scroll;
 }
+
+
 
 .range-control {
   position: relative;
   margin-top: 15px;
-}
-
-input[type=range] {
-  display: block;
-  width: 100%;
-  margin: 0;
-  -webkit-appearance: none;
-  outline: none;
-}
-
-input[type=range]::-webkit-slider-runnable-track {
-  position: relative;
-  height: 12px;
-  border: 1px solid #b2b2b2;
-  border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.35);
-  box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.35);
-  z-index: 2;
-}
-
-input[type=range]::-webkit-slider-thumb {
-  position: relative;
-  top: -5px;
-  width: 20px;
-  height: 20px;
-  border: 1px solid #999;
-  -webkit-appearance: none;
-  background-color: #fff;
-  box-shadow: inset 0 -1px 2px 0 rgba(255, 255, 255, 0.7);
-  border-radius: 100%;
-  cursor: pointer;
-  z-index: 2;
-}
-
-input[type=range]:active + output {
-  display: block;
-  transform: translateX(-50%);
+  width: 100%;
+  height: 12px;
+  border-radius: 5px;
 }
 
 .bar {
@@ -64,31 +46,20 @@ input[type=range]:active + output {
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.35);
   z-index: 1;
-}
-
-.dots {
-  width: 10px;
-  height: 10px;
-  margin-top: 1px;
-  border-radius: 12px;
-  background-color: rgba(19, 19, 19, 0.48);
-  &-bar {
-    position: absolute;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
+  transition: 0.5s;
 }
 
 .mobile-text {
-  visibility: hidden;
+  display: none;
 }
 
 
 @include media-below($bp-ld) {
+  .desktop-text {
+    display: none;
+  }
   .mobile-text {
-    visibility: visible;
+    display: block;
   }
   .carousel, .range-control {
     display: none;
