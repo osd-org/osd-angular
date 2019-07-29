@@ -2,7 +2,8 @@
 <app-blog-list-layout>
   <div class="page-content">
     <div class="container">
-      <div class="blog__list">
+
+      <div class="blog__list desktop">
         <div class="blog__item" *ngFor="let item of blogList">
           <div class="blog__item-title"
             [line-truncation]="2"
@@ -13,13 +14,36 @@
           <a class="blog__item-link-icon"  [routerLink]="[item?.slug]"><img src="/assets/svg/arrow.svg" alt=""></a>
         </div>
       </div>
-      <div class="blog__pagination" *ngIf="paginationPages.length > 1">
+
+
+      <!-- mobile -->
+      <div class="blog__list mobile">
+        <div class="blog__item" *ngFor="let item of mobBlogList">
+            <div class="blog__item-title"
+              [line-truncation]="2"
+              [options]='{ellipsis: "..."}' [routerLink]="[item?.slug]">{{item?.acf?.title_prev}}
+            </div>
+            <div class="blog__item-text" [line-truncation]="2"  [options]='{ellipsis: "..."}' >{{item?.acf?.desc_prev}}</div>
+            <div class="blog__item-readmore"><a [routerLink]="[item?.slug]">{{'читать' | translate}} <img src="/assets/svg/arrow.svg" alt=""></a></div>
+            <a class="blog__item-link-icon"  [routerLink]="[item?.slug]"><img src="/assets/svg/arrow.svg" alt=""></a>
+        </div>
+      </div>
+      <!-- mobile -->
+
+      <div class="blog__pagination" *ngIf="pagination?.paginationPages.length > 1">
         <div
           class="blog__pagination-link"
           (click)="loadPaginationPage(i + 1)"
-          *ngFor="let item of paginationPages; let i = index">{{i + 1}}</div>
+          *ngFor="let item of pagination?.paginationPages; let i = index">{{i + 1}}</div>
       </div>
-      <button *ngIf="loadmore" class="blog__loadmore-btn" type="button" (click)="loadMore()">{{'load more' | translate}}</button>
+
+      <ng-container *ngIf="pagination?.nextPage">
+        <button *ngIf="loadmore" class="blog__loadmore-btn" type="button" (click)="loadMore()">{{'ещё' | translate}}</button>
+        <button *ngIf="!loadmore" disabled class="blog__loadmore-btn" type="button">
+          <img src="/assets/img/content/button_loader.gif" alt="">
+        </button>
+      </ng-container>
+
     </div>
   </div>
 </app-blog-list-layout>

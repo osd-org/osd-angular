@@ -13,19 +13,18 @@ import { PageService } from '@osd-services/page.service';
 export class ListComponent implements OnInit, OnDestroy {
 
   public blogList: any[] = [];
-  public paginationPages: any[] = [];
+  public mobBlogList: any[] = [];
+  private _storedMobBlogList: Map<any, any> = new Map<any, any>();
   public loadmore = true;
-  private _perPage: number = 9;
-  private _currentPage: number = 1;
-  private _maxPage: number = null;
 
-  private _pagination: any = {
+  public pagination: any = {
     prevPage: null,
     nextPage: null,
     totalPages: null,
     from: null,
     to: null,
-    total: null
+    total: null,
+    paginationPages: []
   }
   private _postsData: any = {
     per_page: 9,
@@ -51,9 +50,12 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   private _getPost() {
+    this.loadmore = false;
     this._blog.getBlogList(this._postsData).subscribe( (res: any) => {
       this.blogList = res.body;
+      this._createMoblist(res.body);
       this._configPagination(res.headerParams);
+      this.loadmore = true;
     });
   }
 
@@ -65,12 +67,11 @@ export class ListComponent implements OnInit, OnDestroy {
   private _searchHendler() {
     this._header.searchInputEvent$.subscribe(e => {
       if (e) {
-        this._blog.getBlogList({per_page: 100, search: e}).subscribe( (res: any) => {
-          this.blogList = res.body;
-          this._compareData(res);
-        });
+        this._resetSearch();
+        this._postsData['search'] = e;
+        this._getPost();
       } else {
-        this._resetSearch(e);
+        this._resetSearch();
       }
     })
   }
@@ -80,28 +81,31 @@ export class ListComponent implements OnInit, OnDestroy {
     this._getPost();
   }
 
-  private _compareData(res) {
-    this._maxPage = res.headerParams.pages;
-    this.paginationPages = Array(this._maxPage);
-    this._maxPage === this._currentPage ? this.loadmore = false : this.loadmore = true;
-  }
-
-  private _resetSearch(enter: any) {
-    enter ? this.loadmore = false : this.loadmore = true;
-    this._blog.getBlogList({per_page: this._perPage}).subscribe( (res: any) => {
-      this.blogList = res.body;
-      this._compareData(res);
-    });
+  private _resetSearch() {
+    delete this._postsData['search'];
+    this._postsData.per_page = 9;
+    this._postsData.page = 1;
+    this._getPost();
   }
 
   private _configPagination(headers) {
-    this._pagination.total = +headers['total'];
-    this._pagination.totalPages = +headers['pages'];
-    this._pagination.from = this._pagination.total ? ((this._postsData.page - 1) * this._postsData.per_page) + 1 : ' ';
-    this._pagination.to = (this._postsData.page * this._postsData.per_page) > this._pagination.total ? this._pagination.total : this._postsData.page * this._postsData.per_page;
-    this._pagination.prevPage = this._postsData.page > 1 ? this._postsData.page : '';
-    this._pagination.nextPage = this._postsData.page < this._pagination.totalPages ? this._postsData.page + 1 : '';
-}
+    this.pagination.total = +headers['total'];
+    this.pagination.totalPages = +headers['pages'];
+    this.pagination.from = this.pagination.total ? ((this._postsData.page - 1) * this._postsData.per_page) + 1 : ' ';
+    this.pagination.to = (this._postsData.page * this._postsData.per_page) > this.pagination.total ? this.pagination.total : this._postsData.page * this._postsData.per_page;
+    this.pagination.prevPage = this._postsData.page > 1 ? this._postsData.page : '';
+    this.pagination.nextPage = this._postsData.page < this.pagination.totalPages ? this._postsData.page + 1 : '';
+    this.pagination.paginationPages = Array(this.pagination.totalPages);
+  }
+
+  private _createMoblist(res) {
+    res.forEach(e => {
+      if (!this._storedMobBlogList.has(e['id'])) {
+        this.mobBlogList.push(e);
+        this._storedMobBlogList.set(e['id'], e['id']);
+      }
+    });
+  }
 
   ngOnDestroy() {
 

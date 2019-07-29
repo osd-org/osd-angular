@@ -31,4 +31,5 @@ $sub-header-height: 180px;
 $footer-height: 60px;
 $content-height: calc(100vh - #{($header-height + $footer-height)});
 $content-height--no-footer: calc(100vh - #{($header-height)});
+$content-height--no-footer-mob: calc(100vh - #{($header-height-mobile)});
 $content-height--no-footer--sub-header: calc(100vh - #{($header-height + $sub-header-height)});

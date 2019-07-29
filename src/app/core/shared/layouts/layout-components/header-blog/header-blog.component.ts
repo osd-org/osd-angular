@@ -14,6 +14,7 @@ import { fromEvent } from 'rxjs';
 export class HeaderBlogComponent implements OnInit {
 
   @ViewChild('searchInput') searchInput;
+  @ViewChild('searchInputMob') searchInputMob;
   constructor(
     private _translate: TranslationService,
     public sidebar: SidebarService,
@@ -24,6 +25,9 @@ export class HeaderBlogComponent implements OnInit {
   ngOnInit() {
     this._loadLanguages();
     fromEvent(this.searchInput.nativeElement, 'input').pipe(
+      debounceTime(500)
+    ).subscribe((e: any) => this.header.searchInputEvent$.next(e.target.value));
+    fromEvent(this.searchInputMob.nativeElement, 'input').pipe(
       debounceTime(500)
     ).subscribe((e: any) => this.header.searchInputEvent$.next(e.target.value));
   }
