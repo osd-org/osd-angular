@@ -151,6 +151,7 @@
   text-transform: uppercase;
   letter-spacing: 10px;
   transition: 0.3s;
+  cursor: pointer;
 
   @include media-below($bp-ld) {
     @include font(28px);
