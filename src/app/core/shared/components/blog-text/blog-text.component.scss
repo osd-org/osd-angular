@@ -5,26 +5,14 @@
   height: 90%;
   overflow-y: scroll;
   @include hiddeScrollBar();
-	background:
-		/* Shadow covers */
-		linear-gradient(white 30%, rgba(255,255,255,0)),
-		linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
-
-		/* Shadows */
-		radial-gradient(50% 0, ellipse, rgba(0,0,0,.2), rgba(0,0,0,0)),
-		radial-gradient(50% 100%, ellipse, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
-	background:
-		/* Shadow covers */
-		linear-gradient(white 30%, rgba(255,255,255,0)),
-		linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
-
-		/* Shadows */
-		radial-gradient(ellipse at 50% 0, rgba(0,0,0,.2), rgba(0,0,0,0)),
-		radial-gradient(ellipse at 50% 100%, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
-    background-repeat: no-repeat;
-    /* background-color: white; */
-    background-size: 100% 40px, 100% 40px, 100% 14px, 100% 30px;
-  background-attachment: local, local, scroll, scroll;
+  background:
+	linear-gradient(white 30%, hsla(0,0%,100%, 0)),
+	linear-gradient(hsla(0,0%,100%,0) 10px, white 70%) bottom,
+	radial-gradient(at top, rgba(0,0,0,0.2), transparent 70%),
+	radial-gradient(at bottom, rgba(0,0,0,0.4), transparent 70%) bottom;
+  background-repeat:no-repeat;
+  background-size: 100% 20px, 100% 20px, 100% 10px, 100% 14px;
+  background-attachment:local, local, scroll, scroll;
 }
 
 

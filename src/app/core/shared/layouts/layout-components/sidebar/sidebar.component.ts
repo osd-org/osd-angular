@@ -68,12 +68,12 @@ export class SidebarComponent implements OnInit {
     })
   }
 
-  public get linkHeight() : string {
-    if (this._device.isMobile()) {
-      return 'calc(' + 100 / this.menuList.length + '% - ' + 84 / this.menuList.length + 'px)';
-    } else {
-      return 100 / this.menuList.length + '%';
-    }
+  public get linkHeightDesk() : string {
+    return 100 / this.menuList.length + '%';
+  }
+
+  public get linkHeightMob() : string {
+    return 'calc(' + 100 / this.menuList.length + '% - ' + 84 / this.menuList.length + 'px)';
   }
 
 }

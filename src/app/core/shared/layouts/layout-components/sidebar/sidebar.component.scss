@@ -47,7 +47,7 @@
   }
 
 
-  @include media-below($bp-sm) {
+  @include media-below($bp-ld) {
     &__langlist {
       height: 84px;
       @include flex(row, space-between, center);

@@ -1,8 +1,16 @@
 <div class="sidebar" [ngClass]="{open: sidebar.isOpen}"  ClickOutside (clickOutside)="sidebar.close()">
-    <nav class="sidebar__menu">
+    <nav class="sidebar__menu" *appShellMedia="{type: 'below', width: 1080}">
+        <div
+        *ngFor="let item of menuList; let i = index"
+        class="sidebar__menu-item" [ngStyle]="{'background-color': '#' + item?.classes[0], 'height': linkHeightDesk, 'transitionDelay': i * 100 + 'ms'}">
+         <a [routerLink]="[ '/' + LANG, item?.url]" (click)="sidebar.close()" class="link">{{item?.name}}</a>
+      </div>
+    </nav>
+
+    <nav class="sidebar__menu" *appShellMedia="{type: 'above', width: 1080}">
       <div
       *ngFor="let item of menuList; let i = index"
-      class="sidebar__menu-item" [ngStyle]="{'background-color': '#' + item?.classes[0], 'height': linkHeight, 'transitionDelay': i * 100 + 'ms'}">
+      class="sidebar__menu-item" [ngStyle]="{'background-color': '#' + item?.classes[0], 'height': linkHeightMob, 'transitionDelay': i * 100 + 'ms'}">
        <a [routerLink]="[ '/' + LANG, item?.url]" (click)="sidebar.close()" class="link">{{item?.name}}</a>
     </div>
     <div class="sidebar__langlist">

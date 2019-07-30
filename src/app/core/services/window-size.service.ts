@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable, fromEvent} from 'rxjs';
-import { BehaviorSubject } from 'rxjs';
+import { fromEvent, BehaviorSubject } from 'rxjs';
 import { PlatformService } from './universal/platform.service';
 import { debounceTime, map } from 'rxjs/operators';
 
