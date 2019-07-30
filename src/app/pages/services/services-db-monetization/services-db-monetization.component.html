@@ -1,5 +1,5 @@
 <div class="service-container">
-	<div *appShellNoMobile>
+	<div *appShellMedia="{type: 'below', width: 1080}">
 		<div class="service-content">
 			<h1>{{pageContent?.title?.rendered}}</h1>
 
@@ -28,7 +28,7 @@
 		</div>
 	</div>
 
-	<div *appShellMobile class="service-content">
+	<div *appShellMedia="{type: 'above', width: 1080}" class="service-content">
 		<h1>{{pageContent?.title?.rendered}}</h1>
 
 		<app-rush-slider *ngIf="pageContent" [config]="sliderConfig">
