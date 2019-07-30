@@ -1,8 +1,0 @@
-<div #scrollWrapper class="scrolling-wrapper-flexbox">
-
-</div>
-<div class="range-control">
-    <input id="inputRange" type="range" min="0" max="{{maxRangeVal}}" step="100" (input)="setRange($event)" [value]="currentRangeVal" data-thumbwidth="20">
-</div>
-
-<div class="mobile-text" [innerHTML]="html | sanitizeHtml"></div>
