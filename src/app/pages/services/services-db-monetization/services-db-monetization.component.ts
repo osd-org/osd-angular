@@ -1,9 +1,10 @@
-import { BackgroundService, BackgroundColor } from './../../../core/shared/layouts/layout-components/background/background.service';
+import { BackgroundService, BackgroundColor } from '../../../core/shared/layouts/layout-components/background/background.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PageService, PageType } from '@osd-services/page.service';
 import { SeoService } from '@osd-services/seo.service';
 import { TranslationService } from 'app/core/shared/translation/translation.service';
 import { untilDestroyed } from '@osd-rxjs/operators';
+import {RushSliderConfig} from '../../../core/shared/components/rush-slider/rush-slider-config';
 
 @Component({
   selector: 'app-services-db-monetization',
@@ -12,8 +13,11 @@ import { untilDestroyed } from '@osd-rxjs/operators';
 })
 export class ServicesDbMonetizationComponent implements OnInit, OnDestroy {
 
+  public sliderConfig: Map<number, RushSliderConfig> = new Map<number, RushSliderConfig>([[9999, {}]]);
+
   public orderBtnColor = BackgroundColor.BLUE;
   public pageContent: PageType;
+  public currentTab: string;
 
   public monetizationBlocks: Array<any>;
 
@@ -37,7 +41,7 @@ export class ServicesDbMonetizationComponent implements OnInit, OnDestroy {
         this.monetizationBlocks = e.acf.monetization_list.monetization_block;
         this.openTab(this.monetizationBlocks[0].name);
       })
-    })
+    });
     this._background.changeColor(BackgroundColor.BLUE);
   }
 
@@ -52,7 +56,8 @@ export class ServicesDbMonetizationComponent implements OnInit, OnDestroy {
 
   openTab(name: string) {
     const monetizationBlock = this.monetizationBlocks.find(block => block.name === name);
-    this._currentTabContent = monetizationBlock.name; // todo: insert content instead name
+    this.currentTab = name;
+    this._currentTabContent = monetizationBlock.desk; // todo: insert content instead name
   }
 
   ngOnDestroy(): void {

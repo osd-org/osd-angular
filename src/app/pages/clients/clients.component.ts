@@ -1,12 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { PlatformService } from './../../core/services/universal/platform.service';
-import { HeaderService } from './../../core/shared/layouts/layout-components/header/header.service';
-import { BackgroundService, BackgroundColor } from './../../core/shared/layouts/layout-components/background/background.service';
+import { PlatformService } from '@osd-services/universal/platform.service';
+import { HeaderService } from '../../core/shared/layouts/layout-components/header/header.service';
+import { BackgroundService, BackgroundColor } from '../../core/shared/layouts/layout-components/background/background.service';
 import { PageService, PageType } from '@osd-services/page.service';
 import { SeoService } from '@osd-services/seo.service';
 import { TranslationService } from 'app/core/shared/translation/translation.service';
 import { ApiService } from '@osd-services/api.service';
 import { untilDestroyed } from '@osd-rxjs/operators';
+import {RushSliderService} from '../../core/shared/components/rush-slider/rush-slider.service';
+import {RushSliderConfig} from '../../core/shared/components/rush-slider/rush-slider-config';
 
 @Component({
   selector: 'app-clients',
@@ -15,15 +17,12 @@ import { untilDestroyed } from '@osd-rxjs/operators';
 })
 export class ClientsComponent implements OnInit, OnDestroy {
 
-  private _testimonialsList;
-  private _track: HTMLElement;
-
-  private _testimonialWidth: number;
-
-  public activeSlide = 0;
+  public sliderConfig: Map<number, RushSliderConfig> = new Map<number, RushSliderConfig>([[9999, {}]]);
   public pageContent: PageType;
   public pagination: any[];
   public clientImgList: any[];
+
+  public slider: RushSliderService;
 
   constructor(
     private _background: BackgroundService,
@@ -51,29 +50,8 @@ export class ClientsComponent implements OnInit, OnDestroy {
     this._loadClientList();
   }
 
-  initTestimonialsSlider() {
-    if (this._platform.isBrowser) {
-      this._testimonialsList = document.querySelectorAll('.js-testimonial');
-      this._testimonialWidth = this._testimonialsList[0].scrollWidth;
-      this._track = document.querySelector('.js-track');
-    }
-  }
-
-  goTo(testimonialPosition: number) {
-    this._track.style.transform = `translateX(-${testimonialPosition * this._testimonialWidth}px)`;
-    this.activeSlide = testimonialPosition;
-  }
-
-  next() {
-    if (this.activeSlide + 1 < this._testimonialsList.length) {
-      this.goTo(this.activeSlide + 1);
-    }
-  }
-
-  prev() {
-    if (this.activeSlide - 1 >= 0) {
-      this.goTo(this.activeSlide - 1);
-    }
+  sliderInit(slider: RushSliderService) {
+    this.slider = slider;
   }
 
   private _loadClientList() {

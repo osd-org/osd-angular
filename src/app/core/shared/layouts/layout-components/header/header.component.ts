@@ -12,6 +12,8 @@ import { ApiService } from '@osd-services/api.service';
 })
 export class HeaderComponent implements OnInit {
 
+  public logoImg = '/assets/img/content/osd_logo_no-animation.png';
+
   constructor(
     private _translate: TranslationService,
     public sidebar: SidebarService,
@@ -45,5 +47,26 @@ export class HeaderComponent implements OnInit {
    */
   public changeLanguage(lang: string) {
     this._translate.changeLang(lang);
+  }
+
+  public langAnimation() {
+    let position;
+    switch (this.LANG) {
+      case 'ru':
+        position = 0 + '%';
+        break;
+
+      case 'ua':
+        position = 'calc(100% - 39px)';
+        break;
+
+      case 'en':
+        position = 'calc(50% - 19px)';
+        break;
+
+      default:
+        break;
+    }
+    return position;
   }
 }

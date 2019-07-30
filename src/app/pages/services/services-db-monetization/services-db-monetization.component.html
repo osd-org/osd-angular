@@ -1,26 +1,56 @@
 <div class="service-container">
-  <div *appShellNoMobile>
-    <div class="service-content">
-      <h1>{{pageContent?.title?.rendered}}</h1>
-  
-      <div class="monetization_list">
-        <div
-        (click)="openTab(item.name)"
-        class="monetization_item"
-        *ngFor="let item of pageContent?.acf?.monetization_list?.monetization_block"
-        >
-        <div class="monetization_item-name" [ngStyle]="{color: item?.fill >= 70 ? '#fff' : item?.color}">{{item?.name}}</div>
-        <div class="monetization_item-background" [ngStyle]="{background: item?.color, height: item?.fill + '%'}"></div>
-      </div>
-      </div>
-  
-      <ng-container>
-        <div class="text" [innerHTML]="currentTabContent | sanitizeHtml"></div>
-      </ng-container>
-  
-    </div>
-    <div class="order-btn-container">
-      <a [routerLink]="['/', LANG,'contact']" class="order-btn" [style.backgroundColor]="orderBtnColor">{{'Сделать заказ' | translate}} <i class="icon-arrow"></i></a>
-    </div>
-  </div>
+	<div *appShellNoMobile>
+		<div class="service-content">
+			<h1>{{pageContent?.title?.rendered}}</h1>
+
+			<div class="monetization_list">
+				<div
+								(click)="openTab(item.name)"
+								class="monetization_item"
+								[ngClass]="{active: item.name === currentTab}"
+								*ngFor="let item of pageContent?.acf?.monetization_list?.monetization_block"
+				>
+					<div class="monetization_item-name" [ngStyle]="{color: item?.fill >= 70 ? '#fff' : item?.color}">
+						{{item?.name}}
+					</div>
+					<div class="monetization_item-background"
+					     [ngStyle]="{background: item?.color, height: item?.fill + '%'}"></div>
+				</div>
+			</div>
+
+			<ng-container>
+				<div class="text" [innerHTML]="currentTabContent | sanitizeHtml"></div>
+			</ng-container>
+
+		</div>
+		<div class="order-btn-container">
+			<a [routerLink]="['/', LANG,'contact']" class="order-btn" [style.backgroundColor]="orderBtnColor">{{'Сделать заказ' | translate}} <i class="icon-arrow"></i></a>
+		</div>
+	</div>
+
+	<div *appShellMobile class="service-content">
+		<h1>{{pageContent?.title?.rendered}}</h1>
+
+		<app-rush-slider *ngIf="pageContent" [config]="sliderConfig">
+			<app-rush-slide *ngFor="let item of pageContent?.acf?.monetization_list?.monetization_block">
+				<div class="monetization_list">
+					<div class="monetization_item mobile" >
+						<div class="monetization_item-name" [ngStyle]="{color: item?.fill >= 70 ? '#fff' : item?.color}">
+							{{item?.name}}
+						</div>
+						<div class="monetization_item-background"
+						     [ngStyle]="{background: item?.color, height: item?.fill + '%'}"></div>
+					</div>
+				</div>
+
+				<ng-container>
+					<div class="text" [innerHTML]="item?.desk | sanitizeHtml"></div>
+				</ng-container>
+			</app-rush-slide>
+		</app-rush-slider>
+
+		<div class="order-btn-container">
+			<a [routerLink]="['/', LANG,'contact']" class="order-btn" [style.backgroundColor]="orderBtnColor">{{'Сделать заказ' | translate}} <i class="icon-arrow"></i></a>
+		</div>
+	</div>
 </div>
