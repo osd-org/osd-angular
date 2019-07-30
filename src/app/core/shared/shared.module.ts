@@ -22,7 +22,7 @@ import { LineTruncationLibModule } from 'ngx-line-truncation';
     FormsModule,
     ComponentsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAkGvTCXRIlnH-acZFRCBdHVITsDho5CVw' // todo: Test Api Key | old AIzaSyCCgsoz9cifBsT4D5gYGvYAWt8bgstA6nQ
+      apiKey: 'AIzaSyC-7bhBCSgMmaivGIg9j0Dpfu5f2zr4J1A' // todo: Test Api Key | old AIzaSyCCgsoz9cifBsT4D5gYGvYAWt8bgstA6nQ
     })
   ],
   exports: [
