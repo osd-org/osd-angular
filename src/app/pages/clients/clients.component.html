@@ -1,29 +1,31 @@
 <app-page-layout>
-  <div class="container">
-    <h1 class="title" [innerHTML]="pageContent?.content?.rendered"></h1>
+  <div class="page-content">
+    <div class="container">
+      <h1 class="title" [innerHTML]="pageContent?.content?.rendered"></h1>
 
-    <div class="testimonials-container" *ngIf="pageContent?.acf?.reviews">
-      <div class="slider-nav prev" (click)="slider.prevSlide()"><i class="icon-arrow"></i></div>
-      <div class="slider-nav next" (click)="slider.nextSlide()"><i class="icon-arrow"></i></div>
-      <div class="testimonials">
-        <app-rush-slider class="testimonials-track" (init)="sliderInit($event)" [config]="sliderConfig">
+      <div class="testimonials-container" *ngIf="pageContent?.acf?.reviews">
+        <div class="slider-nav prev" (click)="slider.prevSlide()"><i class="icon-arrow"></i></div>
+        <div class="slider-nav next" (click)="slider.nextSlide()"><i class="icon-arrow"></i></div>
+        <div class="testimonials">
+          <app-rush-slider class="testimonials-track" (init)="sliderInit($event)" [config]="sliderConfig">
 
-          <app-rush-slide class="testimonial" *ngFor="let item of pageContent?.acf?.reviews; let last = last;">
-            <img class="testimonial__quote" src="/assets/svg/quote.svg" alt="">
-            <p class="testimonial__text">{{item?.review}}</p>
-            <strong class="testimonial__author">{{item?.name}}</strong>
-            <span class="testimonial__author-position">{{item?.position}}</span>
-          </app-rush-slide>
+            <app-rush-slide class="testimonial" *ngFor="let item of pageContent?.acf?.reviews; let last = last;">
+              <img class="testimonial__quote" src="/assets/svg/quote.svg" alt="">
+              <p class="testimonial__text">{{item?.review}}</p>
+              <strong class="testimonial__author">{{item?.name}}</strong>
+              <span class="testimonial__author-position">{{item?.position}}</span>
+            </app-rush-slide>
 
-        </app-rush-slider>
+          </app-rush-slider>
+        </div>
+        <div class="pagination">
+          <span class="pagination__link" *ngFor="let slide of pagination; let i = index;" (click)="slider.goToSlide(i)" [ngClass]="{active: i == slider?.currentSlide}">{{ i + 1 }}</span>
+        </div>
       </div>
-      <div class="pagination">
-        <span class="pagination__link" *ngFor="let slide of pagination; let i = index;" (click)="slider.goToSlide(i)" [ngClass]="{active: i == slider?.currentSlide}">{{ i + 1 }}</span>
-      </div>
-    </div>
 
-    <div class="brands-container">
-      <img class="brand-item" [src]="item?.data?.img?.url" [alt]="item?.data?.img?.alt" *ngFor="let item of clientImgList">
+      <div class="brands-container">
+        <img class="brand-item" [src]="item?.data?.img?.url" [alt]="item?.data?.img?.alt" *ngFor="let item of clientImgList">
+      </div>
     </div>
   </div>
 </app-page-layout>

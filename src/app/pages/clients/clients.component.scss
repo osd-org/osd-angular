@@ -1,9 +1,29 @@
 @import "variables";
 @import "mixins";
 
+
+.page-content {
+  height: $content-height--no-footer;
+  margin-bottom: 0;
+  overflow: auto;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  @include media-below($bp-sm) {
+    height: $content-height--no-footer-mob;
+    .container {
+      display: block;
+    }
+  }
+}
+
 .title {
     @include font(24px, 400);
-    margin: 30px 0 20px 0;
+    margin: 20px 0 20px 0;
 
     @include media-below($bp-ld) {
         padding: 0 20px;
@@ -15,13 +35,16 @@
 .testimonials-container {
     background-color: #fff;
     box-sizing: border-box;
-    padding: 40px 150px 20px 150px;
+    padding: 70px 150px 20px 150px;
     margin-bottom: 20px;
     color: #000;
     position: relative;
+    height: 40%;
+    max-height: 450px;
 
     @include media-below($bp-ld) {
-        padding: 20px 20px 35px 20px;
+      height: auto;
+      padding: 20px 20px 35px 20px;
     }
 }
 
@@ -74,12 +97,15 @@
 }
 
 .brands-container {
-    text-align: center;
-
-    .brand-item {
-        height: 50px;
-        margin: 10px;
-    }
+  text-align: center;
+  display: inline-flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  .brand-item {
+    height: 50px;
+    margin: 10px 4.7%;
+  }
 }
 
 .pagination {
