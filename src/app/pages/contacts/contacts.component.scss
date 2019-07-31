@@ -10,22 +10,35 @@
     top: 0;
 
     @include media-below($bp-ld) {
-        position: static;
+        position: absolute;
+        bottom: -30px;
+        top: unset;
         height: 320px;
     }
 }
 
-.content-container {
+.page-content {
+  height: $content-height--no-footer;
+  margin-bottom: 0;
+  overflow: auto;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     position: relative;
     z-index: 2;
     pointer-events: none;
-    overflow: auto;
-    margin: 0 60px;
+  }
 
-    @include media-below($bp-ld) {
-        margin: 0;
-        position: static;
+  @include media-below($bp-sm) {
+    height: $content-height--no-footer-mob;
+    .container {
+      display: block;
+      position: static;
+      pointer-events: initial;
     }
+  }
 }
 
 .contact-form {
@@ -134,11 +147,12 @@
     margin: 30px 0;
 
     @include media-below($bp-ld) {
-        position: absolute;
+        position: relative;
         box-sizing: border-box;
         padding: 50px 10px 0 10px;
         width: 100%;
         z-index: 99;
+        height: 260px;
     }
 
     .subtitle {
@@ -187,7 +201,9 @@
             padding-left: 10px;
             box-sizing: border-box;
             position: absolute;
-            bottom: 0;
+            bottom: 125px;
+            right: 0;
+            max-width: 130px;
         }
     }
 
@@ -203,7 +219,7 @@
 
         @include media-below($bp-ld) {
             top: 100%;
-            margin-top: 60px;
+            margin-top: -50px;
             width: 42px;
             height: 42px;
         }

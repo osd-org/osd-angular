@@ -1,7 +1,7 @@
 <app-page-layout>
 
-  <div class="container">
-    <div class="content-container">
+  <div class="page-content">
+    <div class="container">
       <form
       [formGroup]="form"
       (ngSubmit)="sendEmail()"
@@ -66,9 +66,14 @@
           <div class="map-control minus" (click)="zoomOut()"></div>
           <img src="/assets/svg/logo.svg" class="logo" alt="">
         </div>
+        <agm-map *appShellMedia="{type: 'above', width: 1080}" class="map" [latitude]="50.45390" [longitude]="30.5190" [zoom]="zoom" [styles]="mapStyle" [disableDefaultUI]="true" [zoomControl]="false">
+          <agm-marker [iconUrl]="'/assets/svg/marker-mob.svg'" [latitude]="50.45466" [longitude]="30.5238"></agm-marker>
+        </agm-map>
       </div>
     </div>
   </div>
 
-  <agm-map class="map" [latitude]="50.45466" [longitude]="30.5238" [zoom]="zoom" [styles]="mapStyle" [disableDefaultUI]="true" [zoomControl]="false"></agm-map>
+  <agm-map *appShellMedia="{type: 'below', width: 1080}" class="map" [latitude]="50.46180" [longitude]="30.5050" [zoom]="zoom" [styles]="mapStyle" [disableDefaultUI]="true" [zoomControl]="false">
+    <agm-marker [iconUrl]="'/assets/svg/marker.svg'" [latitude]="50.45466" [longitude]="30.5238"></agm-marker>
+  </agm-map>
 </app-page-layout>
