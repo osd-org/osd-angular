@@ -23,6 +23,7 @@ export class RushSliderService {
     itemsCount: 1,
     spaceAround: 0,
     shiftLeft: 0,
+    ignoreSwipe: false
   };
 
   /**
@@ -164,6 +165,7 @@ export class RushSliderService {
     }
 
     this._enableTransition();
+
 
     /**
      * Time for transition enabling
@@ -406,10 +408,14 @@ export class RushSliderService {
       takeUntil(this._alive$),
       debounceTime(200)
     ).subscribe(e => {
+      const currentSlideBeforeResize: number = this.currentSlide;
       this._resolveConfig();
       this._removeAdditionalSlides();
       this._disableTransition();
       this._buildSlider();
+
+      this._normalizeTrackPosition(currentSlideBeforeResize);
+      this._currentSlide = currentSlideBeforeResize;
     });
   }
 
@@ -419,6 +425,8 @@ export class RushSliderService {
    * @private
    */
   private _touchStartHandle() {
+    if (this._config.ignoreSwipe) return;
+
     merge(
       fromEvent(this._track, 'touchstart'),
       fromEvent(this._track, 'mousedown')
@@ -439,6 +447,8 @@ export class RushSliderService {
    * @private
    */
   private _touchEndHandle() {
+    if (this._config.ignoreSwipe) return;
+
     const minDistanceToSlide = 50;
 
     merge(
@@ -473,6 +483,8 @@ export class RushSliderService {
    * @private
    */
   private _touchMoveHandler() {
+    if (this._config.ignoreSwipe) return;
+
     merge(
       fromEvent(this._track, 'touchmove'),
       fromEvent(this._track, 'mousemove')
