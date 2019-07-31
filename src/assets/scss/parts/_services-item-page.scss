@@ -1,10 +1,13 @@
 
 .service-container {
     width: 100%;
-    height: calc(100vh - 87px);
     background-color: #fff;
     overflow: auto;
     color: #000;
+    height: $content-height--no-footer;
+    @include media-below($bp-sm) {
+      height: $content-height--no-footer-mob;
+    }
 }
 
 .service-content {

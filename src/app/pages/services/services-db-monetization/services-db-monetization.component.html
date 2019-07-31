@@ -29,13 +29,13 @@
 	</div>
 
 	<div *appShellMedia="{type: 'above', width: 1080}" class="service-content">
-		<h1>{{pageContent?.title?.rendered}}</h1>
 
 		<div class="slider-container">
 			<app-rush-slider *ngIf="pageContent" (init)="sliderInit($event)" [config]="sliderConfig">
 				<app-rush-slide *ngFor="let item of pageContent?.acf?.monetization_list?.monetization_block">
 					<div class="monetization_list">
 						<div class="monetization_item mobile" >
+                <h1>{{pageContent?.title?.rendered}}</h1>
 							<div class="monetization_item-name" [ngStyle]="{color: item?.fill >= 70 ? '#fff' : item?.color}">
 								{{item?.name}}
 							</div>
@@ -49,7 +49,7 @@
 					</ng-container>
 
 					<div class="order-btn-container">
-						<a [routerLink]="['/', LANG,'contact']" class="order-btn" [style.backgroundColor]="orderBtnColor">{{'Сделать заказ' | translate}} <i class="icon-arrow"></i></a>
+						<a [routerLink]="['/', LANG,'contact']" class="order-btn" [style.backgroundColor]="item?.color">{{'Сделать заказ' | translate}} <i class="icon-arrow"></i></a>
 					</div>
 				</app-rush-slide>
 			</app-rush-slider>

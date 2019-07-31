@@ -5,12 +5,106 @@
 h1 {
   @include font(42px, 600);
   text-transform: uppercase;
+
+  @include media-below($bp-ld) {
+    @include font(14px, 100);
+    position: absolute;
+    top: 0;
+    width: 100%;
+    color: #fff;
+    letter-spacing: 3px;
+    z-index: 2;
+    padding: 0 30px;
+    box-sizing: border-box;
+  }
+}
+.monetization {
+  &_list {
+    @include flex(row, space-between, center);
+    width: 100%;
+  }
+  &_item {
+    @include flex(row, center, center);
+    width: 170px;
+    height: 170px;
+    position: relative;
+    cursor: pointer;
+
+    @include media-below($bp-ld) {
+      width: 100%;
+      height: 400px;
+      padding: 0 30px;
+      box-sizing: border-box;
+    }
+
+    &:hover,
+    &.active,
+    &.mobile {
+      .monetization_item-background {
+        height: 100% !important;
+      }
+
+      .monetization_item-name {
+        color: #fff !important;
+      }
+    }
+
+    &-background {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      transition: 0.3s;
+    }
+    &-name {
+      text-align: center;
+      z-index: 1;
+      @include font(14px, 800);
+      line-height: 14px;
+      text-transform: uppercase;
+      transition: 0.3s;
+
+      @include media-below($bp-ld) {
+        @include font(22px, 800);
+        line-height: 1.5;
+      }
+    }
+  }
+}
+
+.slider-container {
+  position: relative;
+
+  .slider-nav {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(#000, 0.4);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 330px;
+    left: calc(50% - 25px);
+
+    i {
+      display: flex;
+    }
+
+    &.prev {
+      transform: rotateZ(-180deg) translateX(40px);
+      margin-right: 100px;
+    }
+
+    &.next {
+      transform: translateX(40px);
+    }
+  }
 }
 
 @include media-below($bp-ld) {
   .service {
     &-container {
-      height: auto;
       .order-btn-container {
         margin: 20px;
         a {
@@ -20,12 +114,16 @@ h1 {
     }
     &-content {
       width: 100%;
-      h1 {
-        font-size: 16px;
-      }
+
       .text {
         padding: 20px 20px 10px 20px;
+      }
+      .monetization {
+        &_list {
+          @include flex(column, center, center);
+        }
       }
     }
   }
 }
+

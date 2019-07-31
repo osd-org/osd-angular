@@ -12,6 +12,7 @@
         display: block;
         height: auto;
         margin-top: 0;
+        height: $content-height--no-footer-mob;
     }
 
     &:before {
@@ -32,7 +33,7 @@
 
     @include media-below($bp-ld) {
         width: 100%;
-        height: auto;
+        height: 50%;
         padding-bottom: 40px;
         box-sizing: border-box;
     }
