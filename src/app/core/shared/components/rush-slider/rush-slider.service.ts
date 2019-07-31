@@ -158,7 +158,6 @@ export class RushSliderService {
    * Show provided slide
    *
    * @param slidePosition
-   * @param useTransition
    */
   public goToSlide(slidePosition: number) {
     if (!this._allowControl) {
