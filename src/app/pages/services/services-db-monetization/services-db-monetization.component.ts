@@ -1,10 +1,11 @@
-import { BackgroundService, BackgroundColor } from '../../../core/shared/layouts/layout-components/background/background.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { PageService, PageType } from '@osd-services/page.service';
-import { SeoService } from '@osd-services/seo.service';
-import { TranslationService } from 'app/core/shared/translation/translation.service';
-import { untilDestroyed } from '@osd-rxjs/operators';
+import {BackgroundService, BackgroundColor} from '../../../core/shared/layouts/layout-components/background/background.service';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {PageService, PageType} from '@osd-services/page.service';
+import {SeoService} from '@osd-services/seo.service';
+import {TranslationService} from 'app/core/shared/translation/translation.service';
+import {untilDestroyed} from '@osd-rxjs/operators';
 import {RushSliderConfig} from '../../../core/shared/components/rush-slider/rush-slider-config';
+import {RushSliderService} from '../../../core/shared/components/rush-slider/rush-slider.service';
 
 @Component({
   selector: 'app-services-db-monetization',
@@ -13,11 +14,18 @@ import {RushSliderConfig} from '../../../core/shared/components/rush-slider/rush
 })
 export class ServicesDbMonetizationComponent implements OnInit, OnDestroy {
 
-  public sliderConfig: Map<number, RushSliderConfig> = new Map<number, RushSliderConfig>([[9999, {}]]);
+  public sliderConfig: Map<number, RushSliderConfig> = new Map<number, RushSliderConfig>([
+    [9999, {
+      ignoreSwipe: true
+    }
+    ]
+  ]);
 
   public orderBtnColor = BackgroundColor.BLUE;
   public pageContent: PageType;
   public currentTab: string;
+
+  public slider: RushSliderService;
 
   public monetizationBlocks: Array<any>;
 
@@ -28,7 +36,8 @@ export class ServicesDbMonetizationComponent implements OnInit, OnDestroy {
     private _page: PageService,
     private _seo: SeoService,
     private _translate: TranslationService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this._page.contentUpdate$.pipe(
@@ -40,13 +49,13 @@ export class ServicesDbMonetizationComponent implements OnInit, OnDestroy {
         this.pageContent = e;
         this.monetizationBlocks = e.acf.monetization_list.monetization_block;
         this.openTab(this.monetizationBlocks[0].name);
-      })
+      });
     });
     this._background.changeColor(BackgroundColor.BLUE);
   }
 
 
-  public get LANG() : string {
+  public get LANG(): string {
     return this._translate.lang;
   }
 
@@ -62,6 +71,10 @@ export class ServicesDbMonetizationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._background.changeColor(BackgroundColor.PURPLE);
+  }
+
+  sliderInit(slider: RushSliderService) {
+    this.slider = slider;
   }
 
 }
