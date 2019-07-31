@@ -1,25 +1,27 @@
 <app-page-layout>
-  <div class="container">
-    <div class="logo">
-      <img class="logo__img" [src]="pageContent?.acf?.img?.url" alt="">
-    </div>
+    <div class="page-content">
+      <div class="container">
+        <div class="logo">
+          <img class="logo__img" [src]="pageContent?.acf?.img?.url" alt="">
+        </div>
 
-    <div class="features">
+        <div class="features">
 
-      <div class="feature" *ngFor="let item of pageContent?.acf?.counts" [ngStyle]="{background: item?.color}">
-        <div class="feature__title" [countUp]="item?.number" [options]="countOpts">{{item?.number}}{{item?.number_sufix}}</div>
-        <span class="feature__label">{{item?.name}}</span>
+          <div class="feature" *ngFor="let item of pageContent?.acf?.counts" [ngStyle]="{background: item?.color}">
+            <div class="feature__title" [countUp]="item?.number" [options]="countOpts">{{item?.number}}{{item?.number_sufix}}</div>
+            <span class="feature__label">{{item?.name}}</span>
+          </div>
+
+        </div>
+
+        <div class="description" [innerHTML]="pageContent?.content?.rendered">
+          Рекламное агентство из Киева. Команда мечтателей, которые собрались вместе, чтобы изменить к лучшему мир  и будущее бизнеса наших единомышленников
+        </div>
+
+        <!-- <a class="more" [routerLink]="['/' + LANG + '/cases']">
+          {{'ЕЩЕ КЕЙСЫ' | translate}}
+          <i class="icon-arrow"></i>
+        </a> -->
       </div>
-
     </div>
-
-    <div class="description" [innerHTML]="pageContent?.content?.rendered">
-      Рекламное агентство из Киева. Команда мечтателей, которые собрались вместе, чтобы изменить к лучшему мир  и будущее бизнеса наших единомышленников
-    </div>
-
-    <a class="more" [routerLink]="['/' + LANG + '/cases']">
-      {{'ЕЩЕ КЕЙСЫ' | translate}}
-      <i class="icon-arrow"></i>
-    </a>
-  </div>
 </app-page-layout>

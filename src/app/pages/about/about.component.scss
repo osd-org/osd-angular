@@ -1,11 +1,25 @@
 @import 'variables';
 @import 'mixins';
 
+
+.page-content {
+  height: $content-height--no-footer;
+  margin-bottom: 0;
+  @include media-below($bp-sm) {
+    height: $content-height--no-footer-mob;
+  }
+}
+
+
+
 .logo {
     text-align: center;
-    margin-top: 70px;
+    margin-top: 20px;
+    height: 15%;
     &__img {
-        height: 140px;
+        height: 100%;
+        width: auto;
+        max-width: 80%;
     }
     @include media-below($bp-ld) {
       margin-top: 10px;
@@ -17,7 +31,7 @@
 }
 
 .features {
-    margin-top: 70px;
+    margin-top: 30px;
     display: flex;
     justify-content: space-between;
 
@@ -57,7 +71,7 @@
 
 .description {
     @include font(28px, 100);
-    margin-top: 70px;
+    margin-top: 30px;
     padding-bottom: 30px;
     box-sizing: border-box;
 }
@@ -68,9 +82,12 @@
 
 .container {
   padding: 20px 20px 10px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  @include hiddeScrollBar();
   @include media-below($bp-ld) {
-    display: flex;
-    flex-direction: column;
+    justify-content: unset;
     .logo {
       order: 1;
     }

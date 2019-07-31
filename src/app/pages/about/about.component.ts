@@ -36,7 +36,7 @@ export class AboutComponent implements OnInit, OnDestroy {
     if (this._device.isMobile()) {
       this._background.changeColor(BackgroundColor.BLACK);
     } else {
-      this._background.changeColor(BackgroundColor.DARKBLUE);
+      this._background.changeColor(BackgroundColor.BLACK);
     }
     this._page.contentUpdate$.pipe(
       untilDestroyed(this)
