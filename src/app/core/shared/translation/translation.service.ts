@@ -8,7 +8,7 @@ import { LANG_RU } from './LANG_RU';
 import { ReplaySubject, BehaviorSubject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
-import { WindowService } from '@osd-services/universal/window.service';
+import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ import { WindowService } from '@osd-services/universal/window.service';
 export class TranslationService {
 
   private _defaultLang = 'ru';
-  private _currentLang = this._cookie.check('qtrans_front_language') ? this._cookie.get('qtrans_front_language') : this._defaultLang;
+  private _currentLang = this._defaultLang;
   private _langChange$: EventEmitter<string> = new EventEmitter<string>();
   private _langResolved: boolean;
   private _resolveLang$: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
@@ -34,10 +34,10 @@ export class TranslationService {
   private _langList: Array<any> = [];
 
   constructor(
-    private _window: WindowService,
     private _cookie: CookieService,
     private _router: Router,
-    private _platform: PlatformService
+    private _platform: PlatformService,
+    private _location: Location,
   ) {
     this._resolveCurrentLang();
 
@@ -148,13 +148,16 @@ export class TranslationService {
    * @private
    */
   private _changeUrlParam(lang: string) {
-    if (this.langResolved) {
-      this._router.navigateByUrl(this._router.url);
-    } else {
-      if (this._platform.isBrowser) {
-        const host = this._window.nativeWindow.location.origin;
-        const uri = this._window.nativeWindow.location.href.replace(host, '');
+    if (this._platform.isBrowser) {
+      if (this.langResolved) {
+        this._router.navigateByUrl(this._router.url);
+      } else {
+        const uri = this._location.path() ? this._location.path() : '/';
         this._router.navigateByUrl(uri);
+      }
+    } else {
+      if (this.langResolved) {
+        this._router.navigateByUrl(this._router.url);
       }
     }
   }
@@ -166,20 +169,18 @@ export class TranslationService {
    */
   private _resolveCurrentLang() {
     this._env$.subscribe(env => {
-      if (this._platform.isBrowser) {
-        const host = this._window.nativeWindow.location.origin;
-        const uri = this._window.nativeWindow.location.href.replace(host, '');
-
-        const langSegment = uri.split('/')[1];
-
+      const uri = this._location.path() ? this._location.path() : '/';
+      const langSegment = uri.split('/')[1];
         if (langSegment && this._dictionary.hasOwnProperty(langSegment)) { // check lang segment
           this.changeLang(langSegment);
-        } else if (this._cookie.check('qtrans_front_language') && this._dictionary.hasOwnProperty(this._cookie.get('qtrans_front_language'))) { // check cookie
+        } else if (
+          this._platform.isBrowser &&
+          this._cookie.check('qtrans_front_language') &&
+          this._dictionary.hasOwnProperty(this._cookie.get('qtrans_front_language'))) { // check cookie
           this.changeLang(this._cookie.get('qtrans_front_language'));
         } else if (env && this._dictionary.hasOwnProperty(env)) { // check environment
           this.changeLang(env);
         }
-      }
       this._langResolved = true;
       this._resolveLang$.next(true);
     });
