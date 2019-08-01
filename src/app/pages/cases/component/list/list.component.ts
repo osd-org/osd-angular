@@ -14,8 +14,23 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 export class ListComponent implements OnInit, OnDestroy {
 
   public caseList: any[] = [];
-  public paginationPages: any[] = [];
-  private _per_page: number = 9;
+  public mobCaseList: any[] = [];
+  private _storedMobBlogList: Map<any, any> = new Map<any, any>();
+  public loadmore = true;
+
+  public pagination: any = {
+    prevPage: null,
+    nextPage: null,
+    totalPages: null,
+    from: null,
+    to: null,
+    total: null,
+    paginationPages: []
+  }
+  private _postsData: any = {
+    per_page: 9,
+    page: 1
+  }
 
   constructor(
     private _case: CaseService,
@@ -27,27 +42,56 @@ export class ListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._header.setTitle('КЕЙСЫ');
+
     if (this._device.isMobile()) {
       this._background.changeColor(BackgroundColor.BLACK);
     } else {
       this._background.changeColor(BackgroundColor.DARKBLUE);
     }
+
     this._page.contentUpdate$.pipe(
       untilDestroyed(this)
     ).subscribe(() => {
-      this._case.getCaseList({per_page: this._per_page}).subscribe( (res: any) => {
-        this.caseList = res.body;
-        this.paginationPages = res.headerParams.pages;
-        this.paginationPages = Array(this.paginationPages);
-      });
+      this._getCase();
+    });
+  }
+
+  private _getCase() {
+    this.loadmore = false;
+    this._case.getCaseList(this._postsData).subscribe( (res: any) => {
+      this.caseList = res.body;
+      this._createMoblist(res.body);
+      this._configPagination(res.headerParams);
+      this.loadmore = true;
     });
   }
 
   public loadPaginationPage(pageNumber: number) {
-    this._case.getCaseList({per_page: this._per_page, page: pageNumber}).subscribe( (res: any) => {
-      this.caseList = res.body;
-      this.paginationPages = res.headerParams.pages;
-      this.paginationPages = Array(this.paginationPages);
+    this._postsData.page = pageNumber;
+    this._getCase();
+  }
+
+  public loadMore() {
+    this._postsData.page++;
+    this._getCase();
+  }
+
+  private _configPagination(headers) {
+    this.pagination.total = +headers['total'];
+    this.pagination.totalPages = +headers['pages'];
+    this.pagination.from = this.pagination.total ? ((this._postsData.page - 1) * this._postsData.per_page) + 1 : ' ';
+    this.pagination.to = (this._postsData.page * this._postsData.per_page) > this.pagination.total ? this.pagination.total : this._postsData.page * this._postsData.per_page;
+    this.pagination.prevPage = this._postsData.page > 1 ? this._postsData.page : '';
+    this.pagination.nextPage = this._postsData.page < this.pagination.totalPages ? this._postsData.page + 1 : '';
+    this.pagination.paginationPages = Array(this.pagination.totalPages);
+  }
+
+  private _createMoblist(res) {
+    res.forEach(e => {
+      if (!this._storedMobBlogList.has(e['id'])) {
+        this.mobCaseList.push(e);
+        this._storedMobBlogList.set(e['id'], e['id']);
+      }
     });
   }
 

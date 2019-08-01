@@ -2,21 +2,47 @@
 <app-page-layout>
   <div class="page-content">
     <div class="container">
-      <div class="case__list">
-        <a [routerLink]="[item?.slug]"
+
+
+      <div *appShellMedia="{type: 'below', width: 1080}" class="case__list desktop">
+        <a
+        [routerLink]="[item?.slug]"
         [ngStyle]="{'background-image': 'url('+ item?.data?.small_img +')'}"
-        class="case__item" *ngFor="let item of caseList">
+        class="case__item"
+        *ngFor="let item of caseList">
           <div class="case__item-title">
             <span [ngStyle]="{'background': item?.data?.small_title_color}">{{item?.data?.small_title}}</span>
           </div>
         </a>
       </div>
-      <div class="case__pagination" *ngIf="paginationPages.length > 1">
+
+      <div *appShellMedia="{type: 'above', width: 1080}" class="case__list mobile">
+          <a
+          [routerLink]="[item?.slug]"
+          [ngStyle]="{'background-image': 'url('+ item?.data?.small_img +')'}"
+          class="case__item"
+          *ngFor="let item of mobCaseList">
+            <div class="case__item-title">
+              <span [ngStyle]="{'background': item?.data?.small_title_color}">{{item?.data?.small_title}}</span>
+            </div>
+          </a>
+      </div>
+
+      <div class="case__pagination" *ngIf="pagination?.paginationPages.length > 1">
         <div
           class="case__pagination-link"
           (click)="loadPaginationPage(i + 1)"
-          *ngFor="let item of paginationPages; let i = index">{{i + 1}}</div>
+          *ngFor="let item of pagination?.paginationPages; let i = index">{{i + 1}}</div>
       </div>
+
+      <ng-container *ngIf="pagination?.nextPage">
+        <button *ngIf="loadmore" class="case__loadmore-btn" type="button" (click)="loadMore()">{{'ещё' | translate}}</button>
+        <button *ngIf="!loadmore" disabled class="case__loadmore-btn" type="button">
+          <img src="/assets/img/content/button_loader.gif" alt="">
+        </button>
+      </ng-container>
+
+
     </div>
   </div>
 </app-page-layout>
