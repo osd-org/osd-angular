@@ -1,3 +1,4 @@
+import { TranslationService } from './../../core/shared/translation/translation.service';
 import { SeoService } from './../../core/services/seo.service';
 import { PageService } from '@osd-services/page.service';
 import { BackgroundColor, BackgroundService } from './../../core/shared/layouts/layout-components/background/background.service';
@@ -53,7 +54,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     private _platform: PlatformService,
     private _background: BackgroundService,
     private _page: PageService,
-    private _seo: SeoService
+    private _seo: SeoService,
+    private _translate: TranslationService
   ){
     if (_platform.isBrowser) {
       this.mobile = window.innerWidth <= 1080 || window.navigator.userAgent.indexOf('Trident/') >= 0;
@@ -65,6 +67,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     this._background.changeColor(BackgroundColor.BLACK);
     this._getSliderList();
     this._getWordList();
+
+    this._translate.onLangChange$.pipe(
+      untilDestroyed(this)
+    ).subscribe(lang => {
+      this._getSliderList();
+    });
   }
 
   ngOnDestroy(): void {
@@ -73,8 +81,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 
   private _getSliderList() {
+    this.slideList = [];
+
     this._api.getWithCache('/slider/list').subscribe(e => {
-      this.slideList = e.body;
+      setTimeout(() => {
+        this.slideList = e.body;
+      }, 10);
     })
   }
 

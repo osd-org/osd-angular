@@ -11,7 +11,13 @@ const routes: Routes = [
     {
       path: '',
       component: HomeComponent,
-    }
+      children: [
+        {
+          path: ':lang',
+          component: HomeComponent
+        }
+      ]
+    },
   ];
 
   @NgModule({
