@@ -1,7 +1,14 @@
 import { Component, OnInit, ContentChildren, AfterContentInit, OnDestroy, EventEmitter, Input } from '@angular/core';
 import { TileSlideComponent } from './tile-slide/tile-slide.component';
-import { fromEvent } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {fromEvent, timer} from 'rxjs';
+import {switchMap, takeUntil} from 'rxjs/operators';
+
+/**
+ * Available timer events
+ */
+enum TimerEvent {
+  RESET = 'reset'
+}
 
 @Component({
   selector: 'app-tile-slider',
@@ -20,10 +27,15 @@ export class TileSliderComponent implements OnInit, OnDestroy, AfterContentInit 
 
   private _alive$: EventEmitter<boolean> = new EventEmitter();
 
+  private _timerEvents$: EventEmitter<TimerEvent> = new EventEmitter<TimerEvent>();
+
   constructor() { }
 
   ngOnInit() {
     this._initEventListeners();
+    this._handleTimer();
+
+    this._timerEvents$.next(TimerEvent.RESET);
   }
 
   ngOnDestroy() {
@@ -52,6 +64,7 @@ export class TileSliderComponent implements OnInit, OnDestroy, AfterContentInit 
    *
    */
   nextSlide() {
+    this._timerEvents$.next(TimerEvent.RESET);
     this.hideCurrentSlide();
 
     if (this._currentSlide + 1 >= this._sliderList.length) {
@@ -71,6 +84,7 @@ export class TileSliderComponent implements OnInit, OnDestroy, AfterContentInit 
    *
    */
   prevSlide() {
+    this._timerEvents$.next(TimerEvent.RESET);
     this.hideCurrentSlide();
 
     if (this._currentSlide - 1 < 0) {
@@ -116,6 +130,21 @@ export class TileSliderComponent implements OnInit, OnDestroy, AfterContentInit 
         }
       }
     });
+  }
+
+  private _handleTimer() {
+    this._timerEvents$.pipe(
+      takeUntil(this._alive$),
+      switchMap(event => {
+        switch (event) {
+          case TimerEvent.RESET:
+            return timer(10000);
+        }
+      })
+    ).subscribe(() => {
+      this.nextSlide();
+      this._timerEvents$.next(TimerEvent.RESET);
+    })
   }
 
 }
