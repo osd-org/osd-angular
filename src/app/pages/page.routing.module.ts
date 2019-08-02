@@ -27,7 +27,7 @@ const routes: Routes = [
       { path: ':lang/about', loadChildren: './about/about.module#AboutModule'},
       { path: ':lang/contact', loadChildren: './contacts/contacts.module#ContactsModule'},
       { path: ':lang/clients', loadChildren: './clients/clients.module#ClientsModule'},
-      { path: ':lang', loadChildren: './home/home.module#HomeModule' },
+      // { path: ':lang', loadChildren: './home/home.module#HomeModule' },
       { path: '**', redirectTo: '/404'},
     ]
   },
