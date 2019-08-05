@@ -14,7 +14,8 @@ export class ListComponent implements OnInit, OnDestroy {
 
   public blogList: any[] = [];
   public mobBlogList: any[] = [];
-  private _storedMobBlogList: Map<any, any> = new Map<any, any>();
+  public mobSearchBlogList: any[] = [];
+  public isSearch = false;
   public loadmore = true;
 
   public pagination: any = {
@@ -68,6 +69,7 @@ export class ListComponent implements OnInit, OnDestroy {
     this._header.searchInputEvent$.subscribe(e => {
       if (e) {
         this._resetSearch();
+        this.isSearch = true;
         this._postsData['search'] = e;
         this._getPost();
       } else {
@@ -83,9 +85,11 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   private _resetSearch() {
+    this.isSearch = false;
     delete this._postsData['search'];
     this._postsData.per_page = 9;
     this._postsData.page = 1;
+    this.mobSearchBlogList = [];
   }
 
   private _configPagination(headers) {
@@ -100,11 +104,20 @@ export class ListComponent implements OnInit, OnDestroy {
 
   private _createMoblist(res) {
     res.forEach(e => {
-      if (!this._storedMobBlogList.has(e['id'])) {
+      if (!this.isSearch) {
         this.mobBlogList.push(e);
-        this._storedMobBlogList.set(e['id'], e['id']);
+      } else {
+        this.mobSearchBlogList.push(e);
       }
     });
+  }
+
+  public get mobList(): any[] {
+    if (!this.isSearch) {
+      return  this.mobBlogList;
+    } else {
+      return this.mobSearchBlogList;
+    }
   }
 
   ngOnDestroy() {

@@ -115,6 +115,8 @@ $group-size: 6;
       }
     }
     &__item {
+      border-left: 0;
+      border-right: 0;
       position: relative;
       width: 100%;
       height: 77px;

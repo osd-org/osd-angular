@@ -18,7 +18,7 @@
 
       <!-- mobile -->
       <div class="blog__list mobile">
-        <div class="blog__item" *ngFor="let item of mobBlogList">
+        <div class="blog__item" *ngFor="let item of mobList">
             <div class="blog__item-title"
               [line-truncation]="2"
               [options]='{ellipsis: "..."}' [routerLink]="[item?.slug]">{{item?.acf?.title_prev}}
