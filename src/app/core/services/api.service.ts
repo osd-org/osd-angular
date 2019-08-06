@@ -2,10 +2,10 @@ import { environment } from '../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of, Subject } from 'rxjs';
-import { catchError, map, tap, retryWhen } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { TranslationService } from '../shared/translation/translation.service';
 import { CacheService } from './cache/cache.service';
-import { genericRetryStrategy } from '@osd-rxjs/generic';
+import { http_retry } from '@osd-rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -125,10 +125,7 @@ export class ApiService {
     const subject = new Subject();
 
     this._http.request(method, path + encodeURI(url), options).pipe(
-      retryWhen(
-        genericRetryStrategy({
-          scalingDuration: 2000
-      }))
+      http_retry(method)
     ).subscribe((response: any )=> {
       const body = response.body;
       const headerParams = {total: Number(response.headers.get('x-wp-total')), pages: Number(response.headers.get('x-wp-totalpages'))}

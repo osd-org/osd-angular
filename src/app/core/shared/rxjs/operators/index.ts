@@ -1,5 +1,5 @@
-import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Observable, Subject, of, throwError, interval, OperatorFunction } from 'rxjs';
+import { takeUntil, retryWhen, delay, mergeMap, flatMap, timeout, retry, tap } from 'rxjs/operators';
 
 const isFunction = fn => typeof fn === 'function';
 
@@ -29,3 +29,20 @@ export const untilDestroyed = (
   }
   return source.pipe(takeUntil<T>(componentInstance['__takeUntilDestroy']));
 };
+
+
+export function http_retry(method = 'GET', maxRetry: number = 5, delayMs: number = 1000, timeOut: number = 1500) {
+  if (method === 'GET') {
+    return (src: Observable<any>) => src.pipe(
+      timeout(timeOut),
+      retryWhen(_ => {
+        return interval(delayMs).pipe(
+          flatMap(count => count == maxRetry ? throwError("Giving up") : of(count))
+        )
+      })
+    )
+  } else {
+    return (src: Observable<any>) => src;
+  }
+}
+
