@@ -31,7 +31,7 @@ export const untilDestroyed = (
 };
 
 
-export function http_retry(method = 'GET', maxRetry: number = 5, delayMs: number = 1000, timeOut: number = 1500) {
+export function http_retry(method = 'GET', maxRetry: number = 5, delayMs: number = 1500, timeOut: number = 2000) {
   if (method === 'GET') {
     return (src: Observable<any>) => src.pipe(
       timeout(timeOut),

@@ -5,6 +5,9 @@ import { ActivatedRoute } from '@angular/router';
 import { untilDestroyed } from '@osd-rxjs/operators';
 import { PageService } from '@osd-services/page.service';
 import { switchMap } from 'rxjs/operators';
+import { CaseSlideContentType } from './../../case.service';
+import { RushSliderConfig } from './../../../../core/shared/components/rush-slider/rush-slider-config';
+import { RushSliderService } from './../../../../core/shared/components/rush-slider/rush-slider.service';
 
 @Component({
   selector: 'app-item',
@@ -13,8 +16,14 @@ import { switchMap } from 'rxjs/operators';
 })
 export class ItemComponent implements OnInit, OnDestroy {
 
-  public casePost: any = null;
-  public currentTemplate: any;
+  public sliderLoad = false;
+  public casePost: any[] = null;
+
+
+  public contentType = CaseSlideContentType;
+  public slider: RushSliderService;
+  public sliderConfig: Map<number, RushSliderConfig>;
+  public slideList: Array<any> = [];
 
   constructor(
     private _case: CaseService,
@@ -22,8 +31,8 @@ export class ItemComponent implements OnInit, OnDestroy {
     private _background: BackgroundService,
     private _page: PageService
   ) {
-
-   }
+    this._initConfig();
+  }
 
 
   ngOnInit() {
@@ -34,10 +43,29 @@ export class ItemComponent implements OnInit, OnDestroy {
       untilDestroyed(this)
     ).subscribe((res) => {
       this._case.resolveCurrentCasePost(res[0]);
-      this.casePost = res[0];
-      this.currentTemplate = this.casePost['acf']['case_template'];
+      this.casePost = res[0]['acf']['slide'];
+      this._reloadSlider();
     })
   }
+
+  sliderInit(e) {
+    this.slider = e;
+  }
+
+  private _initConfig() {
+    this.sliderConfig = new Map();
+    this.sliderConfig.set(1400, {
+      speed: 1000
+    })
+  }
+
+  private _reloadSlider() {
+    this.sliderLoad = false;
+    setTimeout(() => {
+      this.sliderLoad = true;
+    });
+  }
+
 
   ngOnDestroy() {
 

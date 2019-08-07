@@ -42,13 +42,7 @@ export class ListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._header.setTitle('КЕЙСЫ');
-
-    if (this._device.isMobile()) {
-      this._background.changeColor(BackgroundColor.BLACK);
-    } else {
-      this._background.changeColor(BackgroundColor.DARKBLUE);
-    }
-
+    this._background.changeColor(BackgroundColor.BLACK);
     this._page.contentUpdate$.pipe(
       untilDestroyed(this)
     ).subscribe(() => {
