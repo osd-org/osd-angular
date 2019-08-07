@@ -78,11 +78,12 @@
         &-title {
             @include font(18px);
             text-transform: uppercase;
+            margin-bottom: 20px;
         }
 
         &-item {
             @include font(16px, 100);
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             padding-left: 50px;
             box-sizing: border-box;
             position: relative;

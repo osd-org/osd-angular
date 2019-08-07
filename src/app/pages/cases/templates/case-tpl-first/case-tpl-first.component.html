@@ -17,9 +17,9 @@
       <div class="text-block__title" *ngIf="data?.title">{{data?.title}}</div>
       <div class="text-block__list">
         <div class="text-block__list-title">{{ 'Задачи:' | translate }}</div>
-        <div class="text-block__list-item">
+        <div class="text-block__list-item" *ngFor="let listItem of data?.list">
           <i class="icon-arrow"></i>
-          <div [innerHTML]="data?.text"></div>
+          <div [innerHTML]="listItem?.text"></div>
         </div>
       </div>
       <div class="look-case-btn" (click)="slider.nextSlide()">
