@@ -1,13 +1,15 @@
-import { BackgroundService, BackgroundColor } from './../../../../core/shared/layouts/layout-components/background/background.service';
+import { BackgroundService, BackgroundColor } from '../../../../core/shared/layouts/layout-components/background/background.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CaseService } from '../../case.service';
 import { ActivatedRoute } from '@angular/router';
 import { untilDestroyed } from '@osd-rxjs/operators';
 import { PageService } from '@osd-services/page.service';
 import { switchMap } from 'rxjs/operators';
-import { CaseSlideContentType } from './../../case.service';
-import { RushSliderConfig } from './../../../../core/shared/components/rush-slider/rush-slider-config';
-import { RushSliderService } from './../../../../core/shared/components/rush-slider/rush-slider.service';
+import { CaseSlideContentType } from '../../case.service';
+import { RushSliderConfig } from '../../../../core/shared/components/rush-slider/rush-slider-config';
+import { RushSliderService } from '../../../../core/shared/components/rush-slider/rush-slider.service';
+import {fromEvent} from 'rxjs';
+import {PlatformService} from '@osd-services/universal/platform.service';
 
 @Component({
   selector: 'app-item',
@@ -29,7 +31,8 @@ export class ItemComponent implements OnInit, OnDestroy {
     private _case: CaseService,
     private _route: ActivatedRoute,
     private _background: BackgroundService,
-    private _page: PageService
+    private _page: PageService,
+    private _platform: PlatformService
   ) {
     this._initConfig();
   }
@@ -45,7 +48,11 @@ export class ItemComponent implements OnInit, OnDestroy {
       this._case.resolveCurrentCasePost(res[0]);
       this.casePost = res[0]['acf']['slide'];
       this._reloadSlider();
-    })
+    });
+
+    if (this._platform.isBrowser) {
+      this._scrollHandler();
+    }
   }
 
   sliderInit(e) {
@@ -63,6 +70,18 @@ export class ItemComponent implements OnInit, OnDestroy {
     this.sliderLoad = false;
     setTimeout(() => {
       this.sliderLoad = true;
+    });
+  }
+
+  private _scrollHandler() {
+    fromEvent(document, 'wheel').pipe(
+      untilDestroyed(this)
+    ).subscribe((e: MouseWheelEvent) => {
+      if (e.deltaY > 0) {
+        this.slider.nextSlide();
+      } else {
+        this.slider.prevSlide();
+      }
     });
   }
 
