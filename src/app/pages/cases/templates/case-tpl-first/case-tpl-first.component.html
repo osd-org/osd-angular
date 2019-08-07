@@ -3,15 +3,21 @@
     <img class="page-block-bg__img" [src]="data?.slide_background?.url" alt="" />
   </div>
 
-  <div class="page-block left" *ngIf="data?.block_direction_left">
+  <div class="page-block left" *ngIf="data?.block_direction_left" [ngStyle]="data?.background_color_opacity">
     <div class="client" *ngIf="data?.client">{{data?.client}}</div>
     <div class="text-block">
       <div class="text-block__title" *ngIf="data?.title">{{data?.title}}</div>
-      <div class="text-block__list" [innerHTML]="data?.text"></div>
+      <div class="text-block__list">
+        <div class="text-block__list-title">{{ 'Решения:' | translate }}</div>
+        <div class="text-block__list-item" *ngFor="let listItem of data?.list">
+          <i class="icon-arrow"></i>
+          <div [innerHTML]="listItem?.text"></div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="page-block right" *ngIf="!data?.block_direction_left">
+  <div class="page-block right" *ngIf="!data?.block_direction_left" [ngStyle]="data?.background_color_opacity">
     <div class="client" *ngIf="data?.client">{{data?.client}}</div>
     <div class="text-block">
       <div class="text-block__title" *ngIf="data?.title">{{data?.title}}</div>

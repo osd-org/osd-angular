@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {RushSliderService} from '../../../../core/shared/components/rush-slider/rush-slider.service';
+import { hexToRgba } from 'app/core/helpers/colorHexToRgba';
 
 @Component({
   selector: 'app-case-tpl-first',
@@ -15,9 +16,8 @@ export class CaseTplFirstComponent implements OnInit {
   @Input('data')
   set _setData(v : any) {
     this._data = v;
-    this.checkDirection();
-    console.log(v);
-
+    this._checkDirection();
+    this._returnBlockStyle();
   }
 
   public get data(): any {
@@ -29,7 +29,7 @@ export class CaseTplFirstComponent implements OnInit {
   ngOnInit() {
   }
 
-  public checkDirection() {
+  private _checkDirection() {
     if (this.data.block_direction) {
       if (this.data.block_direction === 'слева') {
         this.data.block_direction_left = true;
@@ -40,4 +40,9 @@ export class CaseTplFirstComponent implements OnInit {
       this.data.block_direction_left = true;
     }
   }
+
+  private _returnBlockStyle() {
+    this.data.background_color_opacity = {'background-color': hexToRgba(this.data.background_color, this.data.background_opacity / 100)};
+  }
+
 }
