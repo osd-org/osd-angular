@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {RushSliderService} from '../../../../core/shared/components/rush-slider/rush-slider.service';
 
 @Component({
   selector: 'app-case-tpl-first',
@@ -7,7 +8,9 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CaseTplFirstComponent implements OnInit {
 
-  private _data: any
+  private _data: any;
+
+  @Input('slider') slider: RushSliderService;
 
   @Input('data')
   set _setData(v : any) {

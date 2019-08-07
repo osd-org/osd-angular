@@ -2,57 +2,10 @@
 @import "variables";
 @import "mixins";
 
-
-.page-top {
-  background-color: #ee8028;
-  height: $sub-header-height;
-  .container {
-    @include flex(row, flex-start, center);
-  }
-  &__title {
-    width: 76%;
-    h1 {
-      color: #ffffff;
-      font-family: "Open Sans Semi Bold";
-      font-size: 28px;
-      font-weight: 600;
-      text-transform: uppercase;
-      line-height: 2;
-    }
-  }
-  &__author {
-    width: 24%;
-    @include flex(row, space-around, center);
-    &-name {
-      color: #ffffff;
-      font-family: "DIN Alternate";
-      font-size: 15px;
-      font-weight: 700;
-      text-align: right;
-    }
-    &-img {
-      width: 66px;
-      height: 66px;
-      border-radius: 50%;
-    }
-  }
+.slider {
+  margin-top: -$header-height;
 }
 
-.page-content {
-  background-color: #fff;
-  color: #000;
-  height: $content-height--no-footer--sub-header;
-  margin-bottom: 0;
-  .container {
-    height: $content-height--no-footer--sub-header;
-    width: 100%;
-    overflow: hidden;
-    display: block;
-    flex-wrap: nowrap;
-    section {
-      width: 100%;
-      display: inline-block;
-    }
-  }
-
+.slide {
+  user-select: none;
 }

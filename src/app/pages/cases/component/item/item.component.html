@@ -6,9 +6,9 @@
       (init)="sliderInit($event)"
       *ngIf="sliderLoad"
     >
-      <app-rush-slide *ngFor="let item of casePost">
+      <app-rush-slide class="slide" *ngFor="let item of casePost">
         <ng-container [ngSwitch]="item?.template">
-          <app-case-tpl-first *ngSwitchCase="'tpl1'" [data]="item[item?.template]"></app-case-tpl-first>
+          <app-case-tpl-first *ngSwitchCase="'tpl1'" [data]="item[item?.template]" [slider]="slider"></app-case-tpl-first>
           <!-- <app-case-tpl-second  *ngSwitchCase="'case2'"></app-case-tpl-second>
                 <app-cases-tpl-third  *ngSwitchCase="'case3'" [data]="casePost"></app-cases-tpl-third>
                 <app-case-tpl-fourth  *ngSwitchCase="'case4'" [data]="casePost"></app-case-tpl-fourth>

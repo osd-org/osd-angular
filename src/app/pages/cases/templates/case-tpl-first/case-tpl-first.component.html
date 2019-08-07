@@ -1,6 +1,7 @@
 <div class="page-block-container">
-    <div class="page-block-bg"></div>
+  <div class="page-block-bg">
     <img class="page-block-bg__img" [src]="data?.slide_background?.url" alt="" />
+  </div>
 
   <div class="page-block left" *ngIf="data?.block_direction_left">
     <div class="client" *ngIf="data?.client">{{data?.client}}</div>
@@ -14,7 +15,17 @@
     <div class="client" *ngIf="data?.client">{{data?.client}}</div>
     <div class="text-block">
       <div class="text-block__title" *ngIf="data?.title">{{data?.title}}</div>
-      <div class="text-block__list" [innerHTML]="data?.text"></div>
+      <div class="text-block__list">
+        <div class="text-block__list-title">{{ 'Задачи:' | translate }}</div>
+        <div class="text-block__list-item">
+          <i class="icon-arrow"></i>
+          <div [innerHTML]="data?.text"></div>
+        </div>
+      </div>
+      <div class="look-case-btn" (click)="slider.nextSlide()">
+        <i class="icon-arrow"></i>
+        <span class="look-case-btn__label">{{ 'Смотреть кейс' | translate }}</span>
+      </div>
     </div>
   </div>
 
