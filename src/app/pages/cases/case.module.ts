@@ -12,6 +12,7 @@ import { CaseTplFifthComponent } from './templates/case-tpl-fifth/case-tpl-fifth
 import { CaseTplFourthComponent } from './templates/case-tpl-fourth/case-tpl-fourth.component';
 import { CaseTplSeventhComponent } from './templates/case-tpl-seventh/case-tpl-seventh.component';
 import { CaseTplMailComponent } from './templates/case-tpl-mail/case-tpl-mail.component';
+import { CaseTplMailOnePhotoComponent } from './templates/case-tpl-mail-one-photo/case-tpl-mail-one-photo.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CaseTplMailComponent } from './templates/case-tpl-mail/case-tpl-mail.co
     CaseTplFourthComponent,
     CaseTplSeventhComponent,
     CaseTplFirstComponent,
-    CaseTplMailComponent
+    CaseTplMailComponent,
+    CaseTplMailOnePhotoComponent
   ],
   imports: [
     CommonModule,
