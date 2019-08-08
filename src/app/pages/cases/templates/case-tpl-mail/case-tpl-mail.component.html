@@ -1,0 +1,23 @@
+<div class="page-block-container">
+  <div class="page-block-bg">
+    <img class="page-block-bg__img" *ngIf="data?.slide_background?.url" [src]="data?.slide_background?.url" alt="" />
+    <div class="page-block-bg full" [ngStyle]="data?.background_color_opacity"></div>
+  </div>
+
+  <div class="container page-block">
+    <div class="title" *ngIf="data?.title">{{data?.title}}</div>
+
+    <div class="img-list" *ngIf="data?.photo_list?.length">
+      <div
+      class="img-list__item"
+      *ngFor="let item of data?.photo_list; let first = first; let last = last;"
+      [ngClass]="{'first': first, 'last': last}"
+      >
+        <img [src]="item?.img?.url" alt="" />
+      </div>
+    </div>
+
+    <div class="bottom_text" *ngIf="data?.bottom_text">{{data?.bottom_text}}</div>
+  </div>
+
+</div>
