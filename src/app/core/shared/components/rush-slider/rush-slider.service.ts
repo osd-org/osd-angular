@@ -23,7 +23,8 @@ export class RushSliderService {
     itemsCount: 1,
     spaceAround: 0,
     shiftLeft: 0,
-    ignoreSwipe: false
+    ignoreSwipe: false,
+    infinite: true,
   };
 
   /**
@@ -204,6 +205,8 @@ export class RushSliderService {
    * Show prev slide
    */
   public nextSlide() {
+    if (!this._config.infinite && this._currentSlide === this._slideList.length - 1) { return; }
+
     this.goToSlide(this._currentSlide + 1);
   }
 
@@ -211,6 +214,8 @@ export class RushSliderService {
    * Show next slide
    */
   public prevSlide() {
+    if (!this._config.infinite && this._currentSlide === 0) { return; }
+
     this.goToSlide(this._currentSlide - 1);
   }
 
@@ -331,7 +336,9 @@ export class RushSliderService {
       slide.element.style.boxSizing = `border-box`;
     });
 
-    this._buildAdditionalSlides();
+    if (this._config.infinite) {
+      this._buildAdditionalSlides();
+    }
 
     this._track.style.transform = `translateX(${this._resolveTranslate(0)}px)`;
     this._currentSlide = 0;
@@ -383,7 +390,12 @@ export class RushSliderService {
    * @private
    */
   private _resolveTranslate(slidePosition: number): number {
-    this._currentTranslate = -(this._shiftWidth + this._slideWidth * (this._additionalSlidesCount + slidePosition));
+    if (this._config.infinite) {
+      this._currentTranslate = -(this._shiftWidth + this._slideWidth * (this._additionalSlidesCount + slidePosition));
+    } else {
+      this._currentTranslate = -(this._shiftWidth + this._slideWidth * slidePosition);
+    }
+
     return this._currentTranslate;
   }
 

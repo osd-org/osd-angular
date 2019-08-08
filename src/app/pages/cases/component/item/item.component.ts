@@ -53,6 +53,8 @@ export class ItemComponent implements OnInit, OnDestroy {
     if (this._platform.isBrowser) {
       this._scrollHandler();
     }
+
+    this._reloadSlider();
   }
 
   sliderInit(e) {
@@ -62,7 +64,9 @@ export class ItemComponent implements OnInit, OnDestroy {
   private _initConfig() {
     this.sliderConfig = new Map();
     this.sliderConfig.set(1400, {
-      speed: 1000
+      speed: 1000,
+      infinite: false,
+      ignoreSwipe: true
     })
   }
 
