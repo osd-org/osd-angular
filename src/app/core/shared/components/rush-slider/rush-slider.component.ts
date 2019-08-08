@@ -6,7 +6,10 @@ import { RushSliderService } from './rush-slider.service';
 @Component({
   selector: 'app-rush-slider',
   templateUrl: './rush-slider.component.html',
-  styleUrls: ['./rush-slider.component.scss']
+  styleUrls: ['./rush-slider.component.scss'],
+  providers: [
+    RushSliderService
+  ]
 })
 export class RushSliderComponent implements OnInit, AfterContentInit {
 

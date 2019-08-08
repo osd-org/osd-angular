@@ -58,7 +58,9 @@ export class ItemComponent implements OnInit, OnDestroy {
   }
 
   sliderInit(e) {
-    this.slider = e;
+    if (!this.slider) {
+      this.slider = e;
+    }
   }
 
   private _initConfig() {

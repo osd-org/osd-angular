@@ -1,6 +1,6 @@
 <div class="page-block-container">
   <div class="page-block-bg">
-    <img class="page-block-bg__img" [src]="data?.slide_background?.url" alt="" />
+    <img class="page-block-bg__img" *ngIf="data?.slide_background?.url" [src]="data?.slide_background?.url" alt="" />
   </div>
 
   <div class="page-block left" *ngIf="data?.block_direction_left" [ngStyle]="data?.background_color_opacity">

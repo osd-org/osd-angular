@@ -1,6 +1,7 @@
-<ng-container>
-  <div class="page-block-bg"></div>
-  <img class="page-block-bg__img" [src]="data?.acf?.case5?.gallery_background?.url" alt="">
+<div class="page-block-container">
+  <div class="page-block-bg" [ngStyle]="data?.background_color_opacity">
+    <img class="page-block-bg__img" *ngIf="data?.slide_background?.url" [src]="data?.slide_background?.url" alt="">
+  </div>
 
   <div class="container">
     <div class="content-container">
@@ -12,20 +13,20 @@
       </div>
 
       <div class="slider-container">
-        <app-rush-slider class="slider" [config]="sliderConfig" (init)="sliderInit($event)" *ngIf="sliderLoad">
+        <app-rush-slider class="slider" [config]="sliderConfig" (init)="photoSliderInit($event)" *ngIf="sliderLoad">
           <app-rush-slide  *ngFor="let item of slideList">
-            <img class="img-slide" [src]="item?.img?.url" [alt]="item?.img?.alt">
+            <img class="img-slide" [src]="item?.photo?.url" [alt]="item?.photo?.alt">
           </app-rush-slide>
         </app-rush-slider>
         <div class="slider-controls">
-          <div class="slider-controls__btn prev" (click)="slider.prevSlide()"><i class="icon-arrow"></i></div>
-          <div class="slider-controls__btn next" (click)="slider.nextSlide()"><i class="icon-arrow"></i></div>
+          <div class="slider-controls__btn prev" (click)="photoSlider.prevSlide()"><i class="icon-arrow"></i></div>
+          <div class="slider-controls__btn next" (click)="photoSlider.nextSlide()"><i class="icon-arrow"></i></div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="pagination" *ngIf="slider">
-    <span class="pagination__link" *ngFor="let slide of slider.slideList; let i = index;" (click)="slider.goToSlide(i)" [ngClass]="{active: i == slider.currentSlide}">{{ i + 1 }}</span>
+  <div class="pagination" *ngIf="photoSlider">
+    <span class="pagination__link" *ngFor="let slide of photoSlider.slideList; let i = index;" (click)="photoSlider.goToSlide(i)" [ngClass]="{active: i == photoSlider.currentSlide}">{{ i + 1 }}</span>
   </div>
-</ng-container>
+</div>
