@@ -28,4 +28,9 @@ export interface RushSliderConfig {
    * Disable swipe sliding
    */
   ignoreSwipe?: boolean;
+
+  /**
+   * Is infinite scrolling enabled
+   */
+  infinite?: boolean;
 }
