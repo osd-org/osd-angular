@@ -4,9 +4,6 @@ import { RushSlideComponent } from './rush-slide/rush-slide.component';
 import { fromEvent, merge } from 'rxjs';
 import { takeUntil, debounceTime, filter, map } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
 export class RushSliderService {
 
   /**
