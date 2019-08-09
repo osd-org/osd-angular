@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { RushSliderService } from 'app/core/shared/components/rush-slider/rush-slider.service';
 import { RushSliderConfig } from 'app/core/shared/components/rush-slider/rush-slider-config';
 import { ModalsService } from 'app/core/modules/modals/modals.service';
+import {hexToRgba} from '../../../../core/helpers/colorHexToRgba';
 
 @Component({
   selector: 'app-case-tpl-galery',
@@ -21,10 +22,10 @@ export class CaseTplGaleryComponent implements OnInit {
   @Input('data')
   set _setData(v : any) {
     console.log(v);
-
-    this._reloadSlider();
     this._data = v;
-    this.slideList = this._mapSliderData(this.data.acf[this.data.slug]['gallery']);
+    this._reloadSlider();
+    this._returnBlockStyle();
+    this.slideList = this._mapSliderData(this.data.gallery);
   }
 
   public get data(): any {
@@ -71,5 +72,9 @@ export class CaseTplGaleryComponent implements OnInit {
     setTimeout(() => {
       this.sliderLoad = true;
     });
+  }
+
+  private _returnBlockStyle() {
+    this.data.background_color_opacity = {'background-color': hexToRgba(this.data.background_color, this.data.background_opacity / 100)};
   }
 }

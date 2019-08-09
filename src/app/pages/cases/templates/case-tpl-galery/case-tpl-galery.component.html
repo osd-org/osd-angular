@@ -1,12 +1,13 @@
-<ng-container>
-  <div class="page-block-bg"></div>
-  <img class="page-block-bg__img" [src]="data?.acf?.case6?.gallery_background?.url" alt="">
+<div class="page-block-container">
+  <div class="page-block-bg" [ngStyle]="data?.background_color_opacity">
+    <img class="page-block-bg__img" *ngIf="data?.slide_background?.url" [src]="data?.slide_background?.url" alt="">
+  </div>
 
   <div class="container">
     <div class="content-container">
       <div class="heading">
-        <h1 class="heading__title">{{'Фотоотчет' | translate}}</h1>
-        <div class="heading__description" [innerHTML]="data?.acf?.case6?.text_gallery">
+        <h1 class="heading__title">{{ data?.title }}</h1>
+        <div class="heading__description" [innerHTML]="data?.text_gallery">
 
         </div>
       </div>
@@ -32,4 +33,4 @@
   <div class="pagination" *ngIf="slider">
     <span class="pagination__link" *ngFor="let slide of slider.slideList; let i = index;" (click)="slider.goToSlide(i)" [ngClass]="{active: i == slider.currentSlide}">{{ i + 1 }}</span>
   </div>
-</ng-container>
+</div>
