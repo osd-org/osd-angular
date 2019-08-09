@@ -47,7 +47,27 @@
       max-width: 235px;
       &__part {
         &--no-animation {
-          display: block;
+          display: flex;
+
+          .left {
+            width: 79px;
+          }
+
+          .right {
+            width: 134px;
+          }
+
+          .overlay {
+            width: 0;
+            overflow: hidden;
+            transition: 0.3s width;
+          }
+
+          &:hover {
+            .overlay {
+              width: 100%;
+            }
+          }
         }
         &--mobile {
           display: none;
@@ -56,6 +76,7 @@
 
       img {
         height: 100%;
+        object-fit: contain;
       }
 
       @include media-below($bp-ld) {

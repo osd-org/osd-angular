@@ -2,12 +2,18 @@
     <div class="container">
         <header class="header">
             <a href="/" class="logo">
-              <div
-              class="logo__part--no-animation"
-              (mouseover)="logoImg = '/assets/img/content/osd_logo_animation.gif'"
-              (mouseout)="logoImg = '/assets/img/content/osd_logo_no-animation.png'"
-              >
-                  <img [src]="logoImg" alt="Logo">
+              <div class="logo__part--no-animation">
+                <div class="left">
+                  <div class="overlay">
+                    <img src="/assets/svg/logo-left.svg" alt="">
+                  </div>
+                </div>
+                <img src="/assets/svg/fill_1.svg" alt="">
+                <div class="right">
+                  <div class="overlay">
+                    <img src="/assets/svg/logo-right.svg" alt="">
+                  </div>
+                </div>
               </div>
               <div class="logo__part--mobile">
                   <img src="/assets/svg/fill_1.svg" alt="Logo">
