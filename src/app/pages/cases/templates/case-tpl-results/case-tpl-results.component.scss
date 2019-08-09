@@ -1,0 +1,113 @@
+@import "variables";
+@import "mixins";
+
+.page-block-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    position: relative;
+}
+
+.page-block {
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  padding-top: $header-height;
+  box-sizing: border-box;
+  overflow: hidden;
+  @include media-below($bp-sm) {
+    padding-top: $header-height-mobile;
+  }
+  &-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    &__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+  }
+  &.full {
+    width: 100%;
+  }
+
+  .title {
+    color: #fff;
+    @include font(36px, 600);
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  .image {
+    width: 100%;
+    height: 75%;
+    text-align: center;
+    img {
+      height: 100%;
+    }
+  }
+
+  .bottom__link {
+    width: 100%;
+    max-width: 550px;
+    height: 87px;
+    border: 2px solid #fff;
+    margin: 0 auto;
+    color: #fff;
+    @include font(18px, 400);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+      cursor: pointer;
+    }
+    &-more {
+      text-align: center;
+      position: absolute;
+      bottom: 30px;
+      width: 100%;
+    }
+    .icon {
+      @include font(42px, 400);
+      position: absolute;
+      right: 20px;
+      bottom: 7px;
+    }
+  }
+
+  .counter {
+    &-list {
+      @include flex(row, center, center);
+      height: 65%;
+      &__item {
+        width: 30%;
+        height: 100%;
+        .outer {
+          @include flex(row, center, center);
+          height: 100%;
+        }
+
+        svg {
+          height: 100%;
+          overflow: visible;
+          z-index: 1;
+        }
+
+        text {
+          fill: #fff;
+          font-size: 125%;
+          &.small {
+            font-size: 35%;
+          }
+        }
+      }
+    }
+  }
+}
+

@@ -16,8 +16,6 @@ export class CaseTplSeventhComponent implements OnInit, OnDestroy {
 
   @Input('data')
   set _setData(v : any) {
-    console.log(v);
-
     this._data = v;
     this.countsList = this.data.acf[this.data.slug]['counts'];
     this.partyList = this.data.acf[this.data.slug]['party'];
