@@ -15,6 +15,9 @@
   padding-top: $header-height;
   box-sizing: border-box;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   @include media-below($bp-sm) {
     padding-top: $header-height-mobile;
   }
@@ -50,6 +53,20 @@
     text-align: center;
     img {
       height: 100%;
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .link {
+    border-radius: 58px;
+    background-color: rgba(255, 255, 255, 0.8);
+    margin: 0 auto;
+    text-align: center;
+    a {
+      font-size: 48px;
+      padding: 14px;
+      display: block;
     }
   }
 
@@ -59,8 +76,10 @@
     height: 87px;
     border: 2px solid #fff;
     margin: 0 auto;
+    margin-bottom: 30px;
     color: #fff;
     text-shadow: 1px 0px 2px #000;
+    box-shadow: 1px 0px 2px #000;
     @include font(18px, 400);
     position: relative;
     display: flex;

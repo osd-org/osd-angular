@@ -14,6 +14,8 @@ export class CaseTplResultsComponent implements OnInit {
   @Input('data')
   set _setData(v : any) {
     this._data = v;
+    console.log(v);
+
     this._returnBlockStyle();
     this._returnCircleFillAndText();
   }

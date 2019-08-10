@@ -7,11 +7,11 @@
   <div class="container page-block">
     <div class="title" *ngIf="data?.title">{{data?.title}}</div>
 
-    <div class="image" *ngIf="data?.counter_or_photo === 'фото'">
+    <div class="image" *ngIf="data?.counter_or_photo_or_link === 'фото'">
       <img *ngIf="data?.photo?.url" [src]="data?.photo?.url" alt="" />
     </div>
 
-    <div class="counter-list" *ngIf="data?.counter_or_photo !== 'фото'">
+    <div class="counter-list" *ngIf="data?.counter_or_photo_or_link === 'счетчик'">
       <div class="counter-list__item" *ngFor="let item of data?.counts; let i = index;">
         <div class="outer">
           <svg viewBox="0 0 140 140" preserveAspectRatio="xMinYMin meet" [style.zIndex]="i === 1 ? 2 : 1">
@@ -34,6 +34,10 @@
           </svg>
         </div>
       </div>
+    </div>
+
+    <div class="link" *ngIf="data?.counter_or_photo_or_link === 'ссылка'">
+      <a [href]="data?.link?.link_url" target="_blank" [ngStyle]="{'color': data?.link?.link_color}">{{data?.link?.link_text}}</a>
     </div>
 
     <div class="bottom__link" *ngIf="data?.more_cases" [routerLink]="['/' + LANG + '/cases']">

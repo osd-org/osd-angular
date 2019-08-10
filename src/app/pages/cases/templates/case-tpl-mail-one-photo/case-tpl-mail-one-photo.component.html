@@ -7,7 +7,7 @@
     <div class="container page-block">
       <div class="title" *ngIf="data?.title">{{data?.title}}</div>
 
-      <div class="image">
+      <div class="image" [ngStyle]="{'margin-bottom': data?.bottom_text ? '0px' : '30px'}">
         <img *ngIf="data?.photo?.url" [src]="data?.photo?.url" alt="" />
       </div>
 
