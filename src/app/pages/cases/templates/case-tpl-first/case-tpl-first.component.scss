@@ -2,19 +2,24 @@
 @import "mixins";
 
 .page-block-container {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  position: relative;
+  @include media-below($bp-ld) {
+    // height: auto;
+  }
 }
 
 .page-block {
     width: 50%;
     height: 100%;
     color: #fff;
-    padding-top: 120px;
+    padding-top: $header-height;
     box-sizing: border-box;
-
+    @include media-below($bp-sm) {
+      padding-top: $header-height-mobile;
+    }
     &-bg {
         position: absolute;
         width: 100%;
@@ -58,6 +63,25 @@
         .text-block {
             padding-right: 70px;
         }
+    }
+    @include media-below($bp-ld) {
+      width: 100%;
+    }
+    @include media-below($bp-sm) {
+      &.left {
+        .text-block,
+        .client {
+          padding: 20px;
+          padding-left: 20px;
+        }
+      }
+      &.right {
+        .text-block {
+          padding: 20px;
+          padding-left: 20px;
+        }
+      }
+
     }
 }
 
@@ -130,5 +154,8 @@
         left: 0;
         width: 100%;
         text-align: center;
+    }
+    @include media-below($bp-ld) {
+      display: none;
     }
 }

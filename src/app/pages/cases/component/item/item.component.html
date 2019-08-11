@@ -1,23 +1,44 @@
 <app-page-layout>
   <ng-container *ngIf="casePost?.length">
-    <app-rush-slider
-      class="slider"
-      [config]="sliderConfig"
-      (init)="sliderInit($event)"
-      *ngIf="sliderLoad"
-    >
-      <app-rush-slide class="slide" *ngFor="let item of casePost">
-        <ng-container [ngSwitch]="item?.template">
-          <app-case-tpl-first *ngSwitchCase="'tpl1'" [data]="item[item?.template]" [slider]="slider"></app-case-tpl-first>
-          <app-cases-tpl-third  *ngSwitchCase="'tpl2'" [data]="item[item?.template]"></app-cases-tpl-third>
-          <app-case-tpl-galery  *ngSwitchCase="'tpl3'" [data]="item[item?.template]"></app-case-tpl-galery>
-          <app-case-tpl-fourth  *ngSwitchCase="'tpl4'" [data]="item[item?.template]"></app-case-tpl-fourth>
-          <app-case-tpl-fifth   *ngSwitchCase="'tpl5'" [data]="item[item?.template]"></app-case-tpl-fifth>
-          <app-case-tpl-mail *ngSwitchCase="'tpl6'" [data]="item[item?.template]"></app-case-tpl-mail>
-          <app-case-tpl-mail-one-photo *ngSwitchCase="'tpl7'" [data]="item[item?.template]"></app-case-tpl-mail-one-photo>
-          <app-case-tpl-results *ngSwitchCase="'tpl8'" [data]="item[item?.template]"></app-case-tpl-results>
+
+    <ng-container *appShellMedia="{type: 'below', width: 1080}">
+      <app-rush-slider
+        class="slider"
+        [config]="sliderConfig"
+        (init)="sliderInit($event)"
+        *ngIf="sliderLoad"
+      >
+        <app-rush-slide class="slide" *ngFor="let item of casePost">
+          <ng-container [ngSwitch]="item?.template">
+            <app-case-tpl-first *ngSwitchCase="'tpl1'" [data]="item[item?.template]" [slider]="slider"></app-case-tpl-first>
+            <app-cases-tpl-third  *ngSwitchCase="'tpl2'" [data]="item[item?.template]"></app-cases-tpl-third>
+            <app-case-tpl-galery  *ngSwitchCase="'tpl3'" [data]="item[item?.template]"></app-case-tpl-galery>
+            <app-case-tpl-fourth  *ngSwitchCase="'tpl4'" [data]="item[item?.template]"></app-case-tpl-fourth>
+            <app-case-tpl-fifth   *ngSwitchCase="'tpl5'" [data]="item[item?.template]"></app-case-tpl-fifth>
+            <app-case-tpl-mail *ngSwitchCase="'tpl6'" [data]="item[item?.template]"></app-case-tpl-mail>
+            <app-case-tpl-mail-one-photo *ngSwitchCase="'tpl7'" [data]="item[item?.template]"></app-case-tpl-mail-one-photo>
+            <app-case-tpl-results *ngSwitchCase="'tpl8'" [data]="item[item?.template]"></app-case-tpl-results>
+          </ng-container>
+        </app-rush-slide>
+      </app-rush-slider>
+    </ng-container>
+
+    <ng-container *appShellMedia="{type: 'above', width: 1080}">
+      <div class="page-content">
+        <ng-container *ngFor="let item of casePost">
+          <ng-container [ngSwitch]="item?.template">
+              <app-case-tpl-first *ngSwitchCase="'tpl1'" [data]="item[item?.template]" [slider]="slider"></app-case-tpl-first>
+              <app-cases-tpl-third  *ngSwitchCase="'tpl2'" [data]="item[item?.template]"></app-cases-tpl-third>
+              <app-case-tpl-galery  *ngSwitchCase="'tpl3'" [data]="item[item?.template]"></app-case-tpl-galery>
+              <app-case-tpl-fourth  *ngSwitchCase="'tpl4'" [data]="item[item?.template]"></app-case-tpl-fourth>
+              <app-case-tpl-fifth   *ngSwitchCase="'tpl5'" [data]="item[item?.template]"></app-case-tpl-fifth>
+              <app-case-tpl-mail *ngSwitchCase="'tpl6'" [data]="item[item?.template]"></app-case-tpl-mail>
+              <app-case-tpl-mail-one-photo *ngSwitchCase="'tpl7'" [data]="item[item?.template]"></app-case-tpl-mail-one-photo>
+              <app-case-tpl-results *ngSwitchCase="'tpl8'" [data]="item[item?.template]"></app-case-tpl-results>
+          </ng-container>
         </ng-container>
-      </app-rush-slide>
-    </app-rush-slider>
+      </div>
+    </ng-container>
+
   </ng-container>
 </app-page-layout>

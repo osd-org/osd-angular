@@ -9,3 +9,13 @@
 .slide {
   user-select: none;
 }
+
+.page-content {
+  margin-bottom: 0;
+  @include media-below($bp-sm) {
+    height: $content-height--no-footer-mob;
+    overflow-y: auto;
+    overflow-x: visible;
+    @include hiddeScrollBar();
+  }
+}
