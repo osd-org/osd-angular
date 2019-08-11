@@ -5,7 +5,7 @@
       <!-- 1 PART -->
       <ng-container *ngIf="slide?.slide_content?.length === 1">
         <div class="page-block-container">
-          <img class="page-block-bg" [src]="slide?.slide_background?.url" alt="">
+          <img class="page-block-bg" *ngIf="slide?.slide_background?.url" [src]="slide?.slide_background?.url" alt="">
           <div class="page-block full" [ngStyle]="returnBlockStyle(slide?.slide_content[0])">
             <ng-container *ngFor="let content of [slide?.slide_content[0]]">
               <ng-container *ngIf="content.type_content === contentType.TEXT">
@@ -22,7 +22,7 @@
       <!-- 2 PARTS -->
       <ng-container *ngIf="slide?.slide_content?.length === 2">
         <div class="page-block-container">
-          <img class="page-block-bg" [src]="slide?.slide_background?.url" alt="">
+          <img class="page-block-bg" *ngIf="slide?.slide_background?.url" [src]="slide?.slide_background?.url" alt="">
           <div class="page-block left" [ngStyle]="returnBlockStyle(slide?.slide_content[0])">
             <ng-container *ngFor="let content of [slide?.slide_content[0]]">
               <ng-container *ngIf="content.type_content === contentType.TEXT">
@@ -48,12 +48,12 @@
     </app-rush-slide>
   </app-rush-slider>
 
-  <div class="slider-controls">
+  <div class="slider-controls" *ngIf="slideList?.length > 1">
     <div class="slider-controls__btn prev" (click)="slider.prevSlide()"><i class="icon-arrow"></i></div>
     <div class="slider-controls__btn next" (click)="slider.nextSlide()"><i class="icon-arrow"></i></div>
   </div>
 
-  <div class="pagination" *ngIf="slider">
+  <div class="pagination" *ngIf="slideList?.length > 1">
     <span class="pagination__link" *ngFor="let slide of slider.slideList; let i = index;" (click)="slider.goToSlide(i)" [ngClass]="{active: i == slider.currentSlide}">{{ i + 1 }}</span>
   </div>
 </ng-container>
@@ -67,7 +67,10 @@
 <ng-template #text let-content="content">
   <div class="text-block">
     <div class="text-block__title">{{ content?.title }}</div>
-    <div [innerHtml]="content?.text"></div>
+    <div class="text-block__list-item" *ngFor="let listItem of content?.list">
+      <i class="icon-arrow"></i>
+      <div [innerHTML]="listItem?.text"></div>
+    </div>
   </div>
 </ng-template>
 
