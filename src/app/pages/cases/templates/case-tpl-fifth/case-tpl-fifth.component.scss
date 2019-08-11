@@ -17,6 +17,10 @@
 .slider-controls {
   position: absolute;
   width: 1200px;
+
+  @include height-below($bp-height) {
+    width: 900px;
+  }
 }
 
 .content-container {
@@ -38,12 +42,22 @@
     text-align: center;
     margin-top: 28px;
     margin-bottom: 28px;
+
+    @include height-below($bp-height) {
+      @include font(26px);
+      margin: 10px 0;
+    }
   }
 
   &__description {
     @include font(20px);
     margin-top: 0;
     margin-bottom: 20px;
+
+    @include height-below($bp-height) {
+      @include font(16px);
+      margin-bottom: 10px;
+    }
   }
 }
 
@@ -74,7 +88,6 @@
 .pagination {
   position: static;
   margin-top: 17px;
-  margin-bottom: 40px;
 }
 
 .img-slide {
@@ -83,4 +96,11 @@
   object-fit: cover;
   user-select: none;
   pointer-events: none;
+
+  @include height-below($bp-height) {
+    max-height: 350px;
+    width: 70%;
+    display: block;
+    margin: 0 auto;
+  }
 }

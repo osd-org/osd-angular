@@ -129,6 +129,12 @@ a {
 .block-video {
   height: 100%;
   width: 100%;
+
+  @include height-below($bp-height) {
+    width: 70%;
+    margin: 0 auto;
+  }
+
   iframe {
     width: 100%;
     height: 60vh;

@@ -20,6 +20,11 @@
     @include media-below($bp-sm) {
       padding-top: $header-height-mobile;
     }
+
+    @include height-below($bp-height) {
+        padding-top: 95px;
+    }
+
     &-bg {
         position: absolute;
         width: 100%;
@@ -51,6 +56,10 @@
 
             &__title {
                 @include font(42px, 600);
+
+                @include height-below($bp-height) {
+                    @include font(30px);
+                }
             }
         }
     }
@@ -99,10 +108,19 @@
     &__list {
         margin-top: 20px;
 
+        @include height-below($bp-height) {
+            margin-top: 5px;
+        }
+
         &-title {
             @include font(32px);
             text-transform: uppercase;
             margin-bottom: 20px;
+
+            @include height-below($bp-height) {
+                @include font(22px);
+                margin-bottom: 10px;
+            }
         }
 
         &-item {
@@ -112,6 +130,11 @@
             box-sizing: border-box;
             position: relative;
             max-width: 480px;
+
+            @include height-below($bp-height) {
+                @include font(16px);
+                margin-bottom: 10px
+            }
 
             i {
                 @include font(14px);
@@ -134,6 +157,12 @@
     margin-top: 80px;
     transition: 0.2s background-color;
 
+    @include height-below($bp-height) {
+        width: 150px;
+        height: 140px;
+        margin-top: 40px;
+    }
+
     &:hover {
         background-color: rgba(#eee, 0.3);
     }
@@ -145,6 +174,10 @@
         left: 50%;
         transform: translate(-50%, -50%);
         display: flex;
+
+        @include height-below($bp-height) {
+            @include font(20px);
+        }
     }
 
     &__label {
