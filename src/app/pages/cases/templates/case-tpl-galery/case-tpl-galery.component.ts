@@ -21,7 +21,6 @@ export class CaseTplGaleryComponent implements OnInit {
 
   @Input('data')
   set _setData(v : any) {
-    console.log(v);
     this._data = v;
     this._reloadSlider();
     this._returnBlockStyle();
