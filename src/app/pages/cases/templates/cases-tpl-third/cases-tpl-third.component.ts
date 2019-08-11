@@ -12,12 +12,17 @@ import { hexToRgba } from '../../../../core/helpers/colorHexToRgba';
 export class CasesTplThirdComponent implements OnInit {
 
   public sliderLoad = false;
+  public slider: RushSliderService;
+  public sliderConfig: Map<number, RushSliderConfig>;
   private _data: any
+  public contentType = CaseSlideContentType;
+  public slideList: Array<any> = [];
 
   @Input('data')
   set _setData(v : any) {
     this._data = v;
-    this.slideList = this.data.acf[this.data.slug].slide;
+    console.log(v);
+    this.slideList = v['slide'];
     this._reloadSlider();
   }
 
@@ -25,22 +30,12 @@ export class CasesTplThirdComponent implements OnInit {
     return this._data;
   }
 
-
-
-  public contentType = CaseSlideContentType;
-
-  public slider: RushSliderService;
-
-  public sliderConfig: Map<number, RushSliderConfig>;
-
-  public slideList: Array<any> = [];
-
   constructor() {
     this._initConfig();
   }
 
   ngOnInit() {
-    console.log(this.slideList);
+
   }
 
   sliderInit(e) {
