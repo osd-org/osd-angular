@@ -53,6 +53,10 @@
       <a [href]="data?.link?.link_url" target="_blank" [ngStyle]="{'color': data?.link?.link_color}">{{data?.link?.link_text}}</a>
     </div>
 
+    <div class="video" *ngIf="data?.counter_or_photo_or_link === 'видео'">
+      <div class="block-video" [innerHTML]="data?.video | sanitizeHtml"></div>
+    </div>
+
     <div class="bottom__link" *ngIf="data?.more_cases" [routerLink]="['/' + LANG + '/cases']">
       <i class="icon icon-arrow"></i>
       <div class="bottom__link-more">{{'ЕЩЕ КЕЙСЫ' | translate}}</div>
