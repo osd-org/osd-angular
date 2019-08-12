@@ -135,6 +135,10 @@ a {
     margin: 0 auto;
   }
 
+  @include media-below($bp-ld) {
+    width: 100%;
+  }
+
   iframe {
     width: 100%;
     height: 60vh;
