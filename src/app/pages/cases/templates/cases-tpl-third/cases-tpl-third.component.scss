@@ -7,6 +7,9 @@
     width: 100%;
     height: 100vh;
     display: block;
+    @include media-below($bp-ld) {
+      height: 100%;
+    }
 }
 
 .slider {
@@ -32,6 +35,10 @@
     height: 100%;
     display: flex;
     position: relative;
+    @include media-below($bp-ld) {
+      width: 100%;
+      flex-direction: column;
+    }
 }
 
 .page-block {
@@ -73,6 +80,10 @@
 
         .text-block {
             padding-right: 70px;
+            @include media-below($bp-ld) {
+              padding-left: 20px;
+              padding-right: 0;
+            }
         }
     }
 
@@ -83,6 +94,9 @@
         max-width: 600px;
         left: calc(50% - 300px);
       }
+    }
+    @include media-below($bp-ld) {
+      width: 100%;
     }
 }
 
@@ -124,6 +138,16 @@
       }
   }
 
+  @include media-below($bp-ld) {
+    position: initial;
+    width: 100%;
+    transform: unset;
+    &__list {
+      &-item {
+        @include font(14px, 400);
+      }
+    }
+  }
 }
 
 .block-img-container {
@@ -136,5 +160,12 @@
         bottom: 0;
         max-height: 90%;
         max-width: 100%;
+    }
+    @include media-below($bp-ld) {
+      .block-img {
+        position: initial;
+        max-height: 90%;
+        max-width: 100%;
+      }
     }
 }
