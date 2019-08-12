@@ -29,6 +29,7 @@
     position: relative;
     z-index: 2;
     pointer-events: none;
+    @include hiddeScrollBar();
   }
 
   @include media-below($bp-sm) {
