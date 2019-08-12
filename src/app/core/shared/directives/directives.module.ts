@@ -7,6 +7,7 @@ import { AppShellNoSSRDirective } from './appshell/app-shell-no-ssr.directive';
 import { AppShellMobileDirective } from './appshell/app-shell-mobile.directive';
 import { AppShellNoMobileDirective } from './appshell/app-shell-no-mobile.directive';
 import { AppShellMediaDirective } from './appshell/app-shell-media.directive';
+import { fittyDirective } from './fitty/fitty.directive';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { AppShellMediaDirective } from './appshell/app-shell-media.directive';
     AppShellNoSSRDirective,
     AppShellMobileDirective,
     AppShellNoMobileDirective,
-    AppShellMediaDirective
+    AppShellMediaDirective,
+    fittyDirective
   ],
   exports: [
     horisontalScrollDirective,
@@ -28,7 +30,8 @@ import { AppShellMediaDirective } from './appshell/app-shell-media.directive';
     AppShellNoSSRDirective,
     AppShellMobileDirective,
     AppShellNoMobileDirective,
-    AppShellMediaDirective
+    AppShellMediaDirective,
+    fittyDirective
   ]
 })
 
