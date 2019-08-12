@@ -81,10 +81,12 @@ export class ItemComponent implements OnInit, OnDestroy {
     fromEvent(document, 'wheel').pipe(
       untilDestroyed(this)
     ).subscribe((e: MouseWheelEvent) => {
-      if (e.deltaY > 0) {
-        this.slider.nextSlide();
-      } else {
-        this.slider.prevSlide();
+      if (this.slider) {
+        if (e.deltaY > 0) {
+          this.slider.nextSlide();
+        } else {
+          this.slider.prevSlide();
+        }
       }
     });
   }
