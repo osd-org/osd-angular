@@ -58,6 +58,12 @@
   }
 }
 
+@mixin height-below($breakpoint) {
+  @media (max-height: ($breakpoint - 1)) {
+    @content;
+  }
+}
+
 @mixin flex($direction: row, $justify: flex-start, $align-items: flex-start) {
   display: flex;
   flex-wrap: wrap;
