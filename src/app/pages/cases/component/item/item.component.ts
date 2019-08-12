@@ -1,10 +1,10 @@
 import { BackgroundService, BackgroundColor } from '../../../../core/shared/layouts/layout-components/background/background.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ComponentRef } from '@angular/core';
 import { CaseService } from '../../case.service';
 import { ActivatedRoute } from '@angular/router';
 import { untilDestroyed } from '@osd-rxjs/operators';
 import { PageService } from '@osd-services/page.service';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, debounceTime } from 'rxjs/operators';
 import { CaseSlideContentType } from '../../case.service';
 import { RushSliderConfig } from '../../../../core/shared/components/rush-slider/rush-slider-config';
 import { RushSliderService } from '../../../../core/shared/components/rush-slider/rush-slider.service';
@@ -20,12 +20,14 @@ export class ItemComponent implements OnInit, OnDestroy {
 
   public sliderLoad = false;
   public casePost: any[] = null;
-
+  public progress;
+  private _scrollEventMouse$;
 
   public contentType = CaseSlideContentType;
   public slider: RushSliderService;
   public sliderConfig: Map<number, RushSliderConfig>;
   public slideList: Array<any> = [];
+  @ViewChild('sliderEl') sliderEl: ComponentRef<any>;
 
   constructor(
     private _case: CaseService,
@@ -74,6 +76,7 @@ export class ItemComponent implements OnInit, OnDestroy {
     this.sliderLoad = false;
     setTimeout(() => {
       this.sliderLoad = true;
+      this._scrollEvent$();
     });
   }
 
@@ -89,11 +92,26 @@ export class ItemComponent implements OnInit, OnDestroy {
         }
       }
     });
+
   }
 
 
-  ngOnDestroy() {
+  private _scrollEvent$() {
+    this._scrollEventMouse$ = fromEvent((<any>window), 'wheel')
+    .pipe(
+      debounceTime(100),
+    )
+    .subscribe(e => {
+      this._horisontalScrolling(e)
+    });
+  }
 
+  private _horisontalScrolling(e) {
+    this.progress = (this.slider.currentSlide / (this.slider.slideList.length - 1)) * 100;
+  }
+
+  ngOnDestroy() {
+    this._scrollEventMouse$.unsubscribe();
   }
 
 }

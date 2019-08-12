@@ -18,3 +18,26 @@
   margin-bottom: 0;
   z-index: 1;
 }
+
+
+.range-control {
+  position: relative;
+  margin-top: 15px;
+  background-color: rgba(0, 0, 0, 0.35);
+  width: 100%;
+  height: 12px;
+  border-radius: 5px;
+  .bar {
+    position: absolute;
+    top: 0;
+    width: 0%;
+    height: 12px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.35);
+    z-index: 1;
+    transition: 0.5s;
+  }
+  @include media-below($bp-ld) {
+    display: none;
+  }
+}
