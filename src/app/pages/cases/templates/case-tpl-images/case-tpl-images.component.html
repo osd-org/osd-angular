@@ -1,16 +1,32 @@
 <div class="page-block-container">
-  <div class="page-block-bg" [ngStyle]="data?.background_color_opacity">
-    <img class="page-block-bg__img" *ngIf="data?.slide_background?.url" [src]="data?.slide_background?.url" alt="" />
+  <div class="page-block-bg"></div>
+
+  <app-rush-slider *ngIf="sliderLoad" (init)="sliderInit($event)" [config]="sliderConfig">
+    <app-rush-slide *ngFor="let slide of data?.slide">
+      <div class="page-block">
+        <div class="title" *ngIf="slide?.title">{{slide?.title}}</div>
+        <div class="images-container">
+          <ng-container *ngIf="slide?.slide_content[0]">
+            <img class="left-img small" *ngIf="slide?.slide_content[0]?.small_img" [src]="slide?.slide_content[0]?.small_img.url" alt="">
+            <img class="left-img big" *ngIf="slide?.slide_content[0]?.big_img" [src]="slide?.slide_content[0]?.big_img.url" alt="">
+          </ng-container>
+
+          <ng-container *ngIf="slide?.slide_content[1]">
+            <img class="right-img small" *ngIf="slide?.slide_content[1]?.small_img" [src]="slide?.slide_content[1]?.small_img.url" alt="">
+            <img class="right-img big" *ngIf="slide?.slide_content[1]?.big_img" [src]="slide?.slide_content[1]?.big_img.url" alt="">
+          </ng-container>
+        </div>
+      </div>
+    </app-rush-slide>
+  </app-rush-slider>
+
+  <div class="slider-controls">
+    <div class="slider-controls__btn prev" (click)="slider.prevSlide()"><i class="icon-arrow"></i></div>
+    <div class="slider-controls__btn next" (click)="slider.nextSlide()"><i class="icon-arrow"></i></div>
   </div>
 
-  <div class="container page-block">
-    <div class="title" *ngIf="data?.title">{{data?.title}}</div>
-
-    <div class="image" [ngStyle]="{'margin-bottom': data?.bottom_text ? '0px' : '30px'}">
-      <img *ngIf="data?.photo?.url" [src]="data?.photo?.url" alt="" />
-    </div>
-
-    <div class="bottom_text" *ngIf="data?.bottom_text">{{data?.bottom_text}}</div>
+  <div class="pagination" *ngIf="slider">
+    <span class="pagination__link" *ngFor="let slide of slider.slideList; let i = index;" (click)="slider.goToSlide(i)" [ngClass]="{active: i == slider.currentSlide}">{{ i + 1 }}</span>
   </div>
 
 </div>

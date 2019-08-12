@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {hexToRgba} from '../../../../core/helpers/colorHexToRgba';
+import {RushSliderService} from '../../../../core/shared/components/rush-slider/rush-slider.service';
+import {RushSliderConfig} from '../../../../core/shared/components/rush-slider/rush-slider-config';
 
 @Component({
   selector: 'app-case-tpl-images',
@@ -10,24 +11,44 @@ export class CaseTplImagesComponent implements OnInit {
 
   private _data: any;
 
+  public sliderLoad: boolean;
+
+  public sliderConfig: Map<number, RushSliderConfig>;
+  public slider: RushSliderService;
+
   @Input('data')
   set _setData(v : any) {
     this._data = v;
-
-    this._returnBlockStyle();
+    this._reloadSlider();
   }
 
-  constructor() { }
+  constructor() {
+    this._initConfig();
+  }
 
   ngOnInit() {
+  }
+
+  sliderInit(slider: RushSliderService) {
+    this.slider = slider;
   }
 
   public get data(): any {
     return this._data;
   }
 
-  private _returnBlockStyle() {
-    this.data.background_color_opacity = {'background-color': hexToRgba(this.data.background_color, this.data.background_opacity / 100)};
+  private _initConfig() {
+    this.sliderConfig = new Map();
+    this.sliderConfig.set(1400, {
+      speed: 400,
+    })
+  }
+
+  private _reloadSlider() {
+    this.sliderLoad = false;
+    setTimeout(() => {
+      this.sliderLoad = true;
+    });
   }
 
 }
