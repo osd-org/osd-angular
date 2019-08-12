@@ -21,10 +21,18 @@
   @include height-below($bp-height) {
     width: 900px;
   }
+
+  @include media-below($bp-ld) {
+    width: 100%;
+  }
 }
 
 .content-container {
   margin: 0 60px;
+
+  @include media-below($bp-ld) {
+    margin: 0;
+  }
 }
 
 .container {
@@ -47,6 +55,10 @@
       @include font(26px);
       margin: 10px 0;
     }
+
+    @include media-below($bp-ld) {
+      @include font(18px);
+    }
   }
 
   &__description {
@@ -58,6 +70,11 @@
       @include font(16px);
       margin-bottom: 10px;
     }
+
+    @include media-below($bp-ld) {
+      @include font(12px);
+      text-align: center;
+    }
   }
 }
 
@@ -67,6 +84,10 @@
     height: 100vh;
     position: relative;
     overflow: auto;
+
+    @include media-below($bp-ld) {
+      height: auto;
+    }
   }
 
   &-bg {
@@ -102,5 +123,10 @@
     width: 70%;
     display: block;
     margin: 0 auto;
+  }
+
+  @include media-below($bp-ld) {
+    width: 100%;
+    max-height: 400px;
   }
 }

@@ -19,7 +19,7 @@
         pointer-events: all;
         color: #fff;
 
-        @include media-below($bp-sm) {
+        @include media-below($bp-md) {
             border-radius: 0;
         }
     }
@@ -32,7 +32,7 @@
     overflow: auto;
     box-sizing: border-box;
 
-    @include media-below($bp-sm) {
+    @include media-below($bp-md) {
         min-height: 100vh;
         width: 100vw;
     }

@@ -46,7 +46,8 @@ export class CasesTplThirdComponent implements OnInit {
     this.sliderConfig = new Map();
     this.sliderConfig.set(1400, {
       speed: 1000,
-      infinite: false
+      infinite: false,
+      ignoreSwipe: true
     })
   }
 
