@@ -20,6 +20,7 @@
         height: 100%;
         width: auto;
         max-width: 80%;
+        object-fit: contain;
     }
     @include media-below($bp-ld) {
       margin-top: 10px;
