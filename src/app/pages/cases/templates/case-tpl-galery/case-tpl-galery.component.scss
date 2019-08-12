@@ -113,6 +113,17 @@
       }
     }
   }
+
+  @include media-below($bp-sm) {
+    margin: 0 auto;
+    justify-content: center;
+    &__item {
+    width: 48%;
+       img {
+         height: auto;
+       }
+    }
+  }
 }
 
 .page-block {
@@ -146,4 +157,7 @@
 .pagination {
   position: static;
   margin-top: 17px;
+  @include media-below($bp-ld) {
+    margin-bottom: 20px;
+  }
 }
