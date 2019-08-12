@@ -20,7 +20,7 @@ export class ItemComponent implements OnInit, OnDestroy {
 
   public sliderLoad = false;
   public casePost: any[] = null;
-  public progress;
+  public progress = 0;
   private _scrollEventMouse$;
 
   public contentType = CaseSlideContentType;
@@ -49,6 +49,7 @@ export class ItemComponent implements OnInit, OnDestroy {
     ).subscribe((res) => {
       this._case.resolveCurrentCasePost(res[0]);
       this.casePost = res[0]['acf']['slide'];
+      this._case.currentCaseId = res[0]['id'];
       this._reloadSlider();
     });
 

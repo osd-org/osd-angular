@@ -15,6 +15,7 @@ export enum CaseSlideContentType {
 export class CaseService {
 
   private _caseList: any[] = [];
+  private _currentCaseId = null;
 
   constructor(
     private _api: ApiService,
@@ -58,6 +59,14 @@ export class CaseService {
 
   public resolveCurrentCasePost(post: any) {
     this._seo.updateTags(post.acf)
+  }
+
+  public get currentCaseId() : any {
+    return this._currentCaseId;
+  }
+
+  public set currentCaseId(v : any) {
+    this._currentCaseId = v;
   }
 
 }

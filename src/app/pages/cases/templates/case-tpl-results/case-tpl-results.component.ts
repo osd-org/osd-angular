@@ -1,3 +1,6 @@
+import { CaseService } from './../../case.service';
+import { ApiService } from './../../../../core/services/api.service';
+import { Router } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
 import { hexToRgba } from 'app/core/helpers/colorHexToRgba';
 import { TranslationService } from 'app/core/shared/translation/translation.service';
@@ -19,10 +22,13 @@ export class CaseTplResultsComponent implements OnInit {
   }
 
   constructor(
-    private _translate: TranslationService
+    private _translate: TranslationService,
+    private _api: ApiService,
+    private _case: CaseService
   ) { }
 
   ngOnInit() {
+    this._getPrevNextCase();
   }
 
   public get data(): any {
@@ -53,4 +59,16 @@ export class CaseTplResultsComponent implements OnInit {
     return this._translate.lang;
   }
 
+
+  private _getPrevNextCase() {
+    if (this._case.currentCaseId) {
+      this._api.getWithCache('/case/item/' + this._case.currentCaseId).subscribe(e => {
+        this._data['next'] = e['body']['next'];
+        this._data['prev'] = e['body']['prev'];
+      });
+    } else {
+      this._data['next'] = null;
+      this._data['prev'] = null;
+    }
+  }
 }
