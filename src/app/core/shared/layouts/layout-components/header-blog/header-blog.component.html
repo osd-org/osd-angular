@@ -15,10 +15,10 @@
         </a>
 
           <div class="page-title" (click)="header?.routeToCategory()">
-            {{ header.title }}
+            {{ header.title | translate }}
             <div class="search">
               <i class="icon icon-search"></i>
-              <input type="text" placeholder="Поиск по блогам" #searchInputMob>
+              <input type="text" placeholder="{{ 'Поиск по блогам' | translate }}" #searchInputMob>
             </div>
           </div>
 
@@ -26,7 +26,7 @@
 
             <div class="search">
               <i class="icon icon-search"></i>
-              <input type="text" placeholder="Поиск по блогам" #searchInput>
+              <input type="text" placeholder="{{ 'Поиск по блогам' | translate }}" #searchInput>
             </div>
 
             <div class="langs">

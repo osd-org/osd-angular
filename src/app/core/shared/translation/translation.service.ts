@@ -31,6 +31,8 @@ export class TranslationService {
     'ua': LANG_UA
   };
 
+  private words: Set<string> = new Set<string>();
+
   private _langList: Array<any> = [];
 
   constructor(
@@ -41,6 +43,9 @@ export class TranslationService {
   ) {
     this._resolveCurrentLang();
 
+    setTimeout(() => {
+      console.log(this.words);
+    }, 20000);
   }
 
   get langResolved$(): ReplaySubject<boolean> {
@@ -117,6 +122,8 @@ export class TranslationService {
    */
   public translate(key, params = null): string {
     let translated = '';
+
+    this.words.add(key);
 
     if (isNullOrUndefined(this._dictionary[this._currentLang]) || isNullOrUndefined(this._dictionary[this._currentLang][key])) {
       translated = key;
