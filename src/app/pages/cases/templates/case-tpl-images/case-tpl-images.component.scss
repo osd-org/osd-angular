@@ -15,6 +15,10 @@
   }
 }
 
+.slide-list {
+  overflow: auto;
+}
+
 .pagination {
   &__link {
     &.active {
@@ -34,6 +38,10 @@
   height: 100vh;
   display: flex;
   position: relative;
+
+  @include media-below($bp-ld) {
+    height: auto;
+  }
 }
 
 .page-block {
@@ -48,8 +56,9 @@
   justify-content: space-between;
   position: relative;
 
-  @include media-below($bp-sm) {
-    padding-top: $header-height-mobile;
+  @include media-below($bp-ld) {
+    padding-top: 40px;
+    height: 400px;
   }
 
   &-bg {
@@ -68,6 +77,11 @@
     text-align: center;
     margin-top: 30px;
     margin-bottom: 20px;
+
+    @include media-below($bp-ld) {
+      @include font(18px, 600);
+      margin: 15px 0 10px 0;
+    }
   }
 }
 
@@ -85,18 +99,31 @@
     margin-right: 100px;
     transform: translateX(-50%);
     pointer-events: none;
+
+    @include media-below($bp-ld) {
+      margin-right: 10px;
+    }
   }
 
   .right-img {
     margin-left: 50px;
     transform: translateX(50%);
     pointer-events: none;
+
+    @include media-below($bp-ld) {
+      margin-left: 10px;
+    }
   }
 
   .big {
     position: absolute;
     bottom: 0;
     max-height: 75vh;
+
+    @include media-below($bp-ld) {
+      max-width: 50vw;
+      max-height: 300px;
+    }
   }
 
   .small {
@@ -105,6 +132,11 @@
     position: relative;
     max-height: 60vh;
     top: 60px;
+
+    @include media-below($bp-ld) {
+      max-width: 50vw;
+      max-height: 300px;
+    }
   }
 }
 
