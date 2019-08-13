@@ -18,3 +18,37 @@ p {
   background-color: #777;
   text-align: center;
 }
+
+.pascalca {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  top: calc(50% - 150px);
+  animation-timing-function: linear;
+  animation-iteration-count: initial;
+    img {
+      height: 100%;
+    }
+}
+
+@keyframes pascalcaMoveLeft {
+  0% {
+      visibility: visible;
+      transform: translateX(215vw);
+  }
+  100% {
+      visibility: visible;
+      transform: translateX(-215vw);
+  }
+}
+
+@keyframes pascalcaMoveRight {
+  0% {
+      visibility: visible;
+      transform: translateX(-215vw);
+    }
+    100% {
+      visibility: visible;
+      transform: translateX(215vw);
+  }
+}

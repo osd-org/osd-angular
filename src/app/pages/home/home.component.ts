@@ -8,6 +8,7 @@ import { ApiService } from '@osd-services/api.service';
 import { untilDestroyed } from '@osd-rxjs/operators';
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -27,15 +28,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   /**
    * Demo data for links slider
    */
-  public linksList = [
-    // {
-    //   url: '/',
-    //   fontSize: 32,
-    //   text: 'Дизайн',
-    //   bottomOffset: 30,
-    //   speed: 16
-    // },
-  ];
+  public linksList = [];
 
   /**
    * True if mobile version
@@ -49,13 +42,16 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public backgroundColor = BackgroundColor;
 
+  public pascalcaData: any = null;
+
   constructor(
     private _api: ApiService,
     private _platform: PlatformService,
     private _background: BackgroundService,
     private _page: PageService,
     private _seo: SeoService,
-    private _translate: TranslationService
+    private _translate: TranslationService,
+    private _cookie: CookieService
   ){
     if (_platform.isBrowser) {
       this.mobile = window.innerWidth <= 1080 || window.navigator.userAgent.indexOf('Trident/') >= 0;
@@ -92,12 +88,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private _getWordList() {
     this._page.loadPageBySlug('main').subscribe(e => {
+      this.pascalcaData = this._resolvePascal(e['acf']['pascalca']);
       this._seo.updateTags(e);
       this.linksList = e['acf']['fly_words'];
     })
-    // this._api.getWithCache('/slider/list').subscribe(e => {
-    //   this.slideList = e.body;
-    // })
   }
 
   /**
@@ -109,10 +103,33 @@ export class HomeComponent implements OnInit, OnDestroy {
       debounceTime(500)
     ).subscribe(() => {
       this.resize = true;
-
       setTimeout(() => {
         this.resize = false;
       }, 10);
     });
+  }
+
+  private _resolvePascal(pascal: any) {
+    if (pascal['direction'] === 'слева') {
+      pascal['style'] = {
+        'right': '-300px',
+        'animation-name': 'pascalcaMoveRight',
+        'animation-duration': pascal['speed'] + 's'
+      };
+    } else {
+      pascal['style'] = {
+        'left': '-300px',
+        'animation-name': 'pascalcaMoveLeft',
+        'animation-duration': pascal['speed'] + 's'
+      };
+    }
+    if (this._cookie.check('pascal')) {
+      pascal['show_pascalca'] = false;
+    } else {
+      if (pascal['show_pascalca']) {
+        this._cookie.set('pascal', '1', 999, '/');
+      }
+    }
+    return pascal;
   }
 }
