@@ -5,7 +5,11 @@
   </div>
 
   <div class="container page-block">
-    <div class="title" *ngIf="data?.title">{{data?.title}}</div>
+    <div
+    class="title"
+    *ngIf="data?.title"
+    [ngStyle]="{'color': data?.font_color}"
+    >{{data?.title}}</div>
 
     <div class="image" *ngIf="data?.counter_or_photo_or_link === 'фото'">
       <img *ngIf="data?.photo?.url" [src]="data?.photo?.url" alt="" />
@@ -14,22 +18,13 @@
     <div class="counter-list" *ngIf="data?.counter_or_photo_or_link === 'счетчик'">
       <div class="counter-list__item" *ngFor="let item of data?.counts; let i = index;">
         <div class="outer">
-          <svg viewBox="0 0 140 140" preserveAspectRatio="xMinYMin meet" [style.zIndex]="i === 1 ? 2 : 1">
+          <svg viewBox="0 0 160 160" width="100%" preserveAspectRatio="xMinYMin meet" [style.zIndex]="i === 1 ? 2 : 1">
             <g>
-              <ng-container *appShellMedia="{type: 'below', width: 1080}">
-                <circle
-                  [attr.r]="item?.max_rad + '%'"
-                  [attr.fill]="item?.background_color_opacity"
-                  cx="50%" cy="50%" class="circle-back"
-                  />
-              </ng-container>
-              <ng-container *appShellMedia="{type: 'above', width: 1080}">
-                  <circle
-                    [attr.r]="'40%'"
-                    [attr.fill]="item?.background_color_opacity"
-                    cx="50%" cy="50%" class="circle-back"
-                    />
-              </ng-container>
+              <circle
+                [attr.r]="item?.max_rad + '%'"
+                [attr.fill]="item?.background_color_opacity"
+                cx="50%" cy="50%" class="circle-back"
+                />
               <text
               x="50%" y="50%"
               text-anchor="middle"
@@ -58,9 +53,10 @@
     </div>
 
     <div class="bottom__link" *ngIf="data?.more_cases"
+      [ngStyle]="{'border-color': data?.font_color}"
       [routerLink]="['/' + LANG + '/cases' + (data?.prev?.slug ?  '/' + data?.prev?.slug : '')]">
       <i class="icon icon-arrow"></i>
-      <div class="bottom__link-more">{{ (data?.prev?.slug ? 'ЕЩЕ КЕЙС': 'ЕЩЕ КЕЙСЫ') | translate}}</div>
+      <div class="bottom__link-more" [ngStyle]="{'color': data?.font_color}">{{ (data?.prev?.slug ? 'ЕЩЕ КЕЙС': 'ЕЩЕ КЕЙСЫ') | translate}}</div>
     </div>
 
   </div>

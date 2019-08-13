@@ -44,7 +44,7 @@ export class CaseTplResultsComponent implements OnInit {
         e.background_color_opacity = hexToRgba(e.color, e.opacity / 100);
         e.multiLine = e.text.split('<br />');
         let y = 55;
-        let step = 2;
+        let step = 5;
         e.y = [];
         e.multiLine.forEach((l) => {
           y = y + 3 + step;
