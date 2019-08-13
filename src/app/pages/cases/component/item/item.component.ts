@@ -47,7 +47,7 @@ export class ItemComponent implements OnInit, OnDestroy {
       switchMap(params => this._case.getCasePostBySlug(params.slug)),
       untilDestroyed(this)
     ).subscribe((res) => {
-      this._case.resolveCurrentCasePost(res[0]);
+      this._case.resolveCurrentCasePost(res[0]['acf']['seo']);
       this.casePost = res[0]['acf']['slide'];
       this._case.currentCaseId = res[0]['id'];
       this._reloadSlider();

@@ -6,6 +6,7 @@ import { untilDestroyed } from '@osd-rxjs/operators';
 import { PageService } from '@osd-services/page.service';
 import { switchMap } from 'rxjs/operators';
 import { PlatformService } from '@osd-services/universal/platform.service';
+import { SeoService } from '@osd-services/seo.service';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class ItemComponent implements OnInit, OnDestroy {
     private _route: ActivatedRoute,
     private _background: BackgroundService,
     private _page: PageService,
-    public platform: PlatformService
+    public platform: PlatformService,
+    private _seo: SeoService
   ) {
    }
 

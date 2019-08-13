@@ -58,7 +58,7 @@ export class CaseService {
   }
 
   public resolveCurrentCasePost(post: any) {
-    this._seo.updateTags(post.acf)
+    this._seo.updateTags(post)
   }
 
   public get currentCaseId() : any {
