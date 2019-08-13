@@ -1,7 +1,7 @@
 import { BackgroundService, BackgroundColor } from '../../../../core/shared/layouts/layout-components/background/background.service';
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ComponentRef } from '@angular/core';
 import { CaseService } from '../../case.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { untilDestroyed } from '@osd-rxjs/operators';
 import { PageService } from '@osd-services/page.service';
 import { switchMap, debounceTime } from 'rxjs/operators';
@@ -20,8 +20,7 @@ export class ItemComponent implements OnInit, OnDestroy {
 
   public sliderLoad = false;
   public casePost: any[] = null;
-  public progress = 0;
-  private _scrollEventMouse$;
+  public progress;
 
   public contentType = CaseSlideContentType;
   public slider: RushSliderService;
@@ -34,7 +33,8 @@ export class ItemComponent implements OnInit, OnDestroy {
     private _route: ActivatedRoute,
     private _background: BackgroundService,
     private _page: PageService,
-    private _platform: PlatformService
+    private _platform: PlatformService,
+    private _router: Router
   ) {
     this._initConfig();
   }
@@ -55,6 +55,7 @@ export class ItemComponent implements OnInit, OnDestroy {
 
     if (this._platform.isBrowser) {
       this._scrollHandler();
+      this._resetRange();
     }
 
     this._reloadSlider();
@@ -93,17 +94,29 @@ export class ItemComponent implements OnInit, OnDestroy {
         }
       }
     });
-
   }
 
-
   private _scrollEvent$() {
-    this._scrollEventMouse$ = fromEvent((<any>window), 'wheel')
+    fromEvent(document, 'wheel')
     .pipe(
       debounceTime(100),
+      untilDestroyed(this)
     )
     .subscribe(e => {
-      this._horisontalScrolling(e)
+      if (this.slider) {
+        this._horisontalScrolling(e)
+      }
+    });
+  }
+
+  private _resetRange() {
+    this._router.events.pipe(
+      untilDestroyed(this)
+    )
+    .subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.progress = 0;
+      }
     });
   }
 
@@ -112,7 +125,7 @@ export class ItemComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this._scrollEventMouse$.unsubscribe();
+
   }
 
 }

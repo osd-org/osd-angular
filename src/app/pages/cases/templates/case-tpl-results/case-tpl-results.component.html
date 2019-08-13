@@ -57,9 +57,10 @@
       <div class="block-video" [innerHTML]="data?.video | sanitizeHtml"></div>
     </div>
 
-    <div class="bottom__link" *ngIf="data?.more_cases && data?.prev" [routerLink]="['/' + LANG + '/cases/' + data?.prev?.slug]">
+    <div class="bottom__link" *ngIf="data?.more_cases"
+      [routerLink]="['/' + LANG + '/cases' + (data?.prev?.slug ?  '/' + data?.prev?.slug : '')]">
       <i class="icon icon-arrow"></i>
-      <div class="bottom__link-more">{{'ЕЩЕ КЕЙСЫ' | translate}}</div>
+      <div class="bottom__link-more">{{ (data?.prev?.slug ? 'ЕЩЕ КЕЙС': 'ЕЩЕ КЕЙСЫ') | translate}}</div>
     </div>
 
   </div>

@@ -1,6 +1,5 @@
 import { CaseService } from './../../case.service';
 import { ApiService } from './../../../../core/services/api.service';
-import { Router } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
 import { hexToRgba } from 'app/core/helpers/colorHexToRgba';
 import { TranslationService } from 'app/core/shared/translation/translation.service';

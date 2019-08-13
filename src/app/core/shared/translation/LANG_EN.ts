@@ -4,6 +4,7 @@ export const LANG_EN = {
   'еще': 'more',
   'читать': 'read',
   'ЕЩЕ КЕЙСЫ': 'ANOTHER CASES',
+  'ЕЩЕ КЕЙС': 'ANOTHER CASE',
   'Решения': 'Solutions',
   'Задачи': 'Tasks',
   'Смотреть кейс': 'Look case',
