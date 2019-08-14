@@ -42,6 +42,7 @@
     position: relative;
     height: 40%;
     max-height: 450px;
+    overflow: hidden;
 
     @include media-below($bp-ld) {
       height: auto;
@@ -75,6 +76,12 @@
             @include media-below($bp-ld) {
                 display: inline;
             }
+        }
+
+        &__text {
+          @include height-below($bp-height) {
+            font-size: 12px;
+          }
         }
 
         &__author {
