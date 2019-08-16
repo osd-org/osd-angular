@@ -3,6 +3,7 @@ import { ApiService } from './../../../../core/services/api.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { hexToRgba } from 'app/core/helpers/colorHexToRgba';
 import { TranslationService } from 'app/core/shared/translation/translation.service';
+import { CountUpOptions } from '@osd-directives/countUp/countUp';
 
 @Component({
   selector: 'app-case-tpl-results',
@@ -10,7 +11,11 @@ import { TranslationService } from 'app/core/shared/translation/translation.serv
   styleUrls: ['./case-tpl-results.component.scss']
 })
 export class CaseTplResultsComponent implements OnInit {
-
+  public countOpts: CountUpOptions = {
+    duration: 2,
+    decimalPlaces: 0,
+    smartEasingThreshold: 9999
+  };
   private _data: any;
 
   @Input('data')

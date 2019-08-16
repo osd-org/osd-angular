@@ -21,6 +21,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  z-index: 4;
   @include media-below($bp-sm) {
     padding-top: $header-height-mobile;
   }
@@ -48,7 +49,6 @@
     margin-top: 30px;
     margin-bottom: 20px;
     text-shadow: 1px 0px 2px #000;
-    z-index: 4;
   }
 
   .image {
@@ -89,8 +89,6 @@
     margin: 0 auto;
     margin-bottom: 30px;
     color: #fff;
-    text-shadow: 1px 0px 2px #000;
-    box-shadow: 1px 0px 2px #000;
     @include font(18px, 400);
     position: relative;
     display: flex;
