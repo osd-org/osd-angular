@@ -4,12 +4,13 @@
     <div class="container">
 
 
-      <div *appShellMedia="{type: 'below', width: 1080}" class="case__list desktop">
+      <div *appShellMedia="{type: 'below', width: 1080}" class="case__list desktop" [ngClass]="{'loaded': animation}">
         <a
         [routerLink]="[item?.slug]"
-        [ngStyle]="{'background-image': 'url('+ item?.data?.small_img +')'}"
         class="case__item"
-        *ngFor="let item of caseList">
+        *ngFor="let item of caseList; let i = index;"
+        [ngStyle]="{'transition-delay': getDelay(i), 'background-image': 'url('+ item?.data?.small_img +')'}"
+        >
           <div class="case__item-title">
             <span [ngStyle]="{'background': item?.data?.small_title_color}">{{item?.data?.small_title}}</span>
           </div>

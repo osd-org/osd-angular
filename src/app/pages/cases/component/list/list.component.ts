@@ -4,7 +4,6 @@ import { CaseService } from '../../case.service';
 import { HeaderService } from 'app/core/shared/layouts/layout-components/header/header.service';
 import { untilDestroyed } from '@osd-rxjs/operators'
 import { PageService } from '@osd-services/page.service';
-import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-list',
@@ -32,12 +31,18 @@ export class ListComponent implements OnInit, OnDestroy {
     page: 1
   }
 
+  public animation = false;
+  private _animateData = [
+    800, 100, 200,
+    600, 300, 900,
+    700, 400, 500
+  ];
+
   constructor(
     private _case: CaseService,
     private _header: HeaderService,
     private _page: PageService,
     private _background: BackgroundService,
-    private _device: DeviceDetectorService,
   ) { }
 
   ngOnInit() {
@@ -52,11 +57,13 @@ export class ListComponent implements OnInit, OnDestroy {
 
   private _getCase() {
     this.loadmore = false;
+    this.animation = false;
     this._case.getCaseList(this._postsData).subscribe( (res: any) => {
       this.caseList = res.body;
       this._createMoblist(res.body);
       this._configPagination(res.headerParams);
       this.loadmore = true;
+      this._animate();
     });
   }
 
@@ -89,6 +96,15 @@ export class ListComponent implements OnInit, OnDestroy {
     });
   }
 
+  private _animate() {
+    setTimeout(() => {
+      this.animation = true;
+    }, 500);
+  }
+
+  public getDelay(i: number) {
+    return this._animateData[i] + 'ms'
+  }
   ngOnDestroy() {
 
   }

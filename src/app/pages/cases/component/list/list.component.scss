@@ -2,6 +2,9 @@
 @import "variables";
 @import "mixins";
 
+.container {
+  overflow-y: visible;
+}
 
 .page-content {
   height: $content-height--no-footer;
@@ -18,9 +21,16 @@
     width: 100%;
     height: calc(100% - 50px);
     align-content: center;
+    overflow-y: visible;
     &.mobile {
       height: auto;
       @include flex(row, space-around, center);
+    }
+    &.loaded {
+      .case__item {
+        transform: translateX(0%);
+        transition: 0.3s;
+      }
     }
   }
   &__item {
@@ -35,6 +45,8 @@
     color: #ffffff;
     background-repeat: no-repeat;
     background-size: cover;
+    transform: translateX(2000%);
+    transition: 0.3s transform;
     &:hover {
       cursor: pointer;
     }

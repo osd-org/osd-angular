@@ -29,9 +29,6 @@
 
   &__menu {
     height: 100%;
-    @include media-below($bp-ld) {
-      @include flex(column, flex-end, inherit);
-    }
     &-item {
       list-style: none;
       text-align: center;
@@ -45,6 +42,16 @@
         color: #ffffff;
         font-family: "Open Sans";
         font-size: 45px;
+      }
+    }
+    @include media-below($bp-ld) {
+      @include flex(column, flex-end, inherit);
+      &-item {
+        .link {
+          letter-spacing: 5.14px;
+          letter-spacing: 3.31px;
+          @include font(30px, 600);
+        }
       }
     }
   }

@@ -8,6 +8,7 @@
   background-color: #ee8028;
   height: $sub-header-height;
   .container {
+    @include hiddeScrollBar();
     @include flex(row, flex-start, center);
   }
   &__title {
