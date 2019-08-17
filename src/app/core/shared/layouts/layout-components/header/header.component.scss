@@ -80,10 +80,13 @@
       }
 
       @include media-below($bp-ld) {
-        height: 26px;
+        height: auto;
         &__part {
           &--mobile {
             display: block;
+            img {
+              max-width: 160px;
+            }
           }
           &--no-animation {
             display: none;
@@ -140,6 +143,20 @@
               transition: 0.5s;
             }
           }
+          &.mobile {
+            @include media-below($bp-ld) {
+              display: block;
+              width: auto;
+              height: auto;
+              .langs__item {
+                border: 2px solid #fff;
+                text-transform: uppercase;
+                width: 30px;
+                height: 30px;
+                background: #000;
+              }
+            }
+          }
         }
         .menu-btn {
           @include font(28px);
@@ -151,7 +168,7 @@
           display: flex;
 
           @include media-below($bp-ld) {
-            @include font(20px);
+            @include font(30px);
           }
 
           i {

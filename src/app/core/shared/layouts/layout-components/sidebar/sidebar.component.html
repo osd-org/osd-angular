@@ -13,16 +13,6 @@
       class="sidebar__menu-item" [ngStyle]="{'background-color': '#' + item?.classes[0], 'height': linkHeightMob, 'transitionDelay': i * 100 + 'ms'}">
        <a [routerLink]="[ '/' + LANG, item?.url]" (click)="sidebar.close()" class="link">{{item?.name}}</a>
     </div>
-    <div class="sidebar__langlist">
-      <div
-      class="sidebar__langlist-item"
-      [ngClass]="{'active': item === LANG}"
-      *ngFor="let item of langList"
-      (click)="changeLanguage(item)"
-      >
-        {{item}}
-        <i *ngIf="item === LANG" class="icon icon-arrow"></i>
-      </div>
-    </div>
+
     </nav>
   </div>

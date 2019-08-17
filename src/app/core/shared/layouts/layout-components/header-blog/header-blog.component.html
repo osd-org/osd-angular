@@ -10,12 +10,12 @@
               <img [src]="logoImg" alt="Logo">
           </div>
           <div class="logo__part--mobile">
-              <img src="/assets/svg/fill_1.svg" alt="Logo">
+              <img src="/assets/svg/logomob.svg" alt="Logo">
           </div>
         </a>
 
           <div class="page-title" (click)="header?.routeToCategory()">
-            {{ header.title | translate }}
+              <span class="hidde">{{ header.title | translate }}</span>
             <div class="search">
               <i class="icon icon-search"></i>
               <input type="text" placeholder="{{ 'Поиск по блогам' | translate }}" #searchInputMob>
@@ -29,16 +29,28 @@
               <input type="text" placeholder="{{ 'Поиск по блогам' | translate }}" #searchInput>
             </div>
 
-            <div class="langs">
-              <ul class="langs__list" *ngIf="langList?.length">
-                <li
-                class="langs__item"
-                *ngFor="let item of langList"
-                (click)="changeLanguage(item)"
-                >{{ item }}</li>
-                <li class="langs__item active" [ngStyle]="{'left': langAnimation()}"></li>
-              </ul>
-            </div>
+            <div class="langs" *appShellMedia="{type: 'below', width: 1080}">
+                <ul class="langs__list" *ngIf="langList?.length">
+                  <li
+                  class="langs__item"
+                  *ngFor="let item of langList"
+                  (click)="changeLanguage(item)"
+                  >{{ item }}</li>
+                  <li class="langs__item active" [ngStyle]="{'left': langAnimation()}"></li>
+                </ul>
+              </div>
+
+              <div class="langs mobile" *appShellMedia="{type: 'above', width: 1080}">
+                <ul class="langs__list" *ngIf="langList?.length">
+                  <ng-container *ngFor="let item of langList">
+                    <li
+                    class="langs__item"
+                    *ngIf="LANG === item"
+                    (click)="changeLanguageNext(item)"
+                    >{{ item }}</li>
+                  </ng-container>
+                </ul>
+              </div>
 
             <button class="menu-btn" *ngIf="!sidebar.isOpen" (click)="sidebar.open()">
               <i class="icon-menu"></i>

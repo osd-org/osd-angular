@@ -73,7 +73,7 @@ export class SidebarComponent implements OnInit {
   }
 
   public get linkHeightMob() : string {
-    return 'calc(' + 100 / this.menuList.length + '% - ' + 84 / this.menuList.length + 'px)';
+    return 'calc(' + 100 / this.menuList.length + '% - ' + 65 / this.menuList.length + 'px)';
   }
 
 }

@@ -16,7 +16,7 @@
                 </div>
               </div>
               <div class="logo__part--mobile">
-                  <img src="/assets/svg/fill_1.svg" alt="Logo">
+                  <img src="/assets/svg/logomob.svg" alt="Logo">
               </div>
             </a>
 
@@ -26,7 +26,7 @@
 
             <div class="header__group--rt">
 
-              <div class="langs">
+              <div class="langs" *appShellMedia="{type: 'below', width: 1080}">
                 <ul class="langs__list" *ngIf="langList?.length">
                   <li
                   class="langs__item"
@@ -34,6 +34,18 @@
                   (click)="changeLanguage(item)"
                   >{{ item }}</li>
                   <li class="langs__item active" [ngStyle]="{'left': langAnimation()}"></li>
+                </ul>
+              </div>
+
+              <div class="langs mobile" *appShellMedia="{type: 'above', width: 1080}">
+                <ul class="langs__list" *ngIf="langList?.length">
+                  <ng-container *ngFor="let item of langList">
+                    <li
+                    class="langs__item"
+                    *ngIf="LANG === item"
+                    (click)="changeLanguageNext(item)"
+                    >{{ item }}</li>
+                  </ng-container>
                 </ul>
               </div>
 

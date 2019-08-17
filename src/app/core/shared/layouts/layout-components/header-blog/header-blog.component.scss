@@ -135,6 +135,20 @@
               transition: 0.5s;
             }
           }
+          &.mobile {
+            @include media-below($bp-ld) {
+              display: block;
+              width: auto;
+              height: auto;
+              .langs__item {
+                border: 2px solid #fff;
+                text-transform: uppercase;
+                width: 30px;
+                height: 30px;
+                background: #000;
+              }
+            }
+          }
         }
         .menu-btn {
           @include font(28px);
@@ -168,6 +182,9 @@
     display: none;
   }
   @include media-below($bp-ld) {
+    .hidde {
+      visibility: hidden;
+    }
     @include font(28px);
     top: calc(50% + 30px);
     text-transform: none;

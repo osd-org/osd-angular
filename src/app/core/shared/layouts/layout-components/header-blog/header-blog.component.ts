@@ -57,6 +57,11 @@ export class HeaderBlogComponent implements OnInit {
     this._translate.changeLang(lang);
   }
 
+  public changeLanguageNext(lang: string) {
+    const next = this.langList.indexOf(lang) + 1;
+    this._translate.changeLang(next === this.langList.length ? this.langList[0] : this.langList[next]);
+  }
+
   public langAnimation() {
     let position;
     switch (this.LANG) {
