@@ -8,7 +8,7 @@
     </app-tile-slider>
 
     <app-home-slider-mobile *ngIf="mobile">
-      <app-home-slider-mobile-slide *ngFor="let slide of slideList" [linesList]="slide?.data?.group" [imageUrl]="slide?.data?.img?.url" [linkData]="slide?.data?.link_block"></app-home-slider-mobile-slide>
+      <app-home-slider-mobile-slide *ngFor="let slide of slideList" [linesList]="slide?.data?.group" [imageUrl]="slide?.data?.img_mob?.url" [linkData]="slide?.data?.link_block"></app-home-slider-mobile-slide>
     </app-home-slider-mobile>
   </div>
 
