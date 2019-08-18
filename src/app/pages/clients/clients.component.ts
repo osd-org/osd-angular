@@ -24,14 +24,21 @@ export class ClientsComponent implements OnInit, OnDestroy {
 
   public slider: RushSliderService;
 
+
+  public animation = false;
+  private _animateData = [
+    800, 100, 200,
+    600, 300, 900,
+    700, 400, 500,
+    1100, 1500, 1000
+  ];
+
   constructor(
     private _background: BackgroundService,
     private _header: HeaderService,
-    private _platform: PlatformService,
     private _page: PageService,
     private _seo: SeoService,
     private _api: ApiService,
-    private _translate: TranslationService
   ) { }
 
   ngOnInit() {
@@ -55,10 +62,22 @@ export class ClientsComponent implements OnInit, OnDestroy {
   }
 
   private _loadClientList() {
-    this._api.get('/client/list', {per_page: 14}).subscribe(e => {
+    this.animation = false;
+    this._api.get('/client/list', {per_page: 20}).subscribe(e => {
       this.clientImgList = e.body;
+      this._animate();
     })
 
+  }
+
+  private _animate() {
+    setTimeout(() => {
+      this.animation = true;
+    }, 500);
+  }
+
+  public getDelay(i: number) {
+    return this._animateData[i] + 'ms'
   }
 
   ngOnDestroy() {

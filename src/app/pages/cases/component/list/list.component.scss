@@ -10,6 +10,7 @@
   height: $content-height--no-footer;
   margin-bottom: 0;
   @include media-below($bp-sm) {
+    overflow: auto;
     height: $content-height--no-footer-mob;
   }
 }
@@ -61,6 +62,10 @@
       span {
         padding: 5px;
       }
+    }
+    @include media-below($bp-ld) {
+      transform: unset;
+      transition: unset;
     }
   }
   &__pagination {

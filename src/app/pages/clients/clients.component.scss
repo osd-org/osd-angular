@@ -5,16 +5,17 @@
 .page-content {
   height: $content-height--no-footer;
   margin-bottom: 0;
-  overflow: auto;
 
   .container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     @include hiddeScrollBar();
+    overflow-y: visible;
   }
 
   @include media-below($bp-sm) {
+    overflow: auto;
     height: $content-height--no-footer-mob;
     .container {
       display: block;
@@ -36,14 +37,17 @@
 .testimonials-container {
     background-color: #fff;
     box-sizing: border-box;
-    padding: 70px 150px 20px 150px;
+    padding: 20px 80px 20px 80px;
     margin-bottom: 20px;
     color: #000;
     position: relative;
     height: 40%;
     max-height: 450px;
+    min-height: 300px;
     overflow: hidden;
-
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     @include media-below($bp-ld) {
       height: auto;
       padding: 20px 20px 35px 20px;
@@ -65,11 +69,20 @@
         box-sizing: border-box;
         padding: 0 50px;
         flex-shrink: 0;
-
-        @include media-below($bp-ld) {
-            padding: 0;
+        &__wrap {
+          display: flex;
+          flex-direction: row;
         }
-
+        &__img {
+          height: 100%;
+          max-width: 150px;
+          padding-right: 30px;
+        }
+        &__client {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+        }
         &__quote {
             display: none;
 
@@ -101,6 +114,15 @@
                 }
             }
         }
+        @include media-below($bp-ld) {
+          padding: 0;
+          &__wrap {
+            flex-direction: column;
+          }
+          &__img {
+            display: none;
+          }
+      }
     }
 }
 
@@ -109,10 +131,26 @@
   display: inline-flex;
   width: 100%;
   flex-wrap: wrap;
+  &.top, &.bottom {
+    height: 25%;
+  }
   justify-content: space-around;
+  &.loaded {
+    .brand-item {
+      transform: translateX(0%);
+      transition: 0.3s;
+    }
+  }
   .brand-item {
-    height: 50px;
-    margin: 10px 4.7%;
+    max-height: 50px;
+    height: 100%;
+    margin: 10px 30px;
+    transform: translateX(100vw);
+    transition: 0.3s transform;
+    @include media-below($bp-ld) {
+      transform: unset;
+      transition: unset;
+    }
   }
 }
 

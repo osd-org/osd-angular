@@ -1,7 +1,16 @@
 <app-page-layout>
   <div class="page-content">
     <div class="container">
-      <h1 class="title" [innerHTML]="pageContent?.content?.rendered"></h1>
+      <!-- <h1 class="title" [innerHTML]="pageContent?.content?.rendered"></h1> -->
+
+      <div *appShellMedia="{type: 'below', width: 1080}" class="brands-container top" [ngClass]="{'loaded': animation}">
+        <img
+        [ngStyle]="{'transition-delay': getDelay(i)}"
+        class="brand-item"
+        [src]="item?.data?.img?.url"
+        [alt]="item?.data?.img?.alt"
+        *ngFor="let item of clientImgList | slice:0:9; let i = index;">
+      </div>
 
       <div class="testimonials-container" *ngIf="pageContent?.acf?.reviews">
         <div class="slider-nav prev" (click)="slider.prevSlide()"><i class="icon-arrow"></i></div>
@@ -11,9 +20,16 @@
 
             <app-rush-slide class="testimonial" *ngFor="let item of pageContent?.acf?.reviews; let last = last;">
               <img class="testimonial__quote" src="/assets/svg/quote.svg" alt="">
-              <p class="testimonial__text">{{item?.review}}</p>
-              <strong class="testimonial__author">{{item?.name}}</strong>
-              <span class="testimonial__author-position">{{item?.position}}</span>
+
+              <div class="testimonial__wrap">
+                <img class="testimonial__img" *ngIf="item?.img?.url" [src]="item?.img?.url" alt="">
+                <div class="testimonial__client">
+                  <p class="testimonial__text">{{item?.review}}</p>
+                  <strong class="testimonial__author">{{item?.name}}</strong>
+                  <span class="testimonial__author-position">{{item?.position}}</span>
+                </div>
+              </div>
+
             </app-rush-slide>
 
           </app-rush-slider>
@@ -23,9 +39,20 @@
         </div>
       </div>
 
-      <div class="brands-container">
+      <div *appShellMedia="{type: 'below', width: 1080}" class="brands-container bottom" [ngClass]="{'loaded': animation}">
+        <img
+        [ngStyle]="{'transition-delay': getDelay(i)}"
+        class="brand-item"
+        [src]="item?.data?.img?.url"
+        [alt]="item?.data?.img?.alt"
+        *ngFor="let item of clientImgList | slice:10:20; let i = index;">
+      </div>
+
+      <div *appShellMedia="{type: 'above', width: 1080}" class="brands-container mob">
         <img class="brand-item" [src]="item?.data?.img?.url" [alt]="item?.data?.img?.alt" *ngFor="let item of clientImgList">
       </div>
+
+
     </div>
   </div>
 </app-page-layout>
