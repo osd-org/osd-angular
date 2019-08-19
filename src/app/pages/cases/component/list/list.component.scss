@@ -30,7 +30,7 @@
     &.loaded {
       .case__item {
         transform: translateX(0%);
-        transition: 0.3s;
+        transition: 0.9s transform;
       }
     }
   }
@@ -46,8 +46,8 @@
     color: #ffffff;
     background-repeat: no-repeat;
     background-size: cover;
-    transform: translateX(2000%);
-    transition: 0.3s transform;
+    transform: translateX(200vw);
+    transition: 0.9s transform;
     &:hover {
       cursor: pointer;
     }

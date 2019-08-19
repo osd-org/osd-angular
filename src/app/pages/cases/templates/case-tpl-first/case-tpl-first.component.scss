@@ -145,7 +145,7 @@
             max-width: 480px;
 
             @include height-below($bp-height) {
-                @include font(16px);
+                @include font(14px);
                 margin-bottom: 10px
             }
 
