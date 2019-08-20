@@ -3,7 +3,6 @@ import { RushSliderConfig } from './rush-slider-config';
 import { RushSlideComponent } from './rush-slide/rush-slide.component';
 import { fromEvent, merge } from 'rxjs';
 import { takeUntil, debounceTime, filter, map } from 'rxjs/operators';
-import { WindowService } from '@osd-services/universal/window.service';
 import { PlatformService } from '@osd-services/universal/platform.service';
 
 export class RushSliderService {
@@ -107,8 +106,6 @@ export class RushSliderService {
   private _alive$: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
-    private _window: WindowService,
-    private _platform: PlatformService
   ) {}
 
   /**
@@ -258,7 +255,7 @@ export class RushSliderService {
     this._stopAutoslidingInterval();
 
     if (this._config.autoSliding) {
-      this._autoSlidingInterval = this._window.nativeWindow.setInterval(() => {
+      this._autoSlidingInterval = (<any>window).setInterval(() => {
         this.nextSlide();
       }, this._config.autoSliding);
     }
@@ -418,20 +415,18 @@ export class RushSliderService {
    * @private
    */
   private _resizeHandle() {
-    if (this._platform.isBrowser) {
-      fromEvent(this._window.nativeWindow, 'resize').pipe(
-        takeUntil(this._alive$),
-        debounceTime(200)
-      ).subscribe(e => {
-        const currentSlideBeforeResize: number = this.currentSlide;
-        this._resolveConfig();
-        this._removeAdditionalSlides();
-        this._disableTransition();
-        this._buildSlider();
-        this._normalizeTrackPosition(currentSlideBeforeResize);
-        this._currentSlide = currentSlideBeforeResize;
-      });
-    }
+    fromEvent((<any>window), 'resize').pipe(
+      takeUntil(this._alive$),
+      debounceTime(200)
+    ).subscribe(e => {
+      const currentSlideBeforeResize: number = this.currentSlide;
+      this._resolveConfig();
+      this._removeAdditionalSlides();
+      this._disableTransition();
+      this._buildSlider();
+      this._normalizeTrackPosition(currentSlideBeforeResize);
+      this._currentSlide = currentSlideBeforeResize;
+    });
   }
 
   /**
@@ -564,7 +559,7 @@ export class RushSliderService {
    * @private
    */
   private _resolveConfig() {
-    const screenWidth = this._window.nativeWindow.innerWidth;
+    const screenWidth = (<any>window).innerWidth;
     const sizes = Array.from(this._configList.keys()).sort((a, b) => b - a);
 
     let config: RushSliderConfig;

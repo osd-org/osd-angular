@@ -1,6 +1,8 @@
 import { Injectable, Inject, PLATFORM_ID, InjectionToken } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-
+@Injectable({
+  providedIn: 'root'
+})
 @Injectable()
 export class PlatformService {
     private _browser: boolean;
