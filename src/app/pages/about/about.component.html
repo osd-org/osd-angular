@@ -2,7 +2,7 @@
     <div class="page-content">
       <div class="container">
         <div class="logo">
-          <img *ngIf="pageContent" class="logo__img" [src]="pageContent?.acf?.img?.url" alt="">
+          <img *ngIf="pageContent" class="logo__img" [src]="pageContent?.acf?.img?.url" [alt]="pageContent?.acf?.img?.alt">
         </div>
 
         <div class="features">

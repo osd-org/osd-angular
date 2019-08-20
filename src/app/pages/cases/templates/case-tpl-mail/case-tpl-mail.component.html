@@ -13,7 +13,7 @@
       *ngFor="let item of data?.photo_list; let first = first; let last = last;"
       [ngClass]="{'first': first, 'last': last}"
       >
-        <img [src]="item?.img?.url" alt="" />
+        <img [src]="item?.img?.url" [alt]="item?.img?.alt" />
       </div>
     </div>
 

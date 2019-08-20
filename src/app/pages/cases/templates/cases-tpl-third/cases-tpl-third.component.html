@@ -115,7 +115,7 @@
 
 <ng-template #image let-content="content">
   <div class="block-img-container">
-    <img [src]="content?.img?.url" class="block-img" alt="">
+    <img [src]="content?.img?.url" class="block-img" [alt]="content?.img?.alt">
   </div>
 </ng-template>
 
