@@ -132,9 +132,9 @@ export class TileSliderComponent implements OnInit, OnDestroy, AfterContentInit 
     ).subscribe((e: MouseWheelEvent) => {
       if (this._allowSlideChanging) {
         if (e.deltaY > 0) {
-          this.prevSlide();
-        } else {
           this.nextSlide();
+        } else {
+          this.prevSlide();
         }
       }
     });

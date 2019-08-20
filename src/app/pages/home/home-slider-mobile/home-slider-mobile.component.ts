@@ -56,7 +56,7 @@ export class HomeSliderMobileComponent implements OnInit, AfterContentInit, OnDe
 
   private _resolveNextSlideNum(currentSlide:number = this.currentSlide): number {
     const nextSlide = currentSlide + 1;
-    return nextSlide < this._slideArray.length - 1 ? nextSlide : 0;
+    return nextSlide < this._slideArray.length ? nextSlide : 0;
   }
 
   private _setZIndex() {
