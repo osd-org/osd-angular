@@ -51,6 +51,9 @@ export class ListComponent implements OnInit, OnDestroy {
     this._page.contentUpdate$.pipe(
       untilDestroyed(this)
     ).subscribe(() => {
+      this._storedMobBlogList.clear();
+      this.mobCaseList = [];
+      this._postsData.page = 1;
       this._getCase();
     });
   }
