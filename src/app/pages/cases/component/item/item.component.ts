@@ -83,30 +83,34 @@ export class ItemComponent implements OnInit, OnDestroy {
   }
 
   private _scrollHandler() {
-    fromEvent(document, 'wheel').pipe(
-      untilDestroyed(this)
-    ).subscribe((e: MouseWheelEvent) => {
-      if (this.slider) {
-        if (e.deltaY > 0) {
-          this.slider.nextSlide();
-        } else {
-          this.slider.prevSlide();
+    if (this._platform.isBrowser) {
+      fromEvent(document, 'wheel').pipe(
+        untilDestroyed(this)
+      ).subscribe((e: MouseWheelEvent) => {
+        if (this.slider) {
+          if (e.deltaY > 0) {
+            this.slider.nextSlide();
+          } else {
+            this.slider.prevSlide();
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   private _scrollEvent$() {
-    fromEvent(document, 'wheel')
-    .pipe(
-      debounceTime(100),
-      untilDestroyed(this)
-    )
-    .subscribe(e => {
-      if (this.slider) {
-        this._horisontalScrolling(e)
-      }
-    });
+    if (this._platform.isBrowser) {
+      fromEvent(document, 'wheel')
+      .pipe(
+        debounceTime(100),
+        untilDestroyed(this)
+      )
+      .subscribe(e => {
+        if (this.slider) {
+          this._horisontalScrolling(e)
+        }
+      });
+    }
   }
 
   private _resetRange() {

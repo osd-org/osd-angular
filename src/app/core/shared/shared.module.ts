@@ -8,7 +8,6 @@ import { TranslationModule } from './translation/translation.module';
 import { RouterModule } from '@angular/router';
 import { ComponentsModule } from './components/components.module';
 import { AgmCoreModule } from '@agm/core';
-import { LineTruncationLibModule } from 'ngx-line-truncation';
 
 @NgModule({
   imports: [
@@ -35,8 +34,7 @@ import { LineTruncationLibModule } from 'ngx-line-truncation';
     ReactiveFormsModule,
     FormsModule,
     ComponentsModule,
-    AgmCoreModule,
-    LineTruncationLibModule
+    AgmCoreModule
   ],
   declarations: []
 })

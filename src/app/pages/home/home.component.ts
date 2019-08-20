@@ -9,6 +9,7 @@ import { untilDestroyed } from '@osd-rxjs/operators';
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
+import { WindowService } from '@osd-services/universal/window.service';
 
 
 @Component({
@@ -51,9 +52,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     private _page: PageService,
     private _seo: SeoService,
     private _translate: TranslationService,
-    private _cookie: CookieService
+    private _cookie: CookieService,
+    private _window: WindowService
   ){
-    if (_platform.isBrowser) {
+    if (this._platform.isBrowser) {
       this.mobile = window.innerWidth <= 1080 || window.navigator.userAgent.indexOf('Trident/') >= 0;
       this._resizeHandler();
     }
@@ -98,15 +100,17 @@ export class HomeComponent implements OnInit, OnDestroy {
    * Handle window resize for slider re-initialization
    */
   private _resizeHandler() {
-    fromEvent(window, 'resize').pipe(
-      untilDestroyed(this),
-      debounceTime(500)
-    ).subscribe(() => {
-      this.resize = true;
-      setTimeout(() => {
-        this.resize = false;
-      }, 10);
-    });
+    if (this._platform.isBrowser) {
+      fromEvent(this._window.nativeWindow, 'resize').pipe(
+        untilDestroyed(this),
+        debounceTime(500)
+      ).subscribe(() => {
+        this.resize = true;
+        setTimeout(() => {
+          this.resize = false;
+        }, 10);
+      });
+    }
   }
 
   private _resolvePascal(pascal: any) {

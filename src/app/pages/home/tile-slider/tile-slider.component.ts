@@ -2,6 +2,9 @@ import { Component, OnInit, ContentChildren, AfterContentInit, OnDestroy, EventE
 import { TileSlideComponent } from './tile-slide/tile-slide.component';
 import {fromEvent, timer} from 'rxjs';
 import {switchMap, takeUntil} from 'rxjs/operators';
+import { PlatformService } from '@osd-services/universal/platform.service';
+import { WindowService } from '@osd-services/universal/window.service';
+import { untilDestroyed } from '@osd-rxjs/operators';
 
 /**
  * Available timer events
@@ -25,21 +28,24 @@ export class TileSliderComponent implements OnInit, OnDestroy, AfterContentInit 
 
   private _allowSlideChanging: boolean;
 
-  private _alive$: EventEmitter<boolean> = new EventEmitter();
-
   private _timerEvents$: EventEmitter<TimerEvent> = new EventEmitter<TimerEvent>();
 
-  constructor() { }
+  constructor(
+    private _paltform: PlatformService,
+    private _window: WindowService
+  ) { }
 
   ngOnInit() {
-    this._initEventListeners();
-    this._handleTimer();
+    if (this._paltform.isBrowser) {
+      this._initEventListeners();
+      this._handleTimer();
+    }
 
     this._timerEvents$.next(TimerEvent.RESET);
   }
 
   ngOnDestroy() {
-    this._alive$.complete();
+
   }
 
   ngAfterContentInit() {
@@ -54,7 +60,6 @@ export class TileSliderComponent implements OnInit, OnDestroy, AfterContentInit 
    */
   disableSlideChanging() {
     this._allowSlideChanging = false;
-
     setTimeout(() => {
       this._allowSlideChanging = true;
     }, 4000);
@@ -72,12 +77,12 @@ export class TileSliderComponent implements OnInit, OnDestroy, AfterContentInit 
     } else {
       this._currentSlide ++;
     }
-
-    setTimeout(() => {
-      this._sliderList[this._currentSlide].show()
-    }, 2000);
-
-    this.disableSlideChanging();
+    if (this._paltform.isBrowser) {
+      setTimeout(() => {
+        this._sliderList[this._currentSlide].show()
+      }, 2000);
+      this.disableSlideChanging();
+    }
   }
 
   /**
@@ -93,11 +98,12 @@ export class TileSliderComponent implements OnInit, OnDestroy, AfterContentInit 
       this._currentSlide --;
     }
 
-    setTimeout(() => {
-      this._sliderList[this._currentSlide].show();
-    }, 2000);
-
-    this.disableSlideChanging();
+    if (this._paltform.isBrowser) {
+      setTimeout(() => {
+        this._sliderList[this._currentSlide].show();
+      }, 2000);
+      this.disableSlideChanging();
+    }
   }
 
   /**
@@ -105,7 +111,9 @@ export class TileSliderComponent implements OnInit, OnDestroy, AfterContentInit 
    */
   showFirstSlide() {
     this._sliderList[this._currentSlide].show();
-    this.disableSlideChanging();
+    if (this._paltform.isBrowser) {
+      this.disableSlideChanging();
+    }
   }
 
   /**
@@ -119,8 +127,8 @@ export class TileSliderComponent implements OnInit, OnDestroy, AfterContentInit 
    *
    */
   private _initEventListeners() {
-    fromEvent(window, 'wheel').pipe(
-      takeUntil(this._alive$)
+    fromEvent(this._window.nativeWindow, 'wheel').pipe(
+      untilDestroyed(this)
     ).subscribe((e: MouseWheelEvent) => {
       if (this._allowSlideChanging) {
         if (e.deltaY > 0) {
@@ -134,7 +142,7 @@ export class TileSliderComponent implements OnInit, OnDestroy, AfterContentInit 
 
   private _handleTimer() {
     this._timerEvents$.pipe(
-      takeUntil(this._alive$),
+      untilDestroyed(this),
       switchMap(event => {
         switch (event) {
           case TimerEvent.RESET:

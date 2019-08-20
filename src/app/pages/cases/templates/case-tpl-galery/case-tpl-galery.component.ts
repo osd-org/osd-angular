@@ -25,8 +25,6 @@ export class CaseTplGaleryComponent implements OnInit {
     this._reloadSlider();
     this._returnBlockStyle();
     this.slideList = this._mapSliderData(this.data.photo_list);
-    console.log(this.slideList);
-
   }
 
   public get data(): any {

@@ -21,7 +21,6 @@ export class CasesTplThirdComponent implements OnInit {
   @Input('data')
   set _setData(v : any) {
     this._data = v;
-    console.log(v);
     this.slideList = v['slide'];
     this._reloadSlider();
   }

@@ -42,10 +42,6 @@ export class TranslationService {
     private _location: Location,
   ) {
     this._resolveCurrentLang();
-
-    setTimeout(() => {
-      console.log(this.words);
-    }, 20000);
   }
 
   get langResolved$(): ReplaySubject<boolean> {

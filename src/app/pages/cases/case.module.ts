@@ -5,7 +5,6 @@ import { ListComponent } from './component/list/list.component';
 import { CaseRoutingModule } from './case-routing.module';
 import { SharedModule } from '../../core/shared/shared.module';
 import { CaseTplFirstComponent } from './templates/case-tpl-first/case-tpl-first.component';
-import { CaseTplSecondComponent } from './templates/case-tpl-second/case-tpl-second.component';
 import { CasesTplThirdComponent } from './templates/cases-tpl-third/cases-tpl-third.component';
 import { CaseTplGaleryComponent } from './templates/case-tpl-galery/case-tpl-galery.component';
 import { CaseTplFifthComponent } from './templates/case-tpl-fifth/case-tpl-fifth.component';
@@ -20,7 +19,6 @@ import { CaseTplImagesComponent } from './templates/case-tpl-images/case-tpl-ima
   declarations: [
     ItemComponent,
     ListComponent,
-    CaseTplSecondComponent,
     CasesTplThirdComponent,
     CaseTplGaleryComponent,
     CaseTplFifthComponent,

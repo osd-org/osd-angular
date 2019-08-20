@@ -56,8 +56,6 @@ export class BlogService {
   }
 
   public resolveCurrentBlogPost(post: any) {
-    console.log(post);
-
     this._seo.updateTags(post.acf)
   }
 

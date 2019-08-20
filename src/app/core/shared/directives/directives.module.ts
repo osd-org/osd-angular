@@ -8,7 +8,7 @@ import { AppShellMobileDirective } from './appshell/app-shell-mobile.directive';
 import { AppShellNoMobileDirective } from './appshell/app-shell-no-mobile.directive';
 import { AppShellMediaDirective } from './appshell/app-shell-media.directive';
 import { fittyDirective } from './fitty/fitty.directive';
-
+import { LineTruncationDirective } from './line-truncation/line-truncation.directive';
 @NgModule({
   imports: [
     CommonModule
@@ -21,7 +21,8 @@ import { fittyDirective } from './fitty/fitty.directive';
     AppShellMobileDirective,
     AppShellNoMobileDirective,
     AppShellMediaDirective,
-    fittyDirective
+    fittyDirective,
+    LineTruncationDirective
   ],
   exports: [
     horisontalScrollDirective,
@@ -31,7 +32,8 @@ import { fittyDirective } from './fitty/fitty.directive';
     AppShellMobileDirective,
     AppShellNoMobileDirective,
     AppShellMediaDirective,
-    fittyDirective
+    fittyDirective,
+    LineTruncationDirective
   ]
 })
 
