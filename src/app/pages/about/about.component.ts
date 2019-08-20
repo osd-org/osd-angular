@@ -33,11 +33,7 @@ export class AboutComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._header.setTitle('Про нас');
-    if (this._device.isMobile()) {
-      this._background.changeColor(BackgroundColor.BLACK);
-    } else {
-      this._background.changeColor(BackgroundColor.BLACK);
-    }
+    this._background.changeColor(BackgroundColor.BLACK);
     this._page.contentUpdate$.pipe(
       untilDestroyed(this)
     ).subscribe(() => {
