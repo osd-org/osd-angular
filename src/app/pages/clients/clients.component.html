@@ -22,7 +22,10 @@
               <img class="testimonial__quote" src="/assets/svg/quote.svg" alt="">
 
               <div class="testimonial__wrap">
-                <img class="testimonial__img" *ngIf="item?.img?.url" [src]="item?.img?.url" [alt]="item?.img?.alt">
+                <div class="testimonial__client left">
+                  <img class="testimonial__img" *ngIf="item?.img?.url" [src]="item?.img?.url" [alt]="item?.img?.alt">
+                  <a *ngIf="item?.pdf_file?.url" [href]="item?.pdf_file?.url" target="_blank" class="testimonial__pdf">pdf {{'файл' | translate }}</a>
+                </div>
                 <div class="testimonial__client">
                   <p class="testimonial__text">{{item?.review}}</p>
                   <strong class="testimonial__author">{{item?.name}}</strong>

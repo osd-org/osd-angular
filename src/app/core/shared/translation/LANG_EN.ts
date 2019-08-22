@@ -15,4 +15,5 @@ export const LANG_EN = {
   'Клиенты': 'Clients',
   'Контакты': 'Contacts',
   'Поиск по блогам': 'Blog search',
+  'файл': 'file'
 };
