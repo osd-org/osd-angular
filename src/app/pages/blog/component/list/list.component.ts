@@ -69,7 +69,9 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   private _searchHendler() {
-    this._header.searchInputEvent$.subscribe(e => {
+    this._header.searchInputEvent$.pipe(
+      untilDestroyed(this)
+    ).subscribe(e => {
       if (e) {
         this._resetSearch();
         this.isSearch = true;
