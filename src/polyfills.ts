@@ -53,6 +53,18 @@ import 'classlist.js';  // Run `npm install --save classlist.js`.
  */
 import 'core-js/es6/reflect';
 import 'core-js/es7/reflect';
+import 'core-js/es7/object';
+
+(function () {
+  if (window['NodeList'] && !NodeList.prototype.forEach) {
+    NodeList.prototype.forEach = function (callback, thisArg) {
+      thisArg = thisArg || window;
+      for (var i = 0; i < this.length; i++) {
+          callback.call(thisArg, this[i], i, this);
+      }
+    };
+  }
+})();
 
 /**
  * Web Animations `@angular/platform-browser/animations`
