@@ -1,6 +1,6 @@
 import { PlatformService } from '@osd-services/universal/platform.service';
 import { WindowService } from '@osd-services/universal/window.service';
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,8 @@ export class TileSliderService {
 
   constructor(
     private _window: WindowService,
-    private _platform: PlatformService
+    private _platform: PlatformService,
+    private _zone: NgZone,
   ) { }
 
   /**
@@ -148,13 +149,15 @@ export class TileSliderService {
     if (this._platform.isBrowser) {
       line.style.transition = this._lineTransition + 'ms';
       line.style.transform = 'translateX(0) scaleY(0.1)';
-      setTimeout(() => {
-        line.style.transition = this._lineScaleTransition + 'ms';
-        line.style.transform = 'translateX(0) scaleY(1)';
+      this._zone.runOutsideAngular(() => {
         setTimeout(() => {
-          line.style.color = 'rgba(255, 255, 255, 1)';
-        }, this._lineTransition);
-      }, this._lineTransition + 50);
+          line.style.transition = this._lineScaleTransition + 'ms';
+          line.style.transform = 'translateX(0) scaleY(1)';
+          setTimeout(() => {
+            line.style.color = 'rgba(255, 255, 255, 1)';
+          }, this._lineTransition);
+        }, this._lineTransition + 50);
+      });
     }
   }
 
@@ -166,16 +169,18 @@ export class TileSliderService {
     if (this._platform.isBrowser) {
       line.style.transition = this._lineScaleTransition + 'ms';
       line.style.color = 'rgba(255, 255, 255, 0)';
-      setTimeout(() => {
-        line.style.transform = 'translateX(0) scaleY(0.1)';
+      this._zone.runOutsideAngular(() => {
         setTimeout(() => {
-          line.style.transition = this._lineTransition + 'ms ease-out';
-          line.style.transform = 'translateX(-3000px) scaleY(0.1)';
+          line.style.transform = 'translateX(0) scaleY(0.1)';
           setTimeout(() => {
-            this.resetLine(line);
-          }, this._lineTransition);
-        }, this._lineScaleTransition + 50);
-      }, this._lineScaleTransition);
+            line.style.transition = this._lineTransition + 'ms ease-out';
+            line.style.transform = 'translateX(-3000px) scaleY(0.1)';
+            setTimeout(() => {
+              this.resetLine(line);
+            }, this._lineTransition);
+          }, this._lineScaleTransition + 50);
+        }, this._lineScaleTransition);
+      });
     }
   }
 }
