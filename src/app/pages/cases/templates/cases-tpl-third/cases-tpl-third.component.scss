@@ -44,6 +44,7 @@
 .page-block {
     width: 50%;
     height: 100%;
+    position: relative;
 
     &-bg {
         position: absolute;
@@ -61,6 +62,7 @@
         color: #fff;
 
         .text-block {
+            left: 0px;
             padding-left: 70px;
         }
     }
@@ -79,6 +81,7 @@
       }
 
         .text-block {
+            right: 0px;
             padding-right: 70px;
             @include media-below($bp-ld) {
               padding-left: 20px;

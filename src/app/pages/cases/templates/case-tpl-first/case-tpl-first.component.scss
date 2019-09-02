@@ -18,7 +18,7 @@
     color: #fff;
     padding-top: $header-height;
     box-sizing: border-box;
-
+    position: relative;
     @include media-below($bp-sm) {
       padding-top: $header-height-mobile;
     }
@@ -50,11 +50,12 @@
 
         .text-block,
         .client {
-            padding-left: 100px;
+          padding-left: 100px;
         }
 
         .text-block {
-            margin-top: 50px;
+          left: 0px;
+          margin-top: 50px;
 
             &__title {
                 @include font(42px, 600);
@@ -75,7 +76,8 @@
         justify-content: flex-end;
 
         .text-block {
-            padding-right: 70px;
+          right: 0px;
+          padding-right: 70px;
         }
     }
     @include media-below($bp-ld) {
