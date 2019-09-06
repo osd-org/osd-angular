@@ -30,6 +30,7 @@ $group-size: 6;
     width: 100%;
     height: calc(100% - 50px);
     align-content: center;
+    align-items: center;
     &.desktop {
       display: flex;
     }

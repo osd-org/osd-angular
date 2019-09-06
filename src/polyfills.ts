@@ -66,6 +66,31 @@ import 'core-js/es7/object';
   }
 })();
 
+(function() {
+  var arr = [window['Element'], window['CharacterData'], window['DocumentType']];
+  var args = [];
+  arr.forEach(function (item) {
+    if (item) {
+      args.push(item.prototype);
+    }
+  });
+  (function (arr) {
+    arr.forEach(function (item) {
+      if (item.hasOwnProperty('remove')) {
+        return;
+      }
+      Object.defineProperty(item, 'remove', {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        value: function remove() {
+          this.parentNode.removeChild(this);
+        }
+      });
+    });
+  })(args);
+})();
+
 /**
  * Web Animations `@angular/platform-browser/animations`
  * Only required if AnimationBuilder is used within the application and using IE/Edge or Safari.

@@ -37,7 +37,7 @@ export class CountUpDirective implements AfterViewInit {
 
   ngAfterViewInit() {
     if (this._platform.isBrowser) {
-      if (this._checkAvailableIntersectionObserver) {
+      if (this._checkAvailableIntersectionObserver()) {
         this._intersectionObserver = new IntersectionObserver(entries => {
           this._checkForIntersection(entries);
         }, {});
