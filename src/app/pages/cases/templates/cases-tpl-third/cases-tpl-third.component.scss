@@ -118,10 +118,19 @@
       margin-top: 20px;
 
       &-title {
-          @include font(32px);
-          text-transform: uppercase;
-          margin-bottom: 20px;
-      }
+        @include font(32px);
+        text-transform: uppercase;
+        margin-bottom: 20px;
+
+        @include height-below($bp-height) {
+            @include font(22px);
+            margin-bottom: 10px;
+        }
+
+        @include media-below($bp-ld) {
+            @include font(18px);
+        }
+    }
 
       &-item {
           @include font(20px, 400);

@@ -14,7 +14,7 @@
 
             <ng-container *ngIf="slide?.slide_content[1]">
               <img class="right-img small" *ngIf="slide?.slide_content[1]?.small_img" [src]="slide?.slide_content[1]?.small_img.url" alt="">
-              <img class="right-img big" *ngIf="slide?.slide_content[1]?.big_img" [src]="slide?.slide_content[1]?.big_img.url" alt="">
+              <img class="right-img big" [ngStyle]="{'right': header.isIE ? '35%' : 'none'}" *ngIf="slide?.slide_content[1]?.big_img" [src]="slide?.slide_content[1]?.big_img.url" alt="">
             </ng-container>
           </div>
         </div>

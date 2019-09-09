@@ -67,7 +67,6 @@ export class ClientsComponent implements OnInit, OnDestroy {
       this.clientImgList = e.body;
       this._animate();
     })
-
   }
 
   private _animate() {
@@ -83,6 +82,10 @@ export class ClientsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this._header.setTitle('');
     this._background.changeColor(BackgroundColor.PURPLE);
+  }
+
+  public get isIE(): boolean {
+    return this._header.isIE;
   }
 
 }

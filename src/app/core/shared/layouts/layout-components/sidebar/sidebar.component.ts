@@ -64,7 +64,11 @@ export class SidebarComponent implements OnInit {
         return menu;
       })
     ).subscribe((e: any[]) => {
-      this.menuList = e;
+      if (this.LANG === 'en' || this.LANG === 'ua') {
+        this.menuList = e.filter(m => m.url !== 'blog');
+      } else {
+        this.menuList = e;
+      }
     })
   }
 

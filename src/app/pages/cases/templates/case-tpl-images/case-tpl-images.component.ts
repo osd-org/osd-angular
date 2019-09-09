@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {RushSliderService} from '../../../../core/shared/components/rush-slider/rush-slider.service';
 import {RushSliderConfig} from '../../../../core/shared/components/rush-slider/rush-slider-config';
+import { HeaderService } from 'app/core/shared/layouts/layout-components/header/header.service';
 
 @Component({
   selector: 'app-case-tpl-images',
@@ -22,7 +23,9 @@ export class CaseTplImagesComponent implements OnInit {
     this._reloadSlider();
   }
 
-  constructor() {
+  constructor(
+    public header: HeaderService
+  ) {
     this._initConfig();
   }
 

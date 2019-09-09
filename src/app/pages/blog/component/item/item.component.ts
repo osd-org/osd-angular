@@ -31,6 +31,7 @@ export class ItemComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._background.changeColor(BackgroundColor.BLACK);
+    this._blog.blogNotSupportLangRedirect(this);
     this._page.contentUpdate$.pipe(
       switchMap(() => this._route.params),
       switchMap(params => this._blog.getBlogPostBySlug(params.slug)),
