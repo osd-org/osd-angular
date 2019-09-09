@@ -28,7 +28,7 @@ export class CountUp {
     useGrouping: true,
     smartEasingThreshold: 999,
     smartEasingAmount: 333,
-    separator: ',',
+    separator: ' ',
     decimal: '.',
     prefix: '',
     suffix: ''

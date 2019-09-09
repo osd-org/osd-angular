@@ -14,7 +14,7 @@ export class CaseTplResultsComponent implements OnInit {
   public countOpts: CountUpOptions = {
     duration: 2,
     decimalPlaces: 0,
-    smartEasingThreshold: 9999
+    smartEasingThreshold: 9999,
   };
   private _data: any;
 

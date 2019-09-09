@@ -10,6 +10,7 @@ import { RushSliderConfig } from '../../../../core/shared/components/rush-slider
 import { RushSliderService } from '../../../../core/shared/components/rush-slider/rush-slider.service';
 import {fromEvent} from 'rxjs';
 import {PlatformService} from '@osd-services/universal/platform.service';
+import { HeaderService } from 'app/core/shared/layouts/layout-components/header/header.service';
 
 @Component({
   selector: 'app-item',
@@ -34,7 +35,8 @@ export class ItemComponent implements OnInit, OnDestroy {
     private _background: BackgroundService,
     private _page: PageService,
     private _platform: PlatformService,
-    private _router: Router
+    private _router: Router,
+    private _header: HeaderService
   ) {
     this._initConfig();
   }
@@ -51,6 +53,9 @@ export class ItemComponent implements OnInit, OnDestroy {
       this.casePost = res[0]['acf']['slide'];
       this._case.currentCaseId = res[0]['id'];
       this._reloadSlider();
+      if (!this._header.title) {
+        this._header.setTitle('КЕЙСЫ');
+      }
     });
 
     if (this._platform.isBrowser) {

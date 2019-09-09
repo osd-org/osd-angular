@@ -2,7 +2,7 @@
     <div class="container">
         <header class="header">
             <a href="/" class="logo">
-              <div class="logo__part--no-animation">
+              <div class="logo__part--no-animation" [ngStyle]="{'display': header?.isIE ? 'none' : 'flex'}">
                 <div class="left">
                   <div class="overlay">
                     <img src="/assets/svg/logo-left.svg" alt="">
@@ -15,7 +15,7 @@
                   </div>
                 </div>
               </div>
-              <div class="logo__part--mobile">
+              <div class="logo__part--mobile" [ngStyle]="{'display': header?.isIE ? 'block' : 'none'}">
                   <img src="/assets/svg/logomob.svg" alt="Logo">
               </div>
             </a>

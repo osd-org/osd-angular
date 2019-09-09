@@ -7,6 +7,7 @@ import { PageService } from '@osd-services/page.service';
 import { switchMap } from 'rxjs/operators';
 import { PlatformService } from '@osd-services/universal/platform.service';
 import { SeoService } from '@osd-services/seo.service';
+import { HeaderService } from 'app/core/shared/layouts/layout-components/header/header.service';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class ItemComponent implements OnInit, OnDestroy {
     private _background: BackgroundService,
     private _page: PageService,
     public platform: PlatformService,
-    private _seo: SeoService
+    private _header: HeaderService
   ) {
    }
 
@@ -38,6 +39,9 @@ export class ItemComponent implements OnInit, OnDestroy {
       this.blogPost = null;
       this._blog.resolveCurrentBlogPost(res[0]);
       this.blogPost = res[0];
+      if (!this._header.title) {
+        this._header.setTitle('Блоги');
+      }
     })
   }
 
