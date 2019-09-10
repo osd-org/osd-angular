@@ -26,8 +26,8 @@
                   <img class="testimonial__img" *ngIf="item?.img?.url" [src]="item?.img?.url" [alt]="item?.img?.alt">
                   <a *ngIf="item?.pdf_file?.url" [href]="item?.pdf_file?.url" target="_blank" class="testimonial__pdf">pdf {{'файл' | translate }}</a>
                 </div>
-                <div class="testimonial__client">
-                  <p class="testimonial__text">{{item?.review}}</p>
+                <div class="testimonial__client" [ngStyle]="{'display': isIE ? 'block' : 'flex'}">
+                  <div class="testimonial__text">{{item?.review}}</div>
                   <strong class="testimonial__author">{{item?.name}}</strong>
                   <span class="testimonial__author-position">{{item?.position}}</span>
                 </div>

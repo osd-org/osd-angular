@@ -121,7 +121,7 @@
 
 <ng-template #text let-content="content">
   <div class="text-block">
-    <div class="text-block__title">{{ content?.title }}</div>
+    <div class="text-block__list-title">{{ 'Решения' | translate }}:</div>
     <div class="text-block__list-item" *ngFor="let listItem of content?.list">
       <i class="icon-arrow"></i>
       <div [innerHTML]="listItem?.text"></div>
