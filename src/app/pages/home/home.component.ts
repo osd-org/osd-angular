@@ -65,22 +65,21 @@ export class HomeComponent implements OnInit, OnDestroy {
     this._background.changeColor(BackgroundColor.BLACK);
     this._getSliderList();
     this._getWordList();
-
     this._translate.onLangChange$.pipe(
       untilDestroyed(this)
-    ).subscribe(lang => {
-      this._getSliderList();
+      ).subscribe(lang => {
+        this._getSliderList();
+        this._getWordList();
     });
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     //Called once, before the instance is destroyed.
   }
 
 
   private _getSliderList() {
     this.slideList = [];
-
     this._api.getWithCache('/slider/list').subscribe(e => {
       setTimeout(() => {
         this.slideList = e.body;
