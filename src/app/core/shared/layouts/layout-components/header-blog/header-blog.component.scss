@@ -78,13 +78,13 @@
         height: auto;
         &__part {
           &--mobile {
-            display: block;
+            display: block!important;
             img {
               max-width: 160px;
             }
           }
           &--no-animation {
-            display: none;
+            display: none!important;
           }
         }
       }
