@@ -30,6 +30,6 @@ export class SeoService {
     this._meta.updateTag({property: 'og:title', content: tags.meta_title ? tags.meta_title : 'OSDirect'});
     this._meta.updateTag({property: 'og:description', content: tags.meta_description ? tags.meta_description : ''});
     this._meta.updateTag({property: 'og:url', content: 'https://osdirect.com.ua' + this._location.path()});
-    this._meta.updateTag({property: 'og:image', content: '/assets/img/osd_logo.png'});
+    this._meta.updateTag({property: 'og:image', content: '/assets/img/prev.png'});
   }
 }
