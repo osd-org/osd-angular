@@ -24,7 +24,12 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "manifest.json",
+                "input": "src",
+                "output": "/"
+              }
             ],
             "styles": [
               "src/styles.scss"
@@ -35,7 +40,8 @@
               "includePaths": [
                 "src/assets/scss/"
               ]
-            }
+            },
+            "sourceMap": false
           },
           "configurations": {
             "production": {

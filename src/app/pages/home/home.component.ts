@@ -90,7 +90,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private _getWordList() {
     this._page.loadPageBySlug('main').subscribe(e => {
       this.pascalcaData = this._resolvePascal(e['acf']['pascalca']);
-      this._seo.updateTags(e);
+      this._seo.updateTags(e.acf);
       this.linksList = e['acf']['fly_words'];
     })
   }
