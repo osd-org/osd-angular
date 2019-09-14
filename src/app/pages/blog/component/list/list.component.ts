@@ -3,7 +3,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BlogService } from '../../blog.service';
 import { HeaderService } from 'app/core/shared/layouts/layout-components/header/header.service';
 import { untilDestroyed } from '@osd-rxjs/operators'
-import { PageService } from '@osd-services/page.service';
+import { PageService, PageType } from '@osd-services/page.service';
+import { SeoService } from '@osd-services/seo.service';
 
 @Component({
   selector: 'app-list',
@@ -37,6 +38,7 @@ export class ListComponent implements OnInit, OnDestroy {
     private _header: HeaderService,
     private _page: PageService,
     private _background: BackgroundService,
+    private _seo: SeoService
   ) { }
 
   ngOnInit() {
@@ -46,6 +48,9 @@ export class ListComponent implements OnInit, OnDestroy {
     this._page.contentUpdate$.pipe(
       untilDestroyed(this)
     ).subscribe(() => {
+      this._page.loadPageBySlug('blog').subscribe((e: PageType) => {
+        this._seo.updateTags(e.acf);
+      })
       this.mobBlogList = [];
       this.mobSearchBlogList = [];
       this._postsData.page = 1;

@@ -58,6 +58,9 @@
     img {
       height: 100%;
       object-fit: contain;
+      @include media-below($bp-sm) {
+        width: 100%;
+      }
     }
   }
 

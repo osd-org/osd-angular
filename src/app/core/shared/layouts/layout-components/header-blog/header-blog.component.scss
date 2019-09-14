@@ -28,7 +28,9 @@
       &.menu {
         background-color: rgba(0, 0, 0, 0);
         pointer-events: none;
-
+        @include media-below($bp-sm) {
+          background-color: #000;
+        }
         .page-title {
           opacity: 0;
         }
