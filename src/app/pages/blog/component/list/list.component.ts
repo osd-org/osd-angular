@@ -44,7 +44,7 @@ export class ListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this._header.setTitle('Блоги');
     this._background.changeColor(BackgroundColor.BLACK);
-    this._blog.blogNotSupportLangRedirect(this);
+    // this._blog.blogNotSupportLangRedirect(this);
     this._page.contentUpdate$.pipe(
       untilDestroyed(this)
     ).subscribe(() => {
