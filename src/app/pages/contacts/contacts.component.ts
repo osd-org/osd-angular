@@ -1,11 +1,12 @@
 import { mapStyle } from './mapStyle';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { HeaderService } from 'app/core/shared/layouts/layout-components/header/header.service';
 import { PageService, PageType } from '@osd-services/page.service';
 import { SeoService } from '@osd-services/seo.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from '@osd-services/api.service';
 import { untilDestroyed } from '@osd-rxjs/operators';
+import { ReCaptcha2Component } from 'app/core/shared/components/recapcha/components/recaptcha-2.component';
 
 @Component({
   selector: 'app-contacts',
@@ -21,12 +22,26 @@ export class ContactsComponent implements OnInit, OnDestroy {
 
   public zoom = 15;
 
+  public captchaIsLoaded = false;
+  public captchaSuccess = false;
+  public captchaIsExpired = false;
+  public captchaResponse?: string;
+
+  public theme: 'light' | 'dark' = 'light';
+  public size: 'compact' | 'normal' = 'normal';
+  public lang = 'en';
+  public type: 'image' | 'audio';
+  public useGlobalDomain: boolean = false;
+
+  @ViewChild('captchaElem') captchaElem: ReCaptcha2Component;
+
   constructor(
     private _header: HeaderService,
     private _page: PageService,
     private _seo: SeoService,
     private _fb: FormBuilder,
-    private _api: ApiService
+    private _api: ApiService,
+    private _cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -47,7 +62,8 @@ export class ContactsComponent implements OnInit, OnDestroy {
     this.form = this._fb.group({
       question: '',
       direction1: '',
-      direction2: ''
+      direction2: '',
+      recaptcha: ['', Validators.required]
     });
   }
 
@@ -101,6 +117,34 @@ export class ContactsComponent implements OnInit, OnDestroy {
     if (this.zoom > 1) {
       this.zoom --;
     }
+  }
+
+  handleReset(): void {
+    this.captchaSuccess = false;
+    this.captchaResponse = undefined;
+    this.captchaIsExpired = false;
+    this._cdr.detectChanges();
+  }
+
+  handleSuccess(captchaResponse: string): void {
+    setTimeout(() => {
+      this.captchaSuccess = true;
+      this.captchaResponse = captchaResponse;
+      this.captchaIsExpired = false;
+      this._cdr.detectChanges();
+    }, 1000);
+  }
+
+  handleLoad(): void {
+    this.captchaIsLoaded = true;
+    this.captchaIsExpired = false;
+    this._cdr.detectChanges();
+  }
+
+  handleExpire(): void {
+    this.captchaSuccess = false;
+    this.captchaIsExpired = true;
+    this._cdr.detectChanges();
   }
 
   ngOnDestroy(): void {

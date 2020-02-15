@@ -15,7 +15,7 @@ import { Location } from '@angular/common';
 })
 export class TranslationService {
 
-  private _defaultLang = 'ru';
+  private _defaultLang = 'ua';
   private _currentLang = this._defaultLang;
   private _langChange$: EventEmitter<string> = new EventEmitter<string>();
   private _langResolved: boolean;

@@ -1,3 +1,4 @@
+import { CaptchaModule } from './../../core/shared/components/recapcha/captcha.module';
 import { SharedModule } from 'app/core/shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -16,7 +17,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    SharedModule
+    SharedModule,
+    CaptchaModule
   ]
 })
 export class ContactsModule { }
