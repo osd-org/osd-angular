@@ -27,20 +27,22 @@
           </div>
         </div>
         <div class="actions">
-          <recaptcha
-          *ngIf="!captchaSuccess"
-          [siteKey]="'6LckLtkUAAAAAHRV2gcBGBU3HNQbKFkMcSu29chY'"
-          (reset)="handleReset()"
-          (expire)="handleExpire()"
-          (load)="handleLoad()"
-          (success)="handleSuccess($event)"
-          [useGlobalDomain]="false"
-          [size]="size"
-          [hl]="lang"
-          [theme]="theme"
-          [type]="type"
-          formControlName="recaptcha">
-          </recaptcha>
+          <ng-container *appShellNoSSR>
+            <recaptcha
+            *ngIf="!captchaSuccess"
+            [siteKey]="'6LckLtkUAAAAAHRV2gcBGBU3HNQbKFkMcSu29chY'"
+            (reset)="handleReset()"
+            (expire)="handleExpire()"
+            (load)="handleLoad()"
+            (success)="handleSuccess($event)"
+            [useGlobalDomain]="false"
+            [size]="size"
+            [hl]="lang"
+            [theme]="theme"
+            [type]="type"
+            formControlName="recaptcha">
+            </recaptcha>
+          </ng-container>
           <button class="btn send" *ngIf="!emailSuccess && !sending && captchaSuccess" type="submit">{{pageContent?.acf?.form_fields?.button_text}} <i class="icon-arrow"></i></button>
           <button class="btn sending" *ngIf="sending && !emailSuccess" disabled type="button"><img src="/assets/img/content/button_loader.gif" alt=""></button>
           <button class="btn ok" *ngIf="emailSuccess" type="button">{{'Сообщение отправлено' | translate}}</button>
