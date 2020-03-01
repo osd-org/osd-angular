@@ -51,6 +51,28 @@
             margin-right: 75px;
         }
     }
+
+    &__contact {
+      @include font(18px);
+      color: #fff;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      transition: 0.2s;
+
+      i {
+          display: flex;
+      }
+
+      &:hover {
+          border-color: #fff;
+      }
+
+      &:not(:last-child) {
+          margin-right: 75px;
+      }
+    }
 }
 
 .copyright {
