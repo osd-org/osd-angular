@@ -63,7 +63,7 @@
           <div class="map-control plus" (click)="zoomIn()"></div>
           <div class="map-control minus" (click)="zoomOut()"></div>
           <div class="address">
-            <img src="/assets/svg/logo.svg" class="logo" alt="">
+            <img src="/assets/img/new-logo.png" class="logo" alt="">
             <div>{{pageContent?.acf?.footer_contacts?.adress}}</div>
           </div>
         </div>
@@ -80,7 +80,7 @@
         </div>
         <div class="info-block">
           <div class="map-control minus" (click)="zoomOut()"></div>
-          <img src="/assets/svg/logo.svg" class="logo" alt="">
+          <img src="/assets/img/new-logo.png" class="logo" alt="">
         </div>
         <agm-map *appShellMedia="{type: 'above', width: 1080}" class="map" [latitude]="50.45390" [longitude]="30.5190" [zoom]="zoom" [styles]="mapStyle" [disableDefaultUI]="true" [zoomControl]="false">
           <agm-marker [iconUrl]="'/assets/svg/marker-mob.svg'" [latitude]="50.45466" [longitude]="30.5238"></agm-marker>
