@@ -25,7 +25,6 @@
     @include media-below($bp-ld) {
       margin-top: 10px;
       &__img {
-        height: auto;
         width: 100%;
     }
   }
